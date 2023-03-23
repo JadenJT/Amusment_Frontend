@@ -14,7 +14,7 @@ const Register = () => {
   
   const handlePhoneNumber = (e) => {
     const phoneNumberRegex = /^[0-9\b]+$/;
-    if (e.target.value.length >= 10) return;
+    if (e.target.value.length >= 11) return;
     if (e.target.value === "" || phoneNumberRegex.test(e.target.value)) {
       setPhoneNumberValue(e.target.value);
     }
@@ -94,7 +94,6 @@ const Register = () => {
               <input name="phoneNumber" 
                     required 
                     placeholder="Number" 
-                    type="number"
                     value={phoneNumberValue}
                     onChange={handlePhoneNumber}
                     />
