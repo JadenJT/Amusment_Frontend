@@ -13,6 +13,9 @@ function Navbar() {
           <Link to="/blogs">Blogs</Link>
         </li>
         <li>
+          <Link to="/rides">Rides</Link>
+        </li>
+        <li>
           <Link to="/register">Register</Link>
         </li>
       </ul>
