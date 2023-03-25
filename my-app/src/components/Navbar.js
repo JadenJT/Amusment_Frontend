@@ -20,6 +20,12 @@ function Navbar() {
       Help
       </Link>
     </div>
+    
+     <div className='rides
+      <Link to='/rides' className='navbar-logo'>
+      rides
+      </Link>
+    </div>
 
     <div className='Login'>
       <Link to='/Login' className='navbar-logo'>

@@ -2,6 +2,9 @@
 import React from 'react';
 import './App.css';
 import './pages/register';
+import Ride from './pages/Rides/rides';
+
+
 import Register from './pages/register';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
@@ -9,7 +12,6 @@ import Home from "./pages/home";
 import Help from './pages/help';
 import Login from './pages/login';
 import loginForm from './components/loginForm';
-
 
 function App() {
   return (
