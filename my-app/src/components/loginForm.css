@@ -1,3 +1,6 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
 
 .cover {
     background-color: white;
@@ -5,21 +8,22 @@
     height: 35em;
     position: relative;
     border-radius: 1em;
-    box-shadow: 0 0.188em 1.550em #9c9c9c;
+    box-shadow: 0 0.1em .5em #9c9c9c;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    overflow: hidden;
 }
 
 .alt-login{
-    width: 80;
+    width: 25em;
     height: 3em;
     display: flex;
     justify-content: space-around;
 }
 
-.alt-login div{
+.alt-login div {
     width: 45%;
     height: 90%;
     border-radius: 0.25em;
@@ -27,12 +31,25 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    cursor: pointer;
+    cursor: pointer;  
+}
+.google{
+    transition: 0.5s;
+    background-image: url("../icons/google.svg");
 }
 
-.google-con{background-image: url("../icons/google.png");}
-.facebook-con{background-image: url("../icons/facebook.png");}
+.google:hover{
+    transform: scale(1.05);
+}
 
+.facebook{
+    transition: 0.5s;
+    background-image: url("../icons/facebook.svg");
+}
+
+.facebook:hover{
+    transform: scale(1.05);
+}
 
 .input-login{
     border: none;
@@ -51,7 +68,7 @@ outline-color: rgb(32, 177, 255);
  .login-btn{
     width: 40%;
     height: 3em;
-    background-color: rgb(32, 177, 255);
+    background-color:#5448E0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -87,4 +104,6 @@ outline-color: rgb(32, 177, 255);
     transform: 1.5s;
  }
 
- 
+ .login-font{
+    color: black;
+ }
