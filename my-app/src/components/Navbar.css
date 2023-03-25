@@ -1,0 +1,21 @@
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    height: 80px;
+    position: fluid;
+    top: 20px;  
+    left: 50%;
+}
+
+.navbar-logo{
+    text-decoration: none;
+   color: #fff;
+   padding: 0.7rem 1rem;
+   white-space: nowrap;
+}
+
+.navbar-logo:hover{
+    text-decoration: underline;
+}
