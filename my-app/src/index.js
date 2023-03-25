@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-
-import Ride from './pages/Rides/rides'
 import Register from './pages/register';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
@@ -18,7 +16,6 @@ root.render(
   <Routes>
       <Route path="/" element={<Layout />}>
       <Route index element={<Home />} />
-      <Route path="rides" element={<Ride />} />
       <Route path="register" element={<Register />} />
       <Route path="Login" element={<Login />} />
       <Route path="help" element={<Help />} />
