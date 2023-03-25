@@ -12,8 +12,8 @@ const popup = ()=> {
   return (
    <div className="cover">
     <h1 className='login-font'>Login</h1>
-    <input type="text" placeholder="username" className='input-login'/>
-    <input type="password" placeholder="password"className='input-login'/>
+    <input type="text" placeholder="Username" className='input-login'/>
+    <input type="password" placeholder="Password"className='input-login'/>
     <div className="login-btn" >Login</div>
     
     <p className='login-font'>Or login using</p>

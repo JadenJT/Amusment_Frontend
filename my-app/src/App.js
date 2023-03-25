@@ -8,7 +8,7 @@ import Layout from "./components/layout";
 import Home from "./pages/home";
 import Help from './pages/help';
 import Login from './pages/login';
-import loginForm from './components/loginForm';
+import Rides from "./pages/rides";
 
 
 function App() {
@@ -21,6 +21,7 @@ function App() {
       <Route path="register" element={<Register />} />
       <Route path="Login" element={<Login />} />
       <Route path="help" element={<Help />} />
+      <Route path="rides" element={<Rides />} />
     </Route>
   </Routes>
 </BrowserRouter>
