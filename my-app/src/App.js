@@ -9,7 +9,7 @@ import Home from "./pages/home";
 import Help from './pages/help';
 import Login from './pages/login';
 import Rides from "./pages/rides";
-
+import Zones from './pages/zone';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
       <Route path="Login" element={<Login />} />
       <Route path="help" element={<Help />} />
       <Route path="rides" element={<Rides />} />
+      <Route path="zone" element={<Zones />} />
     </Route>
   </Routes>
 </BrowserRouter>

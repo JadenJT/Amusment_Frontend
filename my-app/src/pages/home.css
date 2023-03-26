@@ -12,7 +12,7 @@ body{
 }
 
 .welcome{
-    background-image: url(../../images/homePicture.jpg);
+    background-image: url(../images/homePicture.jpg);
     background-color: rgb(26, 163, 255);
     height: 550px;
     background-position: center;
@@ -41,7 +41,7 @@ body{
 }
 
 .FirstMessage{
-    color: rgb(26, 61, 90);
+    color: white;
     font-size: 1.5em;
     text-align: center;
     line-height: 1.5em;
@@ -70,4 +70,5 @@ body{
     font-weight: bold;
     padding: 0 0 .35em;
     line-height: 1em;
+    color: white;
 }

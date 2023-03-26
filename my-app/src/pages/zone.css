@@ -12,7 +12,7 @@ body{
 }
 
 .zwp{
-    background-image: url(../../images/ZonePicture.jpg);
+    background-image: url(../images/ZonePicture.jpg);
     background-color: rgb(26, 163, 255);
     height: 550px;
     background-position: center;
