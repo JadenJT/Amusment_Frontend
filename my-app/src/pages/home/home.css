@@ -38,7 +38,6 @@ body{
     display: flex;
     justify-self: center;
     flex-wrap: wrap;
-    /*margin: 0 auto;*/
 }
 
 .FirstMessage{
@@ -57,7 +56,7 @@ body{
     display: flex;
     flex-direction: column;
     margin: auto;
-    /*padding-bottom: 4em; Only when using smaller width screen*/
+    border-radius: 10px;
 }
 
 .form-right-picture{
@@ -70,4 +69,5 @@ body{
     font-size: 2.25em;
     font-weight: bold;
     padding: 0 0 .35em;
+    line-height: 1em;
 }

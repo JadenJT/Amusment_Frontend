@@ -49,5 +49,11 @@ body{
     flex-direction: column;
 }
 .card ul{
-    list-style-type: none;    
+    list-style-type: none;
+}
+.view{
+    overflow: hidden;
+    border-radius: 10px;
+    width: 200px;
+    height: 300px;
 }
