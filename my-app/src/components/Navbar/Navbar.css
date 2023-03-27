@@ -1,0 +1,55 @@
+.navbar-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    height: 80px;
+    position: fluid;
+    top: 20px;  
+    /* left: 50%; */
+}
+
+.navbar-logo{
+    text-decoration: none;
+   color: #fff;
+   padding: 0.7rem 1rem;
+   white-space: nowrap;
+}
+
+.navbar-logo:hover{
+    text-decoration: underline;
+}
+
+.login{
+    width: 6em;
+    height: 2.5em;
+    background-color:#5448E0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+    margin-right: 2em;
+}
+
+.nav-tabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3em;
+}
+
+.logo{
+height: 10%;
+width: 10%;
+padding-left: 1px;
+padding-right: 1px;
+padding-top: 1px;
+padding-bottom: 1px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-left: 2em;
+}
