@@ -1,13 +1,13 @@
 import React from "react";
 import "./home.css"
-import whiteLogo from '../../images/whitelogo.png'
+import Logo from '../../icons/Umazing.svg';
 import GuestsInRide from '../../images/GuestsInRide.jpg'
 
 export default function HomePage(){
     return (
         <>
             <div className="welcome">
-                <img src={whiteLogo} alt="park logo" className="wLogo"></img>
+                <img src={Logo} alt="park logo" className="wLogo"></img>
             </div>
 
             <div className="container">
