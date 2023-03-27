@@ -29,12 +29,6 @@ function Navbar() {
             Rides
             </Link>
           </div>
-       
-          <div className='Help'>
-            <Link to='/help' className='navbar-logo'>
-            Help
-            </Link>
-          </div>
 
           <div className='register'>
             <Link to='/register' className='navbar-logo'>
