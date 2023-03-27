@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import Logo from '../icons/Umazing.svg';
+import Logo from '../../icons/Umazing.svg';
 import "./Navbar.css";
 
 function Navbar() {
@@ -8,25 +8,6 @@ function Navbar() {
   
  <nav className="navbar">
   <div className="navbar-container">
-    {/* <Link to='/' className='navbar-logo'>
-      <a class="cursor-pointer px-1 text-5xl font-medium text-off-white hover:underline md:text-2xl">Home</a>
-    </Link>
-    <div className='register'>
-      <Link to='/register' className='navbar-logo'>
-      Register
-      </Link>
-    </div>
-    <div className='Help'>
-      <Link to='/help' className='navbar-logo'>
-      Help
-      </Link>
-    </div>
-
-    <div className='rides'>
-      <Link to='/rides' className='navbar-logo'>
-      rides
-      </Link>
-    </div> */}
     
     <div className='logo'>
       <img src={Logo} alt="um-logo"/>
@@ -36,29 +17,33 @@ function Navbar() {
           <Link to='/' className='navbar-logo'>
             <a class="cursor-pointer px-1 text-5xl font-medium text-off-white hover:underline md:text-2xl">Home</a>
           </Link>
-          <div className='register'>
-            <Link to='/register' className='navbar-logo'>
-            Register
+          
+
+          <div className='Zones'>
+            <Link to='/zone' className='navbar-logo'>
+            Zones
             </Link>
           </div>
-          
+
           <div className='Rides'>
             <Link to='/rides' className='navbar-logo'>
             Rides
             </Link>
           </div>
 
+
           <div className='Concessions'>
             <Link to='/concessions' className='navbar-logo'>
             Concessions
             </Link>
           </div>
-          
-          <div className='Help'>
-            <Link to='/help' className='navbar-logo'>
-            Help
+
+          <div className='register'>
+            <Link to='/register' className='navbar-logo'>
+            Register
             </Link>
           </div>
+
     
        </div>
 

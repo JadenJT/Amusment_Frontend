@@ -9,7 +9,7 @@ const importAll = (r) => {
         images[key.replace('./', '')] = r(key);
     });
 };
-importAll(require.context('../images', false, /\.(png|jpe?g|svg|webp)$/));
+importAll(require.context('../../images', false, /\.(png|jpe?g|svg|webp)$/));
 const wonderTreatsImg = images['Wonder Treats.webp'];
 const SpectacularSnacksImg = images['Spectacular Snacks.jpg'];
 const IncredibleEatsImg = images['Incredible Eats.jpg'];

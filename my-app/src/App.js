@@ -1,15 +1,16 @@
 
 import React from 'react';
 import './App.css';
-import './pages/register';
-import Register from './pages/register';
+import './pages/Register/register';
+import Register from './pages/Register/register';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
-import Home from "./pages/home";
+import Home from "./pages/Home/home";
 import Help from './pages/help';
-import Login from './pages/login';
-import Rides from "./pages/rides";
-import Concessions from "./pages/concessions";
+import Concessions from "./pages/Concessions/concessions";
+import Login from './pages/Login/login';
+import Rides from "./pages/Rides/rides";
+import Zones from './pages/Zone/zone';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       <Route path="help" element={<Help />} />
       <Route path="rides" element={<Rides />} />
       <Route path="concessions" element={<Concessions />} />
+      <Route path="zone" element={<Zones />} />
+
     </Route>
   </Routes>
 </BrowserRouter>
