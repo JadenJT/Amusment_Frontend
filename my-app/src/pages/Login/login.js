@@ -1,5 +1,5 @@
 import React from 'react';
-import Loginform from '../components/loginForm';
+import Loginform from '../components/LoginForm/loginForm';
 import "./login.css";
 import { BrowserRouter as router, Routes, Route} from 'react-router-dom';
 const Login = () => {
