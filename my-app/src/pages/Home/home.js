@@ -1,20 +1,20 @@
 import React from "react";
 import "./home.css"
-import whiteLogo from '../../images/whitelogo.png'
+import Logo from '../../icons/Umazing.svg';
 import GuestsInRide from '../../images/GuestsInRide.jpg'
 
-export default function HomePage(){
+export default function Home() {
     return (
         <>
             <div className="welcome">
-                <img src={whiteLogo} alt="park logo" className="wLogo"></img>
+                <img src={Logo} alt="park logo" className="wLogo"></img>
             </div>
 
             <div className="container">
                 <div className="borderLine">
                     <div className="Statement">
                         <div className="FirstMessage">
-                            <p className="wlc">Welcome to Sunny Park.</p>
+                            <p className="wlc">Welcome to Umazing.</p>
                             <p>
                                 A place for fun and excitement.<br></br>
                                 Come and join us today for a delightful time.<br></br>
@@ -32,3 +32,4 @@ export default function HomePage(){
         </>
     )
 }
+
