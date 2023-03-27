@@ -1,15 +1,15 @@
 
 import React from 'react';
 import './App.css';
-import './pages/register';
-import Register from './pages/register';
+import './pages/Register/register';
+import Register from './pages/Register/register';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/layout";
-import Home from "./pages/home";
+import Home from "./pages/Home/home";
 import Help from './pages/help';
-import Login from './pages/login';
-import Rides from "./pages/rides";
-import Zones from './pages/zone';
+import Login from './pages/Login/login';
+import Rides from "./pages/Rides/rides";
+import Zones from './pages/Zone/zone';
 
 function App() {
   return (

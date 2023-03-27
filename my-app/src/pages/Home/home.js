@@ -1,7 +1,7 @@
 import React from "react";
 import "./home.css"
-import whiteLogo from '../images/whitelogo.png'
-import GuestsInRide from '../images/GuestsInRide.jpg'
+import whiteLogo from '../../images/whitelogo.png'
+import GuestsInRide from '../../images/GuestsInRide.jpg'
 
 export default function HomePage(){
     return (
