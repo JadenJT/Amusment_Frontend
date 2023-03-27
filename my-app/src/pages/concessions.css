@@ -1,0 +1,126 @@
+/* styles for button detail */
+.center-dropdown-cons {
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown-cons {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content-cons {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-content-cons a {
+    display: block;
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    text-decoration: none;
+    color: black;
+    width: 250px;
+}
+
+.dropdown-content-cons a:hover {
+    background-color: #3793bc;
+    color: black;
+}
+
+.dropdown-cons:hover .dropdown-content-cons {
+    display: block;
+    width: 200px;
+}
+
+.concessions-button {
+    background-color: #5448e0;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 24px;
+    display: block;
+    margin-top: 10px;
+    width: 250px;
+    height: 60px;
+}
+
+/* styles for concession */
+.all-concessions{
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    cursor: pointer;
+}
+.concession-img{
+    height: 15pc;
+    width: 15pc;
+}
+
+/* styles for concession details */
+.concession-details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 50px;
+}
+.concession-name{
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #e65667;
+}
+.concession-details p{
+    margin: 10px 0;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: #fff;
+}
+
+
+/* syles for concession info box */
+.concession-info-overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* A semi-transparent black background */
+    z-index: 1; /* Make sure the ride information box is on top */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.concession-info-box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #491689;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.concession-name-onClick{
+    align-self: flex-start;
+    margin-top: 0;
+}
+.concession-img-onClick{
+    width: 15pc;
+    height: 15pc;
+    object-fit: cover;
+    margin-bottom: 10px;
+}   
+.close-button{  
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2pc;
+    width: 4pc;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+}

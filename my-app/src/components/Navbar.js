@@ -41,18 +41,24 @@ function Navbar() {
             Register
             </Link>
           </div>
-          <div className='Help'>
-            <Link to='/help' className='navbar-logo'>
-            Help
-            </Link>
-          </div>
-
+          
           <div className='Rides'>
             <Link to='/rides' className='navbar-logo'>
             Rides
             </Link>
           </div>
-      
+
+          <div className='Concessions'>
+            <Link to='/concessions' className='navbar-logo'>
+            Concessions
+            </Link>
+          </div>
+          
+          <div className='Help'>
+            <Link to='/help' className='navbar-logo'>
+            Help
+            </Link>
+          </div>
     
        </div>
 
