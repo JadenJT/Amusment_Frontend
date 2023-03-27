@@ -98,11 +98,7 @@ const Concessions = () => {
     
     return(
         <div>
-            {/* Upper-box */}
-            <div className='upper-box'>
-                <h1>Idea for to implement upperbox</h1>
-            </div>
-
+        
             {/* Bottom-box */}
             <div className='bottom-box'>
                 {/* Concessions button*/}
