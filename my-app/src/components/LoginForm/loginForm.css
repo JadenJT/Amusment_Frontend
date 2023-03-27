@@ -35,7 +35,7 @@ body{
 }
 .google{
     transition: 0.5s;
-    background-image: url("../icons/google.svg");
+    background-image: url("../../icons/google.svg");
 }
 
 .google:hover{
@@ -44,7 +44,7 @@ body{
 
 .facebook{
     transition: 0.5s;
-    background-image: url("../icons/facebook.svg");
+    background-image: url("../../icons/facebook.svg");
 }
 
 .facebook:hover{

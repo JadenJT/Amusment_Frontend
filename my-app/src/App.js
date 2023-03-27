@@ -4,7 +4,7 @@ import './App.css';
 import './pages/Register/register';
 import Register from './pages/Register/register';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout/layout";
+import Layout from "./components/layout";
 import Home from "./pages/Home/home";
 import Help from './pages/help';
 import Login from './pages/Login/login';

@@ -1,17 +1,17 @@
 import React from "react";
 import "./zone.css"
-import whiteLogo from '../images/whitelogo.png'
-import Popcorn from '../images/concessions/popcorn.jpg'
-import CottonCandy from '../images/concessions/cottoncandy.jpg'
-import Lemonade from '../images/concessions/lemonade.jpg'
-import GiftShop1 from '../images/giftshop/giftshop1.jpg'
-import FunnerlCake from '../images/concessions/funnelcake.jpg'
-import IceCream from '../images/concessions/icecream.jpg'
-import GiftShop2 from '../images/giftshop/giftshop2.jpg'
-import Burger from '../images/concessions/burger.jpg'
-import Turkey from '../images/concessions/turkey.jpg'
-import Hotdog from '../images/concessions/hotdogs.jpg'
-import GiftShop3 from '../images/giftshop/giftshop3.jpg'
+import whiteLogo from '../../images/whitelogo.png'
+import Popcorn from '../../images/concessions/popcorn.jpg'
+import CottonCandy from '../../images/concessions/cottoncandy.jpg'
+import Lemonade from '../../images/concessions/lemonade.jpg'
+import GiftShop1 from '../../images/giftshop/giftshop1.jpg'
+import FunnerlCake from '../../images/concessions/funnelcake.jpg'
+import IceCream from '../../images/concessions/icecream.jpg'
+import GiftShop2 from '../../images/giftshop/giftshop2.jpg'
+import Burger from '../../images/concessions/burger.jpg'
+import Turkey from '../../images/concessions/turkey.jpg'
+import Hotdog from '../../images/concessions/hotdogs.jpg'
+import GiftShop3 from '../../images/giftshop/giftshop3.jpg'
 
 export default function Zone(){
     console.log("poop");
