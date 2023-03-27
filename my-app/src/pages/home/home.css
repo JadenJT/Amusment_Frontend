@@ -23,6 +23,8 @@ body{
 
 .wLogo{
     float: right;
+    width: 700px;
+    height: 500px;
 }
 
 .container{
