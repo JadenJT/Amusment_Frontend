@@ -3,7 +3,7 @@ import "./home.css"
 import Logo from '../../icons/Umazing.svg';
 import GuestsInRide from '../../images/GuestsInRide.jpg'
 
-export default function HomePage(){
+export default function Home(){
     return (
         <>
             <div className="welcome">
