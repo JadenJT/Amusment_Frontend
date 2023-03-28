@@ -3,11 +3,11 @@ const fs = require('node:fs');
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host: 'team14-themepark-uma.mysql.database.azure.com',
-  port: '3306',
-  user: 'team14MasterUsername',
-  password: 'UmaIsTheBest14',
-  database: 'master',
+  host: process.env.HOST,
+  port: process.env.PORT,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
   ssl: {
     ca: fs.readFileSync(
       __dirname + "/helpers/SSLCertification.pem"
