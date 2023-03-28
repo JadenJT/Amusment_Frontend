@@ -9,7 +9,7 @@ const importAll = (r) => {
         images[key.replace('./', '')] = r(key);
     });
 };
-importAll(require.context('../images', false, /\.(png|jpe?g|svg|webp)$/));
+importAll(require.context('../../images', false, /\.(png|jpe?g|svg|webp)$/));
 const skybladeImg = images['SkyBlade.jpg'];
 const vortexXImg = images['VortexX.jpg'];
 const ThunderboltImg = images['Thunderbolt.jpg'];
