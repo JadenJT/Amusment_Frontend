@@ -23,42 +23,42 @@ const Concessions = () => {
             name: 'Wonder Treats',
             imgSrc: wonderTreatsImg,
             description: 'Indulge in a wonderland of sweet and savory treats for the whole family!',
-            location: 'Zone 1',
+            location: 'Zone A',
             showInfo: false,
         },
         {
             name: 'Spectacular Snacks',
             imgSrc: SpectacularSnacksImg,
             description: 'Fuel up with our amazing snacks that will leave you feeling satisfied and ready to tackle the parks rides and attractions.',
-            location: 'Zone 1',
+            location: 'Zone A',
             showInfo: false,
         },
         {
             name: 'Incredible Eats',
             imgSrc: IncredibleEatsImg,
             description: 'Treat yourself to our incredible selection of mouth-watering eats that will leave you amazed.',
-            location: 'Zone 2',
+            location: 'Zone B',
             showInfo: false,
         },
         {
             name: 'Enchanted Delights',
             imgSrc: EnchantedDelightsImg,
             description: 'Enter our world of enchantment with our sweet and savory delights that are perfect for any age.',
-            location: 'Zone 2',
+            location: 'Zone B',
             showInfo: false,
         },
         {
             name: 'Epicurean Adventures',
             imgSrc: EpicureanAdventuresImg,
             description: 'Embark on an epicurean adventure with our diverse selection of delectable items that cater to every taste bud.',
-            location: 'Zone 3',
+            location: 'Zone C',
             showInfo: false,
         },
         {
             name: 'Marvelous Meals',
             imgSrc: MarvelousMealsImg,
             description: 'Enjoy our marvelous meals that feature the best of both worlds-kid-friendly favorites and adult-approved dishes.',
-            location: 'Zone 3',
+            location: 'Zone C',
             showInfo: false,
         },
     ]);
@@ -106,16 +106,16 @@ const Concessions = () => {
                     <div className='dropdown-cons'>
                         <button className='concessions-button'>CONCESSIONS</button>
                         <div className='dropdown-content-cons'>
-                            <Link to="zone1-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone 1</Link>
-                            <Link to ="zone2-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone 2</Link>
-                            <Link to = "zone3-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone 3</Link>
+                            <Link to="zoneA-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone A</Link>
+                            <Link to ="zoneB-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone B</Link>
+                            <Link to = "zoneC-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone C</Link>
                         </div>
                     </div>
                 </div>
 
-                <h1 id="zone1-title"><u>Zone 1</u></h1>
-                {concessions.some(concession => concession.location === 'Zone 1') ? (
-                    concessions.filter(concession => concession.location === 'Zone 1').map((concession, index) => (
+                <h1 id="zoneA-title"><u>Zone A</u></h1>
+                {concessions.some(concession => concession.location === 'Zone A') ? (
+                    concessions.filter(concession => concession.location === 'Zone A').map((concession, index) => (
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
@@ -127,7 +127,7 @@ const Concessions = () => {
                                     <br />
                                 </p>
                             </div>
-                            {concession.showInfo && concession.location === 'Zone 1' &&(
+                            {concession.showInfo && concession.location === 'Zone A' &&(
                                 <div className='concession-info-overlay' onClick={(event) => handleConcessionOverlayClick(event, index)}>
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
@@ -147,12 +147,12 @@ const Concessions = () => {
                         </div>
                     ))
                 ) : (
-                    <p>No concessions found in Zone 1</p>
+                    <p>No concessions found in Zone A</p>
                 )}
 
-                <h1 id="zone2-title"><u>Zone 2</u></h1>
-                {concessions.some(concession => concession.location === 'Zone 2') ? (
-                    concessions.filter(concession => concession.location === 'Zone 2').map((concession, index) => (
+                <h1 id="zoneB-title"><u>Zone B</u></h1>
+                {concessions.some(concession => concession.location === 'Zone B') ? (
+                    concessions.filter(concession => concession.location === 'Zone B').map((concession, index) => (
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
@@ -164,7 +164,7 @@ const Concessions = () => {
                                     <br />
                                 </p>
                             </div>
-                            {concession.showInfo && concession.location === 'Zone 2' && (
+                            {concession.showInfo && concession.location === 'Zone B' && (
                                 <div className='concession-info-overlay' onClick={(event) => handleConcessionOverlayClick(event, index)}>
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
@@ -184,12 +184,12 @@ const Concessions = () => {
                         </div>
                     ))
                 ) : (
-                    <p>No concessions found in Zone 2</p>
+                    <p>No concessions found in Zone B</p>
                 )}
 
-                <h1 id="zone3-title"><u>Zone 3</u></h1>
-                {concessions.some(concession => concession.location === 'Zone 3') ? (
-                    concessions.filter(concession => concession.location === 'Zone 3').map((concession, index) => (
+                <h1 id="zoneC-title"><u>Zone C</u></h1>
+                {concessions.some(concession => concession.location === 'Zone C') ? (
+                    concessions.filter(concession => concession.location === 'Zone C').map((concession, index) => (
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
@@ -201,7 +201,7 @@ const Concessions = () => {
                                     <br />
                                 </p>
                             </div>
-                            {concession.showInfo && concession.location === 'Zone 3' &&(
+                            {concession.showInfo && concession.location === 'Zone C' &&(
                                 <div className='concession-info-overlay' onClick={(event) => handleConcessionOverlayClick(event, index)}>
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
@@ -221,7 +221,7 @@ const Concessions = () => {
                         </div>
                     ))
                 ) : (
-                    <p>No concessions found in Zone 3</p>
+                    <p>No concessions found in Zone C</p>
                 )}
 
             </div>

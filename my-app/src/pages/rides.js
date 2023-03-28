@@ -32,7 +32,7 @@ const Rides = () => {
         {
             name: 'SkyBlade',
             imgSrc: skybladeImg,
-            location: 'Zone 1',
+            location: 'Zone A',
             heightRequirement: "42 cm",
             description: 'A high-speed roller coaster that takes riders on a thrilling journey through twists, turns, and loops.',
             maintenanceHours: 0,
@@ -43,7 +43,7 @@ const Rides = () => {
         {
             name: 'VortexX',
             imgSrc: vortexXImg,
-            location: 'Zone 1',
+            location: 'Zone A',
             heightRequirement: "42 cm",
             description: 'A spinning ride that merges the adrenaline-pumping experience of a roller coaster with the exhilarating sensation of whirling through the air, similar to a twirling carnival swing ride.',
             maintenanceHours: 0,
@@ -54,7 +54,7 @@ const Rides = () => {
         {
             name: 'Thunderbolt',
             imgSrc: ThunderboltImg,
-            location: 'Zone 1',
+            location: 'Zone A',
             heightRequirement: "42 cm",
             description: 'A high-speed drop tower that takes riders up to great heights before plummeting down at lighting speeds.',
             maintenanceHours: 0,
@@ -65,7 +65,7 @@ const Rides = () => {
         {
             name: 'G-Force',
             imgSrc: GForceImg,
-            location: 'Zone 2',
+            location: 'Zone B',
             heightRequirement: "42 cm",
             description: 'A ride that uses centrifugal force to spin riders around in circles at dizzying speeds.',
             maintenanceHours: 0,
@@ -76,7 +76,7 @@ const Rides = () => {
         {
           name: 'WarpZone',
           imgSrc: WarpZoneImg,
-          location: 'Zone 2',
+          location: 'Zone B',
           heightRequirement: "42 cm",
           description: 'A futuristic ride that takes riders on a high-speed journey through time and space, complete with special effects and immersive theming.',
           maintenanceHours: 0,
@@ -87,7 +87,7 @@ const Rides = () => {
         {
             name: 'Wildfire',
             imgSrc: WildFireImg,
-            location: 'Zone 2',
+            location: 'Zone B',
             heightRequirement: "42 cm",
             description: 'A water ride that takes riders on a thrilling journey through rapids, waterfalls, and splashy drops.',
             maintenanceHours: 0,
@@ -98,7 +98,7 @@ const Rides = () => {
         {
             name: 'AeroJet',
             imgSrc: AeroJetImg,
-            location: 'Zone 3',
+            location: 'Zone C',
             heightRequirement: "42 cm",
             description: 'A high-flying ride that takes riders on a soaring journey through the air, complete with twist, turns and thrilling drops.',
             maintenanceHours: 0,
@@ -109,7 +109,7 @@ const Rides = () => {
         {
             name: 'Cosmic Cruiser',
             imgSrc: CosmicCruiserImg,
-            location: 'Zone 3',
+            location: 'Zone C',
             heightRequirement: "42 cm",
             description: 'A dark ride that takes riders on a space-themed adventure through the stars, complete with special effects, animations, and interactive elements.',
             maintenanceHours: 0,
@@ -120,7 +120,7 @@ const Rides = () => {
         {
             name: 'Inferno',
             imgSrc: InfernoImg,
-            location: 'Zone 3',
+            location: 'Zone C',
             heightRequirement: "42 cm",
             description: 'A fiery thrill ride that takes riders on a blazing journey through twist, turns, and sudden drops, all a while surrounded by special effects and pyrotechnics.',
             maintenanceHours: 0,
@@ -134,7 +134,7 @@ const Rides = () => {
         {
             name: 'Rainbow Swirl',
             imgSrc: RainbowImg,
-            location: 'Zone 1',
+            location: 'Zone A',
             heightRequirement: "36 cm",
             description: 'A colorful spinning teacup-style attraction that takes kids on a magical journey through a swirling rainbow of colors.',
             maintenanceHours: 0,
@@ -145,7 +145,7 @@ const Rides = () => {
         {
             name: 'Jungle Safari',
             imgSrc: JungleSafariImg,
-            location: 'Zone 1',
+            location: 'Zone A',
             heightRequirement: "36 cm",
             description: 'An exciting ride that takes kids on a wild adventure through the jungle in a safari jeep that travels on a track through a jungle-themed environment.',
             maintenanceHours: 0,
@@ -156,7 +156,7 @@ const Rides = () => {
         {
             name: 'Pirate Plunge',
             imgSrc: PiratePlungeImg,
-            location: 'Zone 2',
+            location: 'Zone B',
             heightRequirement: "36 cm",
             description: 'A water-based attraction that takes kids on a swashbuckling adventure on a pirate ship that plunges down a steep drop into a splash pool below.',
             maintenanceHours: 0,
@@ -167,7 +167,7 @@ const Rides = () => {
         {
             name: 'Space Explorer',
             imgSrc: SpaceExploreImg,
-            location: 'Zone 2',
+            location: 'Zone B',
             heightRequirement: "36 cm",
             description: 'A ride that takes kids on an intergalactic adventure through the stars in a spacecraft that travels on a track through a space-themed environment.',
             maintenanceHours: 0,
@@ -178,7 +178,7 @@ const Rides = () => {
         {
             name: 'Dragons Liar',
             imgSrc: DragonsLiarImg,
-            location: 'Zone 3',
+            location: 'Zone C',
             heightRequirement: "36 cm",
             description: 'A thrilling roller coaster that takes kids on a high-speed journey through a dragons lair with twists, turns, and drops that simulate a dragons flight through dark caverns and winding tunnels.',
             maintenanceHours: 0,
@@ -189,7 +189,7 @@ const Rides = () => {
         {
             name: 'Dino Adventure',
             imgSrc: DinoAdventureImg,
-            location: 'Zone 3',
+            location: 'Zone C',
             heightRequirement: "36 cm",
             description: 'A ride that takes kids back in time to the age of the dinosaurs, exploring a prehistoric landscape filled with animatronic dinosaurs, volcanoes, and other ancient landmarks.',
             maintenanceHours: 0,
