@@ -1,17 +1,5 @@
 const db = require('../database');
 
-/*
-Concession
-Employee
-Giftshop
-job
-person
-ride
-themepark
-ticket
-zone
-*/
-
 db.query(
     'SHOW TABLES',
     function (error, results, fields) {
