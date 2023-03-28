@@ -23,27 +23,4 @@ connection.connect(function (err) {
   console.log('Connected to MySQL database as id', connection.threadId);
 });
 
-connection.query('SELECT * from EMPLOYEE', function (error, results, fields) {
-  if (error) throw error;
-  console.log('The result:', results);
-});
-
-connection.end();
-
-
-// const connectionPool = mysql.createPool({
-//   host: process.env.HOST,
-//   port: process.env.PORT,
-//   user: process.env.USER,
-//   password: process.env.PASSWORD,
-//   database: process.env.DATABASE,
-//   multipleStatements: true
-// });
-
-// connectionPool.getConnection( (err, connection) => {
-//   if (err) throw err;
-//   console.log(`Connected successfully to ${process.env.DATABASE}`)
-//   // connection.release();
-// })
-
 module.exports = connection;
