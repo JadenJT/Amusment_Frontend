@@ -28,7 +28,7 @@ body{
 }
 
 /***Body***/
-.zone1, .zone2, .zone3{
+.zoneA, .zoneB, .zoneC{
     float: left;
     clear: both;
 }
