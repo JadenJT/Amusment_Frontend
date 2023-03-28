@@ -3,7 +3,7 @@ import "./home.css"
 import Logo from '../../icons/Umazing.svg';
 import GuestsInRide from '../../images/GuestsInRide.jpg'
 
-export default function Home(){
+export default function Home() {
     return (
         <>
             <div className="welcome">
@@ -14,7 +14,7 @@ export default function Home(){
                 <div className="borderLine">
                     <div className="Statement">
                         <div className="FirstMessage">
-                            <p className="wlc">Welcome to Sunny Park.</p>
+                            <p className="wlc">Welcome to Umazing.</p>
                             <p>
                                 A place for fun and excitement.<br></br>
                                 Come and join us today for a delightful time.<br></br>
@@ -32,3 +32,4 @@ export default function Home(){
         </>
     )
 }
+
