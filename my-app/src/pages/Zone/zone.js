@@ -29,6 +29,12 @@ import Inferno from '../../images/Inferno.jpg'
 import DragonsLair from '../../images/DragonsLair.jpg'
 import DinoAdventure from '../../images/DinoAdventure.jpg'
 
+import WonderTreats from '../../images/Wonder Treats.webp'
+import SpectacularSnacks from '../../images/Spectacular Snacks.jpg'
+import IncredibleEats from '../../images/Incredible Eats.jpg'
+import EnchantedDelights from '../../images/Enchanted Delights.jpg'
+import EpicureanAdventures from '../../images/Epicurean Adventures.jpg'
+import MarvelousMeals from '../../images/Marvelous Meals.jpg'
 
 export default function Zone(){
     console.log("poop");
@@ -98,8 +104,8 @@ export default function Zone(){
                 <div class="column">
                     <div class="card">                    
                         <ul>
-                            <li><img class="view" src={Popcorn} alt="popcorn"></img></li>
-                            <li><h3>Popcorn</h3></li>
+                            <li><img class="view" src={WonderTreats} alt="concession"></img></li>
+                            <li><h3>Wonder Treats</h3></li>
                             <li>Type: Concession</li>
                             <li>Location: Zone A</li>
                             <li>Status: Open</li>
@@ -109,19 +115,8 @@ export default function Zone(){
                 <div class="column">
                     <div class="card">                    
                         <ul>
-                            <li><img class="view" src={CottonCandy} alt="cotton candy"></img></li>
-                            <li><h3>Cotton Candy</h3></li>
-                            <li>Type: Concession</li>
-                            <li>Location: Zone A</li>
-                            <li>Status: Open</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">                    
-                        <ul>
-                            <li><img class="view" src={Lemonade} alt="lemonade"></img></li>
-                            <li><h3>Lemonade</h3></li>
+                            <li><img class="view" src={SpectacularSnacks} alt="concession"></img></li>
+                            <li><h3>Spectacular Snacks</h3></li>
                             <li>Type: Concession</li>
                             <li>Location: Zone A</li>
                             <li>Status: Open</li>
@@ -132,7 +127,7 @@ export default function Zone(){
                     <div class="card">                    
                         <ul>
                             <li><img class="view" src={GiftShop1} alt="gift shop"></img></li>                    
-                            <li><h3>Gift Shop</h3></li>
+                            <li><h3>Gift Shop A</h3></li>
                             <li>Type: GiftShop</li>
                             <li>Location: Zone A</li>
                             <li>Status: Open</li>
@@ -201,8 +196,8 @@ export default function Zone(){
                 <div class="column">
                     <div class="card">                    
                         <ul>
-                            <li><img class="view" src={FunnerlCake} alt="funnel cake"></img></li>
-                            <li><h3>Funnel Cake</h3></li>
+                            <li><img class="view" src={IncredibleEats} alt="concession"></img></li>
+                            <li><h3>Incredible Eats</h3></li>
                             <li>Type: Concession</li>
                             <li>Location: Zone B</li>
                             <li>Status: Open</li>
@@ -212,8 +207,8 @@ export default function Zone(){
                 <div class="column">
                     <div class="card">                    
                         <ul>
-                            <li><img class="view" src={IceCream} alt="ice cream"></img></li>
-                            <li><h3>Ice Cream</h3></li>
+                            <li><img class="view" src={EnchantedDelights} alt="concession"></img></li>
+                            <li><h3>Enchanted Delights</h3></li>
                             <li>Type: Concession</li>
                             <li>Location: Zone B</li>
                             <li>Status: Open</li>
@@ -224,7 +219,7 @@ export default function Zone(){
                     <div class="card">                    
                         <ul>
                             <li><img class="view" src={GiftShop2} alt="gift shop"></img></li>
-                            <li><h3>Gift Shop2</h3></li>
+                            <li><h3>Gift Shop B</h3></li>
                             <li>Type: GiftShop</li>
                             <li>Location: Zone B</li>
                             <li>Status: Open</li>
@@ -292,8 +287,8 @@ export default function Zone(){
                 <div class="column">
                     <div class="card">
                         <ul>
-                            <li><img class="view" src={Burger} alt="burger"></img></li>
-                            <li><h3>Big Burgers</h3></li>
+                            <li><img class="view" src={EpicureanAdventures} alt="concession"></img></li>
+                            <li><h3>Epicurean Adventures</h3></li>
                             <li>Type: Concession</li>
                             <li>Location: Zone C</li>
                             <li>Status: Open</li>
@@ -303,20 +298,9 @@ export default function Zone(){
                 <div class="column">
                     <div class="card">
                         <ul>
-                            <li><img class="view" src={Turkey} alt="turkey"></img></li>
-                            <li><h3>Turkey Legs</h3></li>
-                            <li>Type: Rollercoaster</li>
-                            <li>Location: Zone C</li>
-                            <li>Status: Open</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="card">
-                        <ul>
-                            <li><img class="view" src={Hotdog} alt="hotdog"></img></li>
-                            <li><h3>Hot Dogs</h3></li>
-                            <li>Type: Rollercoaster</li>
+                            <li><img class="view" src={MarvelousMeals} alt="concession"></img></li>
+                            <li><h3>Marvelous Meals</h3></li>
+                            <li>Type: Concession</li>
                             <li>Location: Zone C</li>
                             <li>Status: Open</li>
                         </ul>
@@ -326,7 +310,7 @@ export default function Zone(){
                     <div class="card">
                         <ul>
                             <li><img class="view" src={GiftShop3} alt="gift shop"></img></li>
-                            <li><h3>Gift Shop</h3></li>
+                            <li><h3>Gift Shop C</h3></li>
                             <li>Type: GiftShop</li>
                             <li>Location: Zone C</li>
                             <li>Status: Open</li>
