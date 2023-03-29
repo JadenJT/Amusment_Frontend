@@ -1,11 +1,14 @@
 const db = require('../database');
 
 db.query(
-    'SELECT * FROM ride',
+    'SELECT * FROM job',
     function (error, results, fields) {
         if (error) throw error;
-        console.log('The result:', results);
+        for (res of results) {
+            console.log(res.work_name)
+        }
     }
 );
 
 db.end();
+
