@@ -15,7 +15,7 @@ const popup = ()=> {
     <input type="text" placeholder="Username" className='input-login'/>
     <input type="password" placeholder="Password"className='input-login'/>
     <div className="login-btn" >Login</div>
-    
+  
     <p className='login-font'>Or login using</p>
 
     <div className="alt-login">
