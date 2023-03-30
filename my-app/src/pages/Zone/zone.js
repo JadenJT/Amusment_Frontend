@@ -29,7 +29,7 @@ import Inferno from '../../images/Inferno.jpg'
 import DragonsLair from '../../images/DragonsLair.jpg'
 import DinoAdventure from '../../images/DinoAdventure.jpg'
 
-export default function Zone() {
+export default function Zone() {    
     return (
         <>
             <div class="zwp">
