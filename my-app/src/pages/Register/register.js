@@ -63,26 +63,29 @@ const Register = () => {
             Full Name:
             <label>
               <input name="firstName" 
+                    type='text'
                     required 
                     placeholder='First Name'
-                    value={firstNameValue}
-                    onChange={setFirstNameValue}
+                    // value={firstNameValue}
+                    // onChange={setFirstNameValue}
                     />
             </label>
             <label>
               <input name="middleInitial" 
+                    type='text'
                     maxLength={1} 
                     placeholder='Middle Initial' 
-                    value={middleInitialValue}
-                    onChange={setMiddleInitialValue}
+                    // value={middleInitialValue}
+                    // onChange={setMiddleInitialValue}
                     />
             </label>
             <label>
               <input name="lastName" 
+                    type='text'
                     required 
                     placeholder='Last Name' 
-                    value={lastNameValue}
-                    onChange={setLastNameValue}
+                    // value={lastNameValue}
+                    // onChange={setLastNameValue}
                     />
             </label>
           </p>
@@ -92,10 +95,11 @@ const Register = () => {
             Phone Number:
             <label>
               <input name="phoneNumber" 
+                    type='text'
                     required 
                     placeholder="Number" 
-                    value={phoneNumberValue}
-                    onChange={handlePhoneNumber}
+                    // value={phoneNumberValue}
+                    // onChange={handlePhoneNumber}
                     />
             </label>
           </p>
@@ -106,10 +110,11 @@ const Register = () => {
             <label>
               <input name="emailAddress" 
                     required 
+                    type='text'
                     maxLength={30}
                     placeholder="email address"
-                    value={emailValue}
-                    onChange={setEmailValue}
+                    // value={emailValue}
+                    // onChange={setEmailValue}
                     // onChange={handleEmail}
                     />
             </label>
@@ -121,11 +126,12 @@ const Register = () => {
             <label>
               <input name="password" 
                     required 
+                    type='text'
                     maxLength={25}
                     // type="password"
                     placeholder="password"
-                    value={passwordValue}
-                    onChange={setPasswordValue}
+                    // value={passwordValue}
+                    // onChange={setPasswordValue}
                     />
             </label>
           </p>

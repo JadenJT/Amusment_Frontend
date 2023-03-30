@@ -28,8 +28,39 @@ import CosmicCruiser from '../../images/CosmicCruiser.jpg'
 import Inferno from '../../images/Inferno.jpg'
 import DragonsLair from '../../images/DragonsLair.jpg'
 import DinoAdventure from '../../images/DinoAdventure.jpg'
+import * as fs from 'fs';
+import mysql from 'mysql';
+import * as dotenv from 'dotenv';
+dotenv.config()
+//import { fetchZoneRides } from '../../Server/routes/ride';
 
+// const zone_a_rides = fetchZoneRides('A');
+// console.log(zone_a_rides);
 export default function Zone() {
+    
+    
+    
+    var connection = mysql.createConnection({
+      host: process.env.HOST,
+      port: process.env.PORT,
+      user: process.env.USER,
+      password: process.env.PASSWORD,
+      database: process.env.DATABASE,
+      ssl: {
+        ca: fs.readFileSync(
+          __dirname + "/helpers/SSLCertification.pem"
+        ),
+      }
+    });
+    
+    connection.connect(function (err) {
+      if (err) {
+        return console.error('Error connecting to MySQL database:', err.stack);
+      }
+    
+      console.log('Connected to MySQL database as id', connection.threadId);
+    });
+
     return (
         <>
             <div class="zwp">
