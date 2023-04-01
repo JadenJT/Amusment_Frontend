@@ -1,8 +1,9 @@
 require('dotenv').config();
 const fs = require('node:fs');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
-var connection = mysql.createConnection({
+
+var connectionPool = mysql.createPool({
   host: process.env.HOST,
   port: process.env.PORT,
   user: process.env.USER,
@@ -12,15 +13,15 @@ var connection = mysql.createConnection({
     ca: fs.readFileSync(
       __dirname + "/helpers/SSLCertification.pem"
     ),
-  }
+  },
+  multipleStatements: true,
 });
 
-connection.connect(function (err) {
-  if (err) {
-    return console.error('Error connecting to MySQL database:', err.stack);
-  }
-
+connectionPool.getConnection((err, connection) => {
+  if (err) return console.error('Error connecting to MySQL database:', err.stack);
   console.log('Connected to MySQL database as id', connection.threadId);
+  connection.release()
+  
 });
 
-module.exports = connection;
+module.exports = connectionPool;
