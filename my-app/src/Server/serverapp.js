@@ -2,7 +2,9 @@ require('dotenv').config();
 const http = require('http');
 const db = require('./database');
 
-const ridesRoutes = require('./routes/ride') 
+const errorMessage = require('./routes/response');
+const ridesRoutes = require('./routes/ride'); 
+const personRoutes = require('./routes/person');
 
 const getHandlers = {
   '/ride/all': (req, res) => ridesRoutes.getAllRides(req, res),
@@ -12,36 +14,36 @@ const getHandlers = {
   '/ride/d': (req, res) => ridesRoutes.getZoneRides(req, res, 'd'),
 }
 
-const updateHandlers = {
+const putHandlers = {
 
 }
 
-const insertHandlers = {
-
+const postHandlers = {
+  '/register': (req, res) => personRoutes.postPerson(req, res),
+  '/login': (req, res) => personRoutes.postLogin(req, res)
 }
 
 const deleteHandlers = {
 
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const getHandler = getHandlers[req.url];
-  const updateHandler = updateHandlers[req.url];
-  const insertHandler = insertHandlers[req.url];
+  const putHandler = putHandlers[req.url];
+  const postHandler = postHandlers[req.url];
   const deleteHandler = deleteHandlers[req.url];
+
 
   if(getHandler && req.method === 'GET'){
     getHandler(req, res)
-  } else if (updateHandler && req.method === 'UPDATE') {
-    updatehandler(req, res)
-  } else if (insertHandler && req.method === 'INSERT') {
-    inserthandler(req, res)
+  } else if (putHandler && req.method === 'PUT') {
+    putHandler(req, res)
+  } else if (postHandler && req.method === 'POST') {
+    postHandler(req, res)
   } else if (deleteHandler && req.method === 'DELETE') {
-    updatehandler(req, res)
+    deleteHandler(req, res)
   }  else {
-      res.statusCode = 404;-
-      res.writeHead(res.statusCode, { 'Content-Type': 'application/json' })
-      res.end(JSON.stringify({error: res.statusCode, message: "page not found"}));
+    errorMessage.sendError(req, res, 404, "Page not found")
   }
 });
 
