@@ -1,6 +1,6 @@
 const db = require('../database');
 
-const responseMessage = require('./response');
+const responseMessage = require('../helpers/response');
 const { getReqData } = require('../helpers/utils');
 
 async function checkPersonExist(person_email) {
