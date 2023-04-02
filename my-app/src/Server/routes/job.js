@@ -10,5 +10,3 @@ db.query(
     }
 );
 
-db.end();
-

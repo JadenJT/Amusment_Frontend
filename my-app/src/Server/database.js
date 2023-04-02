@@ -1,8 +1,6 @@
-require('dotenv').config();
+require('dotenv').config({path: __dirname + '/.env'});
 const fs = require('node:fs');
 const mysql = require('mysql2');
-
-
 var connectionPool = mysql.createPool({
   host: process.env.HOST,
   port: process.env.PORT,
