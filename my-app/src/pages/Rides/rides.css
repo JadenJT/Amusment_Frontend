@@ -1,3 +1,19 @@
+.rwp{
+  background-image: url(../../images/RidePicture.jpg);
+  background-color: rgb(26, 163, 255);
+  height: 550px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.wLogo{
+  float: right;
+  width: 700px;
+  height: 500px;
+}
+
 .title-rides {
     text-align: center;
     display: flex;
