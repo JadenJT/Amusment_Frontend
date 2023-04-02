@@ -21,15 +21,7 @@ import Inferno from '../../images/Inferno.jpg'
 import DragonsLair from '../../images/DragonsLair.jpg'
 import DinoAdventure from '../../images/DinoAdventure.jpg'
 
-import WonderTreats from '../../images/Wonder Treats.webp'
-import SpectacularSnacks from '../../images/Spectacular Snacks.jpg'
-import IncredibleEats from '../../images/Incredible Eats.jpg'
-import EnchantedDelights from '../../images/Enchanted Delights.jpg'
-import EpicureanAdventures from '../../images/Epicurean Adventures.jpg'
-import MarvelousMeals from '../../images/Marvelous Meals.jpg'
-
-export default function Zone(){
-    console.log("poop");
+export default function Zone() {
     return (
         <>
             <div className="zwp">
