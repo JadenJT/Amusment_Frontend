@@ -73,18 +73,21 @@
 .concession-img{
     height: 15pc;
     width: 15pc;
+    margin-left: 25px
 }
 
 /* styles for concession details */
 .concession-details{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin-left: 50px;
 }
 .concession-name{
     margin: 0;
     font-size: 2rem;
+    display: flex;
+    justify-content: left;
     font-weight: bold;
     color: #e65667;
 }
@@ -93,6 +96,8 @@
     font-size: 1.2rem;
     line-height: 1.5;
     color: #fff;
+    display: flex;
+    justify-content: left;
 }
 
 
