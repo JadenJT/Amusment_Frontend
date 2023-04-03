@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./loginForm.css"
+import {Link} from 'react-router-dom';
 
 
 const Loginform = () => {
@@ -14,19 +15,14 @@ const popup = ()=> {
     <h1 className='login-font'>Login</h1>
     <input type="text" placeholder="Username" className='input-login'/>
     <input type="password" placeholder="Password"className='input-login'/>
+    <Link>Forgot password?</Link>
+
     <div className="login-btn" >Login</div>
-    
-    <p className='login-font'>Or login using</p>
 
-    <div className="alt-login">
-        <div className="facebook"></div>
-        <div className="google"></div>
-    </div>
+      <Link to='/register'>SignUp?</Link>
+   
 
-    <div className={popupStyle}>
-      <h3 >Login failed</h3>
-      <p>username or password incorrect</p>
-    </div>
+
    </div>
   )
 }
