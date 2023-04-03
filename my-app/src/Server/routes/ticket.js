@@ -3,12 +3,18 @@ const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils")
 
 module.exports = {
+    /*
+        POST Data Example: 
+        {
+            "dateTime": Date()
+        }
+    */
     async postTicket(req, res) {
 
         const bodyData = await getReqData(req);
         const newTicket = JSON.parse(bodyData);
 
-        const dateTime = new Date();
+        // const dateTime = new Date(); //This is only for testing purposes! Do NOT deploy to live site. 
         const queryData = [null, dateTime, newTicket.price, newTicket.ride_id, newTicket.customer_id];
 
         db.query(
@@ -20,6 +26,12 @@ module.exports = {
         )
     },
 
+    /*
+        POST Data Example: 
+        {
+            "ticket_id": 3
+        }
+    */
     async deleteTicket(req, res){
         const bodyData = await getReqData(req);
         const newTicket = JSON.parse(bodyData);
@@ -31,6 +43,12 @@ module.exports = {
         return sendResponse(req, res, 200, `Ticket ID: ${newTicket.ticket_id} removed`)
     },
 
+    /*
+        POST Data Example: 
+        {
+            "customer_id": 8
+        }
+    */
     async getTicketCustomer(req, res){
         const bodyData = await getReqData(req);
         const customerJSON = JSON.parse(bodyData);
@@ -41,6 +59,12 @@ module.exports = {
         return sendResponse(req, res, 200, `Customer ID: ${customer_id} Ticket fetched`, rows);
     },
 
+    /*
+        POST Data Example: 
+        {
+            "ride_id": 11
+        }
+    */
     async getTicketRides(req, res){
         const bodyData = await getReqData(req);
         const customerJSON = JSON.parse(bodyData);
