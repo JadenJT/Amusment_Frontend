@@ -18,6 +18,11 @@
 .center-dropdown-cons {
     display: flex;
     justify-content: center;
+    padding: 2em 0 2em;
+}
+
+#zoneA-title, #zoneB-title, #zoneC-title{
+    padding: 0 0 1em;
 }
 
 .dropdown-cons {
@@ -81,6 +86,7 @@
     flex-direction: column;
     justify-content: center;
     margin-left: 50px;
+    text-align: left;
 }
 .concession-name{
     margin: 0;
