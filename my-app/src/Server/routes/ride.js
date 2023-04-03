@@ -31,38 +31,3 @@ module.exports = {
     getAllRides,
     getZoneRides
 };
-
-
-
-
-// db.query(
-//     'SELECT * FROM ride',
-//     function (error, results, fields) {
-//         if (error) throw error;
-//         db.end();
-//     }
-// );
-
-
-// module.exports = {
-//     fetchAllRides() {
-//         db.query(
-//             'SELECT * FROM ride',
-//             function (error, results, fields) {
-//                 if (error) throw error;
-//                 return results;
-//             }
-//         );
-//         db.end();
-//     },
-
-//     fetchZoneRides() {
-//         db.query(
-//             'SELECT * FROM ride WHERE zone_id = ?', ['A'],
-//             function (error, results, fields) {
-//                 if (error) throw error;
-//                 return results;
-//             }
-//         );
-//     }
-// }
