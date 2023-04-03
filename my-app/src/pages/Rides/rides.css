@@ -24,8 +24,13 @@
   .center-dropdown {
     display: flex;
     justify-content: center;
+    padding: 2em 0 2em;
   }
   
+#kids-rides-title, #adult-rides-title{
+  padding: 0 0 1em;
+}
+
   .dropdown {
     position: relative;
     display: inline-block;
@@ -91,13 +96,15 @@
     font-size: 2rem;
     font-weight: bold;
     color: #e65667;
+    text-align: left;
   }
   
   .ride-details p {
     margin: 10px 0;
     font-size: 1.2rem;
-    line-height: 1.5;
     color: #fff;
+    text-align: left;
+    line-height: 1.5em;
   }
   
   /* styles for ride info box */
