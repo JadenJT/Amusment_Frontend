@@ -2,9 +2,10 @@ require('dotenv').config();
 const http = require('http');
 const db = require('./database');
 
-const errorMessage = require('./routes/response');
+const { sendResponse } = require("./helpers/response");
 const ridesRoutes = require('./routes/ride'); 
 const personRoutes = require('./routes/person');
+const ticketRoutes = require('./routes/ticket');
 
 const getHandlers = {
   '/ride/all': (req, res) => ridesRoutes.getAllRides(req, res),
@@ -12,6 +13,8 @@ const getHandlers = {
   '/ride/b': (req, res) => ridesRoutes.getZoneRides(req, res, 'b'),
   '/ride/c': (req, res) => ridesRoutes.getZoneRides(req, res, 'c'),
   '/ride/d': (req, res) => ridesRoutes.getZoneRides(req, res, 'd'),
+  '/ticket/owned': (req, res) => ticketRoutes.getTicketCustomer(req, res),
+  '/ticket/ride/': (req, res) => ticketRoutes.getTicketRides(req, res)
 }
 
 const putHandlers = {
@@ -20,11 +23,12 @@ const putHandlers = {
 
 const postHandlers = {
   '/register': (req, res) => personRoutes.postPerson(req, res),
-  '/login': (req, res) => personRoutes.postLogin(req, res)
+  '/login': (req, res) => personRoutes.postLogin(req, res),
+  '/ride/buy': (req, res) => ticketRoutes.postTicket(req, res)
 }
 
 const deleteHandlers = {
-
+  '/ticket/remove': (req, res) => ticketRoutes.deleteTicket(req, res) 
 }
 
 const server = http.createServer(async (req, res) => {
@@ -43,7 +47,7 @@ const server = http.createServer(async (req, res) => {
   } else if (deleteHandler && req.method === 'DELETE') {
     deleteHandler(req, res)
   }  else {
-    errorMessage.sendError(req, res, 404, "Page not found")
+    sendResponse(req, res, 404, "Page not found")
   }
 });
 

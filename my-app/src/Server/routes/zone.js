@@ -1,19 +1,14 @@
 const db = require('../database');
 
-db.query(
-    'SHOW TABLES',
-    function (error, results, fields) {
-        if (error) throw error;
-        console.log('The result:', results);
-    }
-);
+const { getReqData } = require('../helpers/utils');
+const { sendResponse } = require("../helpers/response");
 
-db.query(
-    'SELECT * FROM zone',
-    function (error, results, fields) {
-        if (error) throw error;
-        console.log('The result:', results);
-    }
-);
+module.exports = {
+    async getZoneIncome(req, res) {
+        const bodyData = await getReqData(req);
+        const attemptLogin = JSON.parse(bodyData);
 
-db.end();
+        return sendResponse(req, res, 200, "Logged in")
+
+    }
+}
