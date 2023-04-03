@@ -126,9 +126,9 @@ const Concessions = () => {
                                 <h2 className='concession-name'>{concession.name}</h2>
                                 <p>
                                     {concession.description}
-                                    <br />
+                                </p>
+                                <p>
                                     Location: {concession.location}
-                                    <br />
                                 </p>
                             </div>
                             {concession.showInfo && concession.location === 'Zone A' &&(
@@ -160,12 +160,12 @@ const Concessions = () => {
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
-                                <h2 className='concession-name'>{concession.name}</h2>
+                            <h2 className='concession-name'>{concession.name}</h2>
                                 <p>
                                     {concession.description}
-                                    <br />
+                                </p>
+                                <p>
                                     Location: {concession.location}
-                                    <br />
                                 </p>
                             </div>
                             {concession.showInfo && concession.location === 'Zone B' && (
@@ -197,12 +197,12 @@ const Concessions = () => {
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
-                                <h2 className='concession-name'>{concession.name}</h2>
+                            <h2 className='concession-name'>{concession.name}</h2>
                                 <p>
                                     {concession.description}
-                                    <br />
+                                </p>
+                                <p>
                                     Location: {concession.location}
-                                    <br />
                                 </p>
                             </div>
                             {concession.showInfo && concession.location === 'Zone C' &&(

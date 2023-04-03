@@ -19,6 +19,17 @@ async function checkLoginInfo(email, password) {
 }   
 
 module.exports = {
+    /*
+        POST Data Example: 
+        {
+            "f_name": "john",
+            "m_name": "l", 
+            "l_name": "cox",
+            "phone_number": "9998887777",
+            "email": "john.cox@gmail.com",
+            "password": "password123"
+        }
+    */
     async postPerson(req, res){
         const bodyData = await getReqData(req);
         const newPerson = JSON.parse(bodyData);
@@ -34,7 +45,13 @@ module.exports = {
             }
         )   
     },
-
+    /*
+        POST Data Example: 
+        {
+            "email: "john.cox@gmail.com",
+            "password": "password123"
+        }
+    */
     async postLogin(req, res) {
         const bodyData = await getReqData(req);
         const attemptLogin = JSON.parse(bodyData);
