@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./concessions.css";
 import { Link, animateScroll } from "react-scroll";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Logo from '../../icons/Umazing.svg'
 
 const images ={};
 const importAll = (r) => {
@@ -98,7 +99,10 @@ const Concessions = () => {
     
     return(
         <div>
-        
+            <div className="cwp">
+                <img src={Logo} alt="park logo" className="wLogo"></img>
+            </div>
+
             {/* Bottom-box */}
             <div className='bottom-box'>
                 {/* Concessions button*/}

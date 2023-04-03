@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./rides.css";
 import { Link, animateScroll } from "react-scroll";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Logo from '../../icons/Umazing.svg';
 
 const images = {};
 const importAll = (r) => {
@@ -241,6 +242,10 @@ const Rides = () => {
     }
     return (
         <div>
+            <div className="rwp">
+                <img src={Logo} alt="park logo" className="wLogo"></img>
+            </div>
+
             <div className="center-dropdown">
                 <div className="dropdown">
                     <button className="ridesButton">RIDES</button>
