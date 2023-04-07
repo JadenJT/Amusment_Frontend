@@ -3,7 +3,7 @@ const http = require('http');
 const db = require('./database');
 
 const { sendResponse } = require("./helpers/response");
-const ridesRoutes = require('./routes/ride'); 
+const ridesRoutes = require('./routes/ride');
 const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
 
@@ -28,7 +28,7 @@ const postHandlers = {
 }
 
 const deleteHandlers = {
-  '/ticket/remove': (req, res) => ticketRoutes.deleteTicket(req, res) 
+  '/ticket/remove': (req, res) => ticketRoutes.deleteTicket(req, res)
 }
 
 const server = http.createServer(async (req, res) => {
@@ -37,8 +37,9 @@ const server = http.createServer(async (req, res) => {
   const postHandler = postHandlers[req.url];
   const deleteHandler = deleteHandlers[req.url];
 
+  res.setHeader('Access-Control-Allow-Origin', '*');
 
-  if(getHandler && req.method === 'GET'){
+  if (getHandler && req.method === 'GET') {
     getHandler(req, res)
   } else if (putHandler && req.method === 'PUT') {
     putHandler(req, res)
@@ -46,7 +47,7 @@ const server = http.createServer(async (req, res) => {
     postHandler(req, res)
   } else if (deleteHandler && req.method === 'DELETE') {
     deleteHandler(req, res)
-  }  else {
+  } else {
     sendResponse(req, res, 404, "Page not found")
   }
 });
