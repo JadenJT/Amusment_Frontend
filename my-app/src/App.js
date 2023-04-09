@@ -16,18 +16,18 @@ import Zones from './pages/Zone/zone';
 function App() {
   return (
     <div className="App">
-   <BrowserRouter>
-  <Routes>
-      <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />
-      <Route path="register" element={<Register />} />
-      <Route path="Login" element={<Login />} />
-      <Route path="help" element={<Help />} />
-      <Route path="rides" element={<Rides />} />
-      <Route path="zone" element={<Zones />} />
-    </Route>
-  </Routes>
-</BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="register" element={<Register />} />
+            <Route path="Login" element={<Login />} />
+            <Route path="help" element={<Help />} />
+            <Route path="rides" element={<Rides />} />
+            <Route path="zone" element={<Zones />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
 
       <BrowserRouter>
         <Routes>
@@ -37,7 +37,7 @@ function App() {
             <Route path="Login" element={<Login />} />
             <Route path="help" element={<Help />} />
             <Route path="rides" element={<Rides />} />
-             <Route path="error404" element={<Error404 />} />
+            <Route path="*" element={<Error404 />} />
             <Route path="concessions" element={<Concessions />} />
             <Route path="zone" element={<Zones />} />
           </Route>
