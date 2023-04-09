@@ -1,0 +1,21 @@
+
+.error404{
+    font-size: 5.50em;
+    font-weight: bold;
+    padding: 0.65em;
+    line-height: 1.0em;
+    color: white;
+    position: relative;
+    right: 45px;
+}
+.wLogo{
+    width: 400px;
+    position: relative;
+    right: 130px;
+}
+.description{
+    color: #7d729f;
+    font-weight: bolder;
+    position: relative;
+    right: 15px;
+}

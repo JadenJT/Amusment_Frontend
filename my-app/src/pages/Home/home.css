@@ -41,7 +41,7 @@ body{
 }
 
 .FirstMessage{
-    color: white;
+    color: rgb(255, 255, 255);
     font-size: 1.5em;
     text-align: center;
     line-height: 1.5em;

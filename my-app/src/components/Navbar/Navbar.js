@@ -24,6 +24,14 @@ function Navbar() {
             </Link>
           </div>
 
+
+         {/* <div className='Error404'>
+            <Link to='/error404' className='navbar-logo'>
+            Error404
+            </Link>
+          </div>*/}
+ 
+ 
           <div className='Rides'>
             <Link to='/rides' className='navbar-logo'>
             Rides
