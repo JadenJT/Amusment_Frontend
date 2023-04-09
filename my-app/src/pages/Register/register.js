@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from "axios";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { render } from 'react-dom';
 import {Link } from 'react-router-dom';
@@ -45,7 +44,7 @@ function validatePhoneNumber(phoneNum){
   if(phoneNum.length < 10 || phoneNum.length > 10){
     return false;
   }
-  const regex = /^[0-9\b]+$/;;
+  const regex = /^[0-9\b]+$/;
   if(!regex.test(phoneNum)){
     return false;
   }
@@ -72,7 +71,7 @@ function validatePassword(userPassword){
 
 const Register = () => {
   const [firstNameValue, setFirstNameValue] = useState("");
-  const [middleInitialValue, setMiddleInitialValue] = useState("");
+  let [middleInitialValue, setMiddleInitialValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
   const [phoneNumberValue, setPhoneNumberValue] = useState("");
   const [emailValue, setEmailValue] = useState("");
@@ -110,7 +109,6 @@ const Register = () => {
     if(middleName === ""){
       setMiddleInitialError("");
     }
-    
   }
 
   const handleLastNameChange = (event) => {
@@ -168,12 +166,12 @@ const Register = () => {
       alert("Please correct the errors and try again.");
       return;
     }
-  
+    if (middleInitialValue == "") middleInitialValue = null;
     const personData = {
-      firstName: firstNameValue,
-      middleInitial: middleInitialValue,
-      lastName: lastNameValue,
-      phoneNumber: phoneNumberValue,
+      f_name: firstNameValue,
+      m_name: middleInitialValue,
+      l_name: lastNameValue,
+      phone_number: phoneNumberValue,
       email: emailValue,
       password: passwordValue,
     };
@@ -190,7 +188,7 @@ const Register = () => {
       console.log(responseData);
       //driect to homepage after login
     } catch (error) {
-      console.error(error);
+      console.log(error)
     }
   };
 
