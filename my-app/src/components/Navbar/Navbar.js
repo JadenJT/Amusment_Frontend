@@ -38,7 +38,12 @@ function Navbar() {
             </Link>
           </div>
 
-    
+          <div className='Register'>
+            <Link to ='/register' className='navbar-logo'>
+              Register
+            </Link>
+          </div>
+
        </div>
 
     <div className="login" >
