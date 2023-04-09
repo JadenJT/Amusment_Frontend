@@ -1,0 +1,94 @@
+.register-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;  
+}
+
+.register-cover{
+    background-color: white;
+    width: 50em;
+    height: 55em;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    overflow: hidden;
+}
+
+.register-title{
+    color: black;
+}
+
+.person-info{
+    margin: 1em 0 2em 0;
+}
+
+/*password style */
+.person-info-password{
+    position: relative;
+    margin: 1em 0;
+}
+
+.password-input{
+    padding-right: 50px;
+}
+
+.password-toggle-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    padding: 0 10px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.error{
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 2em;
+    padding: 0 10px;
+    color: red;
+    line-height: 2em;
+}
+/*register style */
+.register-input{
+    width: 20em;
+    height: 3em;
+    border-radius: .25em;
+    border: none;
+    background-color: rgb(229, 226, 226);
+    text-align: left;
+    padding: 2em;
+}
+
+.register-button{
+    width: 50%;
+    height: 3em;
+    background-color:#0c0c0c;
+    color: white;
+    border:none;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+    margin: 3em auto .2em;
+}
+
+.register-button:hover{
+    transform: scale(1.05);
+    background-color: #5448e0;
+}
+.login-link{
+    color: black;
+}

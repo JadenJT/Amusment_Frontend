@@ -33,23 +33,6 @@ body{
     background-repeat: no-repeat;
     cursor: pointer;  
 }
-.google{
-    transition: 0.5s;
-    background-image: url("../../icons/google.svg");
-}
-
-.google:hover{
-    transform: scale(1.05);
-}
-
-.facebook{
-    transition: 0.5s;
-    background-image: url("../../icons/facebook.svg");
-}
-
-.facebook:hover{
-    transform: scale(1.05);
-}
 
 .input-login{
     border: none;
@@ -85,24 +68,6 @@ outline-color: rgb(32, 177, 255);
  .text{
     position: relative;
     bottom :-2em;
- }
-
- .hide {display: none;}
-
- .login-popup {
-    position: absolute;
-    height: 30em;
-    width: 30em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25em;
-    background-color: black;
-    color: white;
-    bottom: 0;
-    transform: scale(1);
-    transform: 1.5s;
  }
 
  .login-font{

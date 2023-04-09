@@ -23,15 +23,19 @@ body{
 
 .wLogo{
     float: right;
+    width: 700px;
+    height: 500px;
 }
 
 /***Body***/
-.zone1, .zone2, .zone3{
+.zoneA, .zoneB, .zoneC{
     float: left;
     clear: both;
 }
 .zName{    
     padding: 20px 20px 0;
+    font-size: 2.5em;
+    text-decoration: underline;
 }
 .column{
     float: left;
@@ -41,7 +45,7 @@ body{
 .card{
     border-radius: 20px;
     padding: 15px 30px;
-    background-color: #ee7028;
+    background-color: #ee850d;
     color: white;
 
     text-align: center;
@@ -54,7 +58,7 @@ body{
 .view{
     overflow: hidden;
     border-radius: 10px;
-    width: 200px;
-    height: 300px;
+    width: 210px;
+    height: 275px;
     object-fit: cover;
 }

@@ -17,6 +17,7 @@ function Navbar() {
           <Link to='/' className='navbar-logo'>
             <a class="cursor-pointer px-1 text-5xl font-medium text-off-white hover:underline md:text-2xl">Home</a>
           </Link>
+          
 
           <div className='Zones'>
             <Link to='/zone' className='navbar-logo'>
@@ -37,22 +38,20 @@ function Navbar() {
             Rides
             </Link>
           </div>
-       
-          <div className='Help'>
-            <Link to='/help' className='navbar-logo'>
-            Help
+
+
+          <div className='Concessions'>
+            <Link to='/concessions' className='navbar-logo'>
+            Concessions
             </Link>
           </div>
 
-          <div className='register'>
-            <Link to='/register' className='navbar-logo'>
-            Register
+          <div className='Register'>
+            <Link to ='/register' className='navbar-logo'>
+              Register
             </Link>
           </div>
 
-         
-      
-    
        </div>
 
     <div className="login" >

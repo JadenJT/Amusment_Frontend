@@ -1,66 +1,61 @@
-.rwp{
-  background-image: url(../../images/RidePicture.jpg);
-  background-color: rgb(26, 163, 255);
-  height: 550px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
+.cwp{
+    background-image: url(../../images/ConcessionPicture.jpg);
+    background-color: rgb(26, 163, 255);
+    height: 550px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
 }
 
 .wLogo{
-  float: right;
-  width: 700px;
-  height: 500px;
+    float: right;
+    width: 700px;
+    height: 500px;
 }
 
-.title-rides {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .center-dropdown {
+/* styles for button detail */
+.center-dropdown-cons {
     display: flex;
     justify-content: center;
     padding: 2em 0 2em;
-  }
-  
-#kids-rides-title, #adult-rides-title{
-  padding: 0 0 1em;
 }
 
-  .dropdown {
+#zoneA-title, #zoneB-title, #zoneC-title{
+    padding: 0 0 1em;
+}
+
+.dropdown-cons {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-content-cons {
     display: none;
     position: absolute;
     z-index: 1;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-content-cons a {
     display: block;
     padding: 10px 20px;
     background-color: #f1f1f1;
     text-decoration: none;
     color: black;
-  }
-  
-  .dropdown-content a:hover {
+    width: 250px;
+}
+
+.dropdown-content-cons a:hover {
     background-color: #3793bc;
     color: black;
-  }
-  
-  .dropdown:hover .dropdown-content {
+}
+
+.dropdown-cons:hover .dropdown-content-cons {
     display: block;
     width: 200px;
-  }
-  
-  .ridesButton {
+}
+
+.concessions-button {
     background-color: #5448e0;
     color: white;
     padding: 15px 30px;
@@ -69,46 +64,51 @@
     font-size: 24px;
     display: block;
     margin-top: 10px;
-    width: 200px;
+    width: 250px;
     height: 60px;
-  }
-  
-  .all-rides {
+}
+
+/* styles for concession */
+.all-concessions{
     display: flex;
     align-items: center;
     margin-bottom: 50px;
     cursor: pointer;
-  }
-  .img-ride{
+}
+.concession-img{
     height: 15pc;
     width: 15pc;
-  }
-  /* styles for ride details */
-  .ride-details {
+    margin-left: 25px
+}
+
+/* styles for concession details */
+.concession-details{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin-left: 50px;
-  }
-  
-  .ride-name {
+    text-align: left;
+}
+.concession-name{
     margin: 0;
     font-size: 2rem;
+    display: flex;
+    justify-content: left;
     font-weight: bold;
     color: #e65667;
-    text-align: left;
-  }
-  
-  .ride-details p {
+}
+.concession-details p{
     margin: 10px 0;
     font-size: 1.2rem;
+    line-height: 1.5;
     color: #fff;
-    text-align: left;
-    line-height: 1.5em;
-  }
-  
-  /* styles for ride info box */
-  .ride-info-overlay {
+    display: flex;
+    justify-content: left;
+}
+
+
+/* syles for concession info box */
+.concession-info-overlay{
     position: fixed;
     top: 0;
     left: 0;
@@ -119,9 +119,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .ride-info-box {
+}
+.concession-info-box{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -130,22 +129,18 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  }
-  
-  .ride-name-onClick{
+}
+.concession-name-onClick{
     align-self: flex-start;
     margin-top: 0;
-  }
-  
-  .img-ride-onClick{
+}
+.concession-img-onClick{
     width: 15pc;
     height: 15pc;
     object-fit: cover;
     margin-bottom: 10px;
-  }
-  
-  .close-button{
-    
+}   
+.close-button{  
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
@@ -155,4 +150,4 @@
     cursor: pointer;
     margin-left: auto;
     margin-right: auto;
-  }
+}
