@@ -1,11 +1,11 @@
-.register-body{
+.register-body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Poppins', sans-serif;  
+    font-family: 'Poppins', sans-serif;
 }
 
-.register-cover{
+.register-cover {
     background-color: white;
     width: 50em;
     height: 69em;
@@ -19,37 +19,38 @@
     overflow: hidden;
 }
 
-.register-title{
+.register-title {
     color: black;
     margin-bottom: 0;
 }
 
 /*form style */
-.form-container{
+.form-container {
     display: flex;
     flex-direction: column;
 }
-.person-info{
+
+.person-info {
     display: flex;
     flex-direction: column;
     margin: 1em 0 1em 0;
     position: relative;
-    
+
 }
 
 /*password style */
-.person-info-password{
+.person-info-password {
     display: flex;
     flex-direction: column;
     position: relative;
     margin: 1em 0;
 }
 
-.password-input{
+.password-input {
     padding-right: 50px;
 }
 
-.password-toggle-button{
+.password-toggle-button {
     position: absolute;
     top: 0;
     right: 0;
@@ -61,16 +62,17 @@
     cursor: pointer;
 }
 
-.error{
+.error {
     position: absolute;
     bottom: 0.5em;
     height: 2em;
     color: red;
     line-height: 1.2em;
-    
+
 }
+
 /*register style */
-.register-input{
+.register-input {
     width: 20em;
     height: 3em;
     border-radius: .25em;
@@ -78,15 +80,15 @@
     background-color: rgb(229, 226, 226);
     text-align: left;
     padding: 2em;
-   
+
 }
 
-.register-button{
+.register-button {
     width: 50%;
     height: 3em;
-    background-color:#0c0c0c;
+    background-color: #0c0c0c;
     color: white;
-    border:none;
+    border: none;
     font-size: 1em;
     display: flex;
     justify-content: center;
@@ -97,10 +99,11 @@
     margin: 3em auto .2em;
 }
 
-.register-button:hover{
+.register-button:hover {
     transform: scale(1.05);
     background-color: #5448e0;
 }
+
 /*error box style */
 .error-box-overlay {
     position: fixed;
@@ -111,6 +114,7 @@
     z-index: 9999;
     backdrop-filter: blur(2px);
 }
+
 .error-box {
     position: fixed;
     top: 50%;
@@ -129,16 +133,17 @@
     font-size: 1.5em;
 }
 
-.error-box-ul{
+.error-box-ul {
     list-style-type: none;
 }
 
-.return-button{
+.return-button {
     height: 2.5em;
     width: 5em;
     margin-top: .5em;
 }
+
 /*login style */
-.login-link{
+.login-link {
     color: black;
 }
