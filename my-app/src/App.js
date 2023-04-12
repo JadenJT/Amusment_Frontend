@@ -26,7 +26,9 @@ function App() {
             {token == null &&
               <Route path="register" element={<Register />} />
             }
-            <Route path="Login" element={<Login />} />
+            {token == null &&
+              <Route path="Login" element={<Login />} />
+            }
             <Route path="help" element={<Help />} />
             <Route path="rides" element={<Rides />} />
             <Route path="*" element={<Error404 />} />

@@ -1,7 +1,5 @@
 import './register.css';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { render } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../tokenhelpers/helpers';
 
@@ -190,8 +188,6 @@ const Register = () => {
 
     const responseData = await response.json();
     setToken(responseData.item);
-    console.log(responseData);
-
     navigate('/');
     window.location.reload();
 

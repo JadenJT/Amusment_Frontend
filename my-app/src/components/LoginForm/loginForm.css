@@ -52,12 +52,16 @@ input:focus {
     width: 40%;
     height: 3em;
     background-color: #0c0c0c;
+    color: white;
+    border: none;
+    font-size: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
     transition: 0.5s;
     border-radius: 0.25em;
     cursor: pointer;
+    margin: 3em auto .2em;
 }
 
 .login-btn:hover {

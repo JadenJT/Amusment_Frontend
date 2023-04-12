@@ -58,11 +58,13 @@ function Navbar() {
 
         </div>
 
-        <div className="login" >
-          <Link to='/Login' className='navbar-logo'>
-            Login
-          </Link>
-        </div>
+        {token == null &&
+          <div className="login" >
+            <Link to='/Login' className='navbar-logo'>
+              Login
+            </Link>
+          </div>
+        }
 
 
 
