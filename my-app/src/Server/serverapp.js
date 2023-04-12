@@ -36,18 +36,18 @@ const server = http.createServer(async (req, res) => {
   const putHandler = putHandlers[req.url];
   const postHandler = postHandlers[req.url];
   const deleteHandler = deleteHandlers[req.url];
-  
+  res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') {
     // Handle preflight request
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Origin', '*');
+
     res.writeHead(204);
     res.end();
     return;
   }
 
-  res.setHeader('Access-Control-Allow-Origin', '*');
+
 
   if (getHandler && req.method === 'GET') {
     getHandler(req, res)

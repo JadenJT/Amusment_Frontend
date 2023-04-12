@@ -1,75 +1,79 @@
+import './register.css';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { render } from 'react-dom';
-import {Link } from 'react-router-dom';
-import './register.css'
+import { Link, useNavigate } from 'react-router-dom';
+import useToken from '../../tokenhelpers/helpers';
 
-function validateFirstName(firstname){
-  if(firstname.length === 0 || firstname.length > 15){
+
+function validateFirstName(firstname) {
+  if (firstname.length === 0 || firstname.length > 15) {
     return false;
   }
   const regex = /^[a-zA-Z]+$/;
-  if(!regex.test(firstname)){
+  if (!regex.test(firstname)) {
     return false;
   }
   return true;
 }
 
-function validateMiddleInitial(midint){
-  if(midint.length === 0){
-    return true; 
+function validateMiddleInitial(midint) {
+  if (midint.length === 0) {
+    return true;
   }
-  if(midint.length > 1){
+  if (midint.length > 1) {
     return false;
   }
   const regex = /^[a-zA-Z]+$/;
-  if(!regex.test(midint)){
+  if (!regex.test(midint)) {
     return false;
   }
   return true;
 }
 
-function validateLastName(lastname){
-  if(lastname.length === 0 || lastname.length > 15){
+function validateLastName(lastname) {
+  if (lastname.length === 0 || lastname.length > 15) {
     return false;
   }
   const regex = /^[a-zA-Z]+$/;
-  if(!regex.test(lastname)){
+  if (!regex.test(lastname)) {
     return false;
   }
   return true;
 }
 
-function validatePhoneNumber(phoneNum){
-  if(phoneNum.length < 10 || phoneNum.length > 10){
+function validatePhoneNumber(phoneNum) {
+  if (phoneNum.length < 10 || phoneNum.length > 10) {
     return false;
   }
   const regex = /^[0-9\b]+$/;
-  if(!regex.test(phoneNum)){
+  if (!regex.test(phoneNum)) {
     return false;
   }
   return true;
 }
 
-function validateEmail(userEmail){
-  if(userEmail.length === 0 || userEmail.length > 30){
+function validateEmail(userEmail) {
+  if (userEmail.length === 0 || userEmail.length > 30) {
     return false;
   }
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-  if(!regex.test(userEmail)){
+  if (!regex.test(userEmail)) {
     return false;
   }
   return true;
 }
 
-function validatePassword(userPassword){
-  if(userPassword.length === 0 || userPassword.length > 30){
+function validatePassword(userPassword) {
+  if (userPassword.length === 0 || userPassword.length > 30) {
     return false;
   }
-  return true; 
+  return true;
 }
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { setToken } = useToken();
   const [firstNameValue, setFirstNameValue] = useState("");
   let [middleInitialValue, setMiddleInitialValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
@@ -85,15 +89,15 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
 
   //show password
-  const[showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   //handleChange functions
-  const handleFirstNameChange = (event) =>{
+  const handleFirstNameChange = (event) => {
     const firstName = event.target.value;
     setFirstNameValue(firstName);
-    if(!validateFirstName(firstName)){
+    if (!validateFirstName(firstName)) {
       setFirstNameError("Please enter a valid first name with no more than 15 characters");
-    }else{
+    } else {
       setFirstNameError("");
     }
   }
@@ -101,12 +105,12 @@ const Register = () => {
   const handleMiddleInitialChange = (event) => {
     const middleName = event.target.value;
     setMiddleInitialValue(middleName);
-    if(!validateMiddleInitial(middleName)){
+    if (!validateMiddleInitial(middleName)) {
       setMiddleInitialError("Please enter a valid middle name initial no more than 1 character");
-    }else{
+    } else {
       setMiddleInitialError("");
     }
-    if(middleName === ""){
+    if (middleName === "") {
       setMiddleInitialError("");
     }
   }
@@ -114,9 +118,9 @@ const Register = () => {
   const handleLastNameChange = (event) => {
     const lastName = event.target.value;
     setLastNameValue(lastName);
-    if(!validateLastName(lastName)){
+    if (!validateLastName(lastName)) {
       setLastNameError("Please enter a valid first name with no more than 15 characters");
-    }else{
+    } else {
       setLastNameError("");
     }
   }
@@ -124,29 +128,29 @@ const Register = () => {
   const handlePhoneNumberChange = (event) => {
     const phoneNumber = event.target.value;
     setPhoneNumberValue(phoneNumber);
-    if(!validatePhoneNumber(phoneNumber)){
+    if (!validatePhoneNumber(phoneNumber)) {
       setPhoneNumberError("Please enter a valid phone number with no more/no less than 10 digits");
-    }else{
+    } else {
       setPhoneNumberError("");
     }
   }
-  
+
   const handleEmailChange = (event) => {
     const useremail = event.target.value;
     setEmailValue(useremail);
-    if(!validateEmail(useremail)){
+    if (!validateEmail(useremail)) {
       setEmailError("Please enter a valid email with no more than 30 characters");
-    }else{
+    } else {
       setEmailError("");
     }
   }
 
-  const handlePasswordChange = (event) =>{
+  const handlePasswordChange = (event) => {
     const userpass = event.target.value;
     setPasswordValue(userpass);
-    if(!validatePassword(userpass)){
+    if (!validatePassword(userpass)) {
       setPasswordError("Please enter a valid password no more than 30 characters");
-    }else{
+    } else {
       setPasswordError("");
     }
   }
@@ -154,7 +158,7 @@ const Register = () => {
   //submit form
   const handleOnSubmit = async (event) => {
     event.preventDefault();
-  
+
     const validFirstName = validateFirstName(firstNameValue);
     const validMiddleInitial = validateMiddleInitial(middleInitialValue);
     const validLastName = validateLastName(lastNameValue);
@@ -175,21 +179,23 @@ const Register = () => {
       email: emailValue,
       password: passwordValue,
     };
-    try {
-      const response = await fetch('http://localhost:8080/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(personData)
-      });
-  
-      const responseData = await response.json();
-      console.log(responseData);
-      //driect to homepage after login
-    } catch (error) {
-      console.log(error)
-    }
+
+    const response = await fetch('http://localhost:8080/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(personData)
+    });
+
+    const responseData = await response.json();
+    setToken(responseData.item);
+    console.log(responseData);
+
+    navigate('/');
+    window.location.reload();
+
+    //driect to homepage after login
   };
 
   return (
@@ -197,7 +203,7 @@ const Register = () => {
       <div className='register-cover'>
         <h1 className='register-title'>Register Here</h1>
         <p className='register-title'>We are thrilled to have you join Umazing!</p>
-        
+
         <form onSubmit={handleOnSubmit}>
           <h3 className='register-title'>Full Name: </h3>
           <div className='person-info'>
@@ -214,7 +220,7 @@ const Register = () => {
             <input type='text' placeholder='Last Name' className='register-input' value={lastNameValue} onChange={handleLastNameChange}></input>
             <div className='error'>{lastNameError}</div>
           </div>
-        
+
 
           <h3 className='register-title'>Phone Number: </h3>
           <div className='person-info'>
@@ -227,6 +233,7 @@ const Register = () => {
             <input type='text' placeholder='youremail@gmail.com' className='register-input' value={emailValue} onChange={handleEmailChange}></input>
             <div className='error'>{emailError}</div>
           </div>
+
 
           <h3 className='register-title'>Password: </h3>
           <div className='person-info-password'>
@@ -250,5 +257,5 @@ const Register = () => {
     </div>
   );
 };
-  
+
 export default Register;
