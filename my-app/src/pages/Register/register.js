@@ -1,7 +1,5 @@
 import './register.css';
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { render } from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../tokenhelpers/helpers';
 
@@ -88,8 +86,17 @@ const Register = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
-  //show password
-  const [showPassword, setShowPassword] = useState(false);
+  //set margins
+  const [firstNameMarginBottom, setFirstNameMarginBottom] = useState("1em");
+  const [middleNameMarginBottom, setMiddleInitialMarginBottom] = useState("1em"); 
+  const [lastNameMarginBottom, setLastNameMarginBottom] = useState("1em"); 
+  const [phoneNumberMarginBottom, setPhoneNumberMarginBottom] = useState("1em"); 
+  const [emailMarginBottom, setEmailMarginBottom] = useState("1em"); 
+  const [passwordMarginBottom, setPasswordMarginBottom] = useState("1em");
+
+  //show items
+  const[showPassword, setShowPassword] = useState(false);
+  const [errorBoxVisible, setErrorBoxVisible] = useState(false);
 
   //handleChange functions
   const handleFirstNameChange = (event) => {
@@ -97,8 +104,10 @@ const Register = () => {
     setFirstNameValue(firstName);
     if (!validateFirstName(firstName)) {
       setFirstNameError("Please enter a valid first name with no more than 15 characters");
+      setFirstNameMarginBottom("3em");
     } else {
       setFirstNameError("");
+      setFirstNameMarginBottom("1em");
     }
   }
 
@@ -107,11 +116,14 @@ const Register = () => {
     setMiddleInitialValue(middleName);
     if (!validateMiddleInitial(middleName)) {
       setMiddleInitialError("Please enter a valid middle name initial no more than 1 character");
+      setMiddleInitialMarginBottom("3em");
     } else {
       setMiddleInitialError("");
+      setMiddleInitialMarginBottom("1em"); 
     }
     if (middleName === "") {
       setMiddleInitialError("");
+      setMiddleInitialMarginBottom("1em");
     }
   }
 
@@ -120,8 +132,10 @@ const Register = () => {
     setLastNameValue(lastName);
     if (!validateLastName(lastName)) {
       setLastNameError("Please enter a valid first name with no more than 15 characters");
+      setLastNameMarginBottom("3em");
     } else {
       setLastNameError("");
+      setLastNameMarginBottom("1em"); 
     }
   }
 
@@ -130,8 +144,10 @@ const Register = () => {
     setPhoneNumberValue(phoneNumber);
     if (!validatePhoneNumber(phoneNumber)) {
       setPhoneNumberError("Please enter a valid phone number with no more/no less than 10 digits");
+      setPhoneNumberMarginBottom("3em"); 
     } else {
       setPhoneNumberError("");
+      setPhoneNumberMarginBottom("1em"); 
     }
   }
 
@@ -140,8 +156,10 @@ const Register = () => {
     setEmailValue(useremail);
     if (!validateEmail(useremail)) {
       setEmailError("Please enter a valid email with no more than 30 characters");
+      setEmailMarginBottom("3em");
     } else {
       setEmailError("");
+      setEmailMarginBottom("1em"); 
     }
   }
 
@@ -150,8 +168,10 @@ const Register = () => {
     setPasswordValue(userpass);
     if (!validatePassword(userpass)) {
       setPasswordError("Please enter a valid password no more than 30 characters");
+      setPasswordMarginBottom("3em");
     } else {
       setPasswordError("");
+      setPasswordMarginBottom("1em"); 
     }
   }
 
@@ -167,7 +187,7 @@ const Register = () => {
     const validPassword = validatePassword(passwordValue);
 
     if (!validFirstName || !validMiddleInitial || !validLastName || !validPhoneNumber || !validEmail || !validPassword) {
-      alert("Please correct the errors and try again.");
+      setErrorBoxVisible(true);
       return;
     }
     if (middleInitialValue == "") middleInitialValue = null;
@@ -190,12 +210,10 @@ const Register = () => {
 
     const responseData = await response.json();
     setToken(responseData.item);
-    console.log(responseData);
-
     navigate('/');
     window.location.reload();
 
-    //driect to homepage after login
+    //direct to homepage after login
   };
 
   return (
@@ -207,37 +225,37 @@ const Register = () => {
         <form onSubmit={handleOnSubmit}>
           <h3 className='register-title'>Full Name: </h3>
           <div className='person-info'>
-            <input type='text' placeholder='Frist Name' className='register-input' value={firstNameValue} onChange={handleFirstNameChange}></input>
+            <input type='text' placeholder='Frist Name' className='register-input' value={firstNameValue} onChange={handleFirstNameChange} style={{marginBottom: firstNameMarginBottom}}></input>
             <div className='error'>{firstNameError}</div>
           </div>
 
           <div className='person-info'>
-            <input type='text' placeholder='Middle Initial' className='register-input' value={middleInitialValue} onChange={handleMiddleInitialChange}></input>
+            <input type='text' placeholder='Middle Initial' className='register-input' value={middleInitialValue} onChange={handleMiddleInitialChange} style={{marginBottom: middleNameMarginBottom}}></input>
             <div className='error'>{middleInitialError}</div>
           </div>
 
           <div className='person-info'>
-            <input type='text' placeholder='Last Name' className='register-input' value={lastNameValue} onChange={handleLastNameChange}></input>
+            <input type='text' placeholder='Last Name' className='register-input' value={lastNameValue} onChange={handleLastNameChange} style={{marginBottom: lastNameMarginBottom}}></input>
             <div className='error'>{lastNameError}</div>
           </div>
 
 
           <h3 className='register-title'>Phone Number: </h3>
           <div className='person-info'>
-            <input type='text' placeholder='Phone Number' className='register-input' value={phoneNumberValue} onChange={handlePhoneNumberChange}></input>
+            <input type='text' placeholder='Phone Number' className='register-input' value={phoneNumberValue} onChange={handlePhoneNumberChange} style={{marginBottom: phoneNumberMarginBottom}}></input>
             <div className='error'>{phoneNumberError}</div>
           </div>
 
           <h3 className='register-title'>Email: </h3>
           <div className='person-info'>
-            <input type='text' placeholder='youremail@gmail.com' className='register-input' value={emailValue} onChange={handleEmailChange}></input>
+            <input type='text' placeholder='youremail@gmail.com' className='register-input' value={emailValue} onChange={handleEmailChange} style={{marginBottom: emailMarginBottom}}></input>
             <div className='error'>{emailError}</div>
           </div>
 
 
           <h3 className='register-title'>Password: </h3>
           <div className='person-info-password'>
-            <input type={showPassword ? 'text' : 'password'} placeholder='Password' className='register-input' value={passwordValue} onChange={handlePasswordChange}></input>
+            <input type={showPassword ? 'text' : 'password'} placeholder='Password' className='register-input' value={passwordValue} onChange={handlePasswordChange} style={{marginBottom: passwordMarginBottom}}></input>
             <button type='button' onClick={() => setShowPassword(!showPassword)} className='password-toggle-button'>
               {showPassword ? 'Hide' : 'Show'}
             </button>
@@ -245,7 +263,24 @@ const Register = () => {
           </div>
 
           <button className='register-button'>Register</button>
-
+          {errorBoxVisible && (
+            <div>
+              <div className='error-box-overlay'></div>
+              <div className="error-box">
+                <h3 className='error-box-text'>Error</h3>
+                <p className='error-box-text'>Please correct the errors and try again.</p>
+                <ul className='error-box-ul'>
+                  {(!validateFirstName(firstNameValue)) && <li>Please enter a valid first name</li>}
+                  {(!validateMiddleInitial(middleInitialValue)) && <li>Please enter a valid middle name initial</li>}
+                  {(!validateLastName(lastNameValue)) && <li>Please enter a valid last name</li>}
+                  {(!validatePhoneNumber(phoneNumberValue)) && <li>Please enter a valid phone number</li>}
+                  {(!validateEmail(emailValue)) && <li>Please enter a valid email</li>}
+                  {(!validatePassword(passwordValue)) && <li>Please enter a valid password</li>}
+                </ul>
+                <button className='return-button' onClick={() => setErrorBoxVisible(false)}>return</button>
+              </div>
+            </div>
+          )}
         </form>
 
         <div className='login-link'>

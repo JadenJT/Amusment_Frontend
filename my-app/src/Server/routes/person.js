@@ -41,7 +41,7 @@ module.exports = {
             'INSERT INTO person(person_id, f_name, m_init, l_name, phone_number, email, password) VALUES (?);', [queryData],
             async function (err, result) {
                 if (err) return sendResponse(req, res, 500, `Database error ${err}`)
-                const token = await generateToken({ email: bodyData.email, f_name: bodyData.f_name });
+                const token = await generateToken({ email: bodyData.email });
                 return sendResponse(req, res, 201, "Person added to database", token)
             }
         )
@@ -56,10 +56,9 @@ module.exports = {
     async postLogin(req, res) {
         const bodyData = await getReqData(req);
         const attemptLogin = JSON.parse(bodyData);
-
         if (!await checkLoginInfo(attemptLogin.email, attemptLogin.password)) return sendResponse(req, res, 401, "Incorrect email or password!")
-
-        return sendResponse(req, res, 200, "Logged in")
+        const token = await generateToken({ email: attemptLogin.email });
+        return sendResponse(req, res, 200, 'Person has logged in', token)
 
     }
 }
