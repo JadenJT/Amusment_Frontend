@@ -41,7 +41,7 @@ module.exports = {
             'INSERT INTO person(person_id, f_name, m_init, l_name, phone_number, email, password) VALUES (?);', [queryData],
             async function (err, result) {
                 if (err) return sendResponse(req, res, 500, `Database error ${err}`)
-                const token = await generateToken({ email: bodyData.email, f_name: bodyData.f_name });
+                const token = await generateToken({ email: bodyData.email });
                 return sendResponse(req, res, 201, "Person added to database", token)
             }
         )
