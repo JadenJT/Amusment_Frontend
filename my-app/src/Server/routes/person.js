@@ -56,9 +56,14 @@ module.exports = {
     async postLogin(req, res) {
         const bodyData = await getReqData(req);
         const attemptLogin = JSON.parse(bodyData);
-        if (!await checkLoginInfo(attemptLogin.email, attemptLogin.password)) return sendResponse(req, res, 401, "Incorrect email or password!")
-        const token = await generateToken({ email: attemptLogin.email });
-        return sendResponse(req, res, 200, 'Person has logged in', token)
 
-    }
+        if (!await checkLoginInfo(attemptLogin.email, attemptLogin.password)) return sendResponse(req, res, 401, "Incorrect email or password!")
+
+        const token = await generateToken({ email: attemptLogin.email });
+
+        const [rows, fields] = await db.promise().execute(
+            'SELECT PER.f_name, PER.role_type FROM master.person AS PER WHERE email = ?;', [attemptLogin.email])
+        
+        return sendResponse(req, res, 200, "Logged in", rows[0])
+    },
 }
