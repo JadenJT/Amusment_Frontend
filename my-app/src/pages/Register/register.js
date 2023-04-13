@@ -88,14 +88,14 @@ const Register = () => {
 
   //set margins
   const [firstNameMarginBottom, setFirstNameMarginBottom] = useState("1em");
-  const [middleNameMarginBottom, setMiddleInitialMarginBottom] = useState("1em"); 
-  const [lastNameMarginBottom, setLastNameMarginBottom] = useState("1em"); 
-  const [phoneNumberMarginBottom, setPhoneNumberMarginBottom] = useState("1em"); 
-  const [emailMarginBottom, setEmailMarginBottom] = useState("1em"); 
+  const [middleNameMarginBottom, setMiddleInitialMarginBottom] = useState("1em");
+  const [lastNameMarginBottom, setLastNameMarginBottom] = useState("1em");
+  const [phoneNumberMarginBottom, setPhoneNumberMarginBottom] = useState("1em");
+  const [emailMarginBottom, setEmailMarginBottom] = useState("1em");
   const [passwordMarginBottom, setPasswordMarginBottom] = useState("1em");
 
   //show items
-  const[showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [errorBoxVisible, setErrorBoxVisible] = useState(false);
 
   //handleChange functions
@@ -119,7 +119,7 @@ const Register = () => {
       setMiddleInitialMarginBottom("3em");
     } else {
       setMiddleInitialError("");
-      setMiddleInitialMarginBottom("1em"); 
+      setMiddleInitialMarginBottom("1em");
     }
     if (middleName === "") {
       setMiddleInitialError("");
@@ -135,7 +135,7 @@ const Register = () => {
       setLastNameMarginBottom("3em");
     } else {
       setLastNameError("");
-      setLastNameMarginBottom("1em"); 
+      setLastNameMarginBottom("1em");
     }
   }
 
@@ -144,10 +144,10 @@ const Register = () => {
     setPhoneNumberValue(phoneNumber);
     if (!validatePhoneNumber(phoneNumber)) {
       setPhoneNumberError("Please enter a valid phone number with no more/no less than 10 digits");
-      setPhoneNumberMarginBottom("3em"); 
+      setPhoneNumberMarginBottom("3em");
     } else {
       setPhoneNumberError("");
-      setPhoneNumberMarginBottom("1em"); 
+      setPhoneNumberMarginBottom("1em");
     }
   }
 
@@ -159,7 +159,7 @@ const Register = () => {
       setEmailMarginBottom("3em");
     } else {
       setEmailError("");
-      setEmailMarginBottom("1em"); 
+      setEmailMarginBottom("1em");
     }
   }
 
@@ -171,7 +171,7 @@ const Register = () => {
       setPasswordMarginBottom("3em");
     } else {
       setPasswordError("");
-      setPasswordMarginBottom("1em"); 
+      setPasswordMarginBottom("1em");
     }
   }
 
@@ -225,37 +225,37 @@ const Register = () => {
         <form onSubmit={handleOnSubmit}>
           <h3 className='register-title'>Full Name: </h3>
           <div className='person-info'>
-            <input type='text' placeholder='Frist Name' className='register-input' value={firstNameValue} onChange={handleFirstNameChange} style={{marginBottom: firstNameMarginBottom}}></input>
+            <input type='text' placeholder='Frist Name' className='register-input' value={firstNameValue} onChange={handleFirstNameChange} style={{ marginBottom: firstNameMarginBottom }}></input>
             <div className='error'>{firstNameError}</div>
           </div>
 
           <div className='person-info'>
-            <input type='text' placeholder='Middle Initial' className='register-input' value={middleInitialValue} onChange={handleMiddleInitialChange} style={{marginBottom: middleNameMarginBottom}}></input>
+            <input type='text' placeholder='Middle Initial' className='register-input' value={middleInitialValue} onChange={handleMiddleInitialChange} style={{ marginBottom: middleNameMarginBottom }}></input>
             <div className='error'>{middleInitialError}</div>
           </div>
 
           <div className='person-info'>
-            <input type='text' placeholder='Last Name' className='register-input' value={lastNameValue} onChange={handleLastNameChange} style={{marginBottom: lastNameMarginBottom}}></input>
+            <input type='text' placeholder='Last Name' className='register-input' value={lastNameValue} onChange={handleLastNameChange} style={{ marginBottom: lastNameMarginBottom }}></input>
             <div className='error'>{lastNameError}</div>
           </div>
 
 
           <h3 className='register-title'>Phone Number: </h3>
           <div className='person-info'>
-            <input type='text' placeholder='Phone Number' className='register-input' value={phoneNumberValue} onChange={handlePhoneNumberChange} style={{marginBottom: phoneNumberMarginBottom}}></input>
+            <input type='text' placeholder='Phone Number' className='register-input' value={phoneNumberValue} onChange={handlePhoneNumberChange} style={{ marginBottom: phoneNumberMarginBottom }}></input>
             <div className='error'>{phoneNumberError}</div>
           </div>
 
           <h3 className='register-title'>Email: </h3>
           <div className='person-info'>
-            <input type='text' placeholder='youremail@gmail.com' className='register-input' value={emailValue} onChange={handleEmailChange} style={{marginBottom: emailMarginBottom}}></input>
+            <input type='text' placeholder='youremail@gmail.com' className='register-input' value={emailValue} onChange={handleEmailChange} style={{ marginBottom: emailMarginBottom }}></input>
             <div className='error'>{emailError}</div>
           </div>
 
 
           <h3 className='register-title'>Password: </h3>
           <div className='person-info-password'>
-            <input type={showPassword ? 'text' : 'password'} placeholder='Password' className='register-input' value={passwordValue} onChange={handlePasswordChange} style={{marginBottom: passwordMarginBottom}}></input>
+            <input type={showPassword ? 'text' : 'password'} placeholder='Password' className='register-input' value={passwordValue} onChange={handlePasswordChange} style={{ marginBottom: passwordMarginBottom }}></input>
             <button type='button' onClick={() => setShowPassword(!showPassword)} className='password-toggle-button'>
               {showPassword ? 'Hide' : 'Show'}
             </button>

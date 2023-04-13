@@ -6,6 +6,12 @@ import useToken from '../../tokenhelpers/helpers';
 function Navbar() {
   const { token } = useToken();
 
+  function logout() {
+    // Clears session storage and reloads
+    sessionStorage.clear();
+    window.location.reload(false);
+  }
+
   return (
 
     <nav className="navbar">
@@ -63,6 +69,14 @@ function Navbar() {
             <Link to='/Login' className='navbar-logo'>
               Login
             </Link>
+          </div>
+        }
+
+        {token != null &&
+          <div className="login" >
+            <div className='navbar-logo' onClick={logout}>
+              Logout
+            </div>
           </div>
         }
 
