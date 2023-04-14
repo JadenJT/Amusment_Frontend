@@ -7,21 +7,31 @@ export default function Home(){
     return(
         <>
             <div className='reportCard'>
-            <div>
-                <h1>Zone Report</h1>
-            </div>
+                <div>
+                    <h1>Ticket Sales Report</h1>
+                </div>
                 <form>
                     <div className='formCard'>
                         <div>
-                            <label>Choose Zone: </label>
+                            <label>Ride ID: </label>
+                            <input type='text' className='formInput' placeholder='Ride ID'></input>
+                        </div>
+                        <div>
+                            <label>Ride Name: </label>
+                            <input type='text' className='formInput' placeholder='Ride Name'></input>
+                        </div>
+                        <div>
+                            <label>Ride Type: </label>
                             <select className='formInput'>
                                 <option value='all'>All</option>
-                                <option value='a'>A</option>
-                                <option value='b'>B</option>
-                                <option value='c'>C</option>
-                            </select>                    
+                                <option value='adult'>Adult</option>
+                                <option value='child'>Child</option>
+                            </select>
                         </div>
-
+                        <div>
+                            <label>Zone: </label>
+                            <input type='text' className='formInput' placeholder='Zone'></input>
+                        </div>
                         <div>
                             <label>Start Date: </label>
                             <input type='date' className='formInput' min={'2000-01-01'}></input>
@@ -35,24 +45,25 @@ export default function Home(){
                     <button className='submit'>Submit</button>
                 </form>
             </div>
-
-            <br></br>
             
+            <br></br>
+
             <table className='tables'>
                 <thead>
                     <tr>
                         <th>Ride</th>
-                        <th>Concession</th>
-                        <th>GiftShop</th>
                         <th>Date</th>
-                        <th>Amount</th>
+                        <th>Popularity</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>temp ride</td>
-                        <td>temp concession</td>
-                        <td>temp shop</td>
+                        <td>temp date</td>
+                        <td>temp amount</td>
+                    </tr>
+                    <tr>
+                        <td>temp ride</td>
                         <td>temp date</td>
                         <td>temp amount</td>
                     </tr>

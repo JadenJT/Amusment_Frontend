@@ -13,12 +13,13 @@ export default function Home(){
                 <form>
                     <div className='formCard'>
                         <div>
-                            <label>Enter Ride ID: </label>
+                            <label>Ride ID: </label>
                             <input type='text' className='formInput' placeholder='Ride ID'></input>
                         </div>
                         <div>
                             <label>Choose Zone: </label>
                             <select className='formInput'>
+                                <option value='all'>All</option>
                                 <option value='a'>A</option>
                                 <option value='b'>B</option>
                                 <option value='c'>C</option>

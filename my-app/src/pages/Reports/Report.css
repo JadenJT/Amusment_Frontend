@@ -2,7 +2,7 @@
 .reportBody{
     font-family: 'Poppins', sans-serif;
 }
-.selection{
+.rSelection{
     padding: 2em 0 2em;
     background-color: rgb(50, 56, 80);
     border-radius: .5em;
@@ -22,6 +22,10 @@
     transition: 0.5s;
 }
 
+.selectButtons button:hover{
+    background-color: #a7a7a7;
+}
+
 /*Individual Report*/
 .selectRender{
     padding: 2em 0 0;
@@ -31,7 +35,7 @@
     background-color: white;
     color: black;
     border-radius: 1em;
-    width: 30%;
+    width: 40em;
     margin: auto;
     padding: 1em 0 1.5em;
     box-shadow: 0 0.1em .5em #9c9c9c;
@@ -74,7 +78,7 @@ input[type="date"], .formInput{
     padding: 2em 0;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
+    width: 70em;
     background-color: white;
     color: black;
     border-radius: 1em;
