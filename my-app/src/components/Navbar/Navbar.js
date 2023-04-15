@@ -63,7 +63,7 @@ function Navbar() {
           {user != null && user.role_type == 'admin' &&
             <div className='admin'>
               <Link to='/admin' className='navbar-logo'>
-                admin
+                Admin
               </Link>
             </div>
           }

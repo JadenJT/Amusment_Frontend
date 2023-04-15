@@ -139,8 +139,18 @@
 
 .return-button {
     height: 2.5em;
-    width: 5em;
+    width: 6em;
     margin-top: .5em;
+    background-color: #F15A59;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.return-button:hover{
+    box-shadow: 0px 0px 10px rgba(230, 86, 103, 0.8);
 }
 
 /*login style */
