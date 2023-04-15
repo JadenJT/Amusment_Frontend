@@ -276,14 +276,14 @@ const Rides = () => {
                             <div className="ride-info-box">
                                 <h2 className="ride-name-onClick">{ride.name}</h2>
                                 <img className="img-ride-onClick" src={ride.imgSrc} alt={ride.name} />
-                                <p>This will show if the ride is available or not. <br />
+                                <p className='ride-info-p'>This will show if the ride is available or not. <br />
                                     {ride.description}
                                     <br />
                                     Location: {ride.location}
                                     <br />
                                     Must be {ride.heightRequirement} to ride
                                 </p>
-                                <button className="close-button" onClick={(event) => {
+                                <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleInfoClose(index)
                                 }}>Close</button>
@@ -313,7 +313,7 @@ const Rides = () => {
                             <div className="ride-info-box">
                                 <h2 className="ride-name-onClick">{ride.name}</h2>
                                 <img className="img-ride-onClick" src={ride.imgSrc} alt={ride.name} />
-                                <p>This will show if the ride is available or not.<br />
+                                <p className='ride-info-p'>This will show if the ride is available or not.<br />
                                     {ride.description}
                                     <br />
                                     Location: {ride.location}
@@ -321,7 +321,7 @@ const Rides = () => {
                                     Must be {ride.heightRequirement} to ride
                                 </p>
 
-                                <button className="close-button" onClick={(event) => {
+                                <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleKidsInfoClose(index)
                                 }}>Close</button>
@@ -331,7 +331,7 @@ const Rides = () => {
                 </div>
             ))}
 
-
+            
         </div>
     );
 };
