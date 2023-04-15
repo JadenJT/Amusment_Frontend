@@ -120,7 +120,7 @@
     justify-content: center;
     align-items: center;
 }
-.concession-info-box{
+.concession-info-box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -129,25 +129,48 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 60em;
+    height: 25em;
 }
-.concession-name-onClick{
-    align-self: flex-start;
+
+.concession-name-onClick {
     margin-top: 0;
 }
-.concession-img-onClick{
+
+.concession-img-onClick {
     width: 15pc;
     height: 15pc;
     object-fit: cover;
     margin-bottom: 10px;
-}   
-.close-button{  
+}
+
+.concession-info-p {
+    margin-bottom: 10px;
+}
+
+.concession-close-button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
     transform: translateX(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 2pc;
-    width: 4pc;
+    margin-top: 1em;
+    height: 2.5em;
+    width: 6em; /* Set the width to 3em */
     cursor: pointer;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #e65667;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    transition: box-shadow 0.3s ease-in-out;
+}
+.concession-close-button:hover {
+    box-shadow: 0px 0px 10px rgba(230, 86, 103, 0.8); /* Add a box shadow with a shining effect on hover */
 }

@@ -136,12 +136,12 @@ const Concessions = () => {
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
                                         <img className='concession-img-onClick' src={concession.imgSrc} alt={concession.name} />
-                                        <p>
+                                        <p className='concession-info-p'>
                                             {concession.description}
                                             <br />
                                             Location: {concession.location}
                                         </p>
-                                        <button className= 'close-button' onClick={(event) => {
+                                        <button className= 'concession-close-button' onClick={(event) => {
                                             event.stopPropagation();
                                             handleConcessionInfoClose(concession)
                                         }}>Close</button>
@@ -161,7 +161,7 @@ const Concessions = () => {
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
                             <h2 className='concession-name'>{concession.name}</h2>
-                                <p>
+                                <p className='concession-info-p'>
                                     {concession.description}
                                 </p>
                                 <p>
@@ -173,12 +173,12 @@ const Concessions = () => {
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
                                         <img className='concession-img-onClick' src={concession.imgSrc} alt={concession.name} />
-                                        <p>
+                                        <p className='concession-info-p'>
                                             {concession.description}
                                             <br />
                                             Location: {concession.location}
                                         </p>
-                                        <button className= 'close-button' onClick={(event) => {
+                                        <button className= 'concession-close-button' onClick={(event) => {
                                             event.stopPropagation();
                                             handleConcessionInfoClose(concession)
                                         }}>Close</button>
@@ -198,7 +198,7 @@ const Concessions = () => {
                             <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
                             <div className='concession-details'>
                             <h2 className='concession-name'>{concession.name}</h2>
-                                <p>
+                                <p className='concession-info-p'>
                                     {concession.description}
                                 </p>
                                 <p>
@@ -210,12 +210,12 @@ const Concessions = () => {
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
                                         <img className='concession-img-onClick' src={concession.imgSrc} alt={concession.name} />
-                                        <p>
+                                        <p className='concession-info-p'>
                                             {concession.description}
                                             <br />
                                             Location: {concession.location}
                                         </p>
-                                        <button className= 'close-button' onClick={(event) => {
+                                        <button className= 'concession-close-button' onClick={(event) => {
                                             event.stopPropagation();
                                             handleConcessionInfoClose(concession)
                                         }}>Close</button>
