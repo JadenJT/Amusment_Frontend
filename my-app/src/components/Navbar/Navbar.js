@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../icons/Umazing.svg';
 import "./Navbar.css";
-import useToken from '../../tokenhelpers/helpers';
+import { UserContext } from '../../App';
+
+
 function Navbar() {
-  const { token } = useToken();
+  const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function logout() {
     // Clears session storage and reloads
     sessionStorage.clear();
-    window.location.reload(false);
+    window.location.reload();
+    setUser(null);
+    navigate('/');
   }
 
   return (
@@ -54,7 +59,17 @@ function Navbar() {
             </Link>
           </div>
 
-          {token == null &&
+
+          {user != null && user.role_type == 'admin' &&
+            <div className='admin'>
+              <Link to='/admin' className='navbar-logo'>
+                admin
+              </Link>
+            </div>
+          }
+
+
+          {user.token == null &&
             <div className='Register'>
               <Link to='/register' className='navbar-logo'>
                 Register
@@ -64,7 +79,7 @@ function Navbar() {
 
         </div>
 
-        {token == null &&
+        {user.token == null &&
           <div className="login" >
             <Link to='/Login' className='navbar-logo'>
               Login
@@ -72,7 +87,7 @@ function Navbar() {
           </div>
         }
 
-        {token != null &&
+        {user.token != null &&
           <div className="login" >
             <div className='navbar-logo' onClick={logout}>
               Logout

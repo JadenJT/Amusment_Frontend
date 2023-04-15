@@ -1,34 +1,33 @@
 require('dotenv').config();
 const http = require('http');
-const db = require('./database');
 
 const { sendResponse } = require("./helpers/response");
-const ridesRoutes = require('./routes/ride');
 const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
+const employee = require('./routes/employee');
+const maintenance = require('./routes/maintenance');
 
 const getHandlers = {
-  '/ride/all': (req, res) => ridesRoutes.getAllRides(req, res),
-  '/ride/a': (req, res) => ridesRoutes.getZoneRides(req, res, 'a'),
-  '/ride/b': (req, res) => ridesRoutes.getZoneRides(req, res, 'b'),
-  '/ride/c': (req, res) => ridesRoutes.getZoneRides(req, res, 'c'),
-  '/ride/d': (req, res) => ridesRoutes.getZoneRides(req, res, 'd'),
-  '/ticket/owned': (req, res) => ticketRoutes.getTicketCustomer(req, res),
-  '/ticket/ride/': (req, res) => ticketRoutes.getTicketRides(req, res)
+  '/ticket/owned': (req, res) => ticketRoutes.ticketsOwn(req, res),
+  '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
+  '/employee/report': (req, res) => employee.employeeReport(req, res),
+  '/maintenance/report': (req, res) => maintenance.maintenanceReport(req, res)
 }
 
 const putHandlers = {
-
+  '/employee/update': (req, res) => employee.updateEmployee(req, res)
 }
 
 const postHandlers = {
-  '/register': (req, res) => personRoutes.postPerson(req, res),
-  '/login': (req, res) => personRoutes.postLogin(req, res),
-  '/ride/buy': (req, res) => ticketRoutes.postTicket(req, res)
+  '/register': (req, res) => personRoutes.register(req, res),
+  '/login': (req, res) => personRoutes.login(req, res),
+  '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
+  '/employee/add': (req, res) => employee.addEmployee(req, res),
 }
 
 const deleteHandlers = {
-  '/ticket/remove': (req, res) => ticketRoutes.deleteTicket(req, res)
+  '/ticket/remove': (req, res) => ticketRoutes.removeTicket(req, res),
+  '/employee/remove': (req, res) => employee.removeEmployee(req, res)
 }
 
 const server = http.createServer(async (req, res) => {

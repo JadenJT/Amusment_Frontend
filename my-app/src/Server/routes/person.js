@@ -30,13 +30,13 @@ module.exports = {
             "password": "password123"
         }
     */
-    async postPerson(req, res) {
+    async register(req, res) {
         const bodyData = await getReqData(req);
         const newPerson = JSON.parse(bodyData);
 
         const queryData = [null, newPerson.f_name, newPerson.m_name, newPerson.l_name, newPerson.phone_number, newPerson.email, newPerson.password];
 
-        if (await checkPersonExist(newPerson.email)) return sendResponse(req, res, 403, "Person already exist");
+        if (await checkPersonExist(newPerson.email)) return sendResponse(req, res, 409, "Person already exist");
         db.query(
             'INSERT INTO person(person_id, f_name, m_init, l_name, phone_number, email, password) VALUES (?);', [queryData],
             async function (err, result) {
@@ -53,17 +53,21 @@ module.exports = {
             "password": "password123"
         }
     */
-    async postLogin(req, res) {
+    async login(req, res) {
         const bodyData = await getReqData(req);
         const attemptLogin = JSON.parse(bodyData);
 
         if (!await checkLoginInfo(attemptLogin.email, attemptLogin.password)) return sendResponse(req, res, 401, "Incorrect email or password!")
 
         const token = await generateToken({ email: attemptLogin.email });
-
         const [rows, fields] = await db.promise().execute(
             'SELECT PER.f_name, PER.role_type FROM master.person AS PER WHERE email = ?;', [attemptLogin.email])
-        
-        return sendResponse(req, res, 200, "Logged in", rows[0])
+
+        const personInfo = {
+            f_name: rows[0].f_name,
+            role_type: rows[0].role_type,
+            token: token,
+        }
+        return sendResponse(req, res, 200, "Logged in", personInfo)
     },
 }
