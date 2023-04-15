@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import "./rides.css";
 import { Link, animateScroll } from "react-scroll";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Logo from '../../icons/Umazing.svg';
+import { UserContext } from '../../App';
+
 
 const images = {};
 const importAll = (r) => {
@@ -29,6 +31,8 @@ const DinoAdventureImg = images['DinoAdventure.jpg'];
 
 
 const Rides = () => {
+    const { user } = useContext(UserContext);
+
     const [rides, setRides] = useState([
         {
             name: 'SkyBlade',
@@ -75,15 +79,15 @@ const Rides = () => {
             showInfo: false,
         },
         {
-          name: 'WarpZone',
-          imgSrc: WarpZoneImg,
-          location: 'Zone B',
-          heightRequirement: "42 cm",
-          description: 'A futuristic ride that takes riders on a high-speed journey through time and space, complete with special effects and immersive theming.',
-          maintenanceHours: 0,
-          inMaintenance: false,
-          status: 'Get from database', //status
-          showInfo: false, 
+            name: 'WarpZone',
+            imgSrc: WarpZoneImg,
+            location: 'Zone B',
+            heightRequirement: "42 cm",
+            description: 'A futuristic ride that takes riders on a high-speed journey through time and space, complete with special effects and immersive theming.',
+            maintenanceHours: 0,
+            inMaintenance: false,
+            status: 'Get from database', //status
+            showInfo: false,
         },
         {
             name: 'Wildfire',
@@ -131,7 +135,7 @@ const Rides = () => {
         },
     ]);
 
-    const[kidRides, setRides2] = useState([
+    const [kidRides, setRides2] = useState([
         {
             name: 'Rainbow Swirl',
             imgSrc: RainbowImg,
@@ -207,7 +211,7 @@ const Rides = () => {
         setRides(updatedRides);
     };
 
-    const handleKidsRideClick = (index, event) =>{
+    const handleKidsRideClick = (index, event) => {
         const updatedKidRides = [...kidRides];
         updatedKidRides[index].showInfo = !updatedKidRides[index].showInfo;
         setRides2(updatedKidRides);
@@ -227,14 +231,14 @@ const Rides = () => {
 
     const handleOverlayClick = (event, index) => {
         if (event.target.className === "ride-info-overlay") {
-          const updatedRides = [...rides];
-          updatedRides[index].showInfo = false;
-          setRides(updatedRides);
+            const updatedRides = [...rides];
+            updatedRides[index].showInfo = false;
+            setRides(updatedRides);
         }
-      };
-    
+    };
+
     const handleKidsOverlayClick = (event, index) => {
-        if(event.target.className === "ride-info-overlay"){
+        if (event.target.className === "ride-info-overlay") {
             const updatedKidRides = [...kidRides];
             updatedKidRides[index].showInfo = false;
             setRides2(updatedKidRides);
@@ -283,10 +287,16 @@ const Rides = () => {
                                     <br />
                                     Must be {ride.heightRequirement} to ride
                                 </p>
+                                {user.token != null &&
+                                    <button className="rides-buy-button " onClick={(event) => {
+                                        event.stopPropagation(); // stop the click event from bubbling up to the parent div
+                                    }}>Buy</button>
+                                }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleInfoClose(index)
                                 }}>Close</button>
+
                             </div>
                         </div>
                     )}
@@ -320,18 +330,22 @@ const Rides = () => {
                                     <br />
                                     Must be {ride.heightRequirement} to ride
                                 </p>
-
+                                {user.token != null &&
+                                    <button className="rides-buy-button " onClick={(event) => {
+                                        event.stopPropagation(); // stop the click event from bubbling up to the parent div
+                                    }}>Buy</button>
+                                }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleKidsInfoClose(index)
                                 }}>Close</button>
+
                             </div>
                         </div>
                     )}
                 </div>
             ))}
 
-            
         </div>
     );
 };

@@ -1,4 +1,4 @@
-.rwp{
+.rwp {
   background-image: url(../../images/RidePicture.jpg);
   background-color: rgb(26, 163, 255);
   height: 550px;
@@ -8,169 +8,207 @@
   position: relative;
 }
 
-.wLogo{
+.wLogo {
   float: right;
   width: 700px;
   height: 500px;
 }
 
 .title-rides {
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .center-dropdown {
-    display: flex;
-    justify-content: center;
-    padding: 2em 0 2em;
-  }
-  
-#kids-rides-title, #adult-rides-title{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.center-dropdown {
+  display: flex;
+  justify-content: center;
+  padding: 2em 0 2em;
+}
+
+#kids-rides-title,
+#adult-rides-title {
   padding: 0 0 1em;
 }
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 1;
-  }
-  
-  .dropdown-content a {
-    display: block;
-    padding: 10px 20px;
-    background-color: #f1f1f1;
-    text-decoration: none;
-    color: black;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #3793bc;
-    color: black;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-    width: 200px;
-  }
-  
-  .ridesButton {
-    background-color: #5448e0;
-    color: white;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 5px;
-    font-size: 24px;
-    display: block;
-    margin-top: 10px;
-    width: 200px;
-    height: 60px;
-  }
-  
-  .all-rides {
-    display: flex;
-    align-items: center;
-    margin-bottom: 50px;
-    cursor: pointer;
-  }
-  .img-ride{
-    height: 15pc;
-    width: 15pc;
-  }
-  /* styles for ride details */
-  .ride-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-left: 50px;
-  }
-  
-  .ride-name {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #e65667;
-    text-align: left;
-  }
-  
-  .ride-details p {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    color: #fff;
-    text-align: left;
-    line-height: 1.5em;
-  }
-  
-  /* styles for ride info box */
-  .ride-info-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* A semi-transparent black background */
-    z-index: 1; /* Make sure the ride information box is on top */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .ride-info-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #491689;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 60em;
-    height: 28em;
-  }
-  
-  .ride-name-onClick{
-    margin-top: 0;
-  }
-  
-  .img-ride-onClick{
-    width: 15pc;
-    height: 15pc;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  .ride-info-p{
-    margin-bottom: 10px;
-  }
-  .rides-close-button{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1em;
-    height: 2.5em;
-    width: 6em; /* Set the width to 3em */
-    cursor: pointer;
-    background-color: #e65667;
-    color: white;
-    border-radius: 25px;
-    border: none;
-    transition: box-shadow 0.3s ease-in-out;
-  }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
 
-  .rides-close-button:hover {
-    box-shadow: 0px 0px 10px rgba(230, 86, 103, 0.8); /* Add a box shadow with a shining effect on hover */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-content a:hover {
+  background-color: #3793bc;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  width: 200px;
+}
+
+.ridesButton {
+  background-color: #5448e0;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 24px;
+  display: block;
+  margin-top: 10px;
+  width: 200px;
+  height: 60px;
+}
+
+.all-rides {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  cursor: pointer;
+}
+
+.img-ride {
+  height: 15pc;
+  width: 15pc;
+}
+
+/* styles for ride details */
+.ride-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 50px;
+}
+
+.ride-name {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e65667;
+  text-align: left;
+}
+
+.ride-details p {
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: left;
+  line-height: 1.5em;
+}
+
+/* styles for ride info box */
+.ride-info-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* A semi-transparent black background */
+  z-index: 1;
+  /* Make sure the ride information box is on top */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ride-info-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #491689;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 60em;
+  height: 28em;
+}
+
+.ride-name-onClick {
+  margin-top: 0;
+  margin-bottom: 1pc;
+
+}
+
+.img-ride-onClick {
+  width: 15pc;
+  height: 15pc;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.ride-info-p {
+  margin-bottom: 10px;
+}
+
+.rides-close-button {
+
+  bottom: 0;
+  left: 50%;
+
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  height: 2.5em;
+  width: 6em;
+  /* Set the width to 3em */
+  cursor: pointer;
+  background-color: #e65667;
+  color: white;
+  border-radius: 25px;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+
+}
+
+.rides-buy-button {
+
+  bottom: 0;
+  left: 50%;
+
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  height: 2.5em;
+  width: 6em;
+  /* Set the width to 3em */
+  cursor: pointer;
+  background-color: #7066E9;
+  color: white;
+  border-radius: 25px;
+  border: none;
+  transition: box-shadow 0.3s ease-in-out;
+
+}
+
+.rides-close-button:hover {
+  box-shadow: 0px 0px 10px rgba(230, 86, 103, 0.8);
+  /* Add a box shadow with a shining effect on hover */
+}
+
+.rides-buy-button:hover {
+  box-shadow: 0px 0px 10px rgba(230, 86, 103, 0.8);
+  /* Add a box shadow with a shining effect on hover */
 }
