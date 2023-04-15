@@ -1,7 +1,8 @@
 import "./loginForm.css"
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useToken from '../../tokenhelpers/helpers';
+import { UserContext } from '../../App';
 
 
 function validateEmail(userEmail) {
@@ -24,6 +25,7 @@ function validatePassword(userPassword) {
 
 
 const Loginform = () => {
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
   const { setToken } = useToken();
 
@@ -80,10 +82,20 @@ const Loginform = () => {
       },
       body: JSON.stringify(personData)
     });
+
     const responseData = await response.json();
-    setToken(responseData.item);
+    setToken(responseData.item.token);
+
+    const info = {
+      f_name: responseData.item.f_name,
+      role_type: responseData.item.role_type,
+      email: emailValue,
+      token: responseData.item.token,
+    }
+
+    setUser(info);
     navigate('/');
-    window.location.reload();
+
   };
 
   return (

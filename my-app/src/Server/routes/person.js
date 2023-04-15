@@ -60,10 +60,14 @@ module.exports = {
         if (!await checkLoginInfo(attemptLogin.email, attemptLogin.password)) return sendResponse(req, res, 401, "Incorrect email or password!")
 
         const token = await generateToken({ email: attemptLogin.email });
-
         const [rows, fields] = await db.promise().execute(
             'SELECT PER.f_name, PER.role_type FROM master.person AS PER WHERE email = ?;', [attemptLogin.email])
-        
-        return sendResponse(req, res, 200, "Logged in", rows[0])
+
+        const personInfo = {
+            f_name: rows[0].f_name,
+            role_type: rows[0].role_type,
+            token: token,
+        }
+        return sendResponse(req, res, 200, "Logged in", personInfo)
     },
 }

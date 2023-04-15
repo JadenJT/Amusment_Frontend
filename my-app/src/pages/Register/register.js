@@ -1,7 +1,8 @@
 import './register.css';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../tokenhelpers/helpers';
+import { UserContext } from '../../App';
 
 
 function validateFirstName(firstname) {
@@ -72,6 +73,8 @@ function validatePassword(userPassword) {
 const Register = () => {
   const navigate = useNavigate();
   const { setToken } = useToken();
+  const { setUser } = useContext(UserContext);
+
   const [firstNameValue, setFirstNameValue] = useState("");
   let [middleInitialValue, setMiddleInitialValue] = useState("");
   const [lastNameValue, setLastNameValue] = useState("");
@@ -207,11 +210,19 @@ const Register = () => {
       },
       body: JSON.stringify(personData)
     });
-
     const responseData = await response.json();
+
+    const info = {
+      f_name: firstNameValue,
+      role_type: 'customer',
+      email: emailValue,
+      token: responseData.item,
+    }
+
+
+    setUser(info);
     setToken(responseData.item);
     navigate('/');
-    window.location.reload();
 
     //direct to homepage after login
   };
