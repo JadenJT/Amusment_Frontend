@@ -13,6 +13,9 @@ import Login from './pages/Login/login';
 import Rides from "./pages/Rides/rides";
 import Zones from './pages/Zone/zone';
 import AdminHub from './pages/admin/adminHub';
+import InsertAttraction from './pages/Attraction/InsertAttraction';
+import ShoppingCart from './pages/shoppingCart/shoppingCart';
+
 
 export const UserContext = createContext(null);
 
@@ -31,7 +34,14 @@ function App() {
             {user.token == null &&
               <Route path="Login" element={<UserContext.Provider value={{ user, setUser }}><Login /></UserContext.Provider>} />
             }
+            {user.token != null &&
+              <Route path="ShoppingCart" element={<ShoppingCart />} />
+            }
             <Route path="admin" element={<AdminHub user={user} />} />
+
+            {user.role_type == 'admin' &&
+              <Route path="InsertAttraction" element={<InsertAttraction user={user} />} />
+            }
 
             <Route path="rides" element={<Rides />} />
             <Route path="*" element={<Error404 />} />
