@@ -43,7 +43,7 @@ export default function Home(){
                 <form onSubmit={ticketSubmit}>
                     <div className='formCard'>
                         <div>
-                            <label>Ride ID: </label>
+                            <h2>Ride ID: </h2>
                             <input
                                 type='text'
                                 className='formInput'
@@ -53,7 +53,7 @@ export default function Home(){
                                 </input>
                         </div>
                         <div>
-                            <label>Ride Name: </label>
+                            <h2>Ride Name: </h2>
                             <input
                                 type='text'
                                 className='formInput'
@@ -63,7 +63,7 @@ export default function Home(){
                                 </input>
                         </div>
                         <div>
-                            <label>Ride Type: </label>
+                            <h2>Ride Type: </h2>
                             <select className='formInput' value={rideType} onChange={(e) => setRideType(e.target.value)}>
                                 <option value='all'>All</option>
                                 <option value='adult'>Adult</option>
@@ -71,7 +71,7 @@ export default function Home(){
                             </select>
                         </div>
                         <div>
-                        <label>Choose Zone: </label>
+                        <h2>Choose Zone: </h2>
                             <select className='formInput' value={ticketZoneType} onChange={(e) => setTicketZoneType(e.target.value)}>
                                 <option value='all'>All</option>
                                 <option value='a'>A</option>
@@ -80,7 +80,7 @@ export default function Home(){
                             </select>  
                         </div>
                         <div>
-                            <label>Start Date: </label>
+                            <h2>Start Date: </h2>
                             <input
                                 type='date'
                                 className='formInput'
@@ -89,7 +89,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>End Date: </label>
+                            <h2>End Date: </h2>
                             <input
                                 type='date'
                                 className='formInput'

@@ -43,7 +43,7 @@ export default function Home(){
                 <form onSubmit={employeeSubmit}>
                     <div className='formCard'>
                         <div>
-                            <label>First Name: </label>
+                            <h3>First Name: </h3>
                             <input
                                 type='text'
                                 className='formInput'
@@ -53,7 +53,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>Last Name: </label>
+                            <h3>Last Name: </h3>
                             <input
                                 type='text'
                                 className='formInput'
@@ -63,7 +63,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>Job Location: </label>
+                            <h3>Job Location: </h3>
                             <input
                                 type='text'
                                 className='formInput'
@@ -73,7 +73,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>Job Role: </label>
+                            <h3>Job Role: </h3>
                             <input
                                 type='text'
                                 className='formInput'
@@ -83,7 +83,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>Email: </label>
+                            <h3>Email: </h3>
                             <input
                                 type='text'
                                 className='formInput'

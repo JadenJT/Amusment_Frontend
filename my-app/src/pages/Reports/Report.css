@@ -4,12 +4,21 @@
 }
 .rSelection{
     padding: 2em 0 2em;
-    background-color: rgb(50, 56, 80);
+    background-color: white;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    color: black;
     border-radius: .5em;
+    width: 60em;
+    margin: auto;
 }
 
 .selectButtons{
-    padding: 1em 0 0;
+    padding: .5em 1.5em;
+    margin: 0 1em;
+    border:none;
+    border-radius: 0.25em;
+    cursor: pointer;
+    font-size: 1em;
 }
 
 .selectButtons button{
@@ -49,12 +58,13 @@
 }
 
 input[type="date"], .formInput{
-    padding: .5em;
+    height: 3.5em;
+    width: 20em;
     border: none;
-    border-radius: .25em;
-    cursor: pointer;
+    border-radius: .2em;
     text-align: center;
     background-color: rgb(229, 226, 226);
+    margin: 0 0 1.5em;
 }
 
 .submit{

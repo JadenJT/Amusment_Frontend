@@ -24,17 +24,20 @@ export default function Report() {
     <div className="reportBody">
       <div className="rSelection">
         <h1>Please select a report.</h1>
-        <div className="selectButtons">
-          <button onClick={() => setValue("EmployeeReport")}>
+        <select className="selectButtons">
+          <option>
+            Choose a report
+          </option>
+          <option onClick={() => setValue("EmployeeReport")}>
             Employee Report
-          </button>
-          <button onClick={() => setValue("MaintenanceReport")}>
+          </option>
+          <option onClick={() => setValue("MaintenanceReport")}>
             Maintenance Report
-          </button>
-          <button onClick={() => setValue("TicketSalesReport")}>
+          </option>
+          <option onClick={() => setValue("TicketSalesReport")}>
             Ticket Sales Report
-          </button>
-        </div>
+          </option>
+        </select>
       </div>
       
       <div className="selectRender">{formType}</div>

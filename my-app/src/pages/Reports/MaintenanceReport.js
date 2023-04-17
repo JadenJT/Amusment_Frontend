@@ -42,7 +42,7 @@ export default function Home(){
                 <form onSubmit={maintenanceSubmit}>
                     <div className='formCard'>
                         <div>
-                            <label>Ride ID: </label>
+                            <h3>Ride ID: </h3>
                             <input
                                 type='text'
                                 className='formInput'
@@ -52,7 +52,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>Choose Zone: </label>
+                            <h3>Choose Zone: </h3>
                             <select className='formInput' value={mainZoneType} onChange={(e) => setMainZoneType(e.target.value)}>
                                 <option value='all'>All</option>
                                 <option value='a'>A</option>
@@ -61,7 +61,7 @@ export default function Home(){
                             </select>                    
                         </div>
                         <div>
-                            <label>Start Date: </label>
+                            <h3>Start Date: </h3>
                             <input
                                 type='date'
                                 className='formInput'
@@ -70,7 +70,7 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <label>End Date: </label>
+                            <h3>End Date: </h3>
                             <input
                                 type='date'
                                 className='formInput'
