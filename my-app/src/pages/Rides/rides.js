@@ -44,6 +44,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 1,
         },
         {
             name: 'VortexX',
@@ -55,6 +57,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 2,
         },
         {
             name: 'Thunderbolt',
@@ -66,6 +70,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 3,
         },
         {
             name: 'G-Force',
@@ -77,6 +83,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 4,
         },
         {
             name: 'WarpZone',
@@ -88,6 +96,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 5,
         },
         {
             name: 'Wildfire',
@@ -99,6 +109,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 6,
         },
         {
             name: 'AeroJet',
@@ -110,6 +122,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 7,
         },
         {
             name: 'Cosmic Cruiser',
@@ -121,6 +135,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 8,
         },
         {
             name: 'Inferno',
@@ -132,6 +148,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 45,
+            id: 9,
         },
     ]);
 
@@ -146,6 +164,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 35,
+            id: 10,
         },
         {
             name: 'Jungle Safari',
@@ -157,6 +177,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 35,
+            id: 11,
         },
         {
             name: 'Pirate Plunge',
@@ -168,6 +190,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 35,
+            id: 12,
         },
         {
             name: 'Space Explorer',
@@ -179,6 +203,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 35,
+            id: 13,
         },
         {
             name: 'Dragons Liar',
@@ -190,6 +216,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 35,
+            id: 14,
         },
         {
             name: 'Dino Adventure',
@@ -201,6 +229,8 @@ const Rides = () => {
             inMaintenance: false,
             status: 'Get from database', //status
             showInfo: false,
+            price: 35,
+            id: 15,
         },
     ]);
 

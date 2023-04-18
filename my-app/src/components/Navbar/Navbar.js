@@ -63,7 +63,31 @@ function Navbar() {
           {user != null && user.role_type == 'admin' &&
             <div className='admin'>
               <Link to='/admin' className='navbar-logo'>
-                Admin Portal
+                Portal
+              </Link>
+            </div>
+          }
+
+          {user.token != null && user.role_type == 'manager' &&
+            <div className='manager'>
+              <Link to='/manager' className='navbar-logo'>
+                Portal
+              </Link>
+            </div>
+          }
+
+          {user.token != null && user.role_type != 'customer' && user.role_type != 'maintenance' && user.role_type != 'manager' && user.role_type != 'admin' &&
+            <div className='employee'>
+              <Link to='/employee' className='navbar-logo'>
+                Portal
+              </Link>
+            </div>
+          }
+
+          {user.token != null && user.role_type == 'maintenance' &&
+            <div className='employee'>
+              <Link to='/maintenance' className='navbar-logo'>
+                Portal
               </Link>
             </div>
           }
