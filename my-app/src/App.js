@@ -15,42 +15,66 @@ import Zones from './pages/Zone/zone';
 import AdminHub from './pages/admin/adminHub';
 import InsertAttraction from './pages/Attraction/InsertAttraction';
 import ShoppingCart from './pages/shoppingCart/shoppingCart';
+import Employee from './pages/employee/Employee';
+import Manager from './pages/Manager/manager';
+import Maintenance from './pages/maintenance/maintenance';
+import { ShopContextProvider } from './components/cartContext/CartContext';
+
+
 
 
 export const UserContext = createContext(null);
 
 function App() {
   const [user, setUser] = useState(UserContext);
-
   return (
+
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<UserContext.Provider value={{ user, setUser }}> <Layout /> </UserContext.Provider>}>
-            <Route index element={<Home />} />
-            {user.token == null &&
-              <Route path="register" element={<Register />} />
-            }
-            {user.token == null &&
-              <Route path="Login" element={<UserContext.Provider value={{ user, setUser }}><Login /></UserContext.Provider>} />
-            }
-            {user.token != null &&
-              <Route path="ShoppingCart" element={<ShoppingCart />} />
-            }
-            <Route path="admin" element={<AdminHub user={user} />} />
+      <ShopContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<UserContext.Provider value={{ user, setUser }}> <Layout /> </UserContext.Provider>}>
+              <Route index element={<Home />} />
+              {user.token == null &&
+                <Route path="register" element={<Register />} />
+              }
+              {user.token == null &&
+                <Route path="Login" element={<UserContext.Provider value={{ user, setUser }}><Login /></UserContext.Provider>} />
+              }
+              {user.token != null &&
+                <Route path="ShoppingCart" element={<ShoppingCart />} />
+              }
 
-            {user.role_type == 'admin' &&
-              <Route path="InsertAttraction" element={<InsertAttraction user={user} />} />
-            }
+              <Route path="admin" element={<AdminHub user={user} />} />
 
-            <Route path="rides" element={<Rides />} />
-            <Route path="*" element={<Error404 />} />
-            <Route path="concessions" element={<Concessions />} />
-            <Route path="zone" element={<Zones />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+              {user.role_type == 'admin' &&
+                <Route path="InsertAttraction" element={<InsertAttraction user={user} />} />
+              }
 
+              {user.token != null &&
+                <Route path="ShoppingCart" element={<ShoppingCart />} />
+              }
+
+              {user.token != null && user.role_type != 'customer' &&
+                <Route path="Employee" element={<Employee user={user} />} />
+              }
+
+              {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
+                <Route path="Manager" element={<Manager user={user} />} />
+              }
+
+              {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager' || user.role_type == 'maintenance') &&
+                <Route path="Maintenance" element={<Maintenance user={user} />} />
+              }
+
+              <Route path="rides" element={<Rides />} />
+              <Route path="*" element={<Error404 />} />
+              <Route path="concessions" element={<Concessions />} />
+              <Route path="zone" element={<Zones />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ShopContextProvider>
     </div>
   );
 }
