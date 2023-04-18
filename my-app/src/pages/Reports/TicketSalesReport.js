@@ -4,12 +4,17 @@ import './Report.css'
 export default function Home(){
     const [ticketValue, setTicketValue] = useState([]);
 
-    const [ticketRideID, setTicketRideID] = useState("");
-    const [rideName, setRideName] = useState("");
-    const [rideType, setRideType] = useState("");
+    const [ticketRide, setTicketRide] = useState("");
+    const [ticketRideType, setTicketRideType] = useState("");
     const [ticketZoneType, setTicketZoneType] = useState("");
     const [ticketStartDate, setTicketStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
+    const [ticketEndDate, setTicketEndDate] = useState("");
+
+    const ticketSubmit = (e)=> {
+        e.preventDefault();
+
+
+    }
 
     const fetchFunc = () =>{
         fetch('temp', {
@@ -30,10 +35,6 @@ export default function Home(){
         fetchFunc()
     }, []);
 
-    const ticketSubmit = (e)=> {
-
-    }
-
     return(
         <>
             <div className='reportCard'>
@@ -43,35 +44,24 @@ export default function Home(){
                 <form onSubmit={ticketSubmit}>
                     <div className='formCard'>
                         <div>
-                            <h2>Ride ID: </h2>
-                            <input
-                                type='text'
-                                className='formInput'
-                                placeholder='Ride ID'
-                                value={ticketRideID}
-                                onChange={(e) => setTicketRideID(e.target.value)}>  
-                                </input>
+                         <h3>Ride Name: </h3>                           
+                            <select className='formInput' value={ticketRide} onChange={(e) => setTicketRide(e.target.value)}>
+                                <option value='all'>All</option>
+                                <option value='ride1'>Ride1</option>
+                                <option value='ride2'>Ride2</option>
+                                <option value='ride3'>Ride3</option>
+                            </select>
                         </div>
                         <div>
-                            <h2>Ride Name: </h2>
-                            <input
-                                type='text'
-                                className='formInput'
-                                placeholder='Ride Name'
-                                value={rideName}
-                                onChange={(e) => setRideName(e.target.value)}>  
-                                </input>
-                        </div>
-                        <div>
-                            <h2>Ride Type: </h2>
-                            <select className='formInput' value={rideType} onChange={(e) => setRideType(e.target.value)}>
+                            <h3>Ride Type: </h3>
+                            <select className='formInput' value={ticketRideType} onChange={(e) => setTicketRideType(e.target.value)}>
                                 <option value='all'>All</option>
                                 <option value='adult'>Adult</option>
                                 <option value='child'>Child</option>
                             </select>
                         </div>
                         <div>
-                        <h2>Choose Zone: </h2>
+                        <h3>Choose Zone: </h3>
                             <select className='formInput' value={ticketZoneType} onChange={(e) => setTicketZoneType(e.target.value)}>
                                 <option value='all'>All</option>
                                 <option value='a'>A</option>
@@ -80,7 +70,7 @@ export default function Home(){
                             </select>  
                         </div>
                         <div>
-                            <h2>Start Date: </h2>
+                            <h3>Start Date: </h3>
                             <input
                                 type='date'
                                 className='formInput'
@@ -89,12 +79,12 @@ export default function Home(){
                             </input>
                         </div>
                         <div>
-                            <h2>End Date: </h2>
+                            <h3>End Date: </h3>
                             <input
                                 type='date'
                                 className='formInput'
-                                value={endDate}
-                                onChange={(e) => setEndDate(e.target.value)}>
+                                value={ticketEndDate}
+                                onChange={(e) => setTicketEndDate(e.target.value)}>
                             </input>
                         </div>
                     </div>
@@ -108,7 +98,6 @@ export default function Home(){
             <table className='tables'>
                 <thead>
                     <tr>
-                        <th>Ride ID</th>
                         <th>Ride Name</th>
                         <th>Ride Type</th>
                         <th>Zone</th>
@@ -120,8 +109,7 @@ export default function Home(){
                     {ticketValue.map((data, index)=> {
                         return(
                             <tr key={index}>
-                                <td type="text">{}</td>
-                                <td type="text">{}</td>
+                                <td type="text">{data.ride_name}</td>
                                 <td type="text">{}</td>
                                 <td type="text">{}</td>
                                 <td type="text">{}</td>

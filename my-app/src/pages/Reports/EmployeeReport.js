@@ -37,9 +37,9 @@ export default function Home(){
     return(
         <>
             <div className='reportCard'>
-            <div>
-                <h1>Employee Report</h1>
-            </div>
+                <div>
+                    <h1>Employee Report</h1>
+                </div>
                 <form onSubmit={employeeSubmit}>
                     <div className='formCard'>
                         <div>
@@ -64,23 +64,21 @@ export default function Home(){
                         </div>
                         <div>
                             <h3>Job Location: </h3>
-                            <input
-                                type='text'
-                                className='formInput'
-                                placeholder='Location'
-                                value={jLocation}
-                                onChange={(e) => setJLocation(e.target.value)}>
-                            </input>
+                            <select className='formInput' value={jLocation} onChange={(e) => setJLocation(e.target.value)}>
+                                <option value='all'>All</option>
+                                <option value='a'>A</option>
+                                <option value='b'>B</option>
+                                <option value='c'>C</option>
+                            </select>
                         </div>
                         <div>
                             <h3>Job Role: </h3>
-                            <input
-                                type='text'
-                                className='formInput'
-                                placeholder='Role'
-                                value={jRole}
-                                onChange={(e) => setJRole(e.target.value)}>
-                            </input>
+                            <select className='formInput' value={jRole} onChange={(e) => setJRole(e.target.value)}>
+                                <option value='all'>All</option>
+                                <option value='role1'>role1</option>
+                                <option value='role2'>role2</option>
+                                <option value='role3'>role3</option>                                
+                            </select>
                         </div>
                         <div>
                             <h3>Email: </h3>
