@@ -18,7 +18,7 @@ const getHandlers = {
   '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
   '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
   '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
-  '/image/add': (req, res) => imageRoutes.addImage(req, res)
+  '/rides/all': (req, res) => ride.getAllRides(req, res)
 }
 
 // All PUT request
@@ -30,6 +30,7 @@ const putHandlers = {
 const postHandlers = {
   '/register': (req, res) => personRoutes.register(req, res),
   '/login': (req, res) => personRoutes.login(req, res),
+  '/image/add': (req, res) => imageRoutes.addImage(req, res),
   '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
   '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
