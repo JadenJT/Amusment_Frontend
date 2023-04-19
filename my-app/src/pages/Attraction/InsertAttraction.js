@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './InsertAttraction.css';
+import { useNavigate } from 'react-router-dom';
 
 function validateAttractionName(attractionName) {
   if (attractionName.length === 0 || attractionName.length > 25) {
@@ -82,17 +83,19 @@ function validateConcessionFoodType(concessionFoodType) {
 }
 
 function validateAttractionImage(attractionImage) {
-  if (!attractionImage) {
+  if (!attractionImage || attractionImage == null) {
     return false
   }
   return true
 }
 
 const InsertAttraction = () => {
+
+  var navigate = useNavigate();
+
   /* insert new attraction */
   const [ZoneId, setZoneId] = useState('');
   const [attractionName, setAttractionName] = useState('');
-  const [attractionImage, setAttractionImage] = useState(false);
   const [attractionCategory, setAttractionCategory] = useState('');
 
   /*new ride*/
@@ -138,7 +141,6 @@ const InsertAttraction = () => {
   const resetForm = () => {
     setZoneId('');
     setAttractionName('');
-    setAttractionImage(false);
     setAttractionCategory('');
     setRideHeightRequirement('');
     setRideType('');
@@ -147,7 +149,7 @@ const InsertAttraction = () => {
     setConcessionFoodType('');
     setzoneIdError('');
     setAttractionNameError('');
-    setImageFile('');
+    setImageFile(null);
     setAttractionExistError('');
     setRideTypeError('');
     setRideCapacityError('');
@@ -317,7 +319,7 @@ const InsertAttraction = () => {
           image: imagePathJSON.item
         };
 
-        const response = await fetch('http://localhost:8080/ride/add', {
+        await fetch('http://localhost:8080/ride/add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -325,9 +327,12 @@ const InsertAttraction = () => {
           body: JSON.stringify(concessionData)
         });
         resetForm();
-        setAttractionAdded("Ride has been added!")
+        setAttractionAdded("Ride has been added!");
+        setTimeout( () => {
+          setAttractionAdded("");
+        }, 4000);
       } else {
-        setAttractionExistError("Ride already exist with that name, try a different name!")
+        setAttractionExistError("Ride already exist")
       }
     }
     else if (selectedOption === 'concession') {
@@ -338,17 +343,48 @@ const InsertAttraction = () => {
         setShowErrorBox(true);
         return;
       }
-      const concessionData = {
-        attractionName,
-        ZoneId,
-        concessionFoodType,
-        attractionImage,
-      };
-      //don't know how to account for concession description to display in our frontend
 
-      /*
-      INSERT THE FETCH HERE FOR CONCESSION
-      */
+      //Check if concession Exist
+      const concessionExistRes = await fetch('http://localhost:8080/concession/exist?' +  new URLSearchParams({
+        name: attractionName
+      }))
+      const concessionExistData = await concessionExistRes.json();
+
+      if(!concessionExistData.item){
+
+        //Add image
+        const imageForm = new FormData()
+        imageForm.append('image', imageFileValue);
+
+        const imageInit = await fetch('http://localhost:8080/image/add', {
+          method: 'POST',
+          body: imageForm.get('image')
+        });  
+        const imagePathJSON = await imageInit.json()
+        
+        //Add Concession to db.
+        const concessionData = {
+          name: attractionName,
+          zone: ZoneId,
+          food_type: concessionFoodType,
+          image: imagePathJSON.item,
+        };
+
+        const res2 = await fetch('http://localhost:8080/concession/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(concessionData)
+        });
+        resetForm();
+        setAttractionAdded("Concession has been added!");
+        setTimeout( () => {
+          setAttractionAdded("");
+        }, 4000);
+      } else {
+        setAttractionExistError("Concession already exist")
+      };
     }
     else if (selectedOption === 'giftshop') {
       //handle gift shop form submission
@@ -358,15 +394,48 @@ const InsertAttraction = () => {
         setShowErrorBox(true);
         return;
       }
-      const giftshopData = {
-        ZoneId,
-        attractionName,
+
+      //Check if giftshop
+      const giftshopExistRes = await fetch('http://localhost:8080/giftshop/exist?' +  new URLSearchParams({
+        name: attractionName
+      }))
+      const giftshopExistData = await giftshopExistRes.json();
+
+      if(!giftshopExistData.item){
+
+        const imageForm = new FormData()
+        imageForm.append('image', imageFileValue);
+
+        const imageInit = await fetch('http://localhost:8080/image/add', {
+          method: 'POST',
+          body: imageForm.get('image')
+        });  
+        const imagePathJSON = await imageInit.json()
+
+        //Add giftshop to db.
+        const giftshopData = {
+          zone: ZoneId,
+          name: attractionName,
+          image: imagePathJSON.item
+        };
+
+        const res3 = await fetch('http://localhost:8080/giftshop/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(giftshopData)
+        });
+        resetForm();
+        setAttractionAdded("Ride has been added!");
+        setTimeout( () => {
+          setAttractionAdded("");
+        }, 4000);
+      } else {
+        setAttractionExistError("Ride already exist with that name, try a different name!")
       };
-      /*
-      INSERT THE FETCH HERE FOR GIFT SHOP
-      */
     }
-    //after form submited, page can redirect back to 'select option to insert'
+    navigate('/InsertAttraction')
   };
 
   return (
@@ -396,7 +465,7 @@ const InsertAttraction = () => {
             {selectedOption === 'ride' && (
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
-                <input type='text' placeholder='Eneter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
+                <input type='text' placeholder='Enter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Ride name:</h3>
@@ -418,7 +487,6 @@ const InsertAttraction = () => {
                   <option>Dropper</option>
                 </select>
                 <div className='admin-error'>{rideCategoryError}</div>
-                {/* <input type='text' placeholder='Enter ride type' value={attractionCategory} className='option-input' /> */}
 
                 <h3 className='option-title'>Ride type:</h3>
                 <select className='ride-select-option' value={rideType} onChange={handleRideTypeChange} style={{ marginBottom: rideTypeMarginBottom }}>
@@ -439,6 +507,7 @@ const InsertAttraction = () => {
                 <h3 className='option-title'>Hour capacity:</h3>
                 <input type='number' min='0' placeholder='Enter hour capactiy' className='option-input' value={hourlyCapacity} onChange={handleHourlyCapacityChange} style={{ marginBottom: hourlyCapacityMarginBottom }} />
                 <div className='admin-error'>{hourlyCapacityError}</div>
+                <div className='admin-error'>{attractionExistError}</div>
                 <div className='admin-confirm'>{attractionAdded}</div>
               </div>
             )}
@@ -446,7 +515,7 @@ const InsertAttraction = () => {
             {selectedOption === 'concession' && (
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
-                <input type='text' placeholder='Eneter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
+                <input type='text' placeholder='Enter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Concession name:</h3>
@@ -455,7 +524,7 @@ const InsertAttraction = () => {
 
                 <div className='option-insert-img'>
                   <h3 className='option-title'>Concession image:</h3>
-                  <input type='file' className='option-input-img'></input>
+                  <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
                 <h3 className='option-title'>Concession food type:</h3>
@@ -469,11 +538,17 @@ const InsertAttraction = () => {
             {selectedOption === 'giftshop' && (
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
-                <input type='text' placeholder='Eneter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
+                <input type='text' placeholder='Enter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Giftshop name:</h3>
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
+    
+                <div className='option-insert-img'>
+                  <h3 className='option-title'>Giftshop image:</h3>
+                  <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
+                </div>
+
                 <div className='admin-error'>{attractionExistError}</div>
                 <div className='admin-confirm'>{attractionAdded}</div>
 
