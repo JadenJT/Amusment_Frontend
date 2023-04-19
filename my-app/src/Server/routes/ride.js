@@ -36,10 +36,18 @@ module.exports = {
         const rideJSON = JSON.parse(bodyData); 
         const name = rideJSON.name;
         const [rows, fields] = await db.promise().execute(
-            `SELECT * FROM master.ride WHERE name = '${name}'`
+            `SELECT * FROM master.ride WHERE name = '${name}';`
         )
         if (rows.length == 0) return sendResponse(req, res, 200, "Ride Not Found", false);
         return sendResponse(req, res, 200, "Ride Exist", true);
 
     },
+
+    async getAllRides(req, res){
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride;`
+        )
+        if (rows.length == 0) return sendResponse(req, res, 200, "Ride Not Found", false);
+        return sendResponse(req, res, 200, "Ride Exist", true);
+    }
 }

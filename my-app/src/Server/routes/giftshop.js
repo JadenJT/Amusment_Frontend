@@ -14,7 +14,7 @@ module.exports = {
         const name = giftshopJSON.name;
         const zone = giftshopJSON.zone;
         const image = giftshopJSON.image;
-        const query = 'INSERT INTO master.concession(`giftshop_id`, `name`, `zone_id`, `image`) VALUES (NULL, ?, ?, ?)'
+        const query = 'INSERT INTO master.concession(`giftshop_id`, `name`, `zone_id`, `image`) VALUES (NULL, ?, ?, ?);'
         const values = [name, zone, image]
 
         const [row, fields] = await db.promise().execute(query, values);
@@ -31,7 +31,7 @@ module.exports = {
         const giftshopJSON = JSON.parse(bodyData); 
         const name = giftshopJSON.name;
         const [rows, fields] = await db.promise().execute(
-            `SELECT * FROM master.giftshop WHERE name = '${name}'`
+            `SELECT * FROM master.giftshop WHERE name = '${name}';`
         )
         if (rows.length == 0) return sendResponse(req, res, 200, "Giftshop Not Found", false);
         return sendResponse(req, res, 200, "GiftShop Found", true);
