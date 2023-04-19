@@ -23,6 +23,9 @@ const getHandlers = {
   '/rides/all': (req, res) => rideRoutes.getAllRides(req, res),
   '/incident/get': (req, res) => incidentRoutes.getIncident(req, res),
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
+  '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
+  '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
+  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res),
 }
 
 // All PUT request
@@ -40,11 +43,8 @@ const postHandlers = {
   '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
   '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
-  '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
   '/ride/add': (req, res) => rideRoutes.addRide(req, res),
-  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res),
   '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
-  '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
 
@@ -57,10 +57,11 @@ const deleteHandlers = {
 }
 
 const server = http.createServer(async (req, res) => {
-  const getHandler = getHandlers[req.url];
-  const putHandler = putHandlers[req.url];
-  const postHandler = postHandlers[req.url];
-  const deleteHandler = deleteHandlers[req.url];
+  searchURL = req.url.split('?')[0]
+  const getHandler = getHandlers[searchURL];
+  const putHandler = putHandlers[searchURL];
+  const postHandler = postHandlers[searchURL];
+  const deleteHandler = deleteHandlers[searchURL];
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') {
     // Handle preflight request

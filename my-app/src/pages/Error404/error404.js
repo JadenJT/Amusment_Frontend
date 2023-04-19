@@ -1,6 +1,6 @@
 import React from "react";
 import "./error404.css";
-import whiteLogo_sad from '../../images/whitelogo_sad.png'
+import whiteLogo_sad from '../../images/whitelogo_sad.jpg'
 
 
 

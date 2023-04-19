@@ -15,7 +15,7 @@ function getRandomName() {
 module.exports = {
     async addImage(req, res) {
         const fileName = getRandomName()
-        const rootPath = path.join(__dirname, '../../images/', fileName + '.jpeg')
+        const rootPath = path.join(__dirname, '../../images/', fileName + '.jpg')
         const writableStream = fs.createWriteStream(rootPath);
 
         req.on('data', (chunk) => {

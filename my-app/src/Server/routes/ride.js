@@ -1,4 +1,6 @@
 const db = require('../database');
+const url = require('url');
+const querystring = require('querystring');
 const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils");
 
@@ -11,16 +13,16 @@ module.exports = {
     async addRide(req, res){
         const bodyData = await getReqData(req);
         const rideJSON = JSON.parse(bodyData);  
-        const ride_id = rideJSON.ride_id;
+        const zone_id = rideJSON.zone_id;
+        const category = rideJSON.category;
         const type = rideJSON.type;
         const name = rideJSON.name;
         const capacity = rideJSON.capacity;
         const hour_capacity = rideJSON.hour_capacity;
         const image = rideJSON.image;
         const height_requirement = rideJSON.height_requirement;
-        const last_maintenance = rideJSON.last_maintenance;
-        const query = 'INSERT INTO master.ride(`ride_id`, `zone_id`, `type`, `name`, `capacity`, `hour_capacity`, `image`, `height_requirement`, `last_maintenance`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)'
-        const values = [ride_id, type, name, capacity, hour_capacity, image, height_requirement, last_maintenance]
+        const query = 'INSERT INTO master.ride(`ride_id`, `zone_id`, `category`, `type` ,`name`, `capacity`, `hour_capacity`, `image`, `height_requirement`, `last_maintenance`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, (current_timestamp()))'
+        const values = [zone_id, category, type, name, capacity, hour_capacity, image, height_requirement]
 
         const [row, fields] = await db.promise().execute(query, values);
         return sendResponse(req, res, 200, `Added Ride`, row)
@@ -32,9 +34,9 @@ module.exports = {
         }
     */
     async rideExist(req, res){
-        const bodyData = await getReqData(req);
-        const rideJSON = JSON.parse(bodyData); 
-        const name = rideJSON.name;
+        const parsedURL = url.parse(req.url)
+        const urlParams = querystring.parse(parsedURL.query)
+        const name = urlParams.name
         const [rows, fields] = await db.promise().execute(
             `SELECT * FROM master.ride WHERE name = '${name}';`
         )

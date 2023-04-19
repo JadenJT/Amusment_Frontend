@@ -23,6 +23,17 @@ function validateZoneId(zoneId) {
   return true;
 }
 
+function validateHeightRequirement(rideCapacity) {
+  if (rideCapacity === 0 || rideCapacity === null) { //do not know if there is a max limit for a single ride cap. if so, modify this if statement
+    return false;
+  }
+  const regex = /^[0-9\b]+$/;
+  if (!regex.test(rideCapacity)) {
+    return false;
+  }
+  return true;
+}
+
 function validateRideCapacity(rideCapacity) {
   if (rideCapacity === 0 || rideCapacity === null) { //do not know if there is a max limit for a single ride cap. if so, modify this if statement
     return false;
@@ -40,6 +51,13 @@ function validateHourlyCapacity(hourlyCapacity) {
   }
   const regex = /^[0-9\b]+$/;
   if (!regex.test(hourlyCapacity)) {
+    return false;
+  }
+  return true;
+}
+
+function validateRideCategory(rideCategory) {
+  if (rideCategory.length === 0) {
     return false;
   }
   return true;
@@ -68,12 +86,11 @@ const InsertAttraction = () => {
   const [ZoneId, setZoneId] = useState('');
   const [attractionName, setAttractionName] = useState('');
   const [attractionImage, setAttractionImage] = useState(false);
-  const [attractionDescription, setAttractionDescription] = useState('');
+  const [attractionCategory, setAttractionCategory] = useState('');
 
   /*new ride*/
   const [rideHeightRequirement, setRideHeightRequirement] = useState(0);
   const [rideType, setRideType] = useState('');
-  const [rideOperating, setRideOperating] = useState(false);
   const [rideCapacity, setRideCapacity] = useState(null);
   const [hourlyCapacity, setHourlyCapacity] = useState(null);
 
@@ -84,19 +101,25 @@ const InsertAttraction = () => {
   const [zoneIdError, setzoneIdError] = useState('');
   const [attractionNameError, setAttractionNameError] = useState('');
   const [rideTypeError, setRideTypeError] = useState('');
+  const [rideCategoryError, setRideCategoryError] = useState('');
   const [rideCapacityError, setRideCapacityError] = useState('');
   const [hourlyCapacityError, setHourlyCapacityError] = useState('');
   const [concessionFoodTypeError, setConcessionFoodTypeError] = useState('');
+  const [attractionExistError, setAttractionExistError] = useState('');
+  const [heightRequirementError, setHeightRequirementError] = useState('')
 
   /* set errror margins */
   const [zoneIdMarginBottom, setzoneIdMarginBottom] = useState('1em');
   const [attractionNameMarginBottom, setAttractionNameMarginBottom] = useState('1em');
   const [rideTypeMarginBottom, setrideTypeMarginBottom] = useState('1em');
+  const [rideCategoryMarginBottom, setRideCategoryMarginBottom] = useState('1em');
   const [rideCapacityMarginBottom, setRideCapacityMarginBottom] = useState('1em');
   const [hourlyCapacityMarginBottom, setHourlyCapacityMarginBottom] = useState('1em');
   const [concessionFoodTypeMarginBottom, setConcessionFoodTypeMarginBottom] = useState('1em');
+  const [heightRequirementMarginBottom, setHeightRequirementMarginBottom] = useState('1em')
 
   //other
+  const [imageFileValue, setImageFile] = useState(null);
   const [selectedOption, setSelectedOption] = useState('');
   const [isOptionSelected, setIsOptionSelected] = useState(false);
   const [showErrorBox, setShowErrorBox] = useState(false);
@@ -106,18 +129,20 @@ const InsertAttraction = () => {
     setZoneId('');
     setAttractionName('');
     setAttractionImage(false);
-    setAttractionDescription('');
+    setAttractionCategory('');
     setRideHeightRequirement(0);
     setRideType('');
-    setRideOperating(false);
     setRideCapacity(null);
     setHourlyCapacity(null);
     setConcessionFoodType('');
     setzoneIdError('');
     setAttractionNameError('');
+    setImageFile(null);
+    setAttractionExistError('');
     setRideTypeError('');
     setRideCapacityError('');
     setConcessionFoodTypeError('');
+    setHeightRequirementError('')
   };
 
   //handle change functions
@@ -152,6 +177,13 @@ const InsertAttraction = () => {
     }
   };
 
+  // Handle image change
+  const handleFileSelect = (event) => {
+    const file = event.target.files[0];
+    if (file) setImageFile(file);
+    
+  };
+
   const handleRideTypeChange = (e) => {
     const rideType = e.target.value;
     setRideType(rideType);
@@ -165,13 +197,28 @@ const InsertAttraction = () => {
     }
   };
 
+  const handleCategoryChange = (e) => {
+    const attractionCategory = e.target.value;
+    setAttractionCategory(attractionCategory);
+    if (!validateRideCategory(attractionCategory)) {
+      setRideCategoryError("Please select a ride type");
+      setRideCategoryMarginBottom("1em");
+    } else {
+      setRideCategoryError("");
+      setRideCategoryMarginBottom("1em");
+    }
+  };
+
   const handleHeightRequirementChange = (e) => {
     const rideHeightRequirement = e.target.value;
     setRideHeightRequirement(rideHeightRequirement);
-  };
-
-  const handleRideOperatingChange = (e) => {
-    setRideOperating(e.target.checked);
+    if (!validateHeightRequirement(rideHeightRequirement)) {
+      setHeightRequirementError("Please put a height requirement (numbers only)")
+      setHeightRequirementMarginBottom("1em")
+    } else {
+      setHeightRequirementError("")
+      setHeightRequirementMarginBottom("1em")
+    }
   };
 
   const handleRideCapacityChange = (event) => {
@@ -198,6 +245,7 @@ const InsertAttraction = () => {
     }
   }
 
+
   const handleConcessionFoodTypeChange = (event) => {
     const concessionFoodType = event.target.value;
     setConcessionFoodType(concessionFoodType);
@@ -211,7 +259,7 @@ const InsertAttraction = () => {
   }
 
   /* submit form */
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     if (selectedOption === 'ride') {
@@ -226,19 +274,48 @@ const InsertAttraction = () => {
         return;
       }
 
-      const ridedata = {
-        ZoneId,
-        rideType,
-        rideOperating,
-        attractionName,
-        rideCapacity,
-        hourlyCapacity,
-      };
-      //don't know how to account for attraction image and description to display in our frontend, since our database doesn't have those attributes
+      // Check if Ride exist within the db
+      const rideExistRes = await fetch('http://localhost:8080/ride/exist?' +  new URLSearchParams({
+        name: attractionName
+      }))
+      const rideExistData = await rideExistRes.json();
 
-      /*
-      INSERT THE FETCH HERE FOR RIDE
-      */
+      // If ride doesn't exist continue
+      if (!rideExistData.item) {
+
+        //Get and insert image into database.
+        const imageForm = new FormData()
+        imageForm.append('image', imageFileValue);
+
+        const imageInit = await fetch('http://localhost:8080/image/add', {
+          method: 'POST',
+          body: imageForm.get('image')
+        });  
+        const imagePathJSON = await imageInit.json()
+
+        // Finally, add ride towards the db
+        const concessionData = {
+          zone_id: ZoneId,
+          category: attractionCategory,
+          type: rideType,
+          name: attractionName,
+          capacity: rideCapacity,
+          hour_capacity: hourlyCapacity,
+          height_requirement: rideHeightRequirement,
+          image: imagePathJSON.item
+        };
+
+        const response = await fetch('http://localhost:8080/ride/add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(concessionData)
+        });
+        
+      } else {
+        setAttractionExistError("Ride already exist with that name, try a different name!")
+      }
     }
     else if (selectedOption === 'concession') {
       //handle concession form submission
@@ -305,6 +382,7 @@ const InsertAttraction = () => {
 
             {selectedOption === 'ride' && (
               <div className='admin-option-box'>
+                <div className='admin-error'>{attractionExistError}</div>
                 <h3 className='option-title'>Zone id:</h3>
                 <input type='text' placeholder='Eneter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
                 <div className='admin-error'>{zoneIdError}</div>
@@ -315,38 +393,32 @@ const InsertAttraction = () => {
 
                 <div className='option-insert-img'>
                   <h3 className='option-title'>Ride image:</h3>
-                  <input type='file' className='option-input-img'></input>
+                  <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
-                <h3 className='option-title'>Ride description:</h3>
-                <input type='text' placeholder='Enter ride description' value={attractionDescription} className='option-input' />
+                <h3 className='option-title'>Ride Category:</h3>
+                <select className='ride-select-option' value={attractionCategory} onChange={handleCategoryChange} style={{ marginBottom: rideCategoryMarginBottom }}>
+                <option value="" disabled>Select an option</option>
+                  <option>RollerCoaster</option>
+                  <option>WaterCoaster</option>
+                  <option>Spinner</option>
+                  <option>Swing</option>
+                  <option>Dropper</option>
+                </select>
+                <div className='admin-error'>{rideCategoryError}</div>
+                {/* <input type='text' placeholder='Enter ride type' value={attractionCategory} className='option-input' /> */}
 
                 <h3 className='option-title'>Ride type:</h3>
                 <select className='ride-select-option' value={rideType} onChange={handleRideTypeChange} style={{ marginBottom: rideTypeMarginBottom }}>
                   <option value="" disabled>Select an option</option>
-                  <option>Adult Ride</option>
-                  <option>Kid Ride</option>
+                  <option>Adult</option>
+                  <option>Child</option>
                 </select>
                 <div className='admin-error'>{rideTypeError}</div>
 
-                <h3 className='option-title'>Ride height requirement (cm):</h3>
-                <select className='ride-select-option' value={rideHeightRequirement} onChange={handleHeightRequirementChange}>
-                  {rideType === "" && (
-                    <option>Select ride type</option>
-                  )}
-                  {rideType === 'Adult Ride' && (
-                    <option value='42'>42 cm</option>
-                  )}
-                  {rideType === 'Kid Ride' && (
-                    <option value='36'>36 cm</option>
-                  )}
-                </select>
-
-                <h3 className='option-title'>Ride operating:</h3>
-                <div className='operating-checkbox'>
-                  <span className='operating-bool'>{rideOperating ? 'True' : 'False'}</span>
-                  <input type='checkbox' checked={rideOperating} onChange={handleRideOperatingChange} />
-                </div>
+                <h3 className='option-title'>Ride height requirement (in):</h3>
+                <input type='number' min='0' placeholder='Enter ride capactiy' className='option-input' value={rideHeightRequirement} onChange={handleHeightRequirementChange} style={{ marginBottom: heightRequirementMarginBottom }} />
+                <div className='admin-error'>{heightRequirementError}</div>
 
                 <h3 className='option-title'>Ride capacity:</h3>
                 <input type='number' min='0' placeholder='Enter ride capactiy' className='option-input' value={rideCapacity} onChange={handleRideCapacityChange} style={{ marginBottom: rideCapacityMarginBottom }} />
@@ -372,9 +444,6 @@ const InsertAttraction = () => {
                   <h3 className='option-title'>Concession image:</h3>
                   <input type='file' className='option-input-img'></input>
                 </div>
-
-                <h3 className='option-title'>Concession description:</h3>
-                <input type='text' placeholder='Enter concession description' className='option-input' />
 
                 <h3 className='option-title'>Concession food type:</h3>
                 <input type='text' placeholder='Enter concession food type' className='option-input' value={concessionFoodType} onChange={handleConcessionFoodTypeChange} style={{ marginBotttom: concessionFoodTypeMarginBottom }} />
