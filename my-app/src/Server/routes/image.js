@@ -26,6 +26,6 @@ module.exports = {
         req.on('end', () => {
             writableStream.end();
         });
-        return sendResponse(req, res, 200, "Image added", `${fileName}.png`)
+        return sendResponse(req, res, 200, "Image added", `${fileName}.jpg`)
     }
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './InsertAttraction.css';
 
 function validateAttractionName(attractionName) {
-  if (attractionName.length === 0 || attractionName.length > 30) {
+  if (attractionName.length === 0 || attractionName.length > 25) {
     return false;
   }
   const regex = /^[a-zA-Z\s]+$/;
@@ -81,6 +81,13 @@ function validateConcessionFoodType(concessionFoodType) {
   return true;
 }
 
+function validateAttractionImage(attractionImage) {
+  if (!attractionImage) {
+    return false
+  }
+  return true
+}
+
 const InsertAttraction = () => {
   /* insert new attraction */
   const [ZoneId, setZoneId] = useState('');
@@ -108,6 +115,9 @@ const InsertAttraction = () => {
   const [attractionExistError, setAttractionExistError] = useState('');
   const [heightRequirementError, setHeightRequirementError] = useState('')
 
+  /* confirmation messages */
+  const [attractionAdded, setAttractionAdded] = useState(''); 
+
   /* set errror margins */
   const [zoneIdMarginBottom, setzoneIdMarginBottom] = useState('1em');
   const [attractionNameMarginBottom, setAttractionNameMarginBottom] = useState('1em');
@@ -130,19 +140,21 @@ const InsertAttraction = () => {
     setAttractionName('');
     setAttractionImage(false);
     setAttractionCategory('');
-    setRideHeightRequirement(0);
+    setRideHeightRequirement('');
     setRideType('');
     setRideCapacity(null);
     setHourlyCapacity(null);
     setConcessionFoodType('');
     setzoneIdError('');
     setAttractionNameError('');
-    setImageFile(null);
+    setImageFile('');
     setAttractionExistError('');
     setRideTypeError('');
     setRideCapacityError('');
     setConcessionFoodTypeError('');
-    setHeightRequirementError('')
+    setHeightRequirementError('');
+    setRideCapacity('');
+    setHourlyCapacity('');
   };
 
   //handle change functions
@@ -180,8 +192,7 @@ const InsertAttraction = () => {
   // Handle image change
   const handleFileSelect = (event) => {
     const file = event.target.files[0];
-    if (file) setImageFile(file);
-    
+    setImageFile(file);
   };
 
   const handleRideTypeChange = (e) => {
@@ -269,7 +280,8 @@ const InsertAttraction = () => {
       const validrideType = validateRideType(rideType);
       const validRideCapacity = validateRideCapacity(rideCapacity);
       const validHourlyCapacity = validateHourlyCapacity(hourlyCapacity);
-      if (!validattractionName || !validZoneId || !validrideType || !validRideCapacity || !validHourlyCapacity) {
+      const validImage = validateAttractionImage(imageFileValue)
+      if (!validattractionName || !validZoneId || !validrideType || !validRideCapacity || !validHourlyCapacity || !validImage) {
         setShowErrorBox(true);
         return;
       }
@@ -312,7 +324,8 @@ const InsertAttraction = () => {
           },
           body: JSON.stringify(concessionData)
         });
-        
+        resetForm();
+        setAttractionAdded("Ride has been added!")
       } else {
         setAttractionExistError("Ride already exist with that name, try a different name!")
       }
@@ -382,7 +395,6 @@ const InsertAttraction = () => {
 
             {selectedOption === 'ride' && (
               <div className='admin-option-box'>
-                <div className='admin-error'>{attractionExistError}</div>
                 <h3 className='option-title'>Zone id:</h3>
                 <input type='text' placeholder='Eneter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
                 <div className='admin-error'>{zoneIdError}</div>
@@ -427,6 +439,7 @@ const InsertAttraction = () => {
                 <h3 className='option-title'>Hour capacity:</h3>
                 <input type='number' min='0' placeholder='Enter hour capactiy' className='option-input' value={hourlyCapacity} onChange={handleHourlyCapacityChange} style={{ marginBottom: hourlyCapacityMarginBottom }} />
                 <div className='admin-error'>{hourlyCapacityError}</div>
+                <div className='admin-confirm'>{attractionAdded}</div>
               </div>
             )}
 
@@ -448,6 +461,8 @@ const InsertAttraction = () => {
                 <h3 className='option-title'>Concession food type:</h3>
                 <input type='text' placeholder='Enter concession food type' className='option-input' value={concessionFoodType} onChange={handleConcessionFoodTypeChange} style={{ marginBotttom: concessionFoodTypeMarginBottom }} />
                 <div className='admin-error'>{concessionFoodTypeError}</div>
+                <div className='admin-error'>{attractionExistError}</div>
+                <div className='admin-confirm'>{attractionAdded}</div>
 
               </div>
             )}
@@ -459,7 +474,8 @@ const InsertAttraction = () => {
 
                 <h3 className='option-title'>Giftshop name:</h3>
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
-                <div className='admin-error'>{attractionNameError}</div>
+                <div className='admin-error'>{attractionExistError}</div>
+                <div className='admin-confirm'>{attractionAdded}</div>
 
               </div>
             )}
@@ -479,6 +495,7 @@ const InsertAttraction = () => {
                     {(selectedOption === "ride" && !validateRideType(rideType) && <li>Please select a valid ride type</li>)}
                     {(selectedOption === "ride" && !validateRideCapacity(rideCapacity) && <li>Please enter a valid ride capacity digit</li>)}
                     {(selectedOption === "ride" && !validateHourlyCapacity(hourlyCapacity) && <li>Please enter a valid hourly capacity digit</li>)}
+                    {(selectedOption === "ride" && !validateAttractionImage(imageFileValue) && <li>Please enter a valid image</li>)}
                     <button className='return-button' onClick={() => setShowErrorBox(false)}>return</button>
                   </ul>
                 </div>

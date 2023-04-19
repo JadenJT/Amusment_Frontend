@@ -138,6 +138,9 @@
 .admin-error{
     color: red;
 }
+.admin-confirm{
+    color: lightgreen;
+}
 
 /*submit button style */
 .admin-insert-button{
