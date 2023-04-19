@@ -6,10 +6,6 @@ module.exports = {
     /*
         POST Data Example:
         {
-            "name": "Hotty Dog"
-            "zone": "a",
-            "food_type": "American"
-            "image": <>
         }
     */
     async addRide(req, res){

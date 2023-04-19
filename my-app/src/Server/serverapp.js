@@ -3,6 +3,7 @@ const http = require('http');
 
 const { sendResponse } = require("./helpers/response");
 const imageRoutes = require('./routes/image');
+const giftshop = require('./routes/giftshop');
 const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
 const employeeRoutes = require('./routes/employee');
@@ -35,6 +36,8 @@ const postHandlers = {
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
   '/ride/add': (req, res) => ride.addRide(req, res),
   '/ride/exist': (req, res) => ride.rideExist(req, res),
+  '/giftshop/add': (req, res) => giftshop.addGiftshop(req, res),
+  '/giftshop/exist': (req, res) => giftshop.giftshopExist(req, res)
 }
 
 // All DELETE request
