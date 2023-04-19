@@ -3,14 +3,15 @@ const http = require('http');
 
 const { sendResponse } = require("./helpers/response");
 const imageRoutes = require('./routes/image');
-const giftshop = require('./routes/giftshop');
+const giftshopRoutes = require('./routes/giftshop');
 const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
 const employeeRoutes = require('./routes/employee');
 const maintenanceRoutes = require('./routes/maintenance');
 const concessionRoutes = require('./routes/concession');
-const incident = require('./routes/incident');
-const ride = require('./routes/ride');
+const incidentRoutes = require('./routes/incident');
+const jobRoutes = require('./routes/job');
+const rideRoutes = require('./routes/ride');
 
 
 // All GET request
@@ -19,13 +20,16 @@ const getHandlers = {
   '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
   '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
   '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
-  '/rides/all': (req, res) => ride.getAllRides(req, res),
-  '/incident/get': (req, res) => incident.getIncident(req, res)
+  '/rides/all': (req, res) => rideRoutes.getAllRides(req, res),
+  '/incident/get': (req, res) => incidentRoutes.getIncident(req, res),
+  '/job/get': (req, res) => jobRoutes.getJob(req, res),
 }
 
 // All PUT request
 const putHandlers = {
-  '/employee/update': (req, res) => employeeRoutes.updateEmployee(req, res)
+  '/employee/update': (req, res) => employeeRoutes.updateEmployee(req, res),
+  '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
+
 }
 
 // All POST request
@@ -37,11 +41,13 @@ const postHandlers = {
   '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
-  '/ride/add': (req, res) => ride.addRide(req, res),
-  '/ride/exist': (req, res) => ride.rideExist(req, res),
-  '/giftshop/add': (req, res) => giftshop.addGiftshop(req, res),
-  '/giftshop/exist': (req, res) => giftshop.giftshopExist(req, res),
-  '/incident/add': (req, res) => incident.addIncident(req, res),
+  '/ride/add': (req, res) => rideRoutes.addRide(req, res),
+  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res),
+  '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
+  '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
+  '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
+  '/job/add': (req, res) => jobRoutes.addJob(req, res),
+
 }
 
 // All DELETE request
