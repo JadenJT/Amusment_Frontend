@@ -2,32 +2,39 @@ require('dotenv').config();
 const http = require('http');
 
 const { sendResponse } = require("./helpers/response");
+const imageRoutes = require('./routes/image');
 const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
-const employee = require('./routes/employee');
-const maintenance = require('./routes/maintenance');
+const employeeRoutes = require('./routes/employee');
+const maintenanceRoutes = require('./routes/maintenance');
 
+
+// All GET request
 const getHandlers = {
   '/ticket/owned': (req, res) => ticketRoutes.ticketsOwn(req, res),
   '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
-  '/employee/report': (req, res) => employee.employeeReport(req, res),
-  '/maintenance/report': (req, res) => maintenance.maintenanceReport(req, res)
+  '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
+  '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
+  '/image/add': (req, res) => imageRoutes.addImage(req, res)
 }
 
+// All PUT request
 const putHandlers = {
-  '/employee/update': (req, res) => employee.updateEmployee(req, res)
+  '/employee/update': (req, res) => employeeRoutes.updateEmployee(req, res)
 }
 
+// All POST request
 const postHandlers = {
   '/register': (req, res) => personRoutes.register(req, res),
   '/login': (req, res) => personRoutes.login(req, res),
   '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
-  '/employee/add': (req, res) => employee.addEmployee(req, res),
+  '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
 }
 
+// All DELETE request
 const deleteHandlers = {
   '/ticket/remove': (req, res) => ticketRoutes.removeTicket(req, res),
-  '/employee/remove': (req, res) => employee.removeEmployee(req, res)
+  '/employee/remove': (req, res) => employeeRoutes.removeEmployee(req, res)
 }
 
 const server = http.createServer(async (req, res) => {
@@ -40,7 +47,6 @@ const server = http.createServer(async (req, res) => {
     // Handle preflight request
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-
     res.writeHead(204);
     res.end();
     return;
