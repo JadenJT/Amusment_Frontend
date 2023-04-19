@@ -34,7 +34,7 @@ const postHandlers = {
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
   '/ride/add': (req, res) => ride.addRide(req, res),
-  '/ride/exist': (req, res) => ride.rideExist(req, res)
+  '/ride/exist': (req, res) => ride.rideExist(req, res),
 }
 
 // All DELETE request

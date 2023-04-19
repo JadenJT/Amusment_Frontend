@@ -14,16 +14,20 @@ module.exports = {
     */
     async addRide(req, res){
         const bodyData = await getReqData(req);
-        const concessionJSON = JSON.parse(bodyData);  
-        const name = concessionJSON.name;
-        const zone = concessionJSON.zone;
-        const food_type = concessionJSON.food_type;
-        const image = concessionJSON.image;
-        const query = 'INSERT INTO master.concession(`concession_id`, `name`, `zone_id`, `food_type`, `image`) VALUES (NULL, ?, ?, ?, ?)'
-        const values = [name, zone, food_type, image]
+        const rideJSON = JSON.parse(bodyData);  
+        const ride_id = rideJSON.ride_id;
+        const type = rideJSON.type;
+        const name = rideJSON.name;
+        const capacity = rideJSON.capacity;
+        const hour_capacity = rideJSON.hour_capacity;
+        const image = rideJSON.image;
+        const height_requirement = rideJSON.height_requirement;
+        const last_maintenance = rideJSON.last_maintenance;
+        const query = 'INSERT INTO master.ride(`ride_id`, `zone_id`, `type`, `name`, `capacity`, `hour_capacity`, `image`, `height_requirement`, `last_maintenance`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?)'
+        const values = [ride_id, type, name, capacity, hour_capacity, image, height_requirement, last_maintenance]
 
         const [row, fields] = await db.promise().execute(query, values);
-        return sendResponse(req, res, 200, `Added Concession`, row)
+        return sendResponse(req, res, 200, `Added Ride`, row)
     },
     /*
         POST Data Example:
@@ -33,13 +37,13 @@ module.exports = {
     */
     async rideExist(req, res){
         const bodyData = await getReqData(req);
-        const concessionJSON = JSON.parse(bodyData); 
-        const name = concessionJSON.name;
+        const rideJSON = JSON.parse(bodyData); 
+        const name = rideJSON.name;
         const [rows, fields] = await db.promise().execute(
-            `SELECT * FROM master.concession WHERE name = '${name}'`
+            `SELECT * FROM master.ride WHERE name = '${name}'`
         )
-        if (rows.length == 0) return sendResponse(req, res, 200, "response", false);
-        return sendResponse(req, res, 200, "response", true);
+        if (rows.length == 0) return sendResponse(req, res, 200, "Ride Not Found", false);
+        return sendResponse(req, res, 200, "Ride Exist", true);
 
     },
 }
