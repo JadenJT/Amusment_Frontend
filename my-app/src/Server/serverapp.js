@@ -7,6 +7,8 @@ const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
 const employeeRoutes = require('./routes/employee');
 const maintenanceRoutes = require('./routes/maintenance');
+const concessionRoutes = require('./routes/concession');
+const ride = require('./routes/ride');
 
 
 // All GET request
@@ -29,6 +31,10 @@ const postHandlers = {
   '/login': (req, res) => personRoutes.login(req, res),
   '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
   '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
+  '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
+  '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
+  '/ride/add': (req, res) => ride.addRide(req, res),
+  '/ride/exist': (req, res) => ride.rideExist(req, res)
 }
 
 // All DELETE request
