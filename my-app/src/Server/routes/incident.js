@@ -10,7 +10,7 @@ module.exports = {
         const description = incidentJSON.description
         const date = incidentJSON.date
 
-        const query = 'INSERT INTO master.incident (`id`, `email`, `description`, `date`) VALUES (null, ?, ?, ?)'
+        const query = 'INSERT INTO master.incident (`id`, `email`, `description`, `date`) VALUES (null, ?, ?, ?);'
 
         try{
             const [rows, fields] = await db.promise().execute(query, [email, description, date])
@@ -21,7 +21,7 @@ module.exports = {
     },
 
     async getIncidentReport(req, res){
-        const query = 'SELECT * FROM master.incident ORDER BY id DESC LIMIT 5;'
+        const query = 'SELECT * FROM master.incident ORDER BY id DESC LIMIT 10;'
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched incidents", rows)
     }
