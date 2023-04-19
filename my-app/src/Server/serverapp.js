@@ -9,6 +9,7 @@ const ticketRoutes = require('./routes/ticket');
 const employeeRoutes = require('./routes/employee');
 const maintenanceRoutes = require('./routes/maintenance');
 const concessionRoutes = require('./routes/concession');
+const incident = require('./routes/incident_report');
 const ride = require('./routes/ride');
 
 
@@ -18,7 +19,8 @@ const getHandlers = {
   '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
   '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
   '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
-  '/rides/all': (req, res) => ride.getAllRides(req, res)
+  '/rides/all': (req, res) => ride.getAllRides(req, res),
+  '/incident/get': (req, res) => incident.getIncidentReport(req, res)
 }
 
 // All PUT request
@@ -38,7 +40,8 @@ const postHandlers = {
   '/ride/add': (req, res) => ride.addRide(req, res),
   '/ride/exist': (req, res) => ride.rideExist(req, res),
   '/giftshop/add': (req, res) => giftshop.addGiftshop(req, res),
-  '/giftshop/exist': (req, res) => giftshop.giftshopExist(req, res)
+  '/giftshop/exist': (req, res) => giftshop.giftshopExist(req, res),
+  '/incident/add': (req, res) => incident.addIncidentReport(req, res),
 }
 
 // All DELETE request
