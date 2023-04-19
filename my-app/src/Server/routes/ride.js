@@ -49,6 +49,6 @@ module.exports = {
         const [rows, fields] = await db.promise().execute(
             `SELECT * FROM master.ride;`
         )
-        return sendResponse(req, res, 200, "Ride Exist", rows);
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
     }
 }

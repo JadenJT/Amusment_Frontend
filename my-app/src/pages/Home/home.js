@@ -1,5 +1,6 @@
 import React from "react";
 import "./home.css"
+import { RidesMap } from "../../components/RidesMap/RidesMap";
 import Logo from '../../icons/Umazing.svg';
 import GuestsInRide from '../../images/GuestsInRide.jpg'
 export default function Home() {

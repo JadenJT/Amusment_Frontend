@@ -1,7 +1,9 @@
 
-export const ShopContextProvider = () => {
+export const RidesMap = async () => {
 
-    fetch()
+    const response = await fetch('http://localhost:8080/ride/all')
+    const ridesMap = await response.json();
+    console.log(ridesMap.item)
 
-    return ridesMap
+    return ridesMap.item
 };
