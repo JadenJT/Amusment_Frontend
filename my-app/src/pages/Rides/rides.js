@@ -319,11 +319,13 @@ const Rides = () => {
                                     <br />
                                     Must be {ride.heightRequirement} to ride
                                 </p>
+
+
                                 {user.token != null &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                         addToCart(ride.id);
-                                    }}>Buy</button>
+                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
@@ -367,7 +369,7 @@ const Rides = () => {
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                         addToCart(ride.id);
-                                    }}>Buy</button>
+                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
