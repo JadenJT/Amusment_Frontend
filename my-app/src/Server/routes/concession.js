@@ -44,4 +44,14 @@ module.exports = {
         return sendResponse(req, res, 200, "Concession does not exist", true);
 
     },
+
+    async getAllConcessions(req, res){
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.concession;`
+        )
+        return sendResponse(req, res, 200, "Concessions Gathered", rows);
+    }
+
+
+
 }
