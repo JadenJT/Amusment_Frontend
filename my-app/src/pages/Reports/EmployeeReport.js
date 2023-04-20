@@ -37,7 +37,8 @@ export default function Home(){
             },
             body: JSON.stringify(employeeFormData)
             });
-        setEmpValue(await response.json());
+        const responseData = await response.json();
+        setEmpValue(responseData);
     }
 
     return(
@@ -72,18 +73,22 @@ export default function Home(){
                             <h3>Job Location: </h3>
                             <select className='formInput' value={jLocation} onChange={(e) => setJLocation(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='location1'>l1</option>
-                                <option value='location2'>l2</option>
-                                <option value='location3'>l3</option>
+                                {empValue.map((data, index)=> {
+                                    return(
+                                        <option key={index} value={data.job_location}>{data.job_location}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                         <div>
                             <h3>Job Role: </h3>
                             <select className='formInput' value={jRole} onChange={(e) => setJRole(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='role1'>role1</option>
-                                <option value='role2'>role2</option>
-                                <option value='role3'>role3</option>                                
+                                {empValue.map((data, index)=> {
+                                    return(
+                                        <option key={index} value={data.job_role}>{data.job_role}</option>
+                                    )
+                                })}                                
                             </select>
                         </div>
                         <div>
