@@ -14,6 +14,8 @@ import Rides from "./pages/Rides/rides";
 import Zones from './pages/Zone/zone';
 import AdminHub from './pages/admin/adminHub';
 import InsertAttraction from './pages/Attraction/InsertAttraction';
+import EditAttraciton from './pages/Modify/EditAttraction';
+import RemoveAttraction from './pages/Delete/RemoveAttraction';
 import ShoppingCart from './pages/shoppingCart/shoppingCart';
 import Employee from './pages/employee/Employee';
 import Manager from './pages/Manager/manager';
@@ -71,6 +73,8 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<Concessions />} />
               <Route path="zone" element={<Zones />} />
+              <Route path='EditAttraction' element={<EditAttraciton />} />
+              <Route path='RemoveAttraction' element={<RemoveAttraction/>} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -1,0 +1,61 @@
+/* cover style */
+.admin-remove-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.admin-remove-cover{
+    background-color: white;
+    width: 50em;
+    height: min-content;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+@keyframes colorWave {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.admin-remove-title{
+    font-size: 1.7em;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    background-image: linear-gradient(to right, black, #c3a3ff);
+    background-size: 200% 100%;
+    background-clip: text;
+    color: transparent;
+    -webkit-background-clip: text;
+    animation: colorWave 4s ease-in-out infinite;
+}
+/* form style */
+.select-remove-option{
+    height: 3em;
+    width: 20em;
+    border: none;
+    border-radius: 1em;
+    color: black;
+    font-size: 0.8em;
+    text-align: center;
+    background-color: rgb(229, 226, 226);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-bottom: 1em;
+}
+.select-remove-option:hover {
+    background-color: #F9F5EB;
+    transform: scale(1.02);
+    box-shadow: 0 0 5px rgba(170, 119, 255, 0.7), 0 0 10px rgba(170, 119, 255, 0.5), 0 0 15px rgba(170, 119, 255, 0.3);
+}
