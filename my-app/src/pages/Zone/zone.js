@@ -1,9 +1,9 @@
 import React from "react";
 import Logo from '../../icons/Umazing.svg';
 import "./zone.css"
-import GiftShop1 from '../../images/giftshop/giftshop1.jpg'
-import GiftShop2 from '../../images/giftshop/giftshop2.jpg'
-import GiftShop3 from '../../images/giftshop/giftshop3.jpg'
+import GiftShop1 from '../../images/giftshop1.jpg'
+import GiftShop2 from '../../images/giftshop2.jpg'
+import GiftShop3 from '../../images/giftshop3.jpg'
 
 import SkyBlade from '../../images/SkyBlade.jpg'
 import VortexX from '../../images/VortexX.jpg'
@@ -11,17 +11,17 @@ import Thunderbolt from '../../images/Thunderbolt.jpg'
 import RainbowSwirl from '../../images/RainbowSwirl.jpg'
 import JungleSafari from '../../images/JungleSafari.jpg'
 import GForce from '../../images/G-Force.jpg'
-import WarpZone from '../../images/WarpZone.webp'
+import WarpZone from '../../images/WarpZone.jpg'
 import Wildfire from '../../images/Wildfire.jpg'
 import PiratePlunge from '../../images/PiratePlunge.jpg'
-import SpaceExplorer from '../../images/SpaceExplorer.webp'
+import SpaceExplorer from '../../images/SpaceExplorer.jpg'
 import AeroJet from '../../images/AeroJet.jpg'
 import CosmicCruiser from '../../images/CosmicCruiser.jpg'
 import Inferno from '../../images/Inferno.jpg'
 import DragonsLair from '../../images/DragonsLair.jpg'
 import DinoAdventure from '../../images/DinoAdventure.jpg'
 
-import WonderTreats from '../../images/Wonder Treats.webp'
+import WonderTreats from '../../images/Wonder Treats.jpg'
 import SpectacularSnacks from '../../images/Spectacular Snacks.jpg'
 import IncredibleEats from '../../images/Incredible Eats.jpg'
 import EnchantedDelights from '../../images/Enchanted Delights.jpg'
