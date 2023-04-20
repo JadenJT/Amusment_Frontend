@@ -11,9 +11,17 @@ function AdminHub({ user }) {
             {user != null && user.role_type == 'admin' &&
                 <div className='Attraction'>
                     <h1>This is admin</h1>
+
                     <Link to='/InsertAttraction' className='navbar-logo'>
                         InsertAttraction
                     </Link>
+                    <Link to='/EditAttraction' className='navbar-logo'>
+                        EditAttraciton
+                    </Link>
+                    <Link to='/RemoveAttraction' className='navbar-logo'>
+                        RemoveAttraction
+                    </Link>
+
                     <Link to='/manager' className='navbar-logo'>
                         Manager
                     </Link>

@@ -73,8 +73,14 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<Concessions />} />
               <Route path="zone" element={<Zones />} />
-              <Route path='EditAttraction' element={<EditAttraciton />} />
-              <Route path='RemoveAttraction' element={<RemoveAttraction/>} />
+
+              {user.role_type == 'admin' &&
+                <Route path='EditAttraction' element={<EditAttraciton />} />
+              }
+              {user.role_type == 'admin' &&
+                <Route path='RemoveAttraction' element={<RemoveAttraction />} />
+              }
+
             </Route>
           </Routes>
         </BrowserRouter>
