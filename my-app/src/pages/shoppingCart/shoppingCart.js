@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { ShopContext } from '../../components/cartContext/CartContext';
 import './shoppingCart.css';
-import ReactModal from 'react-modal';
 
 function ShoppingCart() {
     const { cartTotal } = useContext(ShopContext);
