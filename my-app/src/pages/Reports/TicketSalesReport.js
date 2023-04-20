@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Report.css'
 
-import { tempRD } from './tempReportData';
-
 export default function Home(){
     const [ticketValue, setTicketValue] = useState([]);
     const [show, setShow] = useState(false);
