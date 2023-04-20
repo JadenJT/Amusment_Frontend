@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { ShopContext } from '../../components/cartContext/CartContext';
+import './shoppingCart.css';
 
 function ShoppingCart() {
+    const { cartTotal } = useContext(ShopContext);
     return (
-        <div>shoppingCart</div>
+
+        <div className='cart-cover'>
+            <h1 className='cart-title'>Your cart {<>({cartTotal} item(s))</>}</h1>
+
+            <button className="login-btn">Check out</button>
+        </div>
     )
 }
 
