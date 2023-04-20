@@ -3,35 +3,41 @@ import './Report.css'
 
 export default function Home(){
     const [empValue, setEmpValue] = useState([]);
+    const [show, setShow] = useState(false);
 
-    const [fName, setFName] = useState('');
-    const [lName, setLName] = useState('');
-    const [jLocation, setJLocation] = useState('');
-    const [jRole, setJRole] = useState('');
-    const [employeeMail, setEmployeeMail] = useState('');
+    let [fName, setFName] = useState('');
+    let [lName, setLName] = useState('');
+    let [jLocation, setJLocation] = useState('');
+    let [jRole, setJRole] = useState('');
+    let [employeeMail, setEmployeeMail] = useState('');
 
-    const fetchFunc = () =>{
-        fetch('temp', {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },            
-        })
-        .then(res=> {
-            return res.json();
-        })
-        .then (data=> {
-            setEmpValue(data)
-        })
-    }
-
-    useEffect(() => {
-        fetchFunc()
-    }, []);
-
-    const employeeSubmit = (e)=> {
+    const employeeSubmit = async (e)=> {        
         e.preventDefault();
+        
+        if(fName === '') fName = null;
+        if(lName === '') lName = null;
+        if(jLocation === 'all') jLocation = null;
+        if(jRole === 'all') jRole = null;
+        if(employeeMail === '') employeeMail = null;
 
+        setShow(true);
+
+        const employeeFormData = {
+            f_name: fName,
+            l_name: lName,
+            job_location: jLocation,
+            job_role: jRole,
+            email: employeeMail
+        }
+        
+        const response = await fetch('http://localhost:8080/employee/report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(employeeFormData)
+            });
+        setEmpValue(await response.json());
     }
 
     return(
@@ -66,9 +72,9 @@ export default function Home(){
                             <h3>Job Location: </h3>
                             <select className='formInput' value={jLocation} onChange={(e) => setJLocation(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='a'>A</option>
-                                <option value='b'>B</option>
-                                <option value='c'>C</option>
+                                <option value='location1'>l1</option>
+                                <option value='location2'>l2</option>
+                                <option value='location3'>l3</option>
                             </select>
                         </div>
                         <div>
@@ -98,30 +104,41 @@ export default function Home(){
 
             <br></br>
             
-            <table className='tables'>
-                <thead>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Job Location</th>
-                        <th>Job Role</th>
-                        <th>Email</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {empValue.map((data, index)=> {
-                        return(
-                            <tr key={index}>
-                                <td type="text">{}</td>
-                                <td type="text">{}</td>
-                                <td type="text">{}</td>
-                                <td type="text">{}</td>
-                                <td type="text">{}</td>
+            {show?
+                <div className='tableCard'>
+                    <div className='searchForm'>
+                        <span className='lookUp'>FIRST:</span> {fName}&emsp;
+                        <span className='lookUp'>LAST:</span> {lName}&emsp;
+                        <span className='lookUp'>JOB_LOCATION:</span> {jLocation}&emsp;
+                        <span className='lookUp'>JOB_ROLE:</span> {jRole}&emsp;
+                        <span className='lookUp'>EMAIL:</span> {employeeMail}
+                    </div>
+                    <table className='tableInfo'>
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Job Location</th>
+                                <th>Job Role</th>
+                                <th>Email</th>
                             </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                            {empValue.map((data, index)=> {
+                                return(
+                                    <tr key={index}>
+                                        <td type="text">{data.f_name}</td>
+                                        <td type="text">{data.l_name}</td>
+                                        <td type="text">{data.job_location}</td>
+                                        <td type="text">{data.job_role}</td>
+                                        <td type="text">{data.email}</td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            :null}
         </>
     )
 }

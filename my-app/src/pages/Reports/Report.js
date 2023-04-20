@@ -3,6 +3,7 @@ import { React, useState } from "react";
 import EmployeeReport from "./EmployeeReport";
 import MaintenanceReport from "./MaintenanceReport";
 import TicketSalesReport from "./TicketSalesReport";
+import IncidentReport from "./IncidentReport";
 
 export default function Report() {
   var formType = <></>;
@@ -11,6 +12,9 @@ export default function Report() {
   switch (value) {
     case "EmployeeReport":
       formType = <EmployeeReport />;
+      break;
+    case "IncidentReport":
+      formType = <IncidentReport />;
       break;
     case "MaintenanceReport":
       formType = <MaintenanceReport />;
@@ -30,6 +34,9 @@ export default function Report() {
           </option>
           <option onClick={() => setValue("EmployeeReport")}>
             Employee Report
+          </option>
+          <option onClick={() => setValue("IncidentReport")}>
+            Incident Report
           </option>
           <option onClick={() => setValue("MaintenanceReport")}>
             Maintenance Report

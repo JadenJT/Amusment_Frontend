@@ -3,34 +3,72 @@ import './Report.css'
 
 export default function Home(){
     const [mainValue, setMainValue] = useState([]);
+    const [show, setShow] = useState(false);
 
-    const [mainRide, setMainRide] = useState("");
-    const [mainZoneType, setMainZoneType] = useState("");
-    const [mainStartDate, setMainStartDate] = useState("");
-    const [mainEndDate, setMainEndDate] = useState("");
+    const[errMainStartDate, setErrMainStartDate] = useState("");    
+    const[errMainStartMargin, setErrMainStartMargin] = useState("");
+    const[errMainEndDate, setErrMainEndDate] = useState("");
+    const[errMainEndMargin, setErrMainEndMargin] = useState("");
 
-    const fetchFunc = () =>{
-        fetch('temp', {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-            },            
-        })
-        .then(res=> {
-            return res.json();
-        })
-        .then (data=> {
-            setMainValue(data)
-        })
-    }
+    let [mainRide, setMainRide] = useState("");
+    let [mainZoneType, setMainZoneType] = useState("");
+    let [mainStartDate, setMainStartDate] = useState("");
+    let [mainEndDate, setMainEndDate] = useState("");
 
-    useEffect(() => {
-        fetchFunc()
-    }, []);
-
-    const maintenanceSubmit = (e)=> {
+    const maintenanceSubmit = async (e)=> {        
         e.preventDefault();
 
+        let jCode = null;
+        if(mainRide === '') mainRide = null;
+        if(mainZoneType === '') mainZoneType = null;
+        if(mainStartDate === '') mainStartDate = null;
+        if(mainEndDate === '') mainEndDate = null;
+
+
+        if(mainStartDate == null && mainEndDate != null){
+            //error, tell user to enter START 
+            setErrMainStartDate("Please enter a start date.");
+            setErrMainStartMargin(".25em");
+            setErrMainEndDate("");
+            setErrMainEndMargin("");
+            
+            setShow(false);
+        }
+        else if(mainStartDate != null && mainEndDate == null){
+            //error, tell user to enter END
+            setErrMainStartDate("");
+            setErrMainStartMargin("");
+            setErrMainEndDate("Please enter a end date.");
+            setErrMainEndMargin(".25em");
+
+            setShow(false);
+        }
+        else{
+            setErrMainStartDate("");
+            setErrMainStartMargin("");
+            setErrMainEndDate("");
+            setErrMainEndMargin("");
+            
+            setShow(true);
+
+            const maintenanceFormData = {
+                job_code: jCode,
+                ride_name: mainRide,
+                zone: mainZoneType,
+                start_date: mainStartDate,
+                end_date: mainEndDate
+            }
+            
+            const response = await fetch('http://localhost:8080/maintenance/report', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(maintenanceFormData)
+                });
+            setMainValue(await response.json());
+
+        }
     }
 
     return(
@@ -65,8 +103,10 @@ export default function Home(){
                                 type='date'
                                 className='formInput'
                                 value={mainStartDate}
-                                onChange={(e) => setMainStartDate(e.target.value)}>
+                                onChange={(e) => setMainStartDate(e.target.value)}
+                                style={{marginBottom: errMainStartMargin}}>
                             </input>
+                            <div className='errMainDate'>{errMainStartDate}</div>
                         </div>
                         <div>
                             <h3>End Date: </h3>
@@ -74,8 +114,10 @@ export default function Home(){
                                 type='date'
                                 className='formInput'
                                 value={mainEndDate}
-                                onChange={(e) => setMainEndDate(e.target.value)}>
+                                onChange={(e) => setMainEndDate(e.target.value)}
+                                style={{marginBottom: errMainEndMargin}}>
                             </input>
+                            <div className='errMainDate'>{errMainEndDate}</div>
                         </div>
                     </div>
                     
@@ -85,28 +127,48 @@ export default function Home(){
             
             <br></br>
 
-            <table className='tables'>
-                <thead>
-                    <tr>
-                        <th>Ride</th>
-                        <th>Zone</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {mainValue.map((data, index)=> {
-                            return(
-                                <tr key={index}>
-                                    <td type="text">{}</td>
-                                    <td type="text">{}</td>
-                                    <td type="text">{}</td>
-                                    <td type="text">{}</td>
+           {show?
+                <>
+                    <div className='tableCard'>
+                        <div className='searchForm'>
+                            <span className='lookUp'>RIDE_NAME:</span> {mainRide}&ensp;
+                            <span className='lookUp'>ZONE:</span> {mainZoneType}&ensp;
+                            <span className='lookUp'>DATE:</span> {mainStartDate} - {mainEndDate} 
+                        </div>
+                        <table className='tableInfo'>
+                            <thead>
+                                <tr>
+                                    <th>Job Code</th>
+                                    <th>Zone</th>
+                                    <th>Ride</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                 </tr>
-                        )
-                    })}
-                </tbody>
-            </table>
+                            </thead>
+                            <tbody>
+                                {mainValue.map((data, index)=> {
+                                        return(
+                                            <tr key={index}>
+                                                <td type="text">{data.job_code}</td>
+                                                <td type="text">{data.zone}</td>
+                                                <td type="text">{data.ride_name}</td>
+                                                <td type="text">{data.mainStartDate}</td>
+                                                <td type="text">{data.mainEndDate}</td>
+                                            </tr>
+                                    )
+                                })}
+                                <tr>
+                                <td><h3>Total Tickets</h3></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><h3>{mainValue.length}</h3></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </>
+            :null}
         </>
     )
 }
