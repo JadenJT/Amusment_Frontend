@@ -51,5 +51,34 @@ module.exports = {
         const query = 'SELECT * FROM master.concession;'
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched Concessions", rows)
+    },
+
+    async editConcession(req, res) {
+        const upload = multer()
+        upload.any()(req, res, async (err) => {
+            const selected_concession = req.body.selected_concession;
+            const name = req.body.name;
+            const zone_id = req.body.zone_id;
+            const food_type = req.body.food_type;
+            if (req.files[0]) {
+                var image = req.files[0].buffer.toString('binary');
+            }
+
+            let query = 'UPDATE master.concession SET '; 
+
+            if (name != "null") query += `name = '${name}', `;
+            if (food_type != "null") query += `food_type = '${food_type}', `;
+            if (zone_id != "null") query += `zone_id = '${zone_id}', `;
+            if (image != "null" && image !== undefined) {
+                query += `image = ?, `;
+                var imgValue = [image]
+            }
+            
+            query = query.slice(0, -2);
+            query += ` WHERE name = '${selected_concession}';`
+
+            await db.promise().execute(query, imgValue);
+            return sendResponse(req, res, 200, "Concession Updated")
+        })
     }
 }
