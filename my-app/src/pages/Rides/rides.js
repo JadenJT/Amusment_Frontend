@@ -4,6 +4,7 @@ import { Link, animateScroll } from "react-scroll";
 import Logo from '../../icons/Umazing.svg';
 import { UserContext } from '../../App';
 import { ShopContext } from '../../components/cartContext/CartContext';
+import { RidesMap } from '../../components/RidesMap/RidesMap';
 
 
 const images = {};
