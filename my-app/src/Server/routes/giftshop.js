@@ -1,6 +1,7 @@
 const db = require('../database');
 const url = require('url');
 const querystring = require('querystring');
+const multer = require('multer');
 const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils");
 
