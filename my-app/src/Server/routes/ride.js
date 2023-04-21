@@ -128,7 +128,17 @@ module.exports = {
             query += ` WHERE name = '${selected_ride}';`
 
             await db.promise().execute(query, imgValue);
-            return sendResponse(req, res, 200, "Ride Updated")
         })
+        return sendResponse(req, res, 200, "Ride Updated")
+    },
+
+    async deleteRide(req, res) {
+        const upload = multer()
+        upload.any()(req, res, async (err) => {
+            const name = req.body.name;
+            const query = `UPDATE master.ride SET perm_closed = TRUE WHERE name = '${name}';`
+            const [rows, fields] = await db.promise().execute(query)
+        });
+        return sendResponse(req, res, 200, "Removed Concessions")
     }
 }
