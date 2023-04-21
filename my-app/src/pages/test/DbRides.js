@@ -11,7 +11,7 @@ function convertImage(array) {
     return <img className="img-ride" src={`data:image/jpeg;base64,${b64}`} />
 }
 
-function Test() {
+function DbRides() {
 
     const [isLoading, setLoading] = useState(true);
     const [isKidLoading, setKidLoading] = useState(true);
@@ -204,4 +204,4 @@ function Test() {
     )
 }
 
-export default Test
+export default DbRides

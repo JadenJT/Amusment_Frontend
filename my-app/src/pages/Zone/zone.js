@@ -38,7 +38,7 @@ export default function Zone() {
             <div className="zoneA">
                 <h1 className="zName">Zone A</h1>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={SkyBlade} alt="SkyBlade"></img></li>
                             <li><h3>SkyBlade</h3></li>
@@ -47,9 +47,9 @@ export default function Zone() {
                             <li>Status: Open</li>
                         </ul>
                     </div>
-                </div> 
+                </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={VortexX} alt="VortexX"></img></li>
                             <li><h3>VortexX</h3></li>
@@ -60,7 +60,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={Thunderbolt} alt="Thunderbolt"></img></li>
                             <li><h3>Thunderbolt</h3></li>
@@ -71,7 +71,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={RainbowSwirl} alt="Rainbow Swirl"></img></li>
                             <li><h3>Rainbow Swirl</h3></li>
@@ -82,7 +82,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={JungleSafari} alt="Jungle Safari"></img></li>
                             <li><h3>Jungle Safari</h3></li>
@@ -93,7 +93,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={WonderTreats} alt="concession"></img></li>
                             <li><h3>Wonder Treats</h3></li>
@@ -104,7 +104,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={SpectacularSnacks} alt="concession"></img></li>
                             <li><h3>Spectacular Snacks</h3></li>
@@ -115,9 +115,9 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
-                            <li><img className="view" src={GiftShop1} alt="gift shop"></img></li>                    
+                            <li><img className="view" src={GiftShop1} alt="gift shop"></img></li>
                             <li><h3>Gift Shop A</h3></li>
                             <li>Type: GiftShop</li>
                             <li>Location: Zone A</li>
@@ -130,7 +130,7 @@ export default function Zone() {
             <div className="zoneB">
                 <h1 className="zName">Zone B</h1>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={GForce} alt="G Force"></img></li>
                             <li><h3>G-Force</h3></li>
@@ -141,7 +141,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={WarpZone} alt="Warp Zone"></img></li>
                             <li><h3>WarpZone</h3></li>
@@ -152,7 +152,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={Wildfire} alt="Wildfire"></img></li>
                             <li><h3>Wildfire</h3></li>
@@ -163,7 +163,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={PiratePlunge} alt="Pirate Plunde"></img></li>
                             <li><h3>Pirate Plunge</h3></li>
@@ -174,7 +174,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={SpaceExplorer} alt="Space Explorer"></img></li>
                             <li><h3>Space Explorer</h3></li>
@@ -185,7 +185,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={IncredibleEats} alt="concession"></img></li>
                             <li><h3>Incredible Eats</h3></li>
@@ -196,7 +196,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={EnchantedDelights} alt="concession"></img></li>
                             <li><h3>Enchanted Delights</h3></li>
@@ -207,7 +207,7 @@ export default function Zone() {
                     </div>
                 </div>
                 <div className="column">
-                    <div className="card">                    
+                    <div className="card">
                         <ul>
                             <li><img className="view" src={GiftShop2} alt="gift shop"></img></li>
                             <li><h3>Gift Shop B</h3></li>
@@ -253,7 +253,7 @@ export default function Zone() {
                             <li>Status: Open</li>
                         </ul>
                     </div>
-                </div>        
+                </div>
                 <div className="column">
                     <div className="card">
                         <ul>
