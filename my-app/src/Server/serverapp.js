@@ -27,8 +27,14 @@ const getHandlers = {
   '/test': (req, res) => concessionRoutes.getConcession(req, res),
   '/ride/adult': (req, res) => rideRoutes.getAllAdultRides(req, res),
   '/ride/child': (req, res) => rideRoutes.getAllKidsRides(req, res),
+
+
   '/ride/adultActive': (req, res) => rideRoutes.getAllActiveAdultRides(req, res),
   '/ride/childActive': (req, res) => rideRoutes.getAllActiveKidsRides(req, res),
+  '/concession/Active': (req, res) => concessionRoutes.getActiveConcession(req, res),
+  '/giftshop/Active': (req, res) => giftshopRoutes.getActiveGiftshop(req, res),
+
+
   '/ride/all': (req, res) => rideRoutes.getAllRides(req, res),
   '/concession/all': (req, res) => concessionRoutes.getConcession(req, res),
   '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res),

@@ -53,6 +53,7 @@ module.exports = {
         return sendResponse(req, res, 200, "Fetched Concessions", rows)
     },
 
+
     async editConcession(req, res) {
         const upload = multer()
         upload.any()(req, res, async (err) => {
@@ -64,7 +65,7 @@ module.exports = {
                 var image = req.files[0].buffer.toString('binary');
             }
 
-            let query = 'UPDATE master.concession SET '; 
+            let query = 'UPDATE master.concession SET ';
 
             if (name != "null") query += `name = '${name}', `;
             if (food_type != "null") query += `food_type = '${food_type}', `;
@@ -73,12 +74,18 @@ module.exports = {
                 query += `image = ?, `;
                 var imgValue = [image]
             }
-            
+
             query = query.slice(0, -2);
             query += ` WHERE name = '${selected_concession}';`
 
             await db.promise().execute(query, imgValue);
             return sendResponse(req, res, 200, "Concession Updated")
         })
-    }
+    },
+    async getActiveConcession(req, res) {
+        const query = 'SELECT * FROM master.concession WHERE perm_closed = 0;'
+        const [rows, fields] = await db.promise().execute(query)
+        return sendResponse(req, res, 200, "Fetched Concessions", rows)
+    },
+
 }

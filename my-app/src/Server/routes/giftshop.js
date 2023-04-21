@@ -49,6 +49,7 @@ module.exports = {
         return sendResponse(req, res, 200, "Fetched Giftshops", rows)
     },
 
+
     async editGiftshop(req, res) {
         const upload = multer()
         upload.any()(req, res, async (err) => {
@@ -57,11 +58,11 @@ module.exports = {
             const zone_id = req.body.zone_id;
             const image = req.files[0].buffer.toString('binary');
 
-            let query = 'UPDATE master.giftshop SET ';         
+            let query = 'UPDATE master.giftshop SET ';
 
             if (name != "null") query += `name = '${name}', `;
             if (zone_id != "null") query += `zone_id = '${zone_id}', `;
-            if (image != "null"  && image !== undefined) {
+            if (image != "null" && image !== undefined) {
                 query += 'image = ?, ';
                 var imgValue = [image]
             }
@@ -71,5 +72,10 @@ module.exports = {
             await db.promise().execute(query, imgValue);
             return sendResponse(req, res, 200, "Giftshop Updated")
         })
-    }
+    },
+    async getActiveGiftshop(req, res) {
+        const query = 'SELECT * FROM master.giftshop WHERE perm_closed = 0;'
+        const [rows, fields] = await db.promise().execute(query)
+        return sendResponse(req, res, 200, "Fetched Giftshops", rows)
+    },
 }
