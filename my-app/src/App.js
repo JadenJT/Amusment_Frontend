@@ -21,11 +21,13 @@ import Employee from './pages/employee/Employee';
 import Manager from './pages/Manager/manager';
 import Maintenance from './pages/maintenance/maintenance';
 import { ShopContextProvider } from './components/cartContext/CartContext';
-
-
+import Test from './pages/test/Test';
+import Test2 from './pages/test2/Test2';
+import Test3 from './pages/test3/Test3';
 
 
 export const UserContext = createContext(null);
+export const baseUrl = "http://localhost:8080";
 
 function App() {
   const [user, setUser] = useState(UserContext);
@@ -73,6 +75,12 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<Concessions />} />
               <Route path="zone" element={<Zones />} />
+
+              <Route path="Test" element={<Test />} />
+
+              <Route path="Test2" element={<Test2 />} />
+
+              <Route path="Test3" element={<Test3 />} />
 
               {user.role_type == 'admin' &&
                 <Route path='EditAttraction' element={<EditAttraciton />} />

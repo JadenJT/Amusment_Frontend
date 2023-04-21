@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './RemoveAttraction.css'
 
 const RemoveAttraction = () => {
+
+    const [isRideLoading, setRideLoading] = useState(true);
+    const [isConcessionLoading, setConcessionLoading] = useState(true);
+    const [isGiftshopLoading, setGiftshopLoading] = useState(true);
+
     const [ridedata, setRideData] = useState([]);
     const [concessiondata, setConcessionData] = useState([]);
     const [giftshopdata, setGiftshopData] = useState([]);
@@ -30,41 +35,29 @@ const RemoveAttraction = () => {
 
     //fetch get data
     const fetchridedata = async () => {
-        const response = await fetch('http://localhost:8080/ride/all', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const response = await fetch('http://localhost:8080/ride/all');
 
         const data = await response.json();
         setRideData(data);
+        setRideLoading(false);
     };
     useEffect(() => {
         fetchridedata();
     }, []);
     const fetchconcessiondata = async () => {
-        const response = await fetch('http://localhost:8080/concession/all', {
-            methond: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch('http://localhost:8080/concession/all');
         const data = await response.json();
         setConcessionData(data);
+        setConcessionLoading(false);
     };
     useEffect(() => {
         fetchconcessiondata();
     }, []);
     const fetchgiftshopdata = async () => {
-        const response = await fetch('http://localhost:8080/giftshop/all', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch('http://localhost:8080/giftshop/all');
         const data = await response.json();
         setGiftshopData(data);
+        setGiftshopLoading(false);
     };
     useEffect(() => {
         fetchgiftshopdata();
@@ -106,16 +99,28 @@ const RemoveAttraction = () => {
 
     const handleRemoveOnSubmit = (e) => {
         e.preventDefault();
-        
-        if(selectedOption === 'ride'){
+
+        if (selectedOption === 'ride') {
             //handle deletion for a ride
-        } else if(selectedOption === 'concession'){
+        } else if (selectedOption === 'concession') {
             //handle deletion for a concession
-        } else if(selectedOption === 'giftshop'){
+        } else if (selectedOption === 'giftshop') {
             //handle deletion for a concession
         }
         //redirect to admin portal after submit
     };
+
+    if (isRideLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    if (isConcessionLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    if (isGiftshopLoading) {
+        return <div className="App">Loading...</div>;
+    }
 
     return (
         <div>
@@ -132,7 +137,7 @@ const RemoveAttraction = () => {
                             <option value='concession'>Concession</option>
                             <option value='giftshop'>Gift Shop</option>
                         </select>
-                        
+
                         {selectedOption === '' && (
                             <div className='option-empty-title-container'>
                                 <h2 className='admin-edit-title'>
@@ -157,7 +162,7 @@ const RemoveAttraction = () => {
                             <div className='admin-option-box'>
                                 <h3 className='option-title'>Select a concession to remove:</h3>
                                 <select className='select-remove-option' name='concession' value={concessionoption} onChange={handleconcessionOptionChange}>
-                                    <option value = '' disabled>
+                                    <option value='' disabled>
                                         Select a concession
                                     </option>
                                     {renderConcessionOptions()}

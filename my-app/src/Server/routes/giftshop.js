@@ -1,6 +1,7 @@
 const db = require('../database');
 const url = require('url');
 const querystring = require('querystring');
+const multer = require('multer');
 const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils");
 
@@ -10,17 +11,19 @@ module.exports = {
         {
         }
     */
-    async addGiftshop(req, res){
-        const bodyData = await getReqData(req);
-        const giftshopJSON = JSON.parse(bodyData);  
-        const name = giftshopJSON.name;
-        const zone = giftshopJSON.zone;
-        const image = giftshopJSON.image;
-        const query = 'INSERT INTO master.giftshop(`giftshop_id`, `name`, `zone_id`, `image`) VALUES (NULL, ?, ?, ?);'
-        const values = [name, zone, image]
+    async addGiftshop(req, res) {
+        const upload = multer();
+        upload.any()(req, res, async (err) => {
+            const name = req.body.name;
+            const zone = req.body.zone;
+            const image = req.files[0].buffer.toString('binary')
 
-        const [row, fields] = await db.promise().execute(query, values);
-        return sendResponse(req, res, 200, `Added GiftShop`, row)
+            const query = 'INSERT INTO master.giftshop(`giftshop_id`, `name`, `zone_id`, `image`) VALUES (NULL, ?, ?, ?);'
+            const values = [name, zone, image]
+
+            const [row, fields] = await db.promise().execute(query, values);
+            return sendResponse(req, res, 200, `Added GiftShop`, row)
+        });
     },
     /*
         POST Data Example:
@@ -28,7 +31,7 @@ module.exports = {
             "name": 'SkyBlade
         }
     */
-    async giftshopExist(req, res){
+    async giftshopExist(req, res) {
         const parsedURL = url.parse(req.url)
         const urlParams = querystring.parse(parsedURL.query)
         const name = urlParams.name;
@@ -40,10 +43,9 @@ module.exports = {
 
     },
 
-    async getAllGiftShops(req, res){
-        const [rows, fields] = await db.promise().execute(
-            `SELECT * FROM master.giftshop;`
-        )
-        return sendResponse(req, res, 200, "Gift Shops Gathered", rows);
+    async getGiftshop(req, res) {
+        const query = 'SELECT * FROM master.giftshop;'
+        const [rows, fields] = await db.promise().execute(query)
+        return sendResponse(req, res, 200, "Fetched Giftshops", rows)
     }
 }
