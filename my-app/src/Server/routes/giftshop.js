@@ -17,10 +17,9 @@ module.exports = {
             const name = req.body.name;
             const zone = req.body.zone;
             const image = req.files[0].buffer.toString('binary')
-            const description = req.body.description;
 
-            const query = 'INSERT INTO master.giftshop(`giftshop_id`, `name`, `zone_id`, `image`, `description`) VALUES (NULL, ?, ?, ?, ?);'
-            const values = [name, zone, image, description]
+            const query = 'INSERT INTO master.giftshop(`giftshop_id`, `name`, `zone_id`, `image`) VALUES (NULL, ?, ?, ?);'
+            const values = [name, zone, image]
 
             const [row, fields] = await db.promise().execute(query, values);
             return sendResponse(req, res, 200, `Added GiftShop`, row)
