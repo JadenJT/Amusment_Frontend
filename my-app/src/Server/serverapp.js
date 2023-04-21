@@ -28,6 +28,7 @@ const getHandlers = {
   '/test': (req, res) => concessionRoutes.getConcession(req, res),
   '/ride/adult': (req, res) => rideRoutes.getAllAdultRides(req, res),
   '/ride/child': (req, res) => rideRoutes.getAllKidsRides(req, res),
+  '/concession/get': (req, res) => concessionRoutes.getAllConcession(req, res),
 
 }
 
