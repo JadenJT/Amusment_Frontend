@@ -4,6 +4,7 @@ import { Link, animateScroll } from "react-scroll";
 import Logo from '../../icons/Umazing.svg';
 import { UserContext } from '../../App';
 import { ShopContext } from '../../components/cartContext/CartContext';
+import { RidesMap } from '../../components/RidesMap/RidesMap';
 
 
 const images = {};
@@ -330,13 +331,6 @@ const Rides = () => {
                                     Must be {ride.heightRequirement} to ride
                                 </p>
 
-
-                                {user.token != null &&
-                                    <button className="rides-buy-button " onClick={(event) => {
-                                        event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.id);
-                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
-                                }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleInfoClose(index)
@@ -375,12 +369,7 @@ const Rides = () => {
                                     <br />
                                     Must be {ride.heightRequirement} to ride
                                 </p>
-                                {user.token != null &&
-                                    <button className="rides-buy-button " onClick={(event) => {
-                                        event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.id);
-                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
-                                }
+
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleKidsInfoClose(index)
