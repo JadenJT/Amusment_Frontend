@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link, animateScroll } from "react-scroll";
+import Logo from '../../icons/Umazing.svg';
 import { UserContext } from '../../App';
 import { ShopContext } from '../../components/cartContext/CartContext';
+
 function Test() {
 
     const [isLoading, setLoading] = useState(true);
@@ -12,13 +14,14 @@ function Test() {
     const { addToCart, cartItems } = useContext(ShopContext);
     const { user } = useContext(UserContext);
 
-    const handleRideClick = (index, event) => {
+    const handleRideClick = (index) => {
         const updatedRides = [...ridedata];
+
         updatedRides[index].showInfo = !updatedRides[index].showInfo;
         setRideData(updatedRides);
     };
 
-    const handleKidsRideClick = (index, event) => {
+    const handleKidsRideClick = (index) => {
         const updatedKidRides = [...kidRideData];
         updatedKidRides[index].showInfo = !updatedKidRides[index].showInfo;
         setkidRideData(updatedKidRides);
@@ -59,7 +62,7 @@ function Test() {
             data.item[i].showInfo = false;
         }
 
-        setRideData(data);
+        setRideData(data.item);
         setLoading(false);
     };
     useEffect(() => {
@@ -72,14 +75,13 @@ function Test() {
         for (let i = 0; i < data.item.length; i++) {
             data.item[i].showInfo = false;
         }
-        setkidRideData(data);
+        setkidRideData(data.item);
         setKidLoading(false);
     };
     useEffect(() => {
         getAllKidsRides();
     }, []);
 
-    console.log(kidRideData.item)
 
     if (isLoading) {
         return <div className="App">Loading...</div>;
@@ -91,6 +93,9 @@ function Test() {
 
     return (
         <div>
+            <div className="rwp">
+                <img src={Logo} alt="park logo" className="wLogo"></img>
+            </div>
             <div className="center-dropdown">
                 <div className="dropdown">
                     <button className="ridesButton">RIDES</button>
@@ -101,8 +106,7 @@ function Test() {
                 </div>
             </div>
             <h1 id="adult-rides-title"><u>Adult Rides</u></h1>
-            {ridedata.item.map((ride, index) => (
-
+            {ridedata.map((ride, index) => (
                 <div className="all-rides" key={ride.name} onClick={() => handleRideClick(index)}>
                     <img className="img-ride" src={ride.image} alt={ride.name} />
                     <div className="ride-details">
@@ -116,7 +120,7 @@ function Test() {
                         </p>
                     </div>
                     {ride.showInfo && (
-                        <div className="ride-info-overlay" onClick={(event) => handleOverlayClick(event, index)}>
+                        <div className="ride-info-overlay" onClick={() => handleOverlayClick(index)}>
                             <div className="ride-info-box">
                                 <h2 className="ride-name-onClick">{ride.name}</h2>
                                 <img className="img-ride-onClick" src={ride.image} alt={ride.name} />
@@ -146,9 +150,9 @@ function Test() {
 
             {/* These are the kids rides */}
             <h1 id="kids-rides-title"><u>Kids Rides</u></h1>
-            {kidRideData.item.map((ride, index) => (
+            {kidRideData.map((ride, index) => (
+                <div className="all-rides" key={ride.name} onClick={() => handleKidsRideClick(index)}>
 
-                <div className="all-rides" key={ride.name} onClick={() => handleRideClick(index)}>
                     <img className="img-ride" src={ride.image} alt={ride.name} />
                     <div className="ride-details">
                         <h2 className="ride-name">{ride.name}</h2>
@@ -161,7 +165,7 @@ function Test() {
                         </p>
                     </div>
                     {ride.showInfo && (
-                        <div className="ride-info-overlay" onClick={(event) => handleOverlayClick(event, index)}>
+                        <div className="ride-info-overlay" onClick={(event) => handleKidsOverlayClick(event, index)}>
                             <div className="ride-info-box">
                                 <h2 className="ride-name-onClick">{ride.name}</h2>
                                 <img className="img-ride-onClick" src={ride.image} alt={ride.name} />
@@ -181,7 +185,7 @@ function Test() {
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                    handleInfoClose(index)
+                                    handleKidsInfoClose(index)
                                 }}>Close</button>
                             </div>
                         </div>
