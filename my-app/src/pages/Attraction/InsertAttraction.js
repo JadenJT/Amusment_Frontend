@@ -3,7 +3,6 @@ import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
 
 function validateAttractionDescription(attractionDescription) {
-  console.log(attractionDescription)
   if (attractionDescription.length === 0 || attractionDescription.length > 200) {
     return false;   
   }
