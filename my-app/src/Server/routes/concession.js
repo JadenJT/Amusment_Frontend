@@ -14,7 +14,7 @@ module.exports = {
             "image": <>
         }
     */
-    async addConcession(req, res){
+    async addConcession(req, res) {
         const upload = multer();
         upload.any()(req, res, async (err) => {
             const name = req.body.name;
@@ -35,7 +35,7 @@ module.exports = {
             "name": 'SkyBlade
         }
     */
-    async concessionExist(req, res){
+    async concessionExist(req, res) {
         const parsedURL = url.parse(req.url)
         const urlParams = querystring.parse(parsedURL.query)
         const name = urlParams.name;
@@ -47,7 +47,7 @@ module.exports = {
 
     },
 
-    async getConcession(req, res){
+    async getConcession(req, res) {
         const query = 'SELECT * FROM master.concession;'
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "image got")

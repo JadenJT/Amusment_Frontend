@@ -59,7 +59,7 @@ function Test() {
             data.item[i].showInfo = false;
         }
 
-        setRideData(data);
+        setRideData(data.item);
         setLoading(false);
     };
     useEffect(() => {
@@ -72,14 +72,15 @@ function Test() {
         for (let i = 0; i < data.item.length; i++) {
             data.item[i].showInfo = false;
         }
-        setkidRideData(data);
+        console.log(data)
+        setkidRideData(data.item);
         setKidLoading(false);
     };
     useEffect(() => {
         getAllKidsRides();
     }, []);
 
-    console.log(kidRideData.item)
+
 
     if (isLoading) {
         return <div className="App">Loading...</div>;
@@ -101,7 +102,7 @@ function Test() {
                 </div>
             </div>
             <h1 id="adult-rides-title"><u>Adult Rides</u></h1>
-            {ridedata.item.map((ride, index) => (
+            {ridedata.map((ride, index) => (
 
                 <div className="all-rides" key={ride.name} onClick={() => handleRideClick(index)}>
                     <img className="img-ride" src={ride.image} alt={ride.name} />
@@ -146,7 +147,7 @@ function Test() {
 
             {/* These are the kids rides */}
             <h1 id="kids-rides-title"><u>Kids Rides</u></h1>
-            {kidRideData.item.map((ride, index) => (
+            {kidRideData.map((ride, index) => (
 
                 <div className="all-rides" key={ride.name} onClick={() => handleRideClick(index)}>
                     <img className="img-ride" src={ride.image} alt={ride.name} />

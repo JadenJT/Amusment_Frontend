@@ -13,9 +13,9 @@ module.exports = {
         {
         }
     */
-    async addRide(req, res){
+    async addRide(req, res) {
         const upload = multer()
-        upload.any()(req, res, async(err) => {
+        upload.any()(req, res, async (err) => {
             const zone_id = req.body.zone_id;
             const category = req.body.category;
             const type = req.body.type;
@@ -29,7 +29,7 @@ module.exports = {
 
             const query = 'INSERT INTO master.ride(`ride_id`, `zone_id`, `category`, `name` ,`capacity`, `hour_capacity`, `image`, `height_requirement`, `type`, `perm_closed`, `description`, `last_maintenance`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, (current_timestamp()))'
             const values = [zone_id, category, name, capacity, hour_capacity, image, height_requirement, type, perm_closed, description]
-            
+
             const [row, fields] = await db.promise().execute(query, values);
             return sendResponse(req, res, 200, `Added Ride`, row)
         })
@@ -72,4 +72,4 @@ module.exports = {
         )
         return sendResponse(req, res, 200, "Rides Gathered", rows);
     },
-} 
+}
