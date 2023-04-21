@@ -3,40 +3,40 @@ import './EditAttraction.css';
 
 function validateNewRideName(newAttractionName, rideData) {
     if (newAttractionName.length === 0) {
-        return { isValid: true, errorType: null };
+        return { isValid: true, errorType: null};
     }
     if (newAttractionName.length > 25) {
-        return { isValid: false, errorType: 'length' };
+      return { isValid: false, errorType: 'length' };
     }
     const regex = /^[a-zA-Z\s]+$/;
     if (!regex.test(newAttractionName)) {
-        return { isValid: false, errorType: 'format' };
+      return { isValid: false, errorType: 'format' };
     }
     const items = rideData.item;
-    const rideNameExist = items.find(ride => ride && ride.name && ride.name.toLowerCase().replace(/\s+/g, '') === newAttractionName.toLowerCase().replace(/\s+/g, ''));
+    const rideNameExist = items.find(ride => ride &&  ride.name && ride.name.toLowerCase().replace(/\s+/g, '') === newAttractionName.toLowerCase().replace(/\s+/g, ''));
     if (rideNameExist) {
-        return { isValid: false, errorType: 'exist' };
+      return { isValid: false, errorType: 'exist' };
     }
-
+  
     return { isValid: true, errorType: null };
 }
-function validateNewCsGsName(newAttractionName, attractionData) {
+function validateNewCsGsName(newAttractionName, attractionData){
     if (newAttractionName.length === 0) {
-        return { isValid: true, errorType: null };
+        return { isValid: true, errorType: null};
     }
     if (newAttractionName.length > 25) {
-        return { isValid: false, errorType: 'length' };
+      return { isValid: false, errorType: 'length' };
     }
     const regex = /^[a-zA-Z\s]+$/;
     if (!regex.test(newAttractionName)) {
-        return { isValid: false, errorType: 'format' };
+      return { isValid: false, errorType: 'format' };
     }
     const items = attractionData.item;
     const attractionName = items.find(attraction => attraction.name.toLowerCase().replace(/\s+/g, '') === newAttractionName.toLowerCase().replace(/\s+/g, ''));
     if (attractionName) {
-        return { isValid: false, errorType: 'exist' };
+      return { isValid: false, errorType: 'exist' };
     }
-
+  
     return { isValid: true, errorType: null };
 }
 
@@ -60,7 +60,7 @@ const EditAttraction = () => {
     const [newConcessionName, setNewConcessionName] = useState('');
     const [newConcessionZoneId, setnewConcessionZoneId] = useState('');
     const [newConcessionFoodType, setnewConcessionFoodType] = useState('');
-    const [newConcessionImg, setnewConcessionImg] = useState('');
+    const [newConcessionImg, setnewConcessionImg]= useState('');
 
     const [newGiftShopName, setNewGiftShopName] = useState('');
     const [newGiftShopZoneId, setnewGiftShopZoneId] = useState('');
@@ -85,7 +85,7 @@ const EditAttraction = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [isOptionSelected, setIsOptionSelected] = useState(false);
 
-
+    
     /*fetch rides/concession/giftshops data*/
     const fetchRidesData = async () => {
         const response = await fetch('http://localhost:8080/ride/all', {
@@ -130,7 +130,7 @@ const EditAttraction = () => {
         fetchGiftShopsData();
     }, []);
     //console.log(giftshopData);
-
+    
     //handle change functions */
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
@@ -143,40 +143,40 @@ const EditAttraction = () => {
     const handleAttractionNameChange = (e) => {
         const newAttractionName = e.target.value;
         let validationResult;
-        if (selectedOption === 'ride') {
+        if(selectedOption === 'ride'){
             setNewRideName(newAttractionName);
             validationResult = validateNewRideName(newAttractionName, rideData);
-        } else if (selectedOption === 'concession') {
+        } else if(selectedOption === 'concession') {
             setNewConcessionName(newAttractionName);
             validationResult = validateNewCsGsName(newAttractionName, concessionData);
-        } else if (selectedOption === 'giftshop') {
+        } else if(selectedOption === 'giftshop') {
             setNewGiftShopName(newAttractionName);
             validationResult = validateNewCsGsName(newAttractionName, giftshopData);
         }
 
-        if (!validationResult.isValid) {
+        if(!validationResult.isValid){
             if (validationResult.errorType === 'length') {
-                if (selectedOption === 'ride')
+                if(selectedOption === 'ride')
                     setNewRideNameError("Ride name must be 25 characters or less.");
-                else if (selectedOption === 'concession')
+                else if(selectedOption === 'concession')
                     setNewConcessionNameError("Concession name must be 25 characters or less.");
-                else if (selectedOption === 'giftshop')
+                else if(selectedOption === 'giftshop')
                     setNewGiftShopNameError("Gift Shop name must be 25 characters or less.");
             } else if (validationResult.errorType === 'format') {
-                if (selectedOption === 'ride')
+                if(selectedOption === 'ride')
                     setNewRideNameError("Ride name can only contain letters and spaces.");
-                else if (selectedOption === 'concession') {
+                else if(selectedOption === 'concession'){
                     setNewConcessionNameError("Concession name can only contain letters and spaces.");
                 }
-                else if (selectedOption === 'giftshop') {
+                else if(selectedOption === 'giftshop'){
                     setNewGiftShopName("Gift Shop name can only contain letters and spaces.");
                 }
             } else if (validationResult.errorType === 'exist') {
-                if (selectedOption === 'ride')
+                if(selectedOption === 'ride')
                     setNewRideNameError("Ride name already exists. Please enter a different name.");
-                else if (selectedOption === 'concession')
+                else if(selectedOption === 'concession')
                     setNewConcessionNameError("Concession name already exists. Please enter a different name.");
-                else if (selectedOption === 'giftshop')
+                else if(selectedOption === 'giftshop')
                     setNewGiftShopNameError("Ride name already exists. Please enter a different name.");
             }
             setridenameMarginBottom('1em');
@@ -197,9 +197,9 @@ const EditAttraction = () => {
     const handleNewCapacityChange = (e) => { //need to fix bug
         const newCapacity = e.target.value;
         setNewCapacity(newCapacity);
-
+        
         const allowedPattern = /^(?!-)[0-9]+$/
-        if (!allowedPattern.test(newCapacity)) {
+        if(!allowedPattern.test(newCapacity)){
             setNewCapacityError("Ride capacity must be a postive digit.");
             setcapacityMarginBottom('1em');
         } else {
@@ -212,7 +212,7 @@ const EditAttraction = () => {
         setNewHourCapacity(newHourCapacity);
 
         const allowedPattern = /^(?!-)[0-9]+$/;
-        if (!allowedPattern.test(newHourCapacity)) {
+        if(!allowedPattern.test(newHourCapacity)){
             sethourcapacityError("Ride hour cpacity must be a postive digit.");
             sethourcapacityMarginBottom('1em');
         } else {
@@ -272,7 +272,7 @@ const EditAttraction = () => {
             </option>
         ));
     };
-    const renderConcessionOptions = () => {
+    const renderConcessionOptions = () =>{
         const items = concessionData.item;
         const filteredItems = items.filter(concession => concession.name !== null);
         return filteredItems.map((concession, index) => (
@@ -294,57 +294,57 @@ const EditAttraction = () => {
     const getRideType = () => {
         const items = rideData.item;
         const selectedRideObject = items.find(ride => ride.name === selectedRide);//might have to modify this such that it acconts for ride_id rather than name
-        if (selectedRideObject) {
+        if(selectedRideObject) {
             return selectedRideObject.type;
-        } else {
+        }else{
             return null;
         }
     };
-    const getRideZoneId = () => {
+    const getRideZoneId = () =>{
         const items = rideData.item;
         const selectedRideObject = items.find(ride => ride.name === selectedRide);
-        if (selectedRideObject) {
+        if(selectedRideObject){
             return selectedRideObject.zone_id;
-        } else {
+        }else{
             return null;
         }
     };
     const getRideCapacity = () => {
         const items = rideData.item;
         const selectedRideObject = items.find(ride => ride.name === selectedRide);
-        if (selectedRideObject) {
+        if(selectedRideObject){
             return selectedRideObject.capacity;
-        } else {
+        }else{
             return null;
         }
     };
     const getRideHourCapacity = () => {
         const items = rideData.item;
         const selectedRideObject = items.find(ride => ride.name === selectedRide);
-        if (selectedRideObject) {
+        if(selectedRideObject){
             return selectedRideObject.hour_capacity;
-        } else {
+        }else{
             return null;
         }
     };
     const getRideImage = () => {
         const items = rideData.item;
         const selectedRideObject = items.find(ride => ride.name === selectedRide);
-        if (selectedRideObject) {
+        if(selectedRideObject){
             return selectedOption.image;
-        } else {
+        }else{
             return null;
         }
     };
-    const getRideMaintance = () => {
+    const getRideMaintance = () =>{
         const items = rideData.item;
         const selectedRideObject = items.find(ride => ride.name === selectedRide);
-        if (selectedRideObject) {
+        if(selectedRideObject){
             return selectedRideObject.last_maintenance;
-        } else {
+        }else{
             return null;
         }
-    };
+    }; 
     const getConcessionZoneId = () => {
         const items = concessionData.item;
         const selectedConcessionObject = items.find(concession => concession.name === selectedConcession);
@@ -375,7 +375,7 @@ const EditAttraction = () => {
     const getGiftshopZoneId = (e) => {
         const items = giftshopData.item;
         const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
-        if (selectedGiftShopObject) {
+        if(selectedGiftShopObject){
             return selectedGiftShopObject.zone_id;
         } else {
             return null;
@@ -384,7 +384,7 @@ const EditAttraction = () => {
     const getGiftShopImg = (e) => {
         const items = giftshopData.item;
         const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
-        if (selectedGiftShopObject) {
+        if(selectedGiftShopObject){
             return selectedGiftShopObject.image;
         } else {
             return null;
@@ -425,23 +425,23 @@ const EditAttraction = () => {
     };
     const handleModifyOnSubmit = (e) => {
         e.preventDefault();
-
-        if (selectedOption === 'ride') {
-            if (newRideNameError || newCapacityError || hourcapacityError) {
+        
+        if(selectedOption === 'ride'){
+            if(newRideNameError || newCapacityError || hourcapacityError){
                 setShowErrorBox(true);
                 return;
             } else {
                 //fetch post updated rides data
             }
-        } else if (selectedOption === 'concession') {
-            if (newConcessionNameError) {
+        } else if(selectedOption === 'concession'){
+            if(newConcessionNameError){
                 setShowErrorBox(true);
                 return;
             } else {
                 //fetch post updated concessions data
             }
-        } else if (selectedOption === 'giftshop') {
-            if (newGiftShopNameError) {
+        } else if(selectedOption === 'giftshop'){
+            if(newGiftShopNameError){
                 setShowErrorBox(true);
                 return;
             } else {
@@ -449,11 +449,11 @@ const EditAttraction = () => {
             }
         }
 
-        //redirect to admin portal after submit
+       //redirect to admin portal after submit
 
     };
 
-    return (
+    return (    
         <div>
             <div className='admin-edit-body'>
                 <div className='admin-edit-cover'>
@@ -487,19 +487,19 @@ const EditAttraction = () => {
                                     {renderRideNameOptions()}
                                 </select>
                                 <h3 className='option-title'>New ride name:</h3>
-                                <input type='text' placeholder='Enter new name' className='option-input' value={newRideName} onChange={handleAttractionNameChange} style={{ marginBottom: rideNameMarginBottom }}></input>
+                                <input type='text' placeholder='Enter new name' className='option-input' value={newRideName} onChange={handleAttractionNameChange} style={{marginBottom: rideNameMarginBottom}}></input>
                                 <div className='admin-error'>{newRideNameError}</div>
 
-                                <a><h3 className='option-title'>Change type of ride: {getRideType()}</h3></a>
+                                <h3 className='option-title'>Change type of ride: <a>{getRideType()}</a></h3>
                                 <select className='select-modify-option' name='type' value={newRideType} onChange={handleNewRideTypeChange}>
                                     <option value='' disabled>
                                         Select a ride type
                                     </option>
                                     <option value='Adult Ride'>Adult Ride</option>
-                                    <option value='Kid Ride'>Kid Ride</option>
+                                    <option value ='Kid Ride'>Kid Ride</option>
                                 </select>
 
-                                <a> <h3 className='option-title'>Change zone id: {getRideZoneId()}</h3></a>
+                                <h3 className='option-title'>Change zone id: <a>{getRideZoneId()}</a></h3>
                                 <select className='select-modify-option' name='zone' value={newZoneId} onChange={handleNewZoneIdChange}>
                                     <option value='' disabled>
                                         Select a zone id
@@ -507,23 +507,23 @@ const EditAttraction = () => {
                                     {renderZoneIdOptions()}
                                 </select>
 
-                                <a> <h3 className='option-title'>Change ride capacity: {getRideCapacity()}</h3></a>
-                                <input type='number' min='1' placeholder='Enter new capacity' className='option-input' value={newCapacity} onChange={handleNewCapacityChange} style={{ marginBottom: capacityMarginBottom }}></input>
+                                <h3 className='option-title'>Change ride capacity: <a>{getRideCapacity()}</a></h3>
+                                <input type='number' min='1' placeholder='Enter new capacity' className='option-input' value={newCapacity} onChange={handleNewCapacityChange} style={{marginBottom: capacityMarginBottom}}></input>
                                 <div className='admin-error'>{newCapacityError}</div>
 
-                                <a> <h3 className='option-title'>Change hour capacity: {getRideHourCapacity()}</h3></a>
-                                <input type='number' min='1' placeholder='Enter new hour capacity' className='option-input' value={newHourCapacity} onChange={handleNewHourCapacityChange} style={{ marginBottom: hourcapacityMarginBottom }}></input>
+                                <h3 className='option-title'>Change hour capacity: <a>{getRideHourCapacity()}</a></h3>
+                                <input type='number' min='1' placeholder='Enter new hour capacity' className='option-input' value={newHourCapacity} onChange={handleNewHourCapacityChange} style={{marginBottom: hourcapacityMarginBottom}}></input>
                                 <div className='admin-error'>{hourcapacityError}</div>
 
                                 <h3 className='option-title'>Change ride image: </h3>
                                 <div className='img-display'>{getRideImage()}</div>
                                 <input type='file' className='option-input-img' value={newRideImg} onChange={handleNewRideImgChange}></input>
 
-                                <a> <h3 className='option-title'>Change last maintenance date:{getRideMaintance()}</h3></a>
+                                <h3 className='option-title'>Change last maintenance date: <a>{getRideMaintance()}</a></h3>
                                 <input type="datetime-local" value={dateTime} onChange={handleNewDateTimeChange}></input>
                             </div>
                         )}
-
+                        
                         {selectedOption === 'concession' && (
                             <div className='admin-option-box'>
                                 <h3 className='option-title'>Select a concession to modify:</h3>
@@ -535,12 +535,12 @@ const EditAttraction = () => {
                                 </select>
 
                                 <h3 className='option-title'>New concession name:</h3>
-                                <input type='text' placeholder='Enter new name' className='option-input' value={newConcessionName} onChange={handleAttractionNameChange} style={{ marginBottom: concessionNameMarginBottom }}></input>
+                                <input type='text' placeholder='Enter new name' className='option-input' value={newConcessionName} onChange={handleAttractionNameChange} style={{marginBottom: concessionNameMarginBottom}}></input>
                                 <div className='admin-error'>{newConcessionNameError}</div>
 
                                 <h3 className='option-title'>New zone id: <a>{getConcessionZoneId()}</a></h3>
                                 <select className='select-modify-option' name='zone' value={newConcessionZoneId} onChange={handleConcessionZoneChange}>
-                                    <option value='' disabled>
+                                    <option value= '' disabled>
                                         Select a zone id
                                     </option>
                                     {renderZoneIdOptions()}
@@ -553,7 +553,7 @@ const EditAttraction = () => {
                                 <div className='img-display-box'>
                                     <img className='img-display' src={getConcessionImage()} alt='Concession Img' />
                                 </div>
-                                <input type='file' className='option-input-img' value={newConcessionImg} onChange={handleConcessionImgChange} />
+                                <input type='file' className='option-input-img' value={newConcessionImg} onChange={handleConcessionImgChange}/>
 
                             </div>
                         )}
@@ -569,10 +569,10 @@ const EditAttraction = () => {
                                 </select>
 
                                 <h3 className='option-title'>New gift shop name:</h3>
-                                <input type='text' placeholder='Enter new gift shop name' className='option-input' value={newGiftShopName} onChange={handleAttractionNameChange} style={{ marginBottom: giftshopNameMarginBottom }}></input>
+                                <input type='text' placeholder='Enter new gift shop name' className='option-input' value={newGiftShopName} onChange={handleAttractionNameChange} style={{marginBottom: giftshopNameMarginBottom}}></input>
                                 <div className='admin-error'>{newGiftShopNameError}</div>
-
-                                <a> <h3 className='option-title'>New zone id: {getGiftshopZoneId()} </h3></a>
+                                
+                                <h3 className='option-title'>New zone id: <a>{getGiftshopZoneId()}</a> </h3>
                                 <select className='select-modify-option' name='zone' value={newGiftShopZoneId} onChange={handleGiftShopZoneIdChange}>
                                     <option value='' disabled>
                                         Select a zone id
@@ -582,7 +582,7 @@ const EditAttraction = () => {
 
                                 <h3 className='option-title'>New gift shop image: </h3>
                                 <div className='img-display-box'>
-                                    <img className='img-display' src={getGiftShopImg()} alt='Gift Shop Img' />
+                                    <img className='img-display' src={getGiftShopImg()} alt='Gift Shop Img'/>
                                 </div>
                                 <input type='file' className='option-input-img' value={newGiftShopImg} onChange={handleGiftShopImgChange}></input>
                             </div>
