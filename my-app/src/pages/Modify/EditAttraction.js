@@ -451,7 +451,8 @@ const EditAttraction = () => {
                 if (newHourCapacity == "") newHourCapacity = null;
                 if (newRideImg == "") newRideImg = null;
                 if (dateTime == "") dateTime = null;
-
+                if (newRideName === null && newRideType === null && newZoneId === null && newCapacity === null && newHourCapacity === null && newRideImg === null && dateTime === null) return setShowErrorBox(true);
+                
                 const ridesData = new FormData();
                 ridesData.append('selected_ride', selectedRide)
                 ridesData.append('name', newRideName)
