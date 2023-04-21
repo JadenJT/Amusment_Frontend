@@ -19,7 +19,6 @@ const getHandlers = {
   '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
   '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
   '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
-  '/ride/all': (req, res) => rideRoutes.getAllRides(req, res),
   '/incident/get': (req, res) => incidentRoutes.getIncident(req, res),
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
@@ -28,7 +27,9 @@ const getHandlers = {
   '/test': (req, res) => concessionRoutes.getConcession(req, res),
   '/ride/adult': (req, res) => rideRoutes.getAllAdultRides(req, res),
   '/ride/child': (req, res) => rideRoutes.getAllKidsRides(req, res),
-
+  '/ride/all': (req, res) => rideRoutes.getAllRides(req, res),
+  '/concession/all': (req, res) => concessionRoutes.getConcession(req, res),
+  '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res)
 }
 
 // All PUT request

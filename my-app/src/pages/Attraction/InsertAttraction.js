@@ -3,10 +3,10 @@ import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
 
 function validateAttractionDescription(attractionDescription) {
-  if (attractionDescription.length === 0 || attractionDescription.length > 200) {
+  if (attractionDescription.length === 0 || attractionDescription.length > 500) {
     return false;   
   }
-  const regex = /^[a-zA-Z\s]+$/;
+  const regex = /^^[a-zA-Z,-.\s]+$$/;
   if (!regex.test(attractionDescription)) {
     return false;
   }
@@ -200,7 +200,7 @@ const InsertAttraction = () => {
     const attractionDesc = event.target.value;
     setAttractionDescription(attractionDesc);
     if (!validateAttractionDescription(attractionDesc)) {
-      setAttractionDescriptionError("Please enter a valid attraction name no more than 200 characters");
+      setAttractionDescriptionError("Please enter a valid attraction name no more than 500 characters");
       setAttractionDescriptionMarginBottom("1em");
     } else {
       setAttractionDescriptionError("");
@@ -312,7 +312,7 @@ const InsertAttraction = () => {
       const validRideCapacity = validateRideCapacity(rideCapacity);
       const validHourlyCapacity = validateHourlyCapacity(hourlyCapacity);
       const validImage = validateAttractionImage(imageFileValue)
-      const validDescription = validateAttractionDescription()
+      const validDescription = validateAttractionDescription(attractionDescription)
       if (!validattractionName || !validZoneId || !validrideType || !validRideCapacity || !validHourlyCapacity || !validImage || !validDescription) {
         setShowErrorBox(true);
         return;
@@ -463,8 +463,8 @@ const InsertAttraction = () => {
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
                 <div className='admin-error'>{attractionNameError}</div>
 
-                <h3 className='option-title'>Ride Description: (200 char limit)</h3>
-                <textarea type='text-area' placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
+                <h3 className='option-title'>Ride Description: (500 char limit)</h3>
+                <textarea placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
@@ -517,8 +517,8 @@ const InsertAttraction = () => {
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
                 <div className='admin-error'>{attractionNameError}</div>
 
-                <h3 className='option-title'>Ride Description: (200 char limit)</h3>
-                <textarea type='text-area' placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
+                <h3 className='option-title'>Ride Description: (500 char limit)</h3>
+                <textarea placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
@@ -566,10 +566,12 @@ const InsertAttraction = () => {
                   <ul className='error-box-ul'>
                     {(!validateZoneId(ZoneId) && <li>Please enter a valid zone id</li>)}
                     {(!validateAttractionName(attractionName) && <li>Please enter a valid attraction name</li>)}
+                    {(!validateAttractionImage(imageFileValue) && <li>Please enter a valid image</li>)}
                     {(selectedOption === "ride" && !validateRideType(rideType) && <li>Please select a valid ride type</li>)}
                     {(selectedOption === "ride" && !validateRideCapacity(rideCapacity) && <li>Please enter a valid ride capacity digit</li>)}
+                    {(selectedOption === "ride" && !validateAttractionDescription(attractionDescription) && <li>Please enter a valid description</li>)}
+                    {(selectedOption === "concession" && !validateAttractionDescription(attractionDescription) && <li>Please enter a valid description</li>)}
                     {(selectedOption === "ride" && !validateHourlyCapacity(hourlyCapacity) && <li>Please enter a valid hourly capacity digit</li>)}
-                    {(selectedOption === "ride" && !validateAttractionImage(imageFileValue) && <li>Please enter a valid image</li>)}
                     <button className='return-button' onClick={() => setShowErrorBox(false)}>return</button>
                   </ul>
                 </div>
