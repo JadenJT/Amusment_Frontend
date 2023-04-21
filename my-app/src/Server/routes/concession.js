@@ -50,13 +50,6 @@ module.exports = {
     async getConcession(req, res) {
         const query = 'SELECT * FROM master.concession;'
         const [rows, fields] = await db.promise().execute(query)
-        return sendResponse(req, res, 200, "image got")
-    },
-
-    async getAllConcession(req, res) {
-        const [rows, fields] = await db.promise().execute(
-            `SELECT * FROM master.concession;`
-        )
-        return sendResponse(req, res, 200, "Conessions Gathered", rows);
-    },
+        return sendResponse(req, res, 200, "Fetched Concessions", rows)
+    }
 }

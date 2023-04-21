@@ -41,6 +41,11 @@ function validateNewCsGsName(newAttractionName, attractionData){
 }
 
 const EditAttraction = () => {
+
+    const [isRideLoading, setRideLoading] = useState(true);
+    const [isConcessionLoading, setConcessionLoading] = useState(true);
+    const [isGiftshopLoading, setGiftshopLoading] = useState(true);
+
     const [rideData, setRideData] = useState([]);
     const [concessionData, setConcessionData] = useState([]);
     const [giftshopData, setGiftshopData] = useState([]);
@@ -88,43 +93,31 @@ const EditAttraction = () => {
     
     /*fetch rides/concession/giftshops data*/
     const fetchRidesData = async () => {
-        const response = await fetch('http://localhost:8080/ride/all', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
+        const response = await fetch('http://localhost:8080/ride/all');
 
         const data = await response.json();
         setRideData(data);
+        setRideLoading(false);
     };
     useEffect(() => {
         fetchRidesData();
     }, []);
     //console.log(rideData);
     const fetchConcessionsData = async () => {
-        const response = await fetch('http://localhost:8080/concession/all', {
-            methond: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch('http://localhost:8080/concession/all');
         const data = await response.json();
         setConcessionData(data);
+        setConcessionLoading(false);
     };
     useEffect(() => {
         fetchConcessionsData();
     }, []);
     //console.log(concessionData);
     const fetchGiftShopsData = async () => {
-        const response = await fetch('http://localhost:8080/giftshop/all', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        });
+        const response = await fetch('http://localhost:8080/giftshop/all');
         const data = await response.json();
         setGiftshopData(data);
+        setGiftshopLoading(false);
     };
     useEffect(() => {
         fetchGiftShopsData();
@@ -452,6 +445,19 @@ const EditAttraction = () => {
        //redirect to admin portal after submit
 
     };
+
+    if (isRideLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    if (isConcessionLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    if (isGiftshopLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
 
     return (    
         <div>
