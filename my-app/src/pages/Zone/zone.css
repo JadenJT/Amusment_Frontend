@@ -1,14 +1,5 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
-
 body{
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
 }
 
 .zwp{
@@ -28,37 +19,47 @@ body{
 }
 
 /***Body***/
-.zoneA, .zoneB, .zoneC{
-    float: left;
-    clear: both;
+.zBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
+.zSection{
+    width: 100em;
+}
+
 .zName{    
     padding: 20px 20px 0;
     font-size: 2.5em;
     text-decoration: underline;
 }
-.column{
+
+.zContainer{
     float: left;
-    /*width: 20%;*/
-    padding: 5px 20px 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
-.card{
+
+.zCard{
     border-radius: 20px;
     padding: 15px 30px;
     background-color: #ee850d;
     color: white;
+    margin: 1em 1.5em;
+}
 
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-}
-.card ul{
-    list-style-type: none;
-}
 .view{
     overflow: hidden;
     border-radius: 10px;
     width: 210px;
-    height: 275px;
+    height: 250px;
     object-fit: cover;
+}
+
+@media screen and (max-width: 1548px) {
+    .zSection {
+        width: 80em;
+    }
 }
