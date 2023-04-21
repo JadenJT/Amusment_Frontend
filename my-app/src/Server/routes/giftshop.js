@@ -42,4 +42,10 @@ module.exports = {
         return sendResponse(req, res, 200, "GiftShop Found", true);
 
     },
+
+    async getGiftshop(req, res) {
+        const query = 'SELECT * FROM master.giftshop;'
+        const [rows, fields] = await db.promise().execute(query)
+        return sendResponse(req, res, 200, "Fetched Giftshops", rows)
+    }
 }
