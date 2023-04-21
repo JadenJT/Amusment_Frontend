@@ -47,6 +47,9 @@ const EditAttraction = () => {
     const [isGiftshopLoading, setGiftshopLoading] = useState(true);
     const [isZoneLoading, setZoneLoading] = useState(true);
 
+    /* confirmation messages */
+    const [attractionAdded, setAttractionAdded] = useState(''); 
+
     /*setting new data */
     const [rideData, setRideData] = useState([]);
     const [zoneData, setZoneData] = useState([]);
@@ -436,7 +439,7 @@ const EditAttraction = () => {
         setNewConcessionNameError('');
         setNewGiftShopNameError('');
     };
-    const handleModifyOnSubmit = (e) => {
+    const handleModifyOnSubmit = async (e) => {
         e.preventDefault();
         
         if(selectedOption === 'ride'){
@@ -460,27 +463,74 @@ const EditAttraction = () => {
                 ridesData.append('zone_id', newZoneId)
                 ridesData.append('capacity', newCapacity)
                 ridesData.append('hour_capacity', newHourCapacity)
-                ridesData.append('iamge', newRideImg)
+                ridesData.append('image', newRideImg)
                 ridesData.append('last_maintenance', dateTime)
+
+                await fetch('http://localhost:8080/ride/edit', {
+                    method: 'POST',
+                    body: ridesData
+                });
+                resetForm()
+                setAttractionAdded("Ride has been edited!");
+                setTimeout( () => {
+                setAttractionAdded("");
+                }, 4000);
             }
         } else if(selectedOption === 'concession'){
             if(newConcessionNameError){
                 setShowErrorBox(true);
                 return;
             } else {
-                //fetch post updated concessions data
+                if (newConcessionName == "") newConcessionName = null;
+                if (newConcessionZoneId == "") newConcessionZoneId = null;
+                if (newConcessionFoodType == "") newConcessionFoodType = null;
+                if (newConcessionImg == "") newConcessionImg = null;
+                if (newConcessionName === null && newConcessionZoneId === null && newConcessionFoodType === null && newConcessionImg === null) return setShowErrorBox(true);
+                
+                const concessionData = new FormData();
+                concessionData.append('selected_concession', selectedConcession)
+                concessionData.append('name', newConcessionName)
+                concessionData.append('zone_id', newConcessionZoneId)
+                concessionData.append('food_type', newConcessionFoodType)
+                concessionData.append('image', newConcessionImg)
+
+                await fetch('http://localhost:8080/concession/edit', {
+                    method: 'POST',
+                    body: concessionData
+                });
+                resetForm()
+                setAttractionAdded("Concession has been edited!");
+                setTimeout( () => {
+                setAttractionAdded("");
+                }, 4000);
             }
         } else if(selectedOption === 'giftshop'){
             if(newGiftShopNameError){
                 setShowErrorBox(true);
                 return;
             } else {
-                //fetch post updated gift shops data
+                if (newGiftShopName == "") newGiftShopName = null;
+                if (newGiftShopZoneId == "") newGiftShopZoneId = null;
+                if (newGiftShopImg == "") newGiftShopImg = null;
+                if (newGiftShopName === null && newGiftShopZoneId === null && newGiftShopImg === null) return setShowErrorBox(true);
+                
+                const giftshopData = new FormData();
+                giftshopData.append('selected_giftshop', selectedConcession)
+                giftshopData.append('name', newGiftShopName)
+                giftshopData.append('zone_id', newGiftShopZoneId)
+                giftshopData.append('image', newGiftShopImg)
+
+                await fetch('http://localhost:8080/giftshop/edit', {
+                    method: 'POST',
+                    body: giftshopData
+                });
+                resetForm()
+                setAttractionAdded("Giftshop has been edited!");
+                setTimeout( () => {
+                setAttractionAdded("");
+                }, 4000);
             }
         }
-
-       //redirect to admin portal after submit
-
     };
 
     if (isRideLoading) {
@@ -542,8 +592,8 @@ const EditAttraction = () => {
                                     <option value='' disabled>
                                         Select a ride type
                                     </option>
-                                    <option value='Adult Ride'>Adult</option>
-                                    <option value ='Kid Ride'>Child</option>
+                                    <option value='Adult'>Adult</option>
+                                    <option value ='Kid'>Child</option>
                                 </select>
 
                                 <h3 className='option-title'>Change zone id: <a>{getRideZoneId()}</a></h3>
@@ -562,12 +612,13 @@ const EditAttraction = () => {
                                 <input type='number' min='1' placeholder='Enter new hour capacity' className='option-input' value={newHourCapacity} onChange={handleNewHourCapacityChange} style={{marginBottom: hourcapacityMarginBottom}}></input>
                                 <div className='admin-error'>{hourcapacityError}</div>
 
-                                <h3 className='option-title'>Change ride image: </h3>
+                                <h3 className='option-title'>Change ride image: (.jpg only)</h3>
                                 <div className='img-display'>{getRideImage()}</div>
                                 <input type='file' accept="image/jpg" className='option-input-img'onChange={handleNewRideImgChange}></input>
 
                                 <h3 className='option-title'>Change last maintenance date: <a>{getRideMaintance()}</a></h3>
                                 <input type="datetime-local" value={dateTime} onChange={handleNewDateTimeChange}></input>
+                                <div className='admin-confirm'>{attractionAdded}</div>
                             </div>
                         )}
                         
@@ -596,9 +647,9 @@ const EditAttraction = () => {
                                 <h3 className='option-title'>New concession food type: <a>{getConcessionFoodType()}</a></h3>
                                 <input type='text' placeholder='Enter new food type' className='option-input' value={newConcessionFoodType} onChange={handleConessionFoodTypeChange} />
 
-                                <h3 className='option-title'>New concession image: </h3>
+                                <h3 className='option-title'>New concession image: (.jpg only)</h3>
                                 <input type='file' accept="image/jpg" className='option-input-img' onChange={handleConcessionImgChange}/>
-
+                                <div className='admin-confirm'>{attractionAdded}</div>
                             </div>
                         )}
 
@@ -624,8 +675,9 @@ const EditAttraction = () => {
                                     {renderZoneIdOptions()}
                                 </select>
 
-                                <h3 className='option-title'>New gift shop image: </h3>
+                                <h3 className='option-title'>New gift shop image: (.jpg only)</h3>
                                 <input type='file' accept="image/jpg" className='option-input-img' onChange={handleGiftShopImgChange}></input>
+                                <div className='admin-confirm'>{attractionAdded}</div>
                             </div>
                         )}
 

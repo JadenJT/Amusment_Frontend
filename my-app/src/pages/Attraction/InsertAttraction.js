@@ -418,7 +418,7 @@ const InsertAttraction = () => {
           body: giftShopData
         });
         resetForm();
-        setAttractionAdded("Ride has been added!");
+        setAttractionAdded("Giftshop has been added!");
         setTimeout( () => {
           setAttractionAdded("");
         }, 4000);
@@ -468,7 +468,7 @@ const InsertAttraction = () => {
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
-                  <h3 className='option-title'>Ride image:</h3>
+                  <h3 className='option-title'>Ride image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
@@ -522,7 +522,7 @@ const InsertAttraction = () => {
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
-                  <h3 className='option-title'>Concession image:</h3>
+                  <h3 className='option-title'>Concession image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
@@ -544,7 +544,7 @@ const InsertAttraction = () => {
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
     
                 <div className='option-insert-img'>
-                  <h3 className='option-title'>Giftshop image:</h3>
+                  <h3 className='option-title'>Giftshop image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
