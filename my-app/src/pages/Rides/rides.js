@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import "./rides.css";
 import { Link, animateScroll } from "react-scroll";
 import Logo from '../../icons/Umazing.svg';
@@ -276,6 +276,16 @@ const Rides = () => {
         }
     }
 
+    const fetchAdultridedata = async () => {
+        const response = await fetch('http://localhost:8080/ride/adult');
+        const data = await response.json();
+        console.log(data);
+    };
+    useEffect(() => {
+        fetchAdultridedata();
+    }, []);
+
+
     const { addToCart, cartItems } = useContext(ShopContext);
     return (
         <div>
@@ -320,11 +330,13 @@ const Rides = () => {
                                     <br />
                                     Must be {ride.heightRequirement} to ride
                                 </p>
+
+
                                 {user.token != null &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                         addToCart(ride.id);
-                                    }}>Buy</button>
+                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
@@ -368,7 +380,7 @@ const Rides = () => {
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                         addToCart(ride.id);
-                                    }}>Buy</button>
+                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div

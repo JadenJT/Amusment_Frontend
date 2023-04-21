@@ -14,13 +14,14 @@ import Rides from "./pages/Rides/rides";
 import Zones from './pages/Zone/zone';
 import AdminHub from './pages/admin/adminHub';
 import InsertAttraction from './pages/Attraction/InsertAttraction';
+import EditAttraciton from './pages/Modify/EditAttraction';
+import RemoveAttraction from './pages/Delete/RemoveAttraction';
 import ShoppingCart from './pages/shoppingCart/shoppingCart';
 import Employee from './pages/employee/Employee';
 import Manager from './pages/Manager/manager';
 import Maintenance from './pages/maintenance/maintenance';
 import { ShopContextProvider } from './components/cartContext/CartContext';
-
-
+import Test from './pages/test/Test';
 
 
 export const UserContext = createContext(null);
@@ -71,6 +72,16 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<Concessions />} />
               <Route path="zone" element={<Zones />} />
+
+              <Route path="Test" element={<Test />} />
+
+              {user.role_type == 'admin' &&
+                <Route path='EditAttraction' element={<EditAttraciton />} />
+              }
+              {user.role_type == 'admin' &&
+                <Route path='RemoveAttraction' element={<RemoveAttraction />} />
+              }
+
             </Route>
           </Routes>
         </BrowserRouter>

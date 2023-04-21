@@ -24,8 +24,7 @@ const getHandlers = {
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
-  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res),
-  '/test': (req, res) => concessionRoutes.getConcession(req, res)
+  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res)
 }
 
 // All PUT request
