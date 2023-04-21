@@ -2,7 +2,6 @@ require('dotenv').config();
 const http = require('http');
 
 const { sendResponse } = require("./helpers/response");
-const imageRoutes = require('./routes/image');
 const giftshopRoutes = require('./routes/giftshop');
 const personRoutes = require('./routes/person');
 const ticketRoutes = require('./routes/ticket');
@@ -25,12 +24,7 @@ const getHandlers = {
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
-  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res),
-  '/concession/all': (req, res) => concessionRoutes.getAllConcessions(req, res),
-  '/giftshop/all': (req, res) => giftshopRoutes.getAllGiftShops(req, res),
-
-  '/ride/adult': (req, res) => rideRoutes.getAllAdultRides(req, res),
-  '/ride/child': (req, res) => rideRoutes.getAllKidsRides(req, res),
+  '/ride/exist': (req, res) => rideRoutes.rideExist(req, res)
 }
 
 // All PUT request
