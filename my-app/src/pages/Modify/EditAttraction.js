@@ -41,12 +41,13 @@ function validateNewCsGsName(newAttractionName, attractionData){
 }
 
 const EditAttraction = () => {
-
+    /*setting loading */
     const [isRideLoading, setRideLoading] = useState(true);
     const [isConcessionLoading, setConcessionLoading] = useState(true);
     const [isGiftshopLoading, setGiftshopLoading] = useState(true);
     const [isZoneLoading, setZoneLoading] = useState(true);
 
+    /*setting new data */
     const [rideData, setRideData] = useState([]);
     const [zoneData, setZoneData] = useState([]);
     const [concessionData, setConcessionData] = useState([]);
@@ -56,22 +57,22 @@ const EditAttraction = () => {
     const [selectedGiftShop, setSelectedGiftShop] = useState('');
 
     /*setting new data */
-    const [newRideName, setNewRideName] = useState('');
-    const [newRideType, setnewRideType] = useState('');
-    const [newZoneId, setnewZoneId] = useState('');
-    const [newCapacity, setNewCapacity] = useState('');
-    const [newHourCapacity, setNewHourCapacity] = useState('');
-    const [newRideImg, setnewRideImg] = useState('');
-    const [dateTime, setDateTime] = useState('');
+    let [newRideName, setNewRideName] = useState('');
+    let [newRideType, setnewRideType] = useState('');
+    let [newZoneId, setnewZoneId] = useState('');
+    let [newCapacity, setNewCapacity] = useState('');
+    let [newHourCapacity, setNewHourCapacity] = useState('');
+    let [newRideImg, setnewRideImg] = useState('');
+    let [dateTime, setDateTime] = useState('');
 
-    const [newConcessionName, setNewConcessionName] = useState('');
-    const [newConcessionZoneId, setnewConcessionZoneId] = useState('');
-    const [newConcessionFoodType, setnewConcessionFoodType] = useState('');
-    const [newConcessionImg, setnewConcessionImg]= useState('');
+    let [newConcessionName, setNewConcessionName] = useState('');
+    let [newConcessionZoneId, setnewConcessionZoneId] = useState('');
+    let [newConcessionFoodType, setnewConcessionFoodType] = useState('');
+    let [newConcessionImg, setnewConcessionImg]= useState('');
 
-    const [newGiftShopName, setNewGiftShopName] = useState('');
-    const [newGiftShopZoneId, setnewGiftShopZoneId] = useState('');
-    const [newGiftShopImg, setnewGiftShopImg] = useState('');
+    let [newGiftShopName, setNewGiftShopName] = useState('');
+    let [newGiftShopZoneId, setnewGiftShopZoneId] = useState('');
+    let [newGiftShopImg, setnewGiftShopImg] = useState('');
 
     /*error messages */
     const [newRideNameError, setNewRideNameError] = useState('');
@@ -225,10 +226,18 @@ const EditAttraction = () => {
         }
     };
     const handleNewRideImgChange = (e) => {
-        setnewRideImg(e.target.value);
+        setnewRideImg(e.target.files[0]);
     };
     const handleNewDateTimeChange = (e) => {
-        setDateTime(e.target.value);
+        const datetime = new Date(e.target.value); 
+        const year = datetime.getFullYear();
+        const month = ('0' + (datetime.getMonth() + 1)).slice(-2); 
+        const day = ('0' + datetime.getDate()).slice(-2); 
+        const hour = ('0' + datetime.getHours()).slice(-2); 
+        const minute = ('0' + datetime.getMinutes()).slice(-2);
+        const datetimeFormatted = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':00';
+        setDateTime(datetimeFormatted);
+
     };
     const handleConcessionChange = (e) => {
         setSelectedConcession(e.target.value);
@@ -242,7 +251,7 @@ const EditAttraction = () => {
         setnewConcessionFoodType(newConcessionFoodType);
     };
     const handleConcessionImgChange = (e) => {
-        const newConcessionImg = e.target.value;
+        const newConcessionImg = e.target.files[0];
         setnewConcessionImg(newConcessionImg);
     };
     const handleGiftShopChange = (e) => {
@@ -253,8 +262,8 @@ const EditAttraction = () => {
         setnewGiftShopZoneId(newGiftShopZoneId);
     };
     const handleGiftShopImgChange = (e) => {
-        const newGiftShopImg = e.target.value;
-        setnewGiftShopImg(newConcessionImg);
+        const newGiftShopImg = e.target.files[0];
+        setnewGiftShopImg(newGiftShopImg);
     };
 
     /* render data*/
@@ -262,7 +271,7 @@ const EditAttraction = () => {
         const items = rideData.item;
         const filteredItems = items.filter(ride => ride.name !== null);
         return filteredItems.map((ride, index) => (
-            <option key={index} value={ride.name}>
+            <option key={ride.name} value={ride.name}>
                 {ride.name}
             </option>
         ));
@@ -271,7 +280,7 @@ const EditAttraction = () => {
         const items = zoneData.item;
         const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
         return uniqueZoneIds.map((zoneId, index) => (
-            <option key={index} value={zoneId}>
+            <option key={zoneId} value={zoneId}>
                 {zoneId}
             </option>
         ));
@@ -280,7 +289,7 @@ const EditAttraction = () => {
         const items = concessionData.item;
         const filteredItems = items.filter(concession => concession.name !== null);
         return filteredItems.map((concession, index) => (
-            <option key={index} value={concession.name}>
+            <option key={concession.name} value={concession.name}>
                 {concession.name}
             </option>
         ));
@@ -288,7 +297,7 @@ const EditAttraction = () => {
     const renderGiftShopOptions = () => {
         const items = giftshopData.item;
         return items.map((giftshop, index) => (
-            <option key={index} value={giftshop.name}>
+            <option key={giftshop.name} value={giftshop.name}>
                 {giftshop.name}
             </option>
         ));
@@ -367,15 +376,15 @@ const EditAttraction = () => {
             return null;
         }
     };
-    const getConcessionImage = () => {
-        const items = concessionData.item;
-        const selectedConcessionObject = items.find(concession => concession.name === selectedConcession);
-        if (selectedConcessionObject) {
-            return selectedConcessionObject.image;
-        } else {
-            return null;
-        }
-    };
+    // const getConcessionImage = () => {
+    //     const items = concessionData.item;
+    //     const selectedConcessionObject = items.find(concession => concession.name === selectedConcession);
+    //     if (selectedConcessionObject) {
+    //         return selectedConcessionObject.image;
+    //     } else {
+    //         return null;
+    //     }
+    // };
     const getGiftshopZoneId = (e) => {
         const items = giftshopData.item;
         const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
@@ -385,15 +394,15 @@ const EditAttraction = () => {
             return null;
         }
     };
-    const getGiftShopImg = (e) => {
-        const items = giftshopData.item;
-        const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
-        if(selectedGiftShopObject){
-            return selectedGiftShopObject.image;
-        } else {
-            return null;
-        }
-    };
+    // const getGiftShopImg = (e) => {
+    //     const items = giftshopData.item;
+    //     const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
+    //     if(selectedGiftShopObject){
+    //         return selectedGiftShopObject.image;
+    //     } else {
+    //         return null;
+    //     }
+    // };
 
     /*rest form */
     const resetForm = () => {
@@ -435,7 +444,23 @@ const EditAttraction = () => {
                 setShowErrorBox(true);
                 return;
             } else {
-                //fetch post updated rides data
+                if (newRideName == "") newRideName = null;
+                if (newRideType == "") newRideType = null;
+                if (newZoneId == "") newZoneId = null;
+                if (newCapacity == "") newCapacity = null;
+                if (newHourCapacity == "") newHourCapacity = null;
+                if (newRideImg == "") newRideImg = null;
+                if (dateTime == "") dateTime = null;
+
+                const ridesData = new FormData();
+                ridesData.append('selected_ride', selectedRide)
+                ridesData.append('name', newRideName)
+                ridesData.append('type', newRideType)
+                ridesData.append('zone_id', newZoneId)
+                ridesData.append('capacity', newCapacity)
+                ridesData.append('hour_capacity', newHourCapacity)
+                ridesData.append('iamge', newRideImg)
+                ridesData.append('last_maintenance', dateTime)
             }
         } else if(selectedOption === 'concession'){
             if(newConcessionNameError){
@@ -516,8 +541,8 @@ const EditAttraction = () => {
                                     <option value='' disabled>
                                         Select a ride type
                                     </option>
-                                    <option value='Adult Ride'>Adult Ride</option>
-                                    <option value ='Kid Ride'>Kid Ride</option>
+                                    <option value='Adult Ride'>Adult</option>
+                                    <option value ='Kid Ride'>Child</option>
                                 </select>
 
                                 <h3 className='option-title'>Change zone id: <a>{getRideZoneId()}</a></h3>
@@ -538,7 +563,7 @@ const EditAttraction = () => {
 
                                 <h3 className='option-title'>Change ride image: </h3>
                                 <div className='img-display'>{getRideImage()}</div>
-                                <input type='file' className='option-input-img' value={newRideImg} onChange={handleNewRideImgChange}></input>
+                                <input type='file' accept="image/jpg" className='option-input-img'onChange={handleNewRideImgChange}></input>
 
                                 <h3 className='option-title'>Change last maintenance date: <a>{getRideMaintance()}</a></h3>
                                 <input type="datetime-local" value={dateTime} onChange={handleNewDateTimeChange}></input>
@@ -571,10 +596,7 @@ const EditAttraction = () => {
                                 <input type='text' placeholder='Enter new food type' className='option-input' value={newConcessionFoodType} onChange={handleConessionFoodTypeChange} />
 
                                 <h3 className='option-title'>New concession image: </h3>
-                                <div className='img-display-box'>
-                                    <img className='img-display' src={getConcessionImage()} alt='Concession Img' />
-                                </div>
-                                <input type='file' className='option-input-img' value={newConcessionImg} onChange={handleConcessionImgChange}/>
+                                <input type='file' accept="image/jpg" className='option-input-img' onChange={handleConcessionImgChange}/>
 
                             </div>
                         )}
@@ -602,10 +624,7 @@ const EditAttraction = () => {
                                 </select>
 
                                 <h3 className='option-title'>New gift shop image: </h3>
-                                <div className='img-display-box'>
-                                    <img className='img-display' src={getGiftShopImg()} alt='Gift Shop Img'/>
-                                </div>
-                                <input type='file' className='option-input-img' value={newGiftShopImg} onChange={handleGiftShopImgChange}></input>
+                                <input type='file' accept="image/jpg" className='option-input-img' onChange={handleGiftShopImgChange}></input>
                             </div>
                         )}
 
