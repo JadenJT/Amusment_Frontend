@@ -6,7 +6,7 @@ function validateAttractionDescription(attractionDescription) {
   if (attractionDescription.length === 0 || attractionDescription.length > 500) {
     return false;   
   }
-  const regex = /^[a-zA-Z\s]+$/;
+  const regex = /^^[a-zA-Z,-.]+$$/;
   if (!regex.test(attractionDescription)) {
     return false;
   }
@@ -200,7 +200,7 @@ const InsertAttraction = () => {
     const attractionDesc = event.target.value;
     setAttractionDescription(attractionDesc);
     if (!validateAttractionDescription(attractionDesc)) {
-      setAttractionDescriptionError("Please enter a valid attraction name no more than 200 characters");
+      setAttractionDescriptionError("Please enter a valid attraction name no more than 500 characters");
       setAttractionDescriptionMarginBottom("1em");
     } else {
       setAttractionDescriptionError("");
@@ -463,7 +463,7 @@ const InsertAttraction = () => {
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
                 <div className='admin-error'>{attractionNameError}</div>
 
-                <h3 className='option-title'>Ride Description: (200 char limit)</h3>
+                <h3 className='option-title'>Ride Description: (500 char limit)</h3>
                 <textarea placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
@@ -517,7 +517,7 @@ const InsertAttraction = () => {
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
                 <div className='admin-error'>{attractionNameError}</div>
 
-                <h3 className='option-title'>Ride Description: (200 char limit)</h3>
+                <h3 className='option-title'>Ride Description: (500 char limit)</h3>
                 <textarea placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
