@@ -57,7 +57,6 @@ const server = http.createServer(async (req, res) => {
   searchURL = req.url.split('?')[0]
   const getHandler = getHandlers[searchURL];
   const postHandler = postHandlers[searchURL];
-  const deleteHandler = deleteHandlers[searchURL];
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') {
     // Handle preflight request
@@ -72,12 +71,8 @@ const server = http.createServer(async (req, res) => {
 
   if (getHandler && req.method === 'GET') {
     getHandler(req, res)
-  } else if (putHandler && req.method === 'PUT') {
-    putHandler(req, res)
   } else if (postHandler && req.method === 'POST') {
     postHandler(req, res)
-  } else if (deleteHandler && req.method === 'DELETE') {
-    deleteHandler(req, res)
   } else {
     sendResponse(req, res, 404, "Page not found")
   }
