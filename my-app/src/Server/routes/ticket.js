@@ -11,19 +11,17 @@ module.exports = {
     */
     async buyTicket(req, res) {
 
-        const bodyData = await getReqData(req);
-        const newTicket = JSON.parse(bodyData);
+        // const bodyData = await getReqData(req);
+        // const newTicket = JSON.parse(bodyData);
 
-        // const dateTime = new Date(); //This is only for testing purposes! Do NOT deploy to live site. 
-        const queryData = [null, dateTime, newTicket.price, newTicket.ride_id, newTicket.email];
-
-        db.query(
-            'INSERT INTO ticket(ticket_id, date, price, ride_id, email) VALUES (?);', [queryData],
-            function (err, result) {
-                if (err) return sendResponse(req, res, 500, `Database error`, err);
-                return sendResponse(req, res, 201, `Ticket added to customer ID: ${newTicket.customer_id}`, newTicket);
+        const DummyTickets = [
+            {
+                "ride_name": "Jungle Safari",
+                "amount": 1,
+                "email": "thai.jaden@gmail.com",
+                "dateTime": "tes"
             }
-        )
+        ]
     },
 
     /*

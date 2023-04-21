@@ -2,17 +2,20 @@ const db = require('../database');
 const url = require('url');
 const querystring = require('querystring');
 const multer = require('multer');
+const mysql2 = require('mysql2');
 const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils");
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 module.exports = {
-    /*
-        POST Data Example:
-        {
-        }
-    */
+    async getZones(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.zone;`
+        )
+        return sendResponse(req, res, 200, "Zones Gathered", rows);
+    },
+
     async addRide(req, res) {
         const upload = multer()
         upload.any()(req, res, async (err) => {
@@ -73,6 +76,13 @@ module.exports = {
         return sendResponse(req, res, 200, "Rides Gathered", rows);
     },
 
+    async getAllActiveRides(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride WHERE perm_closed = "0";`
+        )
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
+    },
+
     async getAllActiveAdultRides(req, res) {
         const [rows, fields] = await db.promise().execute(
             `SELECT * FROM master.ride WHERE type = "Adult" and perm_closed = "0";`
@@ -86,4 +96,49 @@ module.exports = {
         )
         return sendResponse(req, res, 200, "Rides Gathered", rows);
     },
+
+    async editRide(req, res) {
+        const upload = multer()
+        upload.any()(req, res, async (err) => {
+            const selected_ride = req.body.selected_ride;
+            const name = req.body.name;
+            const type = req.body.type;
+            const zone_id = req.body.zone_id;
+            const capacity = req.body.capacity;
+            const hour_capacity = req.body.hour_capacity;
+            if (req.files[0]) {
+                var image = req.files[0].buffer.toString('binary');
+            }
+            const last_maintenance = req.body.last_maintenance;
+
+            let query = 'UPDATE master.ride SET ';
+
+            if (name !== "null") query += `name = '${name}', `;
+            if (type !== "null") query += `type = '${type}', `;
+            if (zone_id !== "null") query += `zone_id = '${zone_id}', `;
+            if (capacity !== "null") query += `capacity = ${capacity}, `;
+            if (hour_capacity !== "null") query += `hour_capacity = ${hour_capacity}, `;
+            if (image !== "null" && image !== undefined) {
+                query += `image = ?, `;
+                var imgValue = [image]
+            }
+            if (last_maintenance !== "null") query += `last_maintenance = '${last_maintenance}', `;
+
+            query = query.slice(0, -2);
+            query += ` WHERE name = '${selected_ride}';`
+
+            await db.promise().execute(query, imgValue);
+        })
+        return sendResponse(req, res, 200, "Ride Updated")
+    },
+
+    async deleteRide(req, res) {
+        const upload = multer()
+        upload.any()(req, res, async (err) => {
+            const name = req.body.name;
+            const query = `UPDATE master.ride SET perm_closed = TRUE WHERE name = '${name}';`
+            const [rows, fields] = await db.promise().execute(query)
+        });
+        return sendResponse(req, res, 200, "Removed Concessions")
+    }
 }

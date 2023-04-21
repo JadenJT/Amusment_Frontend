@@ -27,26 +27,28 @@ const getHandlers = {
   '/test': (req, res) => concessionRoutes.getConcession(req, res),
   '/ride/adult': (req, res) => rideRoutes.getAllAdultRides(req, res),
   '/ride/child': (req, res) => rideRoutes.getAllKidsRides(req, res),
+
+
   '/ride/adultActive': (req, res) => rideRoutes.getAllActiveAdultRides(req, res),
   '/ride/childActive': (req, res) => rideRoutes.getAllActiveKidsRides(req, res),
+  '/ride/allActiveRide': (req, res) => rideRoutes.getAllActiveRides(req, res),
+  '/concession/Active': (req, res) => concessionRoutes.getActiveConcession(req, res),
+  '/giftshop/Active': (req, res) => giftshopRoutes.getActiveGiftshop(req, res),
+
+
   '/ride/all': (req, res) => rideRoutes.getAllRides(req, res),
   '/concession/all': (req, res) => concessionRoutes.getConcession(req, res),
-  '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res)
-}
-
-// All PUT request
-const putHandlers = {
-  '/employee/update': (req, res) => employeeRoutes.updateEmployee(req, res),
-  '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
-
+  '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res),
+  '/zone/all': (req, res) => rideRoutes.getZones(req, res)
 }
 
 // All POST request
 const postHandlers = {
   '/register': (req, res) => personRoutes.register(req, res),
   '/login': (req, res) => personRoutes.login(req, res),
-  '/image/add': (req, res) => imageRoutes.addImage(req, res),
+
   '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
+
   '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/ride/add': (req, res) => rideRoutes.addRide(req, res),
@@ -54,20 +56,27 @@ const postHandlers = {
   '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
 
-}
+  '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
 
-// All DELETE request
-const deleteHandlers = {
   '/ticket/remove': (req, res) => ticketRoutes.removeTicket(req, res),
-  '/employee/remove': (req, res) => employeeRoutes.removeEmployee(req, res)
+  '/employee/remove': (req, res) => employeeRoutes.removeEmployee(req, res),
+  '/ride/delete': (req, res) => rideRoutes.deleteRide(req, res),
+  '/concession/delete': (req, res) => concessionRoutes.deleteConcession(req, res),
+  '/giftshop/delete': (req, res) => giftshopRoutes.deleteGiftshop(req, res),
+
+  '/employee/edit': (req, res) => employeeRoutes.updateEmployee(req, res),
+  '/ride/edit': (req, res) => rideRoutes.editRide(req, res),
+  '/concession/edit': (req, res) => concessionRoutes.editConcession(req, res),
+  '/giftshop/edit': (req, res) => giftshopRoutes.editGiftshop(req, res),
+
+  
+
 }
 
 const server = http.createServer(async (req, res) => {
   searchURL = req.url.split('?')[0]
   const getHandler = getHandlers[searchURL];
-  const putHandler = putHandlers[searchURL];
   const postHandler = postHandlers[searchURL];
-  const deleteHandler = deleteHandlers[searchURL];
   res.setHeader('Access-Control-Allow-Origin', '*');
   if (req.method === 'OPTIONS') {
     // Handle preflight request
@@ -82,12 +91,8 @@ const server = http.createServer(async (req, res) => {
 
   if (getHandler && req.method === 'GET') {
     getHandler(req, res)
-  } else if (putHandler && req.method === 'PUT') {
-    putHandler(req, res)
   } else if (postHandler && req.method === 'POST') {
     postHandler(req, res)
-  } else if (deleteHandler && req.method === 'DELETE') {
-    deleteHandler(req, res)
   } else {
     sendResponse(req, res, 404, "Page not found")
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -150,6 +150,8 @@ const InsertAttraction = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [isOptionSelected, setIsOptionSelected] = useState(false);
   const [showErrorBox, setShowErrorBox] = useState(false);
+  const [zoneData, setZoneData] = useState([]);
+  const [isZoneLoading, setZoneLoading] = useState(true);
 
   //reset form
   const resetForm = () => {
@@ -299,6 +301,25 @@ const InsertAttraction = () => {
       setConcessionFoodTypeMarginBottom("1em");
     }
   }
+  const fetchZoneData = async () => {
+    const response = await fetch('http://localhost:8080/zone/all');
+    const data = await response.json();
+    setZoneData(data);
+    setZoneLoading(false);
+  };
+  useEffect(() => {
+      fetchZoneData();
+  }, []);
+
+  const renderZoneIdOptions = () => {
+    const items = zoneData.item;
+    const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
+    return uniqueZoneIds.map((zoneId, index) => (
+        <option key={zoneId} value={zoneId}>
+            {zoneId}
+        </option>
+    ));
+  };
 
   /* submit form */
   const handleFormSubmit = async (e) => {
@@ -418,7 +439,7 @@ const InsertAttraction = () => {
           body: giftShopData
         });
         resetForm();
-        setAttractionAdded("Ride has been added!");
+        setAttractionAdded("Giftshop has been added!");
         setTimeout( () => {
           setAttractionAdded("");
         }, 4000);
@@ -428,6 +449,10 @@ const InsertAttraction = () => {
     }
     navigate('/InsertAttraction')
   };
+
+  if (isZoneLoading) {
+    return <div className="App">Loading...</div>;
+  }
 
   return (
     <div>
@@ -456,7 +481,12 @@ const InsertAttraction = () => {
             {selectedOption === 'ride' && (
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
-                <input type='text' placeholder='Enter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
+                <select className='select-modify-option' name='zone' value={ZoneId} onChange={handleZoneIdChange}>
+                    <option value='' disabled>
+                        Select a zone id
+                    </option>
+                    {renderZoneIdOptions()}
+                </select>
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Ride name:</h3>
@@ -468,7 +498,7 @@ const InsertAttraction = () => {
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
-                  <h3 className='option-title'>Ride image:</h3>
+                  <h3 className='option-title'>Ride image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
@@ -522,7 +552,7 @@ const InsertAttraction = () => {
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
-                  <h3 className='option-title'>Concession image:</h3>
+                  <h3 className='option-title'>Concession image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 
@@ -544,7 +574,7 @@ const InsertAttraction = () => {
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
     
                 <div className='option-insert-img'>
-                  <h3 className='option-title'>Giftshop image:</h3>
+                  <h3 className='option-title'>Giftshop image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>
                 </div>
 

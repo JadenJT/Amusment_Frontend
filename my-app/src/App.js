@@ -21,9 +21,9 @@ import Employee from './pages/employee/Employee';
 import Manager from './pages/Manager/manager';
 import Maintenance from './pages/maintenance/maintenance';
 import { ShopContextProvider } from './components/cartContext/CartContext';
-import Test from './pages/test/Test';
-import Test2 from './pages/test2/Test2';
-import Test3 from './pages/test3/Test3';
+import DbRides from './pages/test/DbRides';
+import DbConcession from './pages/test2/DbConcession';
+import DbZones from './pages/test3/dbZones';
 
 
 export const UserContext = createContext(null);
@@ -71,16 +71,13 @@ function App() {
                 <Route path="Maintenance" element={<Maintenance user={user} />} />
               }
 
-              <Route path="rides" element={<Rides />} />
+              <Route path="rides" element={<DbRides />} />
               <Route path="*" element={<Error404 />} />
-              <Route path="concessions" element={<Concessions />} />
-              <Route path="zone" element={<Zones />} />
+              <Route path="concessions" element={<DbConcession />} />
+              <Route path="zone" element={<DbZones />} />
 
-              <Route path="Test" element={<Test />} />
 
-              <Route path="Test2" element={<Test2 />} />
 
-              <Route path="Test3" element={<Test3 />} />
 
               {user.role_type == 'admin' &&
                 <Route path='EditAttraction' element={<EditAttraciton />} />

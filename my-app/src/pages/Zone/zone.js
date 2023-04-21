@@ -34,6 +34,7 @@ export default function Zone() {
             <div className="zwp">
                 <img src={Logo} alt="park logo" className="wLogo"></img>
             </div>
+
             <div className="zBody">
                 <div className="zSection">
                     <h1 className="zName">Zone A</h1>
@@ -218,6 +219,7 @@ export default function Zone() {
                                 <div>Location: Zone C</div>
                                 <div>Status: Open</div>
                         </div>
+
                     </div>
                 </div>
             </div>
