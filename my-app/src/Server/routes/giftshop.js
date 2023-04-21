@@ -78,4 +78,14 @@ module.exports = {
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched Giftshops", rows)
     },
+
+    async deleteGiftshop(req, res) {
+        const upload = multer()
+        upload.any()(req, res, async (err) => {
+            const name = req.body.name;
+            const query = `UPDATE master.giftshop SET perm_closed = TRUE WHERE name = '${name}';`
+            const [rows, fields] = await db.promise().execute(query)
+            return sendResponse(req, res, 200, "Removed Giftshop")
+        });
+    }
 }

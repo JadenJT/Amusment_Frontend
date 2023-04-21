@@ -46,20 +46,31 @@ const getHandlers = {
 const postHandlers = {
   '/register': (req, res) => personRoutes.register(req, res),
   '/login': (req, res) => personRoutes.login(req, res),
+
   '/ticket/buy': (req, res) => ticketRoutes.buyTicket(req, res),
+
   '/employee/add': (req, res) => employeeRoutes.addEmployee(req, res),
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/ride/add': (req, res) => rideRoutes.addRide(req, res),
   '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
   '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
+
   '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
+
   '/ticket/remove': (req, res) => ticketRoutes.removeTicket(req, res),
   '/employee/remove': (req, res) => employeeRoutes.removeEmployee(req, res),
+  '/ride/delete': (req, res) => rideRoutes.deleteRide(req, res),
+  '/concession/delete': (req, res) => concessionRoutes.deleteConcession(req, res),
+  '/giftshop/delete': (req, res) => giftshopRoutes.deleteGiftshop(req, res),
+
   '/employee/edit': (req, res) => employeeRoutes.updateEmployee(req, res),
   '/ride/edit': (req, res) => rideRoutes.editRide(req, res),
   '/concession/edit': (req, res) => concessionRoutes.editConcession(req, res),
-  '/giftshop/edit': (req, res) => giftshopRoutes.editGiftshop(req, res)
+  '/giftshop/edit': (req, res) => giftshopRoutes.editGiftshop(req, res),
+
+  
+
 }
 
 const server = http.createServer(async (req, res) => {

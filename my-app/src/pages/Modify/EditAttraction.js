@@ -379,15 +379,6 @@ const EditAttraction = () => {
             return null;
         }
     };
-    // const getConcessionImage = () => {
-    //     const items = concessionData.item;
-    //     const selectedConcessionObject = items.find(concession => concession.name === selectedConcession);
-    //     if (selectedConcessionObject) {
-    //         return selectedConcessionObject.image;
-    //     } else {
-    //         return null;
-    //     }
-    // };
     const getGiftshopZoneId = (e) => {
         const items = giftshopData.item;
         const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
@@ -397,15 +388,6 @@ const EditAttraction = () => {
             return null;
         }
     };
-    // const getGiftShopImg = (e) => {
-    //     const items = giftshopData.item;
-    //     const selectedGiftShopObject = items.find(giftshop => giftshop.name === selectedGiftShop);
-    //     if(selectedGiftShopObject){
-    //         return selectedGiftShopObject.image;
-    //     } else {
-    //         return null;
-    //     }
-    // };
 
     /*rest form */
     const resetForm = () => {

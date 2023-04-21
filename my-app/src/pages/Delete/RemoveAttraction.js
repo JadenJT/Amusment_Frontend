@@ -6,10 +6,8 @@ const RemoveAttraction = () => {
     const [isRideLoading, setRideLoading] = useState(true);
     const [isConcessionLoading, setConcessionLoading] = useState(true);
     const [isGiftshopLoading, setGiftshopLoading] = useState(true);
-    const [isZoneLoading, setZoneLoading] = useState(true);
 
     const [ridedata, setRideData] = useState([]);
-    const [zoneData, setZoneData] = useState([]);
     const [concessiondata, setConcessionData] = useState([]);
     const [giftshopdata, setGiftshopData] = useState([]);
     const [isOptionSelected, setIsOptionSelected] = useState(false);
@@ -18,6 +16,8 @@ const RemoveAttraction = () => {
     const [rideoption, setrideoption] = useState('');
     const [concessionoption, setconcessionoption] = useState('');
     const [giftshopoption, setgiftshopoption] = useState('');
+
+    const [attractionMessage, setAttractionMessage] = useState('');
 
     //handle functions
     const handleoptionChange = (e) => {
@@ -64,48 +64,31 @@ const RemoveAttraction = () => {
     useEffect(() => {
         fetchgiftshopdata();
     }, []);
-    const fetchZoneData = async () => {
-        const response = await fetch('http://localhost:8080/zone/all');
-        const data = await response.json();
-        setZoneData(data);
-        setZoneLoading(false);
-    };
-    useEffect(() => {
-        fetchZoneData();
-    }, []);
 
     //render data
     const renderRideNameOptions = () => {
         const items = ridedata.item;
-        const filteredItems = items.filter(ride => ride.name !== null);
+        const filteredItems = items.filter(ride => ride.name !== null && ride.perm_closed !== 1);
         return filteredItems.map((ride, index) => (
-            <option key={index} value={ride.name}>
+            <option key={ride} value={ride.name}>
                 {ride.name}
-            </option>
-        ));
-    };
-    const renderZoneIdOptions = () => {
-        const items = zoneData.item;
-        const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
-        return uniqueZoneIds.map((zoneId, index) => (
-            <option key={index} value={zoneId}>
-                {zoneId}
             </option>
         ));
     };
     const renderConcessionOptions = () => {
         const items = concessiondata.item;
-        const filteredItems = items.filter(concession => concession.name !== null);
+        const filteredItems = items.filter(concession => concession.name !== null && concession.perm_closed !== 1);
         return filteredItems.map((concession, index) => (
-            <option key={index} value={concession.name}>
+            <option key={concession} value={concession.name}>
                 {concession.name}
             </option>
         ));
     };
     const renderGiftShopOptions = () => {
         const items = giftshopdata.item;
-        return items.map((giftshop, index) => (
-            <option key={index} value={giftshop.name}>
+        const filteredItems = items.filter(giftshop => giftshop.name !== null && giftshop.perm_closed !== 1);
+        return filteredItems.map((giftshop, index) => (
+            <option key={giftshop} value={giftshop.name}>
                 {giftshop.name}
             </option>
         ));
@@ -115,19 +98,49 @@ const RemoveAttraction = () => {
         setrideoption('');
         setconcessionoption('');
         setgiftshopoption('');
+        setAttractionMessage('')
     };
 
-    const handleRemoveOnSubmit = (e) => {
+    const handleRemoveOnSubmit = async (e) => {
         e.preventDefault();
 
         if (selectedOption === 'ride') {
-            //handle deletion for a ride
+            if (rideoption == "") return setAttractionMessage("No Ride selected");
+
+            const rideData = new FormData();
+            rideData.append('name', rideoption)
+
+            await fetch('http://localhost:8080/ride/delete', {
+                method: 'POST',
+                body: rideData
+            });
+            setAttractionMessage("Ride Deleted");
+
         } else if (selectedOption === 'concession') {
-            //handle deletion for a concession
+            if (concessionoption == "") return setAttractionMessage("No concession selected");
+
+            const concessionData = new FormData();
+            concessionData.append('name', concessionoption)
+
+            await fetch('http://localhost:8080/concession/delete', {
+                method: 'POST',
+                body: concessionData
+            });
+            setAttractionMessage("Concession Deleted");
+
         } else if (selectedOption === 'giftshop') {
-            //handle deletion for a concession
+            if (giftshopoption == "") return setAttractionMessage("No giftshop selected");
+            
+            const giftshopData = new FormData();
+            giftshopData.append('name', giftshopoption)
+
+            await fetch('http://localhost:8080/concession/delete', {
+                method: 'POST',
+                body: giftshopData
+            });
+
+            setAttractionMessage("Giftshop Deleted");
         }
-        //redirect to admin portal after submit
     };
 
     if (isRideLoading) {
@@ -142,16 +155,12 @@ const RemoveAttraction = () => {
         return <div className="App">Loading...</div>;
     }
 
-    if (isZoneLoading) {
-        return <div className="App">Loading...</div>;
-    }
-
     return (
         <div>
             <div className='admin-remove-body'>
                 <div className='admin-remove-cover'>
                     <h1 className='admin-remove-title'>Remove Ride, Concession, or Gift Shop</h1>
-                    <form className='admin-remove-form'>
+                    <form className='admin-remove-form' onSubmit={handleRemoveOnSubmit}>
                         <h3 className='select-option-title'>Select an option to remove:</h3>
                         <select className='select-option' name='option' value={selectedOption} onChange={handleoptionChange}>
                             <option value='' disabled>
@@ -179,6 +188,8 @@ const RemoveAttraction = () => {
                                     </option>
                                     {renderRideNameOptions()}
                                 </select>
+                                <div className='admin-error'>{attractionMessage}</div>
+                                <div className='admin-success'>{attractionMessage}</div>
                             </div>
                         )}
 
@@ -191,6 +202,8 @@ const RemoveAttraction = () => {
                                     </option>
                                     {renderConcessionOptions()}
                                 </select>
+                                <div className='admin-error'>{attractionMessage}</div>
+                                <div className='admin-success'>{attractionMessage}</div>
                             </div>
                         )}
 
@@ -203,6 +216,8 @@ const RemoveAttraction = () => {
                                     </option>
                                     {renderGiftShopOptions()}
                                 </select>
+                                    <div className='admin-error'>{attractionMessage}</div>
+                                    <div className='admin-success'>{attractionMessage}</div>
                             </div>
                         )}
 

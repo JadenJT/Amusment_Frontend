@@ -87,5 +87,13 @@ module.exports = {
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched Concessions", rows)
     },
-
+    async deleteConcession(req, res) {
+        const upload = multer()
+        upload.any()(req, res, async (err) => {
+            const name = req.body.name;
+            const query = `UPDATE master.concession SET perm_closed = TRUE WHERE name = '${name}';`
+            const [rows, fields] = await db.promise().execute(query)
+            return sendResponse(req, res, 200, "Removed Concessions")
+        });
+    }
 }
