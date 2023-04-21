@@ -45,8 +45,10 @@ const EditAttraction = () => {
     const [isRideLoading, setRideLoading] = useState(true);
     const [isConcessionLoading, setConcessionLoading] = useState(true);
     const [isGiftshopLoading, setGiftshopLoading] = useState(true);
+    const [isZoneLoading, setZoneLoading] = useState(true);
 
     const [rideData, setRideData] = useState([]);
+    const [zoneData, setZoneData] = useState([]);
     const [concessionData, setConcessionData] = useState([]);
     const [giftshopData, setGiftshopData] = useState([]);
     const [selectedRide, setSelectedRide] = useState('');
@@ -123,6 +125,15 @@ const EditAttraction = () => {
         fetchGiftShopsData();
     }, []);
     //console.log(giftshopData);
+    const fetchZoneData = async () => {
+        const response = await fetch('http://localhost:8080/zone/all');
+        const data = await response.json();
+        setZoneData(data);
+        setZoneLoading(false);
+    };
+    useEffect(() => {
+        fetchZoneData();
+    }, []);
     
     //handle change functions */
     const handleOptionChange = (e) => {
@@ -257,8 +268,8 @@ const EditAttraction = () => {
         ));
     };
     const renderZoneIdOptions = () => {
-        const items = rideData.item;
-        const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.zone_name))];
+        const items = zoneData.item;
+        const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
         return uniqueZoneIds.map((zoneId, index) => (
             <option key={index} value={zoneId}>
                 {zoneId}
@@ -455,6 +466,10 @@ const EditAttraction = () => {
     }
 
     if (isGiftshopLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    if (isZoneLoading) {
         return <div className="App">Loading...</div>;
     }
 
