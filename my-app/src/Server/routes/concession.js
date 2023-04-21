@@ -51,5 +51,11 @@ module.exports = {
         const query = 'SELECT * FROM master.concession;'
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched Concessions", rows)
-    }
+    },
+
+    async getActiveConcession(req, res) {
+        const query = 'SELECT * FROM master.concession WHERE perm_closed = 0;'
+        const [rows, fields] = await db.promise().execute(query)
+        return sendResponse(req, res, 200, "Fetched Concessions", rows)
+    },
 }

@@ -47,5 +47,11 @@ module.exports = {
         const query = 'SELECT * FROM master.giftshop;'
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched Giftshops", rows)
-    }
+    },
+
+    async getActiveGiftshop(req, res) {
+        const query = 'SELECT * FROM master.giftshop WHERE perm_closed = 0;'
+        const [rows, fields] = await db.promise().execute(query)
+        return sendResponse(req, res, 200, "Fetched Giftshops", rows)
+    },
 }

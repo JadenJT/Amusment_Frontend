@@ -4,7 +4,7 @@ import { Link, animateScroll } from "react-scroll";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Logo from '../../icons/Umazing.svg'
 
-const images ={};
+const images = {};
 const importAll = (r) => {
     r.keys().forEach((key) => {
         images[key.replace('./', '')] = r(key);
@@ -78,26 +78,26 @@ const Concessions = () => {
 
     const handleConcessionInfoClose = (concession) => {
         setConcessions(prevState => {
-          const updatedConcessions = prevState.map(item => {
-            if (item === concession) {
-              return { ...item, showInfo: false };
-            }
-            return item;
-          });
-          return updatedConcessions;
+            const updatedConcessions = prevState.map(item => {
+                if (item === concession) {
+                    return { ...item, showInfo: false };
+                }
+                return item;
+            });
+            return updatedConcessions;
         });
-      };
-      
-      const handleConcessionOverlayClick = (event, index) => {
+    };
+
+    const handleConcessionOverlayClick = (event, index) => {
         if (event.target.className === "concession-info-overlay") {
-            const updatedConcessions =[...concessions];
+            const updatedConcessions = [...concessions];
             updatedConcessions[index].showInfo = false;
             setConcessions(updatedConcessions);
         }
-      };
+    };
 
-    
-    return(
+
+    return (
         <div>
             <div className="cwp">
                 <img src={Logo} alt="park logo" className="wLogo"></img>
@@ -111,8 +111,8 @@ const Concessions = () => {
                         <button className='concessions-button'>CONCESSIONS</button>
                         <div className='dropdown-content-cons'>
                             <Link to="zoneA-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone A</Link>
-                            <Link to ="zoneB-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone B</Link>
-                            <Link to = "zoneC-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone C</Link>
+                            <Link to="zoneB-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone B</Link>
+                            <Link to="zoneC-title" smooth={true} duration={500} offset={-50} spy={true} exact="true" activeClass="active">Zone C</Link>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,7 @@ const Concessions = () => {
                 {concessions.some(concession => concession.location === 'Zone A') ? (
                     concessions.filter(concession => concession.location === 'Zone A').map((concession, index) => (
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
-                            <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
+                            <img className='concession-img' src={concession.imgSrc} alt={concession.name} />
                             <div className='concession-details'>
                                 <h2 className='concession-name'>{concession.name}</h2>
                                 <p>
@@ -131,7 +131,7 @@ const Concessions = () => {
                                     Location: {concession.location}
                                 </p>
                             </div>
-                            {concession.showInfo && concession.location === 'Zone A' &&(
+                            {concession.showInfo && concession.location === 'Zone A' && (
                                 <div className='concession-info-overlay' onClick={(event) => handleConcessionOverlayClick(event, index)}>
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
@@ -141,7 +141,7 @@ const Concessions = () => {
                                             <br />
                                             Location: {concession.location}
                                         </p>
-                                        <button className= 'concession-close-button' onClick={(event) => {
+                                        <button className='concession-close-button' onClick={(event) => {
                                             event.stopPropagation();
                                             handleConcessionInfoClose(concession)
                                         }}>Close</button>
@@ -158,9 +158,9 @@ const Concessions = () => {
                 {concessions.some(concession => concession.location === 'Zone B') ? (
                     concessions.filter(concession => concession.location === 'Zone B').map((concession, index) => (
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
-                            <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
+                            <img className='concession-img' src={concession.imgSrc} alt={concession.name} />
                             <div className='concession-details'>
-                            <h2 className='concession-name'>{concession.name}</h2>
+                                <h2 className='concession-name'>{concession.name}</h2>
                                 <p className='concession-info-p'>
                                     {concession.description}
                                 </p>
@@ -178,7 +178,7 @@ const Concessions = () => {
                                             <br />
                                             Location: {concession.location}
                                         </p>
-                                        <button className= 'concession-close-button' onClick={(event) => {
+                                        <button className='concession-close-button' onClick={(event) => {
                                             event.stopPropagation();
                                             handleConcessionInfoClose(concession)
                                         }}>Close</button>
@@ -195,9 +195,9 @@ const Concessions = () => {
                 {concessions.some(concession => concession.location === 'Zone C') ? (
                     concessions.filter(concession => concession.location === 'Zone C').map((concession, index) => (
                         <div className='all-concessions' key={concession.name} onClick={(event) => handleConcessionClick(concession)}>
-                            <img className='concession-img' src={concession.imgSrc} alt={concession.name}/>
+                            <img className='concession-img' src={concession.imgSrc} alt={concession.name} />
                             <div className='concession-details'>
-                            <h2 className='concession-name'>{concession.name}</h2>
+                                <h2 className='concession-name'>{concession.name}</h2>
                                 <p className='concession-info-p'>
                                     {concession.description}
                                 </p>
@@ -205,7 +205,7 @@ const Concessions = () => {
                                     Location: {concession.location}
                                 </p>
                             </div>
-                            {concession.showInfo && concession.location === 'Zone C' &&(
+                            {concession.showInfo && concession.location === 'Zone C' && (
                                 <div className='concession-info-overlay' onClick={(event) => handleConcessionOverlayClick(event, index)}>
                                     <div className='concession-info-box'>
                                         <h2 className='concession-name-onClick'>{concession.name}</h2>
@@ -215,7 +215,7 @@ const Concessions = () => {
                                             <br />
                                             Location: {concession.location}
                                         </p>
-                                        <button className= 'concession-close-button' onClick={(event) => {
+                                        <button className='concession-close-button' onClick={(event) => {
                                             event.stopPropagation();
                                             handleConcessionInfoClose(concession)
                                         }}>Close</button>
