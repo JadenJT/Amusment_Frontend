@@ -31,6 +31,7 @@ const getHandlers = {
 
   '/ride/adultActive': (req, res) => rideRoutes.getAllActiveAdultRides(req, res),
   '/ride/childActive': (req, res) => rideRoutes.getAllActiveKidsRides(req, res),
+  '/ride/allActiveRide': (req, res) => rideRoutes.getAllActiveRides(req, res),
   '/concession/Active': (req, res) => concessionRoutes.getActiveConcession(req, res),
   '/giftshop/Active': (req, res) => giftshopRoutes.getActiveGiftshop(req, res),
 

@@ -97,7 +97,6 @@ function Test() {
         return <div className="App">Loading...</div>;
     }
 
-    console.log(`${ridedata.length} rides from server`);
 
     return (
         <div>

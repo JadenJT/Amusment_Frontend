@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Logo from '../../icons/Umazing.svg'
 import { Link } from "react-scroll";
 
@@ -19,9 +19,7 @@ function Test2() {
         const data = await response.json();
         for (let i = 0; i < data.item.length; i++) {
             data.item[i].showInfo = false;
-            console.log(data.item[i].zone_id)
         }
-        console.log(data.item)
         setConcessionData(data.item);
         setLoading(false);
     };

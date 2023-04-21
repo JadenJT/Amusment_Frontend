@@ -9,7 +9,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 module.exports = {
-    async getZones(req, res){
+    async getZones(req, res) {
         const [rows, fields] = await db.promise().execute(
             `SELECT * FROM master.zone;`
         )
@@ -76,6 +76,13 @@ module.exports = {
         return sendResponse(req, res, 200, "Rides Gathered", rows);
     },
 
+    async getAllActiveRides(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride WHERE perm_closed = "0";`
+        )
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
+    },
+
     async getAllActiveAdultRides(req, res) {
         const [rows, fields] = await db.promise().execute(
             `SELECT * FROM master.ride WHERE type = "Adult" and perm_closed = "0";`
@@ -103,8 +110,8 @@ module.exports = {
                 var image = req.files[0].buffer.toString('binary');
             }
             const last_maintenance = req.body.last_maintenance;
-            
-            let query = 'UPDATE master.ride SET '; 
+
+            let query = 'UPDATE master.ride SET ';
 
             if (name !== "null") query += `name = '${name}', `;
             if (type !== "null") query += `type = '${type}', `;
