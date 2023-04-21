@@ -9,7 +9,7 @@ function convertImage(array) {
     return <img className="img-ride" src={`data:image/jpeg;base64,${b64}`} />
 }
 
-function Test2() {
+function DbConcession() {
     const [isLoading, setLoading] = useState(true);
     const [concessionData, setConcessionData] = useState([]);
 
@@ -211,4 +211,4 @@ function Test2() {
     )
 }
 
-export default Test2
+export default DbConcession
