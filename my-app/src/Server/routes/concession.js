@@ -2,7 +2,7 @@ const db = require('../database');
 const url = require('url');
 const querystring = require('querystring');
 const { sendResponse } = require("../helpers/response");
-const multer = require('multer');
+const { getReqData } = require("../helpers/utils");
 
 module.exports = {
     /*
@@ -15,19 +15,17 @@ module.exports = {
         }
     */
     async addConcession(req, res){
-        const upload = multer();
-        upload.any()(req, res, async (err) => {
-            const name = req.body.name;
-            const zone = req.body.zone;
-            const food_type = req.body.food_type;
-            const description = req.body.description;
-            const image = req.files[0].buffer.toString('binary')
-            const query = 'INSERT INTO master.concession(`concession_id`, `name`, `zone_id`, `food_type`, `image`, `description`) VALUES (NULL, ?, ?, ?, ?, ?);'
-            const values = [name, zone, food_type, image, description]
+        const bodyData = await getReqData(req);
+        const concessionJSON = JSON.parse(bodyData);  
+        const name = concessionJSON.name;
+        const zone = concessionJSON.zone;
+        const food_type = concessionJSON.food_type;
+        const image = concessionJSON.image;
+        const query = 'INSERT INTO master.concession(`concession_id`, `name`, `zone_id`, `food_type`, `image`) VALUES (NULL, ?, ?, ?, ?);'
+        const values = [name, zone, food_type, image]
 
-            const [row, fields] = await db.promise().execute(query, values);
-            return sendResponse(req, res, 200, `Added Concession`, row)
-        });
+        const [row, fields] = await db.promise().execute(query, values);
+        return sendResponse(req, res, 200, `Added Concession`, row)
     },
     /*
         POST Data Example:
@@ -47,9 +45,13 @@ module.exports = {
 
     },
 
-    async getConcession(req, res){
-        const query = 'SELECT * FROM master.concession;'
-        const [rows, fields] = await db.promise().execute(query)
-        return sendResponse(req, res, 200, "image got")
+    async getAllConcessions(req, res){
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.concession;`
+        )
+        return sendResponse(req, res, 200, "Concessions Gathered", rows);
     }
+
+
+
 }

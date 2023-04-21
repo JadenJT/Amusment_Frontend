@@ -2,17 +2,6 @@ import React, { useState } from 'react';
 import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
 
-function validateAttractionDescription(attractionDescription) {
-  if (attractionDescription.length === 0 || attractionDescription.length > 200) {
-    return false;   
-  }
-  const regex = /^[a-zA-Z\s]+$/;
-  if (!regex.test(attractionDescription)) {
-    return false;
-  }
-  return true;
-}
-
 function validateAttractionName(attractionName) {
   if (attractionName.length === 0 || attractionName.length > 25) {
     return false;
@@ -108,7 +97,6 @@ const InsertAttraction = () => {
   const [ZoneId, setZoneId] = useState('');
   const [attractionName, setAttractionName] = useState('');
   const [attractionCategory, setAttractionCategory] = useState('');
-  const [attractionDescription, setAttractionDescription] = useState('')
 
   /*new ride*/
   const [rideHeightRequirement, setRideHeightRequirement] = useState(0);
@@ -128,8 +116,7 @@ const InsertAttraction = () => {
   const [hourlyCapacityError, setHourlyCapacityError] = useState('');
   const [concessionFoodTypeError, setConcessionFoodTypeError] = useState('');
   const [attractionExistError, setAttractionExistError] = useState('');
-  const [heightRequirementError, setHeightRequirementError] = useState('');
-  const [attractionDescriptionError, setAttractionDescriptionError] = useState('');
+  const [heightRequirementError, setHeightRequirementError] = useState('')
 
   /* confirmation messages */
   const [attractionAdded, setAttractionAdded] = useState(''); 
@@ -142,8 +129,7 @@ const InsertAttraction = () => {
   const [rideCapacityMarginBottom, setRideCapacityMarginBottom] = useState('1em');
   const [hourlyCapacityMarginBottom, setHourlyCapacityMarginBottom] = useState('1em');
   const [concessionFoodTypeMarginBottom, setConcessionFoodTypeMarginBottom] = useState('1em');
-  const [heightRequirementMarginBottom, setHeightRequirementMarginBottom] = useState('1em');
-  const [attractionDescriptionMarginBottom, setAttractionDescriptionMarginBottom] = useState('1em')
+  const [heightRequirementMarginBottom, setHeightRequirementMarginBottom] = useState('1em')
 
   //other
   const [imageFileValue, setImageFile] = useState(null);
@@ -171,12 +157,9 @@ const InsertAttraction = () => {
     setHeightRequirementError('');
     setRideCapacity('');
     setHourlyCapacity('');
-    setAttractionDescription('');
-    setAttractionDescriptionError('');
   };
 
   //handle change functions
-
   const handleOptionChange = (e) => {
 
     setSelectedOption(e.target.value);
@@ -193,18 +176,6 @@ const InsertAttraction = () => {
     } else {
       setAttractionNameError("");
       setAttractionNameMarginBottom("1em");
-    }
-  };
-
-  const handleAttractionDescriptionChange = (event) => {
-    const attractionDesc = event.target.value;
-    setAttractionDescription(attractionDesc);
-    if (!validateAttractionDescription(attractionDesc)) {
-      setAttractionDescriptionError("Please enter a valid attraction name no more than 200 characters");
-      setAttractionDescriptionMarginBottom("1em");
-    } else {
-      setAttractionDescriptionError("");
-      setAttractionDescriptionMarginBottom("1em");
     }
   };
 
@@ -312,8 +283,7 @@ const InsertAttraction = () => {
       const validRideCapacity = validateRideCapacity(rideCapacity);
       const validHourlyCapacity = validateHourlyCapacity(hourlyCapacity);
       const validImage = validateAttractionImage(imageFileValue)
-      const validDescription = validateAttractionDescription()
-      if (!validattractionName || !validZoneId || !validrideType || !validRideCapacity || !validHourlyCapacity || !validImage || !validDescription) {
+      if (!validattractionName || !validZoneId || !validrideType || !validRideCapacity || !validHourlyCapacity || !validImage) {
         setShowErrorBox(true);
         return;
       }
@@ -327,21 +297,34 @@ const InsertAttraction = () => {
       // If ride doesn't exist continue
       if (!rideExistData.item) {
 
+        //Get and insert image into database.
+        const imageForm = new FormData()
+        imageForm.append('image', imageFileValue);
+
+        const imageInit = await fetch('http://localhost:8080/image/add', {
+          method: 'POST',
+          body: imageForm.get('image')
+        });  
+        const imagePathJSON = await imageInit.json()
+
         // Finally, add ride towards the db
-        const ridesData = new FormData();
-        ridesData.append('zone_id', ZoneId)
-        ridesData.append('category', attractionCategory)
-        ridesData.append('type', rideType)
-        ridesData.append('name', attractionName)
-        ridesData.append('capacity', rideCapacity)
-        ridesData.append('hour_capacity', hourlyCapacity)
-        ridesData.append('height_requirement', rideHeightRequirement)
-        ridesData.append('image', imageFileValue)
-        ridesData.append('description', attractionDescription)
+        const concessionData = {
+          zone_id: ZoneId,
+          category: attractionCategory,
+          type: rideType,
+          name: attractionName,
+          capacity: rideCapacity,
+          hour_capacity: hourlyCapacity,
+          height_requirement: rideHeightRequirement,
+          image: imagePathJSON.item
+        };
 
         await fetch('http://localhost:8080/ride/add', {
           method: 'POST',
-          body: ridesData
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(concessionData)
         });
         resetForm();
         setAttractionAdded("Ride has been added!");
@@ -353,7 +336,6 @@ const InsertAttraction = () => {
       }
     }
     else if (selectedOption === 'concession') {
-
       //handle concession form submission
       const validZoneId = validateZoneId(ZoneId);
       const validattracitonName = validateAttractionName(attractionName);
@@ -369,18 +351,31 @@ const InsertAttraction = () => {
       const concessionExistData = await concessionExistRes.json();
 
       if(!concessionExistData.item){
+
+        //Add image
+        const imageForm = new FormData()
+        imageForm.append('image', imageFileValue);
+
+        const imageInit = await fetch('http://localhost:8080/image/add', {
+          method: 'POST',
+          body: imageForm.get('image')
+        });  
+        const imagePathJSON = await imageInit.json()
         
         //Add Concession to db.
-        const concessForm = new FormData();
-        concessForm.append('name', attractionName)
-        concessForm.append('zone', ZoneId)
-        concessForm.append('food_type', concessionFoodType)
-        concessForm.append('image', imageFileValue)
-        concessForm.append('description', attractionDescription)
+        const concessionData = {
+          name: attractionName,
+          zone: ZoneId,
+          food_type: concessionFoodType,
+          image: imagePathJSON.item,
+        };
 
         const res2 = await fetch('http://localhost:8080/concession/add', {
           method: 'POST',
-          body: concessForm
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(concessionData)
         });
         resetForm();
         setAttractionAdded("Concession has been added!");
@@ -407,15 +402,29 @@ const InsertAttraction = () => {
       const giftshopExistData = await giftshopExistRes.json();
 
       if(!giftshopExistData.item){
-        const giftShopData = new FormData();
-        giftShopData.append('name', attractionName)
-        giftShopData.append('zone', ZoneId)
-        giftShopData.append('image', imageFileValue)
-        giftShopData.append('description', attractionDescription)
+
+        const imageForm = new FormData()
+        imageForm.append('image', imageFileValue);
+
+        const imageInit = await fetch('http://localhost:8080/image/add', {
+          method: 'POST',
+          body: imageForm.get('image')
+        });  
+        const imagePathJSON = await imageInit.json()
+
+        //Add giftshop to db.
+        const giftshopData = {
+          zone: ZoneId,
+          name: attractionName,
+          image: imagePathJSON.item
+        };
 
         const res3 = await fetch('http://localhost:8080/giftshop/add', {
           method: 'POST',
-          body: giftShopData
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(giftshopData)
         });
         resetForm();
         setAttractionAdded("Ride has been added!");
@@ -462,10 +471,6 @@ const InsertAttraction = () => {
                 <h3 className='option-title'>Ride name:</h3>
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
                 <div className='admin-error'>{attractionNameError}</div>
-
-                <h3 className='option-title'>Ride Description: (200 char limit)</h3>
-                <textarea type='text-area' placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
-                <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
                   <h3 className='option-title'>Ride image:</h3>
@@ -516,10 +521,6 @@ const InsertAttraction = () => {
                 <h3 className='option-title'>Concession name:</h3>
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
                 <div className='admin-error'>{attractionNameError}</div>
-
-                <h3 className='option-title'>Ride Description: (200 char limit)</h3>
-                <textarea type='text-area' placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
-                <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
                   <h3 className='option-title'>Concession image:</h3>
