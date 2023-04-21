@@ -8,7 +8,7 @@ function Test2() {
 
 
     const fetchConcessiondata = async () => {
-        const response = await fetch('http://localhost:8080/concession/get');
+        const response = await fetch('http://localhost:8080/concession/all');
         const data = await response.json();
 
         setConcessionData(data.item);
