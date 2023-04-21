@@ -3,6 +3,7 @@ import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
 
 function validateAttractionDescription(attractionDescription) {
+  console.log(attractionDescription)
   if (attractionDescription.length === 0 || attractionDescription.length > 200) {
     return false;   
   }
@@ -312,7 +313,7 @@ const InsertAttraction = () => {
       const validRideCapacity = validateRideCapacity(rideCapacity);
       const validHourlyCapacity = validateHourlyCapacity(hourlyCapacity);
       const validImage = validateAttractionImage(imageFileValue)
-      const validDescription = validateAttractionDescription()
+      const validDescription = validateAttractionDescription(attractionDescription)
       if (!validattractionName || !validZoneId || !validrideType || !validRideCapacity || !validHourlyCapacity || !validImage || !validDescription) {
         setShowErrorBox(true);
         return;
@@ -464,7 +465,7 @@ const InsertAttraction = () => {
                 <div className='admin-error'>{attractionNameError}</div>
 
                 <h3 className='option-title'>Ride Description: (200 char limit)</h3>
-                <textarea type='text-area' placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
+                <textarea placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
@@ -518,7 +519,7 @@ const InsertAttraction = () => {
                 <div className='admin-error'>{attractionNameError}</div>
 
                 <h3 className='option-title'>Ride Description: (200 char limit)</h3>
-                <textarea type='text-area' placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
+                <textarea placeholder='Enter description' className='option-input' value={attractionDescription} onChange={handleAttractionDescriptionChange} style={{ marginBottom: attractionDescriptionMarginBottom, resize: 'vertical' }} />
                 <div className='admin-error'>{attractionDescriptionError}</div>
 
                 <div className='option-insert-img'>
@@ -566,10 +567,12 @@ const InsertAttraction = () => {
                   <ul className='error-box-ul'>
                     {(!validateZoneId(ZoneId) && <li>Please enter a valid zone id</li>)}
                     {(!validateAttractionName(attractionName) && <li>Please enter a valid attraction name</li>)}
+                    {(!validateAttractionImage(imageFileValue) && <li>Please enter a valid image</li>)}
                     {(selectedOption === "ride" && !validateRideType(rideType) && <li>Please select a valid ride type</li>)}
                     {(selectedOption === "ride" && !validateRideCapacity(rideCapacity) && <li>Please enter a valid ride capacity digit</li>)}
+                    {(selectedOption === "ride" && !validateAttractionDescription(attractionDescription) && <li>Please enter a valid description</li>)}
+                    {(selectedOption === "concession" && !validateAttractionDescription(attractionDescription) && <li>Please enter a valid description</li>)}
                     {(selectedOption === "ride" && !validateHourlyCapacity(hourlyCapacity) && <li>Please enter a valid hourly capacity digit</li>)}
-                    {(selectedOption === "ride" && !validateAttractionImage(imageFileValue) && <li>Please enter a valid image</li>)}
                     <button className='return-button' onClick={() => setShowErrorBox(false)}>return</button>
                   </ul>
                 </div>
