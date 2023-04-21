@@ -108,6 +108,10 @@ input[type="date"], .formInput{
     width: 70em;
 }
 
+.noData{
+    color: rgb(201, 0, 0);
+}
+
 .lookUp{
     font-weight:bold;
 }

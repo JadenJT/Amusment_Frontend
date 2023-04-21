@@ -1,44 +1,109 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Report.css'
 
-export default function Home(){
+import { tempDB } from './tempReport';
+
+export default function EmployeeReport(){
+    
     const [empValue, setEmpValue] = useState([]);
+    //shows table
     const [show, setShow] = useState(false);
+    //shows data
+    const [showData, setShowData] = useState(false);
 
-    let [fName, setFName] = useState('');
-    let [lName, setLName] = useState('');
-    let [jLocation, setJLocation] = useState('');
-    let [jRole, setJRole] = useState('');
-    let [employeeMail, setEmployeeMail] = useState('');
+    //Dropdown Arrays
+    const arrLocation =[];
+    const arrRole = [];
 
-    const employeeSubmit = async (e)=> {        
-        e.preventDefault();
-        
+    //Report Inputs
+    let [inputFirst, setInputFirst] = useState('');
+    let [inputLast, setInputLast] = useState('');
+    let [inputLocation, setInputLocation] = useState('all');
+    let [inputRole, setInputRole] = useState('all');
+    let [inputMail, setInputMail] = useState('');
+    
+    const fetchData = () => {
+        fetch("https://retoolapi.dev/q6M1je/data", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          mode: "cors",
+        })
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setEmpValue(data)
+        })
+    }
+  
+    useEffect(() => {
+        fetchData()
+    }, [])
+
+    const getReportData = async () =>  {
+
+        let fName =inputFirst;
+        let lName = inputLast;
+        let jLocation = inputLocation;
+        let jRole = inputRole;
+        let empMail = inputMail;
+
         if(fName === '') fName = null;
         if(lName === '') lName = null;
         if(jLocation === 'all') jLocation = null;
         if(jRole === 'all') jRole = null;
-        if(employeeMail === '') employeeMail = null;
-
-        setShow(true);
-
-        const employeeFormData = {
-            f_name: fName,
-            l_name: lName,
-            job_location: jLocation,
-            job_role: jRole,
-            email: employeeMail
-        }
+        if(empMail === '') empMail = null;
         
-        const response = await fetch('http://localhost:8080/employee/report', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(employeeFormData)
-            });
-        const responseData = await response.json();
-        setEmpValue(responseData);
+        // const employeeFormData = {
+        //     f_name: fName,
+        //     l_name: lName,
+        //     job_location: jLocation,
+        //     job_role: jRole,
+        //     email: empMail
+        // }
+        
+        // const response = await fetch('http://localhost:8080/employee/report', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(employeeFormData)
+        //     });
+        // const responseData = await response.json();       
+
+        //setEmpValue(responseData);
+        
+    }
+    //Get the data first to build the report requirements
+    getReportData();
+
+    //Will put data.values in an array for the dropdown menues
+    empValue.map((data) => {
+        if(!arrLocation.includes(data.rating)){
+            arrLocation.push(data.rating);
+            arrLocation.sort();
+        }
+    })
+    empValue.map((data) => {
+        if(!arrRole.includes(data.col1)){
+            arrRole.push(data.col1);
+            arrRole.sort();
+        }
+    })
+
+    //Gets data with user requirments
+    const employeeSubmit = async (e)=> {
+        e.preventDefault();        
+        getReportData();
+        setShow(true);
+        
+        if(empValue.length > 0){
+            setShowData(true);
+        }
+        else
+            setShowData(false);
     }
 
     return(
@@ -55,8 +120,8 @@ export default function Home(){
                                 type='text'
                                 className='formInput'
                                 placeholder='Firstname'
-                                value={fName}
-                                onChange={(e) => setFName(e.target.value)}>
+                                value={inputFirst}
+                                onChange={(e) => setInputFirst(e.target.value)}>
                             </input>
                         </div>
                         <div>
@@ -65,28 +130,28 @@ export default function Home(){
                                 type='text'
                                 className='formInput'
                                 placeholder='Lastname'
-                                value={lName}
-                                onChange={(e) => setLName(e.target.value)}>
+                                value={inputLast}
+                                onChange={(e) => setInputLast(e.target.value)}>
                             </input>
                         </div>
                         <div>
                             <h3>Job Location: </h3>
-                            <select className='formInput' value={jLocation} onChange={(e) => setJLocation(e.target.value)}>
+                            <select className='formInput' value={inputLocation} onChange={(e) => setInputLocation(e.target.value)}>
                                 <option value='all'>All</option>
-                                {empValue.map((data, index)=> {
+                                {arrLocation.map((data)=> {
                                     return(
-                                        <option key={index} value={data.job_location}>{data.job_location}</option>
+                                        <option value={data}>{data}</option>
                                     )
                                 })}
                             </select>
                         </div>
                         <div>
                             <h3>Job Role: </h3>
-                            <select className='formInput' value={jRole} onChange={(e) => setJRole(e.target.value)}>
+                            <select className='formInput' value={inputRole} onChange={(e) => setInputRole(e.target.value)}>
                                 <option value='all'>All</option>
-                                {empValue.map((data, index)=> {
+                                {arrRole.map((data)=> {
                                     return(
-                                        <option key={index} value={data.job_role}>{data.job_role}</option>
+                                        <option value={data}>{data}</option>
                                     )
                                 })}                                
                             </select>
@@ -97,8 +162,8 @@ export default function Home(){
                                 type='text'
                                 className='formInput'
                                 placeholder='employee@mail.com'
-                                value={employeeMail}
-                                onChange={(e) => setEmployeeMail(e.target.value)}>
+                                value={inputMail}
+                                onChange={(e) => setInputMail(e.target.value)}>
                             </input>
                         </div>
                     </div>
@@ -112,36 +177,40 @@ export default function Home(){
             {show?
                 <div className='tableCard'>
                     <div className='searchForm'>
-                        <span className='lookUp'>FIRST:</span> {fName}&emsp;
-                        <span className='lookUp'>LAST:</span> {lName}&emsp;
-                        <span className='lookUp'>JOB_LOCATION:</span> {jLocation}&emsp;
-                        <span className='lookUp'>JOB_ROLE:</span> {jRole}&emsp;
-                        <span className='lookUp'>EMAIL:</span> {employeeMail}
+                        <span className='lookUp'>FIRST:</span> {inputFirst}&emsp;
+                        <span className='lookUp'>LAST:</span> {inputLast}&emsp;
+                        <span className='lookUp'>JOB_LOCATION:</span> {inputLocation}&emsp;
+                        <span className='lookUp'>JOB_ROLE:</span> {inputRole}&emsp;
+                        <span className='lookUp'>EMAIL:</span> {inputMail}
                     </div>
-                    <table className='tableInfo'>
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Job Location</th>
-                                <th>Job Role</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {empValue.map((data, index)=> {
-                                return(
-                                    <tr key={index}>
-                                        <td type="text">{data.f_name}</td>
-                                        <td type="text">{data.l_name}</td>
-                                        <td type="text">{data.job_location}</td>
-                                        <td type="text">{data.job_role}</td>
-                                        <td type="text">{data.email}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
+                    {showData?
+                        <table className='tableInfo'>
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Job Location</th>
+                                    <th>Job Role</th>
+                                    <th>Email</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {empValue.map((data, index)=> {
+                                    return(
+                                        <tr key={index}>
+                                            <td type="text">{data.fullName}</td>
+                                            <td type="text">{data.isUser}</td>
+                                            <td type="text">{data.rating}</td>
+                                            <td type="text">{data.col1}</td>
+                                            <td type="text">{data.E}</td>
+                                        </tr>
+                                    )
+                                })}
+                            </tbody>
+                        </table>
+                    :
+                        <h2 className='noData'>NO MATCHING DATA</h2>
+                    }
                 </div>
             :null}
         </>

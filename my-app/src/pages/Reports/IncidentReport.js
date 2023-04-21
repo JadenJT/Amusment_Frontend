@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Report.css'
 
-export default function Home(){
+export default function IncidentReport(){
     const [incidentValue, setIncidentValue] = useState([]);
     const [show, setShow] = useState(false);
 
