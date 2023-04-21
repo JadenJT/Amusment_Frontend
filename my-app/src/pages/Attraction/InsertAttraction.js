@@ -6,7 +6,7 @@ function validateAttractionDescription(attractionDescription) {
   if (attractionDescription.length === 0 || attractionDescription.length > 500) {
     return false;   
   }
-  const regex = /^^[a-zA-Z,-.]+$$/;
+  const regex = /^^[a-zA-Z,-.\s]+$$/;
   if (!regex.test(attractionDescription)) {
     return false;
   }
