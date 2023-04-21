@@ -21,8 +21,7 @@ import Employee from './pages/employee/Employee';
 import Manager from './pages/Manager/manager';
 import Maintenance from './pages/maintenance/maintenance';
 import { ShopContextProvider } from './components/cartContext/CartContext';
-
-
+import Test from './pages/test/Test';
 
 
 export const UserContext = createContext(null);
@@ -73,6 +72,8 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<Concessions />} />
               <Route path="zone" element={<Zones />} />
+
+              <Route path="Test" element={<Test />} />
 
               {user.role_type == 'admin' &&
                 <Route path='EditAttraction' element={<EditAttraciton />} />

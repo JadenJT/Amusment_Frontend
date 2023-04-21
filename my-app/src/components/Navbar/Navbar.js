@@ -62,6 +62,12 @@ function Navbar() {
             </Link>
           </div>
 
+          <div className='test'>
+            <Link to='/test' className='navbar-logo'>
+              test
+            </Link>
+          </div>
+
 
           {user != null && user.role_type == 'admin' &&
             <div className='admin'>

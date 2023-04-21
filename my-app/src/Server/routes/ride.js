@@ -10,9 +10,9 @@ module.exports = {
         {
         }
     */
-    async addRide(req, res){
+    async addRide(req, res) {
         const bodyData = await getReqData(req);
-        const rideJSON = JSON.parse(bodyData);  
+        const rideJSON = JSON.parse(bodyData);
         const zone_id = rideJSON.zone_id;
         const category = rideJSON.category;
         const type = rideJSON.type;
@@ -33,7 +33,7 @@ module.exports = {
             "name": 'SkyBlade
         }
     */
-    async rideExist(req, res){
+    async rideExist(req, res) {
         const parsedURL = url.parse(req.url)
         const urlParams = querystring.parse(parsedURL.query)
         const name = urlParams.name
@@ -45,10 +45,24 @@ module.exports = {
 
     },
 
-    async getAllRides(req, res){
+    async getAllRides(req, res) {
         const [rows, fields] = await db.promise().execute(
             `SELECT * FROM master.ride;`
         )
         return sendResponse(req, res, 200, "Rides Gathered", rows);
-    }
-}
+    },
+
+    async getAllAdultRides(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride WHERE type = "Adult";`
+        )
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
+    },
+
+    async getAllKidsRides(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride WHERE type = 'Child';`
+        )
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
+    },
+} 

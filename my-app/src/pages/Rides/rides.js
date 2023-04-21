@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import "./rides.css";
 import { Link, animateScroll } from "react-scroll";
 import Logo from '../../icons/Umazing.svg';
@@ -274,6 +274,16 @@ const Rides = () => {
             setRides2(updatedKidRides);
         }
     }
+
+    const fetchAdultridedata = async () => {
+        const response = await fetch('http://localhost:8080/ride/adult');
+        const data = await response.json();
+        console.log(data);
+    };
+    useEffect(() => {
+        fetchAdultridedata();
+    }, []);
+
 
     const { addToCart, cartItems } = useContext(ShopContext);
     return (

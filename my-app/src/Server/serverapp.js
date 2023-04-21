@@ -26,8 +26,11 @@ const getHandlers = {
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
   '/ride/exist': (req, res) => rideRoutes.rideExist(req, res),
-  '/concession/all' : (req, res) => concessionRoutes.getAllConcessions(req, res),
-  '/giftshop/all' : (req, res) => giftshopRoutes.getAllGiftShops(req, res),
+  '/concession/all': (req, res) => concessionRoutes.getAllConcessions(req, res),
+  '/giftshop/all': (req, res) => giftshopRoutes.getAllGiftShops(req, res),
+
+  '/ride/adult': (req, res) => rideRoutes.getAllAdultRides(req, res),
+  '/ride/child': (req, res) => rideRoutes.getAllKidsRides(req, res),
 }
 
 // All PUT request

@@ -11,8 +11,8 @@ function ShoppingCart() {
         event.preventDefault();
 
         const personData = {
-            Ticket_amount: 0,
-            date: "",
+            Ticket_amount: 1,
+            date: "2023-01-27 13:30:00",
             ride_name: "",
             email: "",
         };
@@ -24,6 +24,7 @@ function ShoppingCart() {
             },
             body: JSON.stringify(personData)
         })
+
     }
 
     return (

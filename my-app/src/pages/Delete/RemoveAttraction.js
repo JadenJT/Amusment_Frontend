@@ -38,6 +38,7 @@ const RemoveAttraction = () => {
         });
 
         const data = await response.json();
+        console.log(data);
         setRideData(data);
     };
     useEffect(() => {
@@ -51,6 +52,7 @@ const RemoveAttraction = () => {
             }
         });
         const data = await response.json();
+        console.log(data);
         setConcessionData(data);
     };
     useEffect(() => {
@@ -64,6 +66,7 @@ const RemoveAttraction = () => {
             }
         });
         const data = await response.json();
+        console.log(data);
         setGiftshopData(data);
     };
     useEffect(() => {
@@ -106,12 +109,12 @@ const RemoveAttraction = () => {
 
     const handleRemoveOnSubmit = (e) => {
         e.preventDefault();
-        
-        if(selectedOption === 'ride'){
+
+        if (selectedOption === 'ride') {
             //handle deletion for a ride
-        } else if(selectedOption === 'concession'){
+        } else if (selectedOption === 'concession') {
             //handle deletion for a concession
-        } else if(selectedOption === 'giftshop'){
+        } else if (selectedOption === 'giftshop') {
             //handle deletion for a concession
         }
         //redirect to admin portal after submit
@@ -132,7 +135,7 @@ const RemoveAttraction = () => {
                             <option value='concession'>Concession</option>
                             <option value='giftshop'>Gift Shop</option>
                         </select>
-                        
+
                         {selectedOption === '' && (
                             <div className='option-empty-title-container'>
                                 <h2 className='admin-edit-title'>
@@ -157,7 +160,7 @@ const RemoveAttraction = () => {
                             <div className='admin-option-box'>
                                 <h3 className='option-title'>Select a concession to remove:</h3>
                                 <select className='select-remove-option' name='concession' value={concessionoption} onChange={handleconcessionOptionChange}>
-                                    <option value = '' disabled>
+                                    <option value='' disabled>
                                         Select a concession
                                     </option>
                                     {renderConcessionOptions()}
