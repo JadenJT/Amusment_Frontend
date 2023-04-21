@@ -61,6 +61,7 @@ function Navbar() {
               Concessions
             </Link>
           </div>
+
           {user != null && user.role_type == 'admin' &&
             <div className='admin'>
               <Link to='/admin' className='navbar-logo'>
