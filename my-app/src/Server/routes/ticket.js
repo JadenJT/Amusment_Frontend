@@ -9,44 +9,8 @@ module.exports = {
             "customer_email"
         }
     */
-    async buyTicket(req, res) {
 
-        // const bodyData = await getReqData(req);
-        // const newTicket = JSON.parse(bodyData);
 
-        const DummyTickets = [
-            {
-                "ride_name": "Jungle Safari",
-                "amount": 1,
-                "email": "thai.jaden@gmail.com",
-                "dateTime": "tes"
-            }
-        ]
-    },
-
-    /*
-        POST Data Example: 
-        {
-            "ticket_id": 3
-        }
-    */
-    async removeTicket(req, res) {
-        const bodyData = await getReqData(req);
-        const newTicket = JSON.parse(bodyData);
-
-        const [row, fields] = await db.promise().execute(
-            'DELETE FROM ticket WHERE ticket_id = ?', [newTicket.ticket_id])
-
-        if (row.length === 0) return sendResponse(req, res, 404, "ticket_id not found")
-        return sendResponse(req, res, 200, `Ticket ID: ${newTicket.ticket_id} removed`)
-    },
-
-    /*
-        POST Data Example: 
-        {
-            "customer_email": "john.cox1@gmail.com"
-        }
-    */
     async ticketsOwn(req, res) {
         const bodyData = await getReqData(req);
         const customerJSON = JSON.parse(bodyData);
