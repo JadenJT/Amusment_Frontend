@@ -62,7 +62,7 @@ function Test() {
     }
 
     const fetchAdultridedata = async () => {
-        const response = await fetch(`${baseUrl}/ride/adult`);
+        const response = await fetch(`${baseUrl}/ride/adultActive`);
         const data = await response.json();
         for (let i = 0; i < data.item.length; i++) {
             data.item[i].showInfo = false;
@@ -75,7 +75,7 @@ function Test() {
     }, []);
 
     const getAllKidsRides = async () => {
-        const response = await fetch(`${baseUrl}/ride/child`);
+        const response = await fetch(`${baseUrl}/ride/childActive`);
         const data = await response.json();
         for (let i = 0; i < data.item.length; i++) {
             data.item[i].showInfo = false;

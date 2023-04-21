@@ -72,4 +72,18 @@ module.exports = {
         )
         return sendResponse(req, res, 200, "Rides Gathered", rows);
     },
+
+    async getAllActiveAdultRides(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride WHERE type = "Adult" and perm_closed = "0";`
+        )
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
+    },
+
+    async getAllActiveKidsRides(req, res) {
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.ride WHERE type = 'Child' and perm_closed = "0";`
+        )
+        return sendResponse(req, res, 200, "Rides Gathered", rows);
+    },
 }
