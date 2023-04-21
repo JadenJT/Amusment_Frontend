@@ -8,11 +8,13 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 module.exports = {
-    /*
-        POST Data Example:
-        {
-        }
-    */
+    async getZones(req, res){
+        const [rows, fields] = await db.promise().execute(
+            `SELECT * FROM master.zone;`
+        )
+        return sendResponse(req, res, 200, "Zones Gathered", rows);
+    },
+
     async addRide(req, res) {
         const upload = multer()
         upload.any()(req, res, async (err) => {

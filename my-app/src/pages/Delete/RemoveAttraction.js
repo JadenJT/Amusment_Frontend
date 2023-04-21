@@ -6,8 +6,10 @@ const RemoveAttraction = () => {
     const [isRideLoading, setRideLoading] = useState(true);
     const [isConcessionLoading, setConcessionLoading] = useState(true);
     const [isGiftshopLoading, setGiftshopLoading] = useState(true);
+    const [isZoneLoading, setZoneLoading] = useState(true);
 
     const [ridedata, setRideData] = useState([]);
+    const [zoneData, setZoneData] = useState([]);
     const [concessiondata, setConcessionData] = useState([]);
     const [giftshopdata, setGiftshopData] = useState([]);
     const [isOptionSelected, setIsOptionSelected] = useState(false);
@@ -62,6 +64,15 @@ const RemoveAttraction = () => {
     useEffect(() => {
         fetchgiftshopdata();
     }, []);
+    const fetchZoneData = async () => {
+        const response = await fetch('http://localhost:8080/zone/all');
+        const data = await response.json();
+        setZoneData(data);
+        setZoneLoading(false);
+    };
+    useEffect(() => {
+        fetchZoneData();
+    }, []);
 
     //render data
     const renderRideNameOptions = () => {
@@ -70,6 +81,15 @@ const RemoveAttraction = () => {
         return filteredItems.map((ride, index) => (
             <option key={index} value={ride.name}>
                 {ride.name}
+            </option>
+        ));
+    };
+    const renderZoneIdOptions = () => {
+        const items = zoneData.item;
+        const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
+        return uniqueZoneIds.map((zoneId, index) => (
+            <option key={index} value={zoneId}>
+                {zoneId}
             </option>
         ));
     };
@@ -119,6 +139,10 @@ const RemoveAttraction = () => {
     }
 
     if (isGiftshopLoading) {
+        return <div className="App">Loading...</div>;
+    }
+
+    if (isZoneLoading) {
         return <div className="App">Loading...</div>;
     }
 

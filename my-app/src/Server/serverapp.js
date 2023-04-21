@@ -31,14 +31,8 @@ const getHandlers = {
   '/ride/childActive': (req, res) => rideRoutes.getAllActiveKidsRides(req, res),
   '/ride/all': (req, res) => rideRoutes.getAllRides(req, res),
   '/concession/all': (req, res) => concessionRoutes.getConcession(req, res),
-  '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res)
-}
-
-// All PUT request
-const putHandlers = {
-  '/employee/update': (req, res) => employeeRoutes.updateEmployee(req, res),
-  '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
-
+  '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res),
+  '/zone/all': (req, res) => rideRoutes.getZones(req, res)
 }
 
 // All POST request
@@ -53,11 +47,8 @@ const postHandlers = {
   '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
   '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
-
-}
-
-// All DELETE request
-const deleteHandlers = {
+  '/employee/update': (req, res) => employeeRoutes.updateEmployee(req, res),
+  '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
   '/ticket/remove': (req, res) => ticketRoutes.removeTicket(req, res),
   '/employee/remove': (req, res) => employeeRoutes.removeEmployee(req, res)
 }
@@ -65,7 +56,6 @@ const deleteHandlers = {
 const server = http.createServer(async (req, res) => {
   searchURL = req.url.split('?')[0]
   const getHandler = getHandlers[searchURL];
-  const putHandler = putHandlers[searchURL];
   const postHandler = postHandlers[searchURL];
   const deleteHandler = deleteHandlers[searchURL];
   res.setHeader('Access-Control-Allow-Origin', '*');
