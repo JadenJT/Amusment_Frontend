@@ -2,30 +2,80 @@ import React, { useState, useEffect } from 'react';
 import './Report.css'
 
 export default function MaintenanceReport(){
-    const [mainValue, setMainValue] = useState([]);
-    const [show, setShow] = useState(false);
 
+    const [dbValue, setDBValue] = useState([]);
+    //Shows Table
+    const [show, setShow] = useState(false);
+    //Shows Data
+    const [showData, setShowData] = useState(false);
+    //Error Messages
     const[errMainStartDate, setErrMainStartDate] = useState("");    
     const[errMainStartMargin, setErrMainStartMargin] = useState("");
     const[errMainEndDate, setErrMainEndDate] = useState("");
     const[errMainEndMargin, setErrMainEndMargin] = useState("");
+    //Report Inputs
+    let [inputRide, setInputRide] = useState("");
+    let [inputZone, setInputZone] = useState("");
+    let [inputStartDate, setInputStartDate] = useState("");
+    let [inputEndDate, setInputEndDate] = useState("");
+    //Dropdown Arrays
+    const arrRide = [];
+    const arrZone = [];
 
-    let [mainRide, setMainRide] = useState("");
-    let [mainZoneType, setMainZoneType] = useState("");
-    let [mainStartDate, setMainStartDate] = useState("");
-    let [mainEndDate, setMainEndDate] = useState("");
+    const getMaintenanceData = async () => {
 
-    const maintenanceSubmit = async (e)=> {        
-        e.preventDefault();
+        let rName = inputRide;
+        let rZone = inputZone;
+        let sDate = inputStartDate;
+        let eDate = inputEndDate;
 
         let jCode = null;
-        if(mainRide === '') mainRide = null;
-        if(mainZoneType === '') mainZoneType = null;
-        if(mainStartDate === '') mainStartDate = null;
-        if(mainEndDate === '') mainEndDate = null;
+        if(rName === 'all') rName = null;
+        if(rZone === 'all') rZone = null;
+        if(sDate === '') sDate = null;
+        if(eDate === '') eDate = null;
 
+        const maintenanceFormData = {
+            job_code: jCode,
+            ride_name: rName,
+            zone: rZone,
+            start_date: sDate,
+            end_date: eDate
+        }        
+        const response = await fetch('http://localhost:8080/maintenance/report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(maintenanceFormData)
+            });
+        const responseData = await response.json();
 
-        if(mainStartDate == null && mainEndDate != null){
+        setDBValue(responseData);
+    }
+    //Get the data first to build the report requirements
+    getMaintenanceData();
+
+    //Will put data.values in an array for the dropdown menues
+    dbValue.map((data) => {
+        if(!arrRide.includes(data.ride_name)){
+            arrRide.push(data.ride_name);
+            arrRide.sort();
+        }
+    })
+    dbValue.map((data) => {
+        if(!arrZone.includes(data.zone)){
+            arrZone.push(data.zone);
+            arrZone.sort();
+        }
+    })
+
+    //Gets data with user requirments
+    const maintenanceSubmit = (e)=> {        
+        e.preventDefault();        
+
+        //Checks for both dates
+        if(inputStartDate === '' && inputEndDate !== ''){
             //error, tell user to enter START 
             setErrMainStartDate("Please enter a start date.");
             setErrMainStartMargin(".25em");
@@ -34,7 +84,7 @@ export default function MaintenanceReport(){
             
             setShow(false);
         }
-        else if(mainStartDate != null && mainEndDate == null){
+        else if(inputStartDate !== '' && inputEndDate === ''){
             //error, tell user to enter END
             setErrMainStartDate("");
             setErrMainStartMargin("");
@@ -49,25 +99,15 @@ export default function MaintenanceReport(){
             setErrMainEndDate("");
             setErrMainEndMargin("");
             
+            getMaintenanceData();
             setShow(true);
 
-            const maintenanceFormData = {
-                job_code: jCode,
-                ride_name: mainRide,
-                zone: mainZoneType,
-                start_date: mainStartDate,
-                end_date: mainEndDate
+            //See if any data is available
+            if(dbValue.length > 0){
+                setShowData(true);
             }
-            
-            const response = await fetch('http://localhost:8080/maintenance/report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(maintenanceFormData)
-                });
-            setMainValue(await response.json());
-
+            else
+                setShowData(false);
         }
     }
 
@@ -81,20 +121,24 @@ export default function MaintenanceReport(){
                     <div className='formCard'>
                         <div>
                             <h3>Ride Name: </h3>                           
-                            <select className='formInput' value={mainRide} onChange={(e) => setMainRide(e.target.value)}>
+                            <select className='formInput' value={inputRide} onChange={(e) => setInputRide(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='ride1'>Ride1</option>
-                                <option value='ride2'>Ride2</option>
-                                <option value='ride3'>Ride3</option>
+                                {arrRide.map((data)=> {
+                                    return(
+                                        <option value={data}>{data}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                         <div>
                             <h3>Choose Zone: </h3>
-                            <select className='formInput' value={mainZoneType} onChange={(e) => setMainZoneType(e.target.value)}>
+                            <select className='formInput' value={inputZone} onChange={(e) => setInputZone(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='a'>A</option>
-                                <option value='b'>B</option>
-                                <option value='c'>C</option>
+                                {arrZone.map((data)=> {
+                                    return(
+                                        <option value={data}>{data}</option>
+                                    )
+                                })}
                             </select>                    
                         </div>
                         <div>
@@ -102,8 +146,8 @@ export default function MaintenanceReport(){
                             <input
                                 type='date'
                                 className='formInput'
-                                value={mainStartDate}
-                                onChange={(e) => setMainStartDate(e.target.value)}
+                                value={inputStartDate}
+                                onChange={(e) => setInputStartDate(e.target.value)}
                                 style={{marginBottom: errMainStartMargin}}>
                             </input>
                             <div className='errMainDate'>{errMainStartDate}</div>
@@ -113,8 +157,8 @@ export default function MaintenanceReport(){
                             <input
                                 type='date'
                                 className='formInput'
-                                value={mainEndDate}
-                                onChange={(e) => setMainEndDate(e.target.value)}
+                                value={inputEndDate}
+                                onChange={(e) => setInputEndDate(e.target.value)}
                                 style={{marginBottom: errMainEndMargin}}>
                             </input>
                             <div className='errMainDate'>{errMainEndDate}</div>
@@ -128,13 +172,13 @@ export default function MaintenanceReport(){
             <br></br>
 
            {show?
-                <>
-                    <div className='tableCard'>
-                        <div className='searchForm'>
-                            <span className='lookUp'>RIDE_NAME:</span> {mainRide}&ensp;
-                            <span className='lookUp'>ZONE:</span> {mainZoneType}&ensp;
-                            <span className='lookUp'>DATE:</span> {mainStartDate} - {mainEndDate} 
-                        </div>
+                <div className='tableCard'>
+                    <div className='searchForm'>
+                        <span className='lookUp'>RIDE_NAME:</span> {inputRide}&ensp;
+                        <span className='lookUp'>ZONE:</span> {inputZone}&ensp;
+                        <span className='lookUp'>DATE:</span> {inputStartDate} - {inputEndDate} 
+                    </div>
+                    {showData?
                         <table className='tableInfo'>
                             <thead>
                                 <tr>
@@ -146,14 +190,13 @@ export default function MaintenanceReport(){
                                 </tr>
                             </thead>
                             <tbody>
-                                {mainValue.map((data, index)=> {
+                                {dbValue.map((data, index)=> {
                                         return(
                                             <tr key={index}>
                                                 <td type="text">{data.job_code}</td>
-                                                <td type="text">{data.zone}</td>
                                                 <td type="text">{data.ride_name}</td>
-                                                <td type="text">{data.mainStartDate}</td>
-                                                <td type="text">{data.mainEndDate}</td>
+                                                <td type="text">{data.zone}</td>
+                                                <td type="text">{data.start_date}</td>
                                             </tr>
                                     )
                                 })}
@@ -162,12 +205,14 @@ export default function MaintenanceReport(){
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td><h3>{mainValue.length}</h3></td>
+                                <td><h3>{dbValue.length}</h3></td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
-                </>
+                    :
+                        <h2 className='noData'>NO MATCHING DATA</h2>
+                    }
+                </div>
             :null}
         </>
     )

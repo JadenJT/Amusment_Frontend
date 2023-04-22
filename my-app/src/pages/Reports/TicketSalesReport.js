@@ -2,40 +2,98 @@ import React, { useState, useEffect } from 'react';
 import './Report.css'
 
 export default function TicketSalesReport(){
-    const [ticketValue, setTicketValue] = useState([]);
+    const [dbValue, setDBValue] = useState([]);
+    //Shows Table
     const [show, setShow] = useState(false);
-
+    //Shows Data
+    const [showData, setShowData] = useState(false);
+    //Error Messages
     const[errTicketStartDate, setErrTicketStartDate] = useState("");    
     const[errTicketStartMargin, setErrTicketStartMargin] = useState("");
     const[errTicketEndDate, setErrTicketEndDate] = useState("");
     const[errTicketEndMargin, setErrTicketEndMargin] = useState("");
+    //Report Inputs
+    let [inputRide, setInputRide] = useState("");
+    let [inputType, setInputType] = useState("");
+    let [inputZone, setInputZone] = useState("");
+    let [inputStartDate, setInputStartDate] = useState("");
+    let [inputEndDate, setInputEndDate] = useState("");
+    //Drowdown Arrays
+    const arrRide = [];
+    const arrType = [];
+    const arrZone = [];
 
-    let [ticketRide, setTicketRide] = useState("");
-    let [ticketRideType, setTicketRideType] = useState("");
-    let [ticketZoneType, setTicketZoneType] = useState("");
-    let [ticketStartDate, setTicketStartDate] = useState("");
-    let [ticketEndDate, setTicketEndDate] = useState("");
+    const getTicketSalesData = async () => {
+        let tkID = null;
+        let rName = inputRide;        
+        let rZone = inputZone;
+        let rType = inputType;
+        let sDate = inputStartDate;
+        let eDate = inputEndDate;
 
-    const ticketSubmit = async (e)=> {
-        e.preventDefault();
-
-        if(ticketRide === 'all') ticketRide = null;
-        switch(ticketRideType){
+        if(rName === 'all') rName = null;
+        switch(rType){
             case "all":
-                ticketZoneType = null;
+                rType = null;
                 break;
             case "adult":
-                ticketZoneType = 45;
+                rType = 45;
                 break;
             case "child":
-                ticketZoneType = 35;
+                rType = 30;
                 break;
         }
-        if(ticketZoneType == 'all') ticketZoneType = null;     
-        if(ticketStartDate == '') ticketStartDate = null;
-        if(ticketEndDate == '') ticketEndDate = null;
+        if(rZone === 'all') rZone = null;     
+        if(sDate === '') sDate = null;
+        if(eDate === '') eDate = null;
 
-        if(ticketStartDate == null && ticketEndDate != null){
+        const ticketFormData = {
+            ride_name: rName,
+            zone: rZone,
+            ride_type: rType,  // (30 = Child, 45 = Adult)
+            start_date: sDate, // (The times are 24Hr time.)
+            end_date: eDate
+        }
+        
+        const response = await fetch('http://localhost:8080/ticket/report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ticketFormData)
+            });
+        const responseData = await response.json();
+
+        setDBValue(responseData);
+    }
+
+    //Get the data first to build the report requirements
+    getTicketSalesData();
+
+    //Will put data.values in an array for the dropdown menues
+    dbValue.map((data) => {
+        if(!arrRide.includes(data.ride_name)){
+            arrRide.push(data.ride_name);
+            arrRide.sort();
+        }
+    })
+    dbValue.map((data) => {
+        if(!arrType.includes(data.ride_type)){
+            arrType.push(data.ride_type);
+            arrType.sort();
+        }
+    })
+    dbValue.map((data) => {
+        if(!arrZone.includes(data.zone)){
+            arrZone.push(data.zone);
+            arrZone.sort();
+        }
+    })
+
+    const ticketSubmit = async (e)=> {
+        e.preventDefault();        
+
+        if(inputStartDate === '' && inputEndDate !== ''){
             //error, tell user to enter START 
             setErrTicketStartDate("Please enter a start date.");
             setErrTicketStartMargin(".25em");
@@ -44,7 +102,7 @@ export default function TicketSalesReport(){
 
             setShow(false);
         }
-        else if(ticketStartDate != null && ticketEndDate == null){
+        else if(inputStartDate !== '' && inputEndDate === ''){
             //error, tell user to enter END
             setErrTicketStartDate("");
             setErrTicketStartMargin("");
@@ -59,24 +117,15 @@ export default function TicketSalesReport(){
             setErrTicketEndDate("");
             setErrTicketEndMargin("");
 
+            getTicketSalesData();
             setShow(true);
 
-            const ticketFormData = {
-                ride_name: ticketRide,
-                zone: ticketZoneType,
-                ride_type: ticketRideType,  // (30 = Child, 45 = Adult)
-                start_date: ticketStartDate, // (The times are 24Hr time.)
-                end_date: ticketEndDate
+            //See if any data is available
+            if(dbValue.length > 0){
+                setShowData(true);
             }
-            
-            const response = await fetch('http://localhost:8080/ticket/report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(ticketFormData)
-                });
-            setTicketValue(await response.json());
+            else
+                setShowData(false);
         }
     }
 
@@ -90,28 +139,35 @@ export default function TicketSalesReport(){
                     <div className='formCard'>
                         <div>
                          <h3>Ride Name: </h3>                           
-                            <select className='formInput' value={ticketRide} onChange={(e) => setTicketRide(e.target.value)}>
+                            <select className='formInput' value={inputRide} onChange={(e) => setInputRide(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='ride1'>Ride1</option>
-                                <option value='ride2'>Ride2</option>
-                                <option value='ride3'>Ride3</option>
+                                {arrRide.map((data)=> {
+                                    return(
+                                        <option value={data}>{data}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                         <div>
                             <h3>Ride Type: </h3>
-                            <select className='formInput' value={ticketRideType} onChange={(e) => setTicketRideType(e.target.value)}>
+                            <select className='formInput' value={inputType} onChange={(e) => setInputType(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='adult'>Adult</option>
-                                <option value='child'>Child</option>
+                                {arrType.map((data)=> {
+                                    return(
+                                        <option value={data}>{data}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                         <div>
                         <h3>Choose Zone: </h3>
-                            <select className='formInput' value={ticketZoneType} onChange={(e) => setTicketZoneType(e.target.value)}>
+                            <select className='formInput' value={inputZone} onChange={(e) => setInputZone(e.target.value)}>
                                 <option value='all'>All</option>
-                                <option value='a'>A</option>
-                                <option value='b'>B</option>
-                                <option value='c'>C</option>
+                                {arrZone.map((data)=> {
+                                    return(
+                                        <option value={data}>{data}</option>
+                                    )
+                                })}
                             </select>  
                         </div>
                         <div>
@@ -119,8 +175,8 @@ export default function TicketSalesReport(){
                             <input
                                 type='date'
                                 className='formInput'
-                                value={ticketStartDate}
-                                onChange={(e) => setTicketStartDate(e.target.value)}
+                                value={inputStartDate}
+                                onChange={(e) => setInputStartDate(e.target.value)}
                                 style={{marginBottom: errTicketStartMargin}}>
                             </input>
                             <div className='errTicketDate'>{errTicketStartDate}</div>
@@ -130,8 +186,8 @@ export default function TicketSalesReport(){
                             <input
                                 type='date'
                                 className='formInput'
-                                value={ticketEndDate}
-                                onChange={(e) => setTicketEndDate(e.target.value)}
+                                value={inputEndDate}
+                                onChange={(e) => setInputEndDate(e.target.value)}
                                 style={{marginBottom: errTicketEndMargin}}>
                             </input>
                             <div className='errTicketDate'>{errTicketEndDate}</div>
@@ -147,42 +203,46 @@ export default function TicketSalesReport(){
             {show?
                 <div className='tableCard'>
                     <div className='searchForm'>
-                        <span className='lookUp'>RIDE_NAME:</span> {ticketRide}&emsp;
-                        <span className='lookUp'>RIDE_TYPE:</span> {ticketRideType}&emsp;
-                        <span className='lookUp'>ZONE:</span> {ticketZoneType}&emsp;
-                        <span className='lookUp'>DATE:</span> {ticketStartDate} - {ticketEndDate}
+                        <span className='lookUp'>RIDE_NAME:</span> {inputRide}&emsp;
+                        <span className='lookUp'>RIDE_TYPE:</span> {inputType}&emsp;
+                        <span className='lookUp'>ZONE:</span> {inputZone}&emsp;
+                        <span className='lookUp'>DATE:</span> {inputStartDate} - {inputEndDate}
                     </div>
-                    <table className='tableInfo'>
-                        <thead>
-                            <tr>
-                                <th>Ride Name</th>
-                                <th>Ride Type</th>
-                                <th>Zone</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {ticketValue.map((data, index)=> {
-                                return(
-                                    <tr key={index}>
-                                        <td type="text">{data.ride_name}</td>
-                                        <td type="text">{data.zone}</td>
-                                        <td type="text">{data.ride_type}</td>
-                                        <td type="text">{data.start_date}</td>
-                                        <td type="text">{data.end_date}</td>
-                                    </tr>
-                                )
-                            })}
-                            <tr>
-                                <td><h3>Total Tickets</h3></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td><h3>{ticketValue.length}</h3></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    {showData?
+                        <table className='tableInfo'>
+                            <thead>
+                                <tr>
+                                    <th>Ride Name</th>
+                                    <th>Ride Type</th>
+                                    <th>Zone</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {dbValue.map((data, index)=> {
+                                    return(
+                                        <tr key={index}>
+                                            <td type="text">{data.ride_name}</td>
+                                            <td type="text">{data.ride_type}</td>
+                                            <td type="text">{data.zone}</td>
+                                            <td type="text">{data.start_date}</td>
+                                            <td type="text">{data.end_date}</td>
+                                        </tr>
+                                    )
+                                })}
+                                <tr>
+                                    <td><h3>Total Tickets</h3></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><h3>{dbValue.length}</h3></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    :
+                        <h2 className='noData'>NO MATCHING DATA</h2>
+                    }
                 </div>
             :null}
         </>
