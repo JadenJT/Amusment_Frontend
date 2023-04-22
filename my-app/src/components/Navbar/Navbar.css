@@ -75,3 +75,48 @@
     transform: translate(100%, 30%);
 
 }
+
+/* 
+.clockinButton{
+    width: 6em;
+    height: 2.5em;
+    background-color:#07b142;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    transition-duration: 0.2s;
+    font-size: 13px;
+    box-shadow: 0 3px #000000;
+    color:#ffffff ;
+    outline: none;
+}
+.clockinButton:hover{
+    background-color:#057a2e;
+}
+.clockinButton:active{
+    box-shadow: 0 1px #000000;
+}
+
+.clockoutButton{
+    width: 6em;
+    height: 2.5em;
+    background-color:#b10707;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    transition-duration: 0.2s;
+    font-size: 13px;
+    box-shadow: 0 3px #000000;
+    color:#ffffff ;
+    outline: none;
+}
+.clockoutButton:hover{
+    background-color:#7a0505;
+}
+.clockoutButton:active{
+    box-shadow: 0 1px #000000;
+}*/ 
