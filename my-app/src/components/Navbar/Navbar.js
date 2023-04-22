@@ -42,13 +42,6 @@ function Navbar() {
           </div>
 
 
-          {/* <div className='Error404'>
-            <Link to='/error404' className='navbar-logo'>
-            Error404
-            </Link>
-          </div>*/}
-
-
           <div className='Rides'>
             <Link to='/rides' className='navbar-logo'>
               Rides
@@ -61,6 +54,16 @@ function Navbar() {
               Concessions
             </Link>
           </div>
+
+          {/*
+          <div className='clockinout'>
+            <button id='in' className='clockinButton'>
+              <span class='Text'> Clock In</span>
+            </button>
+            <button id='out' className='clockoutButton'>
+              <span class='Text'> Clock Out</span>
+            </button>
+          </div> */}
 
           {user != null && user.role_type == 'admin' &&
             <div className='admin'>

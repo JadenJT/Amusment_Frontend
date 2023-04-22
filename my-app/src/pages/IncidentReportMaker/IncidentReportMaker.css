@@ -1,0 +1,113 @@
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.description{
+    background-color: white;
+    width: 50em;
+    height: 47em;
+    position: relative;
+    border-radius: 1em;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+}
+
+.h1{
+    color: black;
+    padding: 2em;
+}
+
+.descContainer{
+    display:flex;
+}
+
+.labelDesc{
+    color:rgb(0, 0, 0);
+    padding-right: 10px;
+    font-size: 25px;
+    text-align: right;
+    position: relative;
+    margin-bottom: 10;
+    display: inline-block;
+    justify-content: left;
+    padding-left: 10px;
+    padding-bottom: 8em;
+}
+
+.descText{
+    width: 73%;
+    height: 90%;
+    border-radius: .25em;
+    border: none;
+    background-color: rgb(229, 226, 226);
+    text-align: left;
+    font-size: 16px;
+    padding: 1em;
+    display:flex;
+    resize: none;
+}
+
+.emailContainer{
+    display:flex;
+    padding-left: 6.18em;
+}
+
+.labelEmail{
+    color:rgb(0, 0, 0);
+    padding-right: 10px;
+    font-size: 25px;
+    text-align: right;
+    position: relative;
+    margin-bottom: 10;
+    display: inline-block;
+    justify-content: left;
+    padding-left: 10px;
+    padding-bottom: 1em;
+}
+
+.emailText{
+    width: 30%;
+    height: 50%;
+    border-radius: .25em;
+    border: none;
+    background-color: rgb(229, 226, 226);
+    text-align: left;
+    padding: 1em;
+    font-size: 16px;
+    display:flex;
+}
+
+.dateContainer{
+    display: flex;
+    padding-left: 6.90em;
+}
+
+.submitButton {
+    width: 17%;
+    height: 3em;
+    background-color: #0c0c0c;
+    color: white;
+    border: none;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+    margin: 3em auto .2em;
+}
+.submitButton:hover {
+    transform: scale(1.05);
+    background-color: #5448e0;
+}
+
+.errorMessage{
+    color: rgb(255, 255, 255);
+}

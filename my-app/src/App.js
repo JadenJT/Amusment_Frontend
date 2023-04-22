@@ -24,6 +24,8 @@ import { ShopContextProvider } from './components/cartContext/CartContext';
 import DbRides from './pages/test/DbRides';
 import DbConcession from './pages/test2/DbConcession';
 import DbZones from './pages/test3/dbZones';
+import IncidentReportMaker from './pages/IncidentReportMaker/IncidentReportMaker';
+
 
 
 export const UserContext = createContext(null);
@@ -77,6 +79,7 @@ function App() {
               <Route path="zone" element={<DbZones />} />
 
 
+              <Route path='IncidentReportMaker' element={<IncidentReportMaker/>} /> 
 
 
               {user.role_type == 'admin' &&
