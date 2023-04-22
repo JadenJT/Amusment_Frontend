@@ -1,95 +1,40 @@
 const db = require('../database');
 const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils");
-const ride = require('./ride');
 
 module.exports = {
     async buyTicket(req, res) {
+        const bodyData = await getReqData(req);
+        const ticketJSON = JSON.parse(bodyData);
+        const ticketList = ticketJSON[0];
 
-        DummyData = [
-            {
-                "ride_name": "Jungle Safari",
-                "tyoe": "Adult",
-                "email": "thai.jaden@gmail.com",
-                "dateTime": " 2023-04-21 17:00:00"
-            }
-            // {
-            //     "ride_name": "Jungle Safari",
-            //     "tyoe": "Adult",
-            //     "email": "thai.jaden@gmail.com",
-            //     "dateTime": " 2023-04-21 17:00:00"
-            // },
-            // {
-            //     "ride_name": "Jungle Safari",
-            //     "tyoe": "Adult",
-            //     "email": "thai.jaden@gmail.com",
-            //     "dateTime": " 2023-04-21 17:00:00"
-            // },
-            // {
-            //     "ride_name": "Jungle Safari",
-            //     "tyoe": "Adult",
-            //     "email": "thai.jaden@gmail.com",
-            //     "dateTime": " 2023-04-21 17:00:00"
-            // },
-            // {
-            //     "ride_name": "Jungle Safari",
-            //     "tyoe": "Adult",
-            //     "email": "thai.jaden@gmail.com",
-            //     "dateTime": " 2023-04-21 17:00:00"
-            // },
-            // {
-            //     "ride_name": "Jungle Safari",
-            //     "tyoe": "Adult",
-            //     "email": "thai.jaden@gmail.com",
-            //     "dateTime": " 2023-04-21 17:00:00"
-            // },
-            // {
-            //     "ride_name": "Jungle Safari",
-            //     "tyoe": "Adult",
-            //     "email": "thai.jaden@gmail.com",
-            //     "dateTime": " 2023-04-21 17:00:00"
-            // }
-        ]
+        const brokenTickets = [];
+        const inputtedTicket = [];
 
-        var brokenTickets = []
-        const inputtedTicket = []
 
-        const promises = await DummyData.map( async (values) => {
-            const [rows, fields] = await db.promise().execute(`SELECT ride_id FROM master.ride WHERE name = '${values.ride_name}'`)
-            var ride_id = rows[0].ride_id;
+        for (const values of ticketList) {
             var price = (values.type === "Adult") ? 30 : 17;
-            var queryData = [null, values.dateTime, price, ride_id, values.email]
-            let query = `INSERT INTO ticket(\`ticket_id\`, \`date\`, \`price\`, \`ride_id\`, \`customer_email\`) VALUES (NULL, '${values.dateTime}', ${price}, ${ride_id}, '${values.email}');`
+            let query = `INSERT INTO ticket(\`ticket_id\`, \`date\`, \`price\`, \`ride_id\`, \`customer_email\`) VALUES (NULL, '${values.dateTime}', ${price}, ${values.ride_name}, '${values.email}');`
             
-            const [rows2, fields2] = await db.promise().execute(query)
-            .catch()
-            brokenTickets.push(rows2)
-            // query += `(NULL, '${values.dateTime}', ${price}, ${ride_id}, '${values.email}');`
-        })
-        await Promise.all(promises)
-
-        console.log(brokenTickets)
-        // const [rows, fields, err] = await db.promise().execute(query)
-        // console.log(rows, fields, err)
-
-        return sendResponse(req, res, 201, 'Ticket(s) added');
-        // return sendResponse(req, res, 500, `Database error`, err);
-
-
-        // const bodyData = await getReqData(req);
-        // const newTicket = JSON.parse(bodyData);
-
-        // // const dateTime = new Date(); //This is only for testing purposes! Do NOT deploy to live site. 
-        // const queryData = [null, dateTime, newTicket.price, newTicket.ride_id, newTicket.email];
-
-        // db.query(
-        //     'INSERT INTO ticket(ticket_id, date, price, ride_id, email) VALUES (?);', [queryData],
-        //     function(err, result) {
-        //         if(err) return sendResponse(req, res, 500, `Database error`, err);
-        //         return sendResponse(req, res, 201, `Ticket added to customer ID: ${newTicket.customer_id}`, newTicket);
-        //     }
-        // )
-
+            try{
+                const [rows2, fields2] = await db.promise().execute(query)
+                inputtedTicket.push(rows2.insertId)
+            } catch (err) {
+                brokenTickets.push({
+                    "ride_name": values.ride_name,
+                    "dateTime": values.dateTime,
+                    "error": err.sqlState
+                })
+            }
+        }
+        if (brokenTickets.length !== 0) {
+            for (const ticket_id of inputtedTicket) {   
+                await db.promise().execute(`DELETE FROM master.ticket WHERE ticket_id = ${ticket_id}`)
+            }
+        } else {
+            return sendResponse(req, res, 201, "Tickets Added")
+        }
+        return sendResponse(req, res, 500, brokenTickets)
     },
 
     async ticketsOwn(req, res) {
