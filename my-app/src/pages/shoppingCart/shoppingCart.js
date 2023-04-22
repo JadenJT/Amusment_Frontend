@@ -7,25 +7,6 @@ import { UserContext } from '../../App';
 function ShoppingCart() {
     const { cartTotal } = useContext(ShopContext);
 
-    const handleOnSubmit = async (event) => {
-        event.preventDefault();
-
-        const personData = {
-            Ticket_amount: 1,
-            date: "2023-01-27 13:30:00",
-            ride_name: "",
-            email: "",
-        };
-
-        const response = await fetch('http://localhost:8080/ticket/buy', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(personData)
-        })
-
-    }
 
     return (
 
