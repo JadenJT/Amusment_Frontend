@@ -56,7 +56,7 @@ export default function IncidentReport(){
             setErrIncidentStartMargin(".25em");
             setErrIncidentEndDate("");
             setErrIncidentEndMargin("");
-            
+
             setShow(false);
         }
         else if(inputStartDate !== '' && inputEndDate === ''){
@@ -68,12 +68,12 @@ export default function IncidentReport(){
 
             setShow(false);
         }
-        else{
+        else {
             setErrIncidentStartDate("");
             setErrIncidentStartMargin("");
             setErrIncidentEndDate("");
             setErrIncidentEndMargin("");
-            
+
             setShow(true);
 
             //See if any data is available
@@ -85,7 +85,7 @@ export default function IncidentReport(){
         }
     }
 
-    return(
+    return (
         <>
             <div className='reportCard'>
                 <div>
@@ -94,7 +94,7 @@ export default function IncidentReport(){
                 <form onSubmit={incidentSubmit}>
                     <div className='formCard'>
                         <div>
-                            <h3>Email: </h3>                           
+                            <h3>Email: </h3>
                             <input
                                 type='input'
                                 className='formInput'
@@ -112,7 +112,7 @@ export default function IncidentReport(){
                                 onChange={(e) => setInputStartDate(e.target.value)}
                                 style={{marginBottom: errIncidentStartMargin}}>
                             </input>
-                            <div className='errIncidentDate'>{errIncidentStartDate}</div>          
+                            <div className='errIncidentDate'>{errIncidentStartDate}</div>
                         </div>
                         <div>
                             <h3>End Date: </h3>
@@ -126,11 +126,11 @@ export default function IncidentReport(){
                             <div className='errIncidentDate'>{errIncidentEndDate}</div>
                         </div>
                     </div>
-                    
+
                     <button className='submit'>Submit</button>
                 </form>
             </div>
-            
+
             <br></br>
 
            {show?

@@ -111,7 +111,7 @@ export default function TicketSalesReport(){
 
             setShow(false);
         }
-        else{
+        else {
             setErrTicketStartDate("");
             setErrTicketStartMargin("");
             setErrTicketEndDate("");
@@ -129,7 +129,7 @@ export default function TicketSalesReport(){
         }
     }
 
-    return(
+    return (
         <>
             <div className='reportCard'>
                 <div>
@@ -193,14 +193,14 @@ export default function TicketSalesReport(){
                             <div className='errTicketDate'>{errTicketEndDate}</div>
                         </div>
                     </div>
-                    
+
                     <button className='submit'>Submit</button>
                 </form>
             </div>
-            
+
             <br></br>
 
-            {show?
+            {show ?
                 <div className='tableCard'>
                     <div className='searchForm'>
                         <span className='lookUp'>RIDE_NAME:</span> {inputRide}&emsp;
@@ -244,7 +244,7 @@ export default function TicketSalesReport(){
                         <h2 className='noData'>NO MATCHING DATA</h2>
                     }
                 </div>
-            :null}
+                : null}
         </>
     )
 }

@@ -58,7 +58,6 @@ const postHandlers = {
 
   '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
 
-  '/ticket/remove': (req, res) => ticketRoutes.removeTicket(req, res),
   '/employee/remove': (req, res) => employeeRoutes.removeEmployee(req, res),
   '/ride/delete': (req, res) => rideRoutes.deleteRide(req, res),
   '/concession/delete': (req, res) => concessionRoutes.deleteConcession(req, res),

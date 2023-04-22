@@ -22,9 +22,9 @@ module.exports = {
         }
     },
     async getJob(req, res) {
-        const bodyData = await getReqData(req);
-        const jobJSON = JSON.parse(bodyData);  
-        const email = jobJSON.email;
+        const parsedURL = url.parse(req.url)
+        const urlParams = querystring.parse(parsedURL.query)
+        const email = urlParams.email;
 
         const query = `SELECT J.* FROM master.job AS J, master.person as P WHERE J.job_completed = FALSE AND (CONCAT(P.f_name, ' ', l_name)) = J.worker AND P.email = ?;`
 

@@ -84,7 +84,7 @@ export default function EmployeeReport(){
             setShowData(false);
     }
 
-    return(
+    return (
         <>
             <div className='reportCard'>
                 <div>
@@ -116,8 +116,8 @@ export default function EmployeeReport(){
                             <h3>Job Location: </h3>
                             <select className='formInput' value={inputLocation} onChange={(e) => setInputLocation(e.target.value)}>
                                 <option value='all'>All</option>
-                                {arrLocation.map((data)=> {
-                                    return(
+                                {arrLocation.map((data) => {
+                                    return (
                                         <option value={data}>{data}</option>
                                     )
                                 })}
@@ -127,11 +127,11 @@ export default function EmployeeReport(){
                             <h3>Job Role: </h3>
                             <select className='formInput' value={inputRole} onChange={(e) => setInputRole(e.target.value)}>
                                 <option value='all'>All</option>
-                                {arrRole.map((data)=> {
-                                    return(
+                                {arrRole.map((data) => {
+                                    return (
                                         <option value={data}>{data}</option>
                                     )
-                                })}                                
+                                })}
                             </select>
                         </div>
                         <div>
@@ -145,14 +145,14 @@ export default function EmployeeReport(){
                             </input>
                         </div>
                     </div>
-                    
+
                     <button className='submit'>Submit</button>
                 </form>
             </div>
 
             <br></br>
-            
-            {show?
+
+            {show ?
                 <div className='tableCard'>
                     <div className='searchForm'>
                         <span className='lookUp'>FIRST:</span> {inputFirst}&emsp;
@@ -161,7 +161,7 @@ export default function EmployeeReport(){
                         <span className='lookUp'>JOB_ROLE:</span> {inputRole}&emsp;
                         <span className='lookUp'>EMAIL:</span> {inputMail}
                     </div>
-                    {showData?
+                    {showData ?
                         <table className='tableInfo'>
                             <thead>
                                 <tr>
@@ -184,11 +184,11 @@ export default function EmployeeReport(){
                                 })}
                             </tbody>
                         </table>
-                    :
+                        :
                         <h2 className='noData'>NO MATCHING DATA</h2>
                     }
                 </div>
-            :null}
+                : null}
         </>
     )
 }

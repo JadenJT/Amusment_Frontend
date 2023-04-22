@@ -35,191 +35,278 @@ export default function Zone() {
                 <img src={Logo} alt="park logo" className="wLogo"></img>
             </div>
 
-            <div className="zBody">
-                <div className="zSection">
-                    <h1 className="zName">Zone A</h1>
-                    <div className="zContainer">
-                        <div className="zCard">
-                            <div><img className="view" src={SkyBlade} alt="SkyBlade"></img></div>
-                            <div><h3>SkyBlade</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={VortexX} alt="VortexX"></img></div>
-                            <div><h3>VortexX</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={Thunderbolt} alt="Thunderbolt"></img></div>
-                            <div><h3>Thunderbolt</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={RainbowSwirl} alt="Rainbow Swirl"></img></div>
-                            <div><h3>Rainbow Swirl</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={JungleSafari} alt="Jungle Safari"></img></div>
-                            <div><h3>Jungle Safari</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={WonderTreats} alt="concession"></img></div>
-                            <div><h3>Wonder Treats</h3></div>
-                            <div>Type: Concession</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                                <div><img className="view" src={SpectacularSnacks} alt="concession"></img></div>
-                                <div><h3>Spectacular Snacks</h3></div>
-                                <div>Type: Concession</div>
-                                <div>Location: Zone A</div>
-                                <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={GiftShop1} alt="gift shop"></img></div>                    
-                            <div><h3>Gift Shop A</h3></div>
-                            <div>Type: GiftShop</div>
-                            <div>Location: Zone A</div>
-                            <div>Status: Open</div>
-                        </div>
+            <div className="zoneA">
+                <h1 className="zName">Zone A</h1>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={SkyBlade} alt="SkyBlade"></img></li>
+                            <li><h3>SkyBlade</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
                     </div>
                 </div>
-
-                <div className="zSection">
-                    <h1 className="zName">Zone B</h1>
-                    <div className="zContainer">
-                        <div className="zCard">
-                            <div><img className="view" src={GForce} alt="G Force"></img></div>
-                            <div><h3>G-Force</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={WarpZone} alt="Warp Zone"></img></div>
-                            <div><h3>WarpZone</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={Wildfire} alt="Wildfire"></img></div>
-                            <div><h3>Wildfire</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={PiratePlunge} alt="Pirate Plunde"></img></div>
-                            <div><h3>Pirate Plunge</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={SpaceExplorer} alt="Space Explorer"></img></div>
-                            <div><h3>Space Explorer</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={IncredibleEats} alt="concession"></img></div>
-                            <div><h3>Incredible Eats</h3></div>
-                            <div>Type: Concession</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={EnchantedDelights} alt="concession"></img></div>
-                            <div><h3>Enchanted Delights</h3></div>
-                            <div>Type: Concession</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={GiftShop2} alt="gift shop"></img></div>
-                            <div><h3>Gift Shop B</h3></div>
-                            <div>Type: GiftShop</div>
-                            <div>Location: Zone B</div>
-                            <div>Status: Open</div>
-                        </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={VortexX} alt="VortexX"></img></li>
+                            <li><h3>VortexX</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
                     </div>
                 </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={Thunderbolt} alt="Thunderbolt"></img></li>
+                            <li><h3>Thunderbolt</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={RainbowSwirl} alt="Rainbow Swirl"></img></li>
+                            <li><h3>Rainbow Swirl</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={JungleSafari} alt="Jungle Safari"></img></li>
+                            <li><h3>Jungle Safari</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={WonderTreats} alt="concession"></img></li>
+                            <li><h3>Wonder Treats</h3></li>
+                            <li>Type: Concession</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={SpectacularSnacks} alt="concession"></img></li>
+                            <li><h3>Spectacular Snacks</h3></li>
+                            <li>Type: Concession</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={GiftShop1} alt="gift shop"></img></li>
+                            <li><h3>Gift Shop A</h3></li>
+                            <li>Type: GiftShop</li>
+                            <li>Location: Zone A</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-                <div className="zSection">
-                    <h1 className="zName">Zone C</h1>
-                    <div className="zContainer">
-                        <div className="zCard">
-                            <div><img className="view" src={AeroJet} alt="AeroJet"></img></div>
-                            <div><h3>AeroJet</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={CosmicCruiser} alt="Cosmic Cruiser"></img></div>
-                            <div><h3>Cosmic Cruiser</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={Inferno} alt="Inferno"></img></div>
-                            <div><h3>Inferno</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={DragonsLair} alt="Dragons Lair"></img></div>
-                            <div><h3>Dragons Lair</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={DinoAdventure} alt="Dino Adventure"></img></div>
-                            <div><h3>Dino Adventure</h3></div>
-                            <div>Type: Rollercoaster</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={EpicureanAdventures} alt="concession"></img></div>
-                            <div><h3>Epicurean Adventures</h3></div>
-                            <div>Type: Concession</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                            <div><img className="view" src={MarvelousMeals} alt="concession"></img></div>
-                            <div><h3>Marvelous Meals</h3></div>
-                            <div>Type: Concession</div>
-                            <div>Location: Zone C</div>
-                            <div>Status: Open</div>
-                        </div>
-                        <div className="zCard">
-                                <div><img className="view" src={GiftShop3} alt="gift shop"></img></div>
-                                <div><h3>Gift Shop C</h3></div>
-                                <div>Type: GiftShop</div>
-                                <div>Location: Zone C</div>
-                                <div>Status: Open</div>
-                        </div>
+            <div className="zoneB">
+                <h1 className="zName">Zone B</h1>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={GForce} alt="G Force"></img></li>
+                            <li><h3>G-Force</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={WarpZone} alt="Warp Zone"></img></li>
+                            <li><h3>WarpZone</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={Wildfire} alt="Wildfire"></img></li>
+                            <li><h3>Wildfire</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={PiratePlunge} alt="Pirate Plunde"></img></li>
+                            <li><h3>Pirate Plunge</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={SpaceExplorer} alt="Space Explorer"></img></li>
+                            <li><h3>Space Explorer</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={IncredibleEats} alt="concession"></img></li>
+                            <li><h3>Incredible Eats</h3></li>
+                            <li>Type: Concession</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={EnchantedDelights} alt="concession"></img></li>
+                            <li><h3>Enchanted Delights</h3></li>
+                            <li>Type: Concession</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={GiftShop2} alt="gift shop"></img></li>
+                            <li><h3>Gift Shop B</h3></li>
+                            <li>Type: GiftShop</li>
+                            <li>Location: Zone B</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
+            <div className="zoneC">
+                <h1 className="zName">Zone C</h1>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={AeroJet} alt="AeroJet"></img></li>
+                            <li><h3>AeroJet</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={CosmicCruiser} alt="Cosmic Cruiser"></img></li>
+                            <li><h3>Cosmic Cruiser</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={Inferno} alt="Inferno"></img></li>
+                            <li><h3>Inferno</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={DragonsLair} alt="Dragons Lair"></img></li>
+                            <li><h3>Dragons Lair</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={DinoAdventure} alt="Dino Adventure"></img></li>
+                            <li><h3>Dino Adventure</h3></li>
+                            <li>Type: Rollercoaster</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={EpicureanAdventures} alt="concession"></img></li>
+                            <li><h3>Epicurean Adventures</h3></li>
+                            <li>Type: Concession</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={MarvelousMeals} alt="concession"></img></li>
+                            <li><h3>Marvelous Meals</h3></li>
+                            <li>Type: Concession</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="card">
+                        <ul>
+                            <li><img className="view" src={GiftShop3} alt="gift shop"></img></li>
+                            <li><h3>Gift Shop C</h3></li>
+                            <li>Type: GiftShop</li>
+                            <li>Location: Zone C</li>
+                            <li>Status: Open</li>
+                        </ul>
                     </div>
                 </div>
             </div>

@@ -81,7 +81,7 @@ export default function MaintenanceReport(){
             setErrMainStartMargin(".25em");
             setErrMainEndDate("");
             setErrMainEndMargin("");
-            
+
             setShow(false);
         }
         else if(inputStartDate !== '' && inputEndDate === ''){
@@ -93,7 +93,7 @@ export default function MaintenanceReport(){
 
             setShow(false);
         }
-        else{
+        else {
             setErrMainStartDate("");
             setErrMainStartMargin("");
             setErrMainEndDate("");
@@ -111,7 +111,7 @@ export default function MaintenanceReport(){
         }
     }
 
-    return(
+    return (
         <>
             <div className='reportCard'>
                 <div>
@@ -164,11 +164,11 @@ export default function MaintenanceReport(){
                             <div className='errMainDate'>{errMainEndDate}</div>
                         </div>
                     </div>
-                    
+
                     <button className='submit'>Submit</button>
                 </form>
             </div>
-            
+
             <br></br>
 
            {show?
