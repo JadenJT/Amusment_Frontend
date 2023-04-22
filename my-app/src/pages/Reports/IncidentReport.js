@@ -1,31 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import './Report.css'
 
-export default function IncidentReport() {
-    const [incidentValue, setIncidentValue] = useState([]);
+export default function IncidentReport(){
+
+    const [dbValue, setDBValue] = useState([]);
+    //Shows Table
     const [show, setShow] = useState(false);
+    //Shows Data
+    const [showData, setShowData] = useState(false);
+    //Error Messages
+    const[errIncidentStartDate, setErrIncidentStartDate] = useState("");    
+    const[errIncidentStartMargin, setErrIncidentStartMargin] = useState("");
+    const[errIncidentEndDate, setErrIncidentEndDate] = useState("");
+    const[errIncidentEndMargin, setErrIncidentEndMargin] = useState("");
+    //Report Inputs
+    let [inputEmail, setInputEmail] = useState("");
+    let [inputStartDate, setInputStartDate] = useState("");
+    let [inputEndDate, setInputEndDate] = useState("");
 
-    const [errIncidentStartDate, setErrIncidentStartDate] = useState("");
-    const [errIncidentStartMargin, setErrIncidentStartMargin] = useState("");
-    const [errIncidentEndDate, setErrIncidentEndDate] = useState("");
-    const [errIncidentEndMargin, setErrIncidentEndMargin] = useState("");
+    const getIncidentData = async () => {
+        let incdMail = inputEmail;
+        let sDate = inputStartDate;
+        let eDate = inputEndDate;
 
-    // let [incidentName, setIncidentName] = useState("");
-    // let [incidentLocation, setIncidentLocation] = useState("");
-    let [incidentEmail, setIncidentEmail] = useState("");
-    let [incidentStartDate, setIncidentStartDate] = useState("");
-    let [incidentEndDate, setIncidentEndDate] = useState("");
+        if(incdMail === '') incdMail = null;
+        if(sDate === '') sDate = null;
+        if(eDate === '') eDate = null;
 
-    const incidentSubmit = async (e) => {
-        e.preventDefault();
+        const incidentFormData = {
+            email: incdMail,
+            start_date: sDate,
+            end_date: eDate
+        }        
+        const response = await fetch('http://localhost:8080/incident/report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(incidentFormData)
+            });
+        const responseData = await response.json();
 
-        // if(incidentName === '') incidentName = null;
-        // if(incidentLocation === '') incidentLocation = null;
-        if (incidentEmail === '') incidentEmail = null;
-        if (incidentStartDate === '') incidentStartDate = null;
-        if (incidentEndDate === '') incidentEndDate = null;
+        setDBValue(responseData);
+    }
+    //Get the data first to build the report requirements
+    getIncidentData();
 
-        if (incidentStartDate == null && incidentEndDate != null) {
+    const incidentSubmit = async (e)=> {        
+        e.preventDefault();        
+
+        //Checks for both dates
+        if(inputStartDate === '' && inputEndDate !== ''){
             //error, tell user to enter START 
             setErrIncidentStartDate("Please enter a start date.");
             setErrIncidentStartMargin(".25em");
@@ -34,7 +59,7 @@ export default function IncidentReport() {
 
             setShow(false);
         }
-        else if (incidentStartDate != null && incidentEndDate == null) {
+        else if(inputStartDate !== '' && inputEndDate === ''){
             //error, tell user to enter END
             setErrIncidentStartDate("");
             setErrIncidentStartMargin("");
@@ -51,20 +76,12 @@ export default function IncidentReport() {
 
             setShow(true);
 
-            const incidentFormData = {
-                // name: incidentName,
-                // date: incidentDate,
-                // location: incidentLocation
+            //See if any data is available
+            if(dbValue.length > 0){
+                setShowData(true);
             }
-
-            const response = await fetch('http://localhost:8080/incident/report', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(incidentFormData)
-            });
-            setIncidentValue(await response.json());
+            else
+                setShowData(false);
         }
     }
 
@@ -82,8 +99,8 @@ export default function IncidentReport() {
                                 type='input'
                                 className='formInput'
                                 placeholder='example@email.com'
-                                value={incidentEmail}
-                                onChange={(e) => setIncidentEmail(e.target.value)}>
+                                value={inputEmail}
+                                onChange={(e) => setInputEmail(e.target.value)}>
                             </input>
                         </div>
                         <div>
@@ -91,9 +108,9 @@ export default function IncidentReport() {
                             <input
                                 type='date'
                                 className='formInput'
-                                value={incidentStartDate}
-                                onChange={(e) => setIncidentStartDate(e.target.value)}
-                                style={{ marginBottom: errIncidentStartMargin }}>
+                                value={inputStartDate}
+                                onChange={(e) => setInputStartDate(e.target.value)}
+                                style={{marginBottom: errIncidentStartMargin}}>
                             </input>
                             <div className='errIncidentDate'>{errIncidentStartDate}</div>
                         </div>
@@ -102,9 +119,9 @@ export default function IncidentReport() {
                             <input
                                 type='date'
                                 className='formInput'
-                                value={incidentEndDate}
-                                onChange={(e) => setIncidentEndDate(e.target.value)}
-                                style={{ marginBotton: errIncidentEndMargin }}>
+                                value={inputEndDate}
+                                onChange={(e) => setInputEndDate(e.target.value)}
+                                style={{marginBotton: errIncidentEndMargin}}>
                             </input>
                             <div className='errIncidentDate'>{errIncidentEndDate}</div>
                         </div>
@@ -116,13 +133,13 @@ export default function IncidentReport() {
 
             <br></br>
 
-            {show ?
-                <>
-                    <div className='tableCard'>
-                        <div className='searchForm'>
-                            <span className='lookUp'>INC_EMAIL: </span> {incidentEmail}&ensp;
-                            <span className='lookUp'>INC_DATE: </span> {incidentStartDate} - {incidentEndDate}&ensp;
-                        </div>
+           {show?
+                <div className='tableCard'>
+                    <div className='searchForm'>
+                        <span className='lookUp'>INC_EMAIL: </span> {inputEmail}&ensp;
+                        <span className='lookUp'>INC_DATE: </span> {inputStartDate} - {inputEndDate}&ensp; 
+                    </div>
+                    {showData?
                         <table className='tableInfo'>
                             <thead>
                                 <tr>
@@ -133,22 +150,23 @@ export default function IncidentReport() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {incidentValue.map((data, index) => {
-                                    return (
-                                        <tr key={index}>
-                                            <td type="text">{data.job_code}</td>
-                                            <td type="text">{data.zone}</td>
-                                            <td type="text">{data.ride_name}</td>
-                                            <td type="text">{data.incidentLocation}</td>
-                                            <td type="text">{data.incidentDescription}</td>
-                                        </tr>
+                                {dbValue.map((data, index)=> {
+                                        return(
+                                            <tr key={index}>
+                                                <td type="text">{data.job_code}</td>
+                                                <td type="text">{data.start_date}</td>
+                                                <td type="text">{data.job_location}</td>
+                                                <td type="text">{data.description}</td>
+                                            </tr>
                                     )
                                 })}
                             </tbody>
                         </table>
-                    </div>
-                </>
-                : null}
+                    :
+                        <h2 className='noData'>NO MATCHING DATA</h2>
+                    }
+                </div>
+            :null}
         </>
     )
 }
