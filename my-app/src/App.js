@@ -25,8 +25,7 @@ import DbRides from './pages/test/DbRides';
 import DbConcession from './pages/test2/DbConcession';
 import DbZones from './pages/test3/dbZones';
 import IncidentReportMaker from './pages/IncidentReportMaker/IncidentReportMaker';
-
-
+import InsertEmployee from './pages/Insert/InsertEmployee';
 
 export const UserContext = createContext(null);
 export const baseUrl = "http://localhost:8080";
@@ -55,6 +54,10 @@ function App() {
 
               {user.role_type == 'admin' &&
                 <Route path="InsertAttraction" element={<InsertAttraction user={user} />} />
+              }
+
+              {user.role_type == 'admin' &&
+                <Route path="InsertEmployee" element={<InsertEmployee user={user} />} />
               }
 
               {user.token != null &&
