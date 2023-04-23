@@ -114,7 +114,7 @@ module.exports = {
         if (address != null) query += `address = '${address}', `
         if (phone_number != null) {
             await db.promise().execute(
-                `UPDATE master.person SET phone_number = ${phone_number} WHERE email = ${email}`
+                `UPDATE master.person SET phone_number = ${phone_number} WHERE email = '${email}';`
             )
         }
         query = query.slice(0, -2);
@@ -147,5 +147,5 @@ module.exports = {
         await db.promise().execute(query);
 
         return sendResponse(req, res, 200, "Employee removed");
-    }   
+    }
 }

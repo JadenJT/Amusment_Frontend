@@ -35,7 +35,8 @@ const getHandlers = {
   '/ride/all': (req, res) => rideRoutes.getAllRides(req, res),
   '/concession/all': (req, res) => concessionRoutes.getConcession(req, res),
   '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res),
-  '/zone/all': (req, res) => rideRoutes.getZones(req, res)
+  '/zone/all': (req, res) => rideRoutes.getZones(req, res),
+
 }
 
 // All POST request
