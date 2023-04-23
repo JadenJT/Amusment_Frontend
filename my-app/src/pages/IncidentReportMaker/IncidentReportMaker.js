@@ -77,29 +77,6 @@ const IncidentReportMaker = () => {
                 </div>
             </div>
         </div>
-
-        // <div className="body">
-        //     <div className="description">
-        //         <h1 className = "h1">Incident Report</h1>
-        //         <form className="descContainer">
-        //             <label for="Desc" className="labelDesc">Description of <br></br>Incident:</label>
-        //             <textarea id="Desc" className="descText" type="text" maxLength="400" name="desc">
-        //             </textarea>
-        //         </form>
-        //         <form className="emailContainer">
-        //             <label for="email" className="labelEmail">Email:</label>
-        //             <input id="email" className="emailText" type="text" name="email">
-        //             </input>
-        //         </form>
-        //         <form className="dateContainer">
-        //             <label for="date" className="labelEmail">Date:</label>
-        //             <input id="date"  className="emailText" type="date" min="2023-01-01" name="date">
-        //             </input>
-        //         </form>
-        //         <button className="submitButton">Submit</button>
-        //         <p className= "errorMessage" id="Input Error">Please fill out all fields.</p>
-        //     </div>
-        // </div>
     )
 }
 
