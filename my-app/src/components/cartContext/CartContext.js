@@ -22,7 +22,6 @@ export const ShopContextProvider = (props) => {
             }
             updatedCartItems[ride_id] = item;
         }
-        console.log(updatedCartItems)
         setCartItems(updatedCartItems);
         setCartTotal(cartTotal + 1);
     };

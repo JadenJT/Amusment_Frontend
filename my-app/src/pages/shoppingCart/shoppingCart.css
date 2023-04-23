@@ -7,5 +7,108 @@
 }
 
 .cart-title {
+    margin-top: 10px;
     color: black;
+}
+
+.checkout-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.checkout-items {
+    width: 60%;
+    color: black;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    padding: 10px 0;
+}
+
+.nav-item {
+    flex-basis: 25%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.item-ride {
+    flex-basis: 25%;
+    text-align: center;
+}
+
+.item-price,
+.item-quantity,
+.item-total {
+    flex-basis: 25%;
+    text-align: center;
+}
+
+.item-price::before {
+    content: "$";
+}
+
+.item-total::before {
+    content: "$";
+}
+
+.checkout-summary {
+    width: 35%;
+    background-color: #bababa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.summary-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.summary-label {
+    flex-basis: 70%;
+}
+
+.summary-value {
+    flex-basis: 30%;
+    text-align: right;
+}
+
+.summary-value::before {
+    content: "$";
+}
+
+.checkout-btn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: purple;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    float: right;
 }
