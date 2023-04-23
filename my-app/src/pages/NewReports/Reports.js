@@ -460,7 +460,7 @@ const NewReports = () => {
             <thead>
               <tr>
                 <th className='option-title'>Ride Name</th>
-                <th className='option-title'>Rize Zone</th>
+                <th className='option-title'>Ride Zone</th>
                 <th className='option-title'>Ticket Price</th>
                 <th className='option-title'>Date Recorded</th>
               </tr>
