@@ -540,7 +540,12 @@ const InsertAttraction = () => {
             {selectedOption === 'concession' && (
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
-                <input type='text' placeholder='Enter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
+                <select className='select-modify-option' name='zone' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }}>
+                    <option value='' disabled>
+                        Select a zone id
+                    </option>
+                    {renderZoneIdOptions()}
+                </select>
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Concession name:</h3>
@@ -567,7 +572,12 @@ const InsertAttraction = () => {
             {selectedOption === 'giftshop' && (
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
-                <input type='text' placeholder='Enter zone id' className='option-input' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }} />
+                <select className='select-modify-option' name='zone' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }}>
+                    <option value='' disabled>
+                        Select a zone id
+                    </option>
+                    {renderZoneIdOptions()}
+                </select>
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Giftshop name:</h3>
