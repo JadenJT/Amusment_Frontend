@@ -495,6 +495,7 @@ const NewReports = () => {
               <th className='option-title'>Employee Name</th>
               <th className='option-title'>Scheduled Date</th>
               <th className='option-title'>Email Contact</th>
+              <th className='option-title'>Date Completed</th>
             </tr>
           </thead>
           <tbody>
@@ -508,6 +509,7 @@ const NewReports = () => {
                 <td>{item.full_name}</td>
                 <td>{item.Scheduled_Date}</td>
                 <td>{item.Email_Contact}</td>
+                <td>{item.job_date_completed}</td>
               </tr>
               );
             })
