@@ -14,13 +14,13 @@ function AdminHub({ user }) {
                     <h1>Admin Portal</h1>
 
                     <Link to='/InsertAttraction' className='button-link-side'>
-                        InsertAttraction
+                        Insert Attraction
                     </Link>
                     <Link to='/EditAttraction' className='button-link-side'>
-                        EditAttraciton
+                        Edit Attraciton
                     </Link>
                     <Link to='/RemoveAttraction' className='button-link-side'>
-                        RemoveAttraction
+                        Remove Attraction
                     </Link>
                     <h3 className="subheader">Other Portals</h3>
                     <Link to='/manager' className='button-link-stack'>
