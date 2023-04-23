@@ -49,23 +49,26 @@ module.exports = {
             if (row.length !== 0) {
                 return sendResponse(req, res, 409, "User already exist with that job");
             }
-            db.promise().execute(`INSERT UPDATE worker = '${jobPerson}' WHERE job_ride = '${jobAttraction}';`)
+            await db.promise().execute(`UPDATE master.job SET worker = '${jobPerson}' WHERE job_ride = '${jobAttraction}';`)
+            return sendResponse(req, res, 201, "Added Job")
 
         } else if (jobLocation === 'concession') {
             const [row, fields] = await db.promise().execute(`SELECT * FROM master.job where worker = '${jobPerson}' AND job_concession = '${jobAttraction}';`)
             if (row.length !== 0) {
                 return sendResponse(req, res, 409, "User already exist with that job");
             }
-            insertQuery = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'maintenance', '${ride_name}', null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`
-            db.promise().execute(`INSERT `)
+            insertQuery = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL, '${jobRole}', NULL, '${ride_name}', NULL, (CURDATE()), FALSE, '${jobPerson}', NULL);`
+            await db.promise().execute(insertQuery);
+            return sendResponse(req, res, 201, "Added Job");
 
         } else if (jobLocation === 'giftshop') {
             const [row, fields] = await db.promise().execute(`SELECT * FROM master.job where worker = '${jobPerson}' AND job_giftshop = '${jobAttraction}';`)
             if (row.length !== 0) {
                 return sendResponse(req, res, 409, "User already exist with that job");
             }
-            insertQuery = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'maintenance', '${ride_name}', null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`
-            db.promise().execute(`INSERT UPDATE worker = '${jobPerson}' WHERE job_ride = '${jobAttraction}';`)
+            insertQuery = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'${jobRole}', NULL, NULL, '${jobAttraction}', (CURDATE()), FALSE, '${jobPerson}', NULL);`
+            await db.promise().execute(insertQuery);
+            return sendResponse(req, res, 201, "Added Job")
         }
     }
 }
