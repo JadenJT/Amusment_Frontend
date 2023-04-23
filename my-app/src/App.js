@@ -23,9 +23,13 @@ import DbConcession from './pages/test2/DbConcession';
 import DbZones from './pages/test3/dbZones';
 import IncidentReportMaker from './pages/IncidentReportMaker/IncidentReportMaker';
 import NewReports from './pages/NewReports/Reports';
+<<<<<<< Updated upstream
 import EditEmployee from './pages/Modify/EditEmployee';
 import RemoveEmployee from './pages/Delete/RemoveEmployee';
 import InsertEmployee from './pages/Insert/InsertEmployee';
+=======
+import Job from './pages/Job/Job';
+>>>>>>> Stashed changes
 
 export const UserContext = createContext(null);
 export const baseUrl = "http://localhost:8080";
@@ -84,6 +88,7 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<DbConcession />} />
               <Route path="zone" element={<DbZones />} />
+              <Route path="Job" element={<Job />} />
 
 
               {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&

@@ -5,24 +5,6 @@ const url = require('url');
 const querystring = require('querystring');
 
 module.exports = {
-    async addJob(req, res){
-        const bodyData = await getReqData(req);
-        const jobJSON = JSON.parse(bodyData);  
-        const job_name = jobJSON.job_name;
-        const job_ride = jobJSON.job_ride;
-        const job_concession = jobJSON.job_concession;
-        const job_giftshop = jobJSON.job_giftshop;
-        const job_date = jobJSON.job_date;
-
-        const query = 'INSERT INTO master. (`job_code`, `job_name`, `job_concession`, `job_giftshop`, `job_date`, `job_completed`) VALUES (null, ?, ?, ?, ?, FALSE);'
-
-        try{
-            const [rows, fields] = await db.promise().execute(query, [job_name, job_ride, job_concession, job_giftshop, job_date])
-            return sendResponse(req, res, 200, "Job Added", rows);
-        } catch (err) {
-            return sendResponse(req, res, 500, "Invalid input")
-        }
-    },
     async getJob(req, res) {
         const parsedURL = url.parse(req.url)
         const urlParams = querystring.parse(parsedURL.query)
@@ -46,5 +28,44 @@ module.exports = {
 
         return sendResponse(req, res, 200, "Job completed!", rows)
 
+    },
+    async getAllMaintenanceJob(req, res) {
+        const [rows, fields] = await db.promise().execute('SELECT job_ride FROM master.job where worker is NULL;')
+        sendResponse(req, res, 200, "Fetched Empty Maintenance", rows)
+    },
+
+    async addJob(req, res) {
+        const bodyData = await getReqData(req);
+        const jobJSON = JSON.parse(bodyData); 
+        const jobLocation = jobJSON.jobLocation;
+        const jobAttraction = jobJSON.jobAttraction;
+        const jobRole = jobJSON.jobRole;
+        const jobPerson = jobJSON.jobPerson;
+
+        //Check the type
+        if (jobLocation === 'ride') {
+            //Check if job exist
+            const [row, fields] = await db.promise().execute(`SELECT * FROM master.job where worker = '${jobPerson}' AND job_ride = '${jobAttraction}';`)
+            if (row.length !== 0) {
+                return sendResponse(req, res, 409, "User already exist with that job");
+            }
+            db.promise().execute(`INSERT UPDATE worker = '${jobPerson}' WHERE job_ride = '${jobAttraction}';`)
+
+        } else if (jobLocation === 'concession') {
+            const [row, fields] = await db.promise().execute(`SELECT * FROM master.job where worker = '${jobPerson}' AND job_concession = '${jobAttraction}';`)
+            if (row.length !== 0) {
+                return sendResponse(req, res, 409, "User already exist with that job");
+            }
+            insertQuery = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'maintenance', '${ride_name}', null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`
+            db.promise().execute(`INSERT `)
+
+        } else if (jobLocation === 'giftshop') {
+            const [row, fields] = await db.promise().execute(`SELECT * FROM master.job where worker = '${jobPerson}' AND job_giftshop = '${jobAttraction}';`)
+            if (row.length !== 0) {
+                return sendResponse(req, res, 409, "User already exist with that job");
+            }
+            insertQuery = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'maintenance', '${ride_name}', null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`
+            db.promise().execute(`INSERT UPDATE worker = '${jobPerson}' WHERE job_ride = '${jobAttraction}';`)
+        }
     }
 }

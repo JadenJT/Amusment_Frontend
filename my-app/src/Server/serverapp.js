@@ -36,6 +36,8 @@ const getHandlers = {
   '/concession/all': (req, res) => concessionRoutes.getConcession(req, res),
   '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res),
   '/zone/all': (req, res) => rideRoutes.getZones(req, res),
+  '/person/all': (req, res) => personRoutes.getAllPerson(req, res),
+  '/ride/maintenance/all': (req, res) => jobRoutes.getAllMaintenanceJob(req, res)
 
   '/employee/get': (req, res) => employeeRoutes.getAllEmployees(req, res)
 
