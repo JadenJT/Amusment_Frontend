@@ -105,7 +105,7 @@ function App() {
               {user.role_type == 'admin' &&
                 <Route path='RemoveAttraction' element={<RemoveAttraction />} />
               }
-              {user.role_type == 'admin' &&
+              {(user.role_type == 'admin' || user.role_type == 'manager') &&
                 <Route path='InsertEmployee' element={<InsertEmployee />} />
               }
 
