@@ -55,18 +55,6 @@ function Navbar() {
             </Link>
           </div>
 
-          <div className='IncidentReportMaker'>
-            <Link to='/IncidentReportMaker' className='navbar-logo'>
-              IncidentReportMaker
-            </Link>
-          </div>
-
-          <div className='reports'>
-            <Link to='/Report' className='navbar-logo'>
-              reports
-            </Link>
-          </div>
-
           {/*
           <div className='clockinout'>
             <button id='in' className='clockinButton'>

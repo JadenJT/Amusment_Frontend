@@ -74,8 +74,8 @@ function App() {
               <Route path="concessions" element={<DbConcession />} />
               <Route path="zone" element={<DbZones />} />
 
-              <Route path='report' element={<NewReports />} />
-
+              <Route path='Report' element={<NewReports />} />
+              
               <Route path='IncidentReportMaker' element={<IncidentReportMaker />} />
 
               {user.role_type == 'admin' &&

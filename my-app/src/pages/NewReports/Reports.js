@@ -495,6 +495,7 @@ const NewReports = () => {
                 <th className='option-title'>Employee Name</th>
                 <th className='option-title'>Scheduled Date</th>
                 <th className='option-title'>Email Contact</th>
+
               </tr>
             </thead>
             <tbody>
