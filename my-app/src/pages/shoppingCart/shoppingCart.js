@@ -5,9 +5,8 @@ import { UserContext } from '../../App';
 
 
 function ShoppingCart() {
-    const { cartTotal } = useContext(ShopContext);
-
-
+    const { cartTotal, cartItems } = useContext(ShopContext);
+    console.log(cartItems)
     return (
 
         <div className='cart-cover'>
