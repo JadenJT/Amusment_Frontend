@@ -497,7 +497,7 @@ const EditAttraction = () => {
                 if (newGiftShopName === null && newGiftShopZoneId === null && newGiftShopImg === null) return setShowErrorBox(true);
                 
                 const giftshopData = new FormData();
-                giftshopData.append('selected_giftshop', selectedConcession)
+                giftshopData.append('selected_giftshop', selectedGiftShop)
                 giftshopData.append('name', newGiftShopName)
                 giftshopData.append('zone_id', newGiftShopZoneId)
                 giftshopData.append('image', newGiftShopImg)
