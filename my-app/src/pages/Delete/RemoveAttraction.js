@@ -134,7 +134,7 @@ const RemoveAttraction = () => {
             const giftshopData = new FormData();
             giftshopData.append('name', giftshopoption)
 
-            await fetch('http://localhost:8080/concession/delete', {
+            await fetch('http://localhost:8080/giftshop/delete', {
                 method: 'POST',
                 body: giftshopData
             });
