@@ -20,20 +20,20 @@ function validatePhoneNum(number){
 
 const EditEmployee = () => {
     const { user } = useContext(UserContext); 
-    const [address, setaddress] = useState('');
-    const [phonenumber, setphonenumber] = useState('');
+    let [address, setaddress] = useState('');
+    let [phonenumber, setphonenumber] = useState('');
 
     //error messages
-    const [addressError, setAddressError] = useState('');
-    const [phonenumberError, setPhoneNumberError] = useState('');
-    const [showErrorBox, setShowErrorBox] = useState(false);
+    let [addressError, setAddressError] = useState('');
+    let [phonenumberError, setPhoneNumberError] = useState('');
+    let [showErrorBox, setShowErrorBox] = useState(false);
 
     //margin bottom
     const [addressErorrMarginBottom, setAddressErorrMarginBottom] = useState('1em');
     const [phonenumberErrorMarginBottom, setphoneNumberErrorMarignBottom] = useState('1em');
 
     const handleaddressChange = (e) =>{
-        const address = e.target.value;
+        let address = e.target.value;
         setaddress(address);
         if(!validateAddress(address)){
             setAddressError("Please enter a valid address.");
@@ -45,7 +45,7 @@ const EditEmployee = () => {
     };
 
     const handlephonenumChange = (e) => {
-        const phonenumber = e.target.value;
+        let phonenumberin = e.target.value;
         
         if(!validatePhoneNum(phonenumber)){
             setPhoneNumberError("Please enter a valid phone number.");
@@ -54,10 +54,10 @@ const EditEmployee = () => {
             setPhoneNumberError("");
             setphoneNumberErrorMarignBottom('');
         }
-        if(phonenumber.length > 10){
-            phonenumber = phonenumber.slice(0, 9);
+        if(phonenumberin.length > 10){
+            phonenumberin = phonenumberin.slice(0, 9);
         }
-        setphonenumber(phonenumber);
+        setphonenumber(phonenumberin);
     };
 
     const resetForm = () => {

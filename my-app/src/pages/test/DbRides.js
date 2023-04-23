@@ -144,7 +144,7 @@ function DbRides() {
                             <br />
                             Location: {ride.zone_id}
                             <br />
-                            Must be {ride.height_requirement} to ride
+                            Must be {ride.height_requirement} in. to ride
                         </p>
                     </div>
                     {ride.showInfo && (
@@ -156,7 +156,7 @@ function DbRides() {
                                 <br />
                                 Location: {ride.zone_id}
                                 <br />
-                                Must be {ride.height_requirement} to ride
+                                Must be {ride.height_requirement} in. to ride
                                 {user.token != null &&
                                     <div>
                                         <input type='date' min={earliestDate} onClick={(event) => event.stopPropagation()} onChange={handleDateChange} />
@@ -217,7 +217,7 @@ function DbRides() {
                             <br />
                             Location: {ride.zone_id}
                             <br />
-                            Must be {ride.height_requirement} to ride
+                            Must be {ride.height_requirement} in. to ride
                         </p>
                     </div>
                     {ride.showInfo && (
@@ -230,7 +230,7 @@ function DbRides() {
                                 <br />
                                 Location: {ride.zone_id}
                                 <br />
-                                Must be {ride.height_requirement} to ride
+                                Must be {ride.height_requirement} in. to ride
                                 {user.token != null &&
                                     <div>
                                         <input type='date' min={earliestDate} onClick={(event) => event.stopPropagation()} onChange={handleDateChange} />
