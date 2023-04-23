@@ -22,7 +22,9 @@ function AdminHub({ user }) {
                     <Link to='/RemoveAttraction' className='button-link-side'>
                         Remove Attraction
                     </Link>
+
                     <h3 className="subheader">Other Portals</h3>
+
                     <Link to='/manager' className='button-link-stack'>
                         Manager
                     </Link>
@@ -32,12 +34,7 @@ function AdminHub({ user }) {
                     <Link to='/Employee' className='button-link-stack'>
                         Employee
                     </Link>
-                    <Link to='/InsertEmployee' className='navbar-logo'>
-                        InsertEmployee
-                    </Link>
-                    <Link to='/RemoveEmployee' className='navbar-logo'>
-                        RemoveEmployee
-                    </Link>
+
                 </div>
             }
         </div>

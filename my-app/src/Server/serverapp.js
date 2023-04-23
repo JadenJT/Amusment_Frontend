@@ -38,8 +38,8 @@ const getHandlers = {
   '/zone/all': (req, res) => rideRoutes.getZones(req, res),
   '/person/all': (req, res) => personRoutes.getAllPerson(req, res),
   '/ride/maintenance/all': (req, res) => jobRoutes.getAllMaintenanceJob(req, res),
-  '/employee/get': (req, res) => employeeRoutes.getAllEmployees(req, res)
 
+  '/employee/get': (req, res) => employeeRoutes.getAllEmployees(req, res),
 }
 
 // All POST request
@@ -62,16 +62,16 @@ const postHandlers = {
   '/ride/delete': (req, res) => rideRoutes.deleteRide(req, res),
   '/concession/delete': (req, res) => concessionRoutes.deleteConcession(req, res),
   '/giftshop/delete': (req, res) => giftshopRoutes.deleteGiftshop(req, res),
-  
+
   '/employee/edit': (req, res) => employeeRoutes.updateEmployee(req, res),
   '/ride/edit': (req, res) => rideRoutes.editRide(req, res),
   '/concession/edit': (req, res) => concessionRoutes.editConcession(req, res),
   '/giftshop/edit': (req, res) => giftshopRoutes.editGiftshop(req, res),
-  
+
   '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
   '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
   '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
-  
+
 }
 
 const server = http.createServer(async (req, res) => {

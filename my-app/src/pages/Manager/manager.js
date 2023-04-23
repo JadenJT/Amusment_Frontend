@@ -10,9 +10,21 @@ function Manager({ user }) {
 
         <div>
             <h1>Manager Portal</h1>
+
+
             <Link to='/Report' className='button-link-side'>
                 Theme Park Reports
             </Link>
+
+            <Link to='/InsertEmployee' className='button-link-side'>
+                InsertEmployee
+            </Link>
+            <Link to='/RemoveEmployee' className='button-link-side'>
+                RemoveEmployee
+            </Link>
+
+            <h3 className="subheader">Other Portals</h3>
+
             <Link to='/Maintenance' className='button-link-stack'>
                 Maintenance
             </Link>
