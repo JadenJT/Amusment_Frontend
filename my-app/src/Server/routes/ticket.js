@@ -27,6 +27,12 @@ module.exports = {
                     "dateTime": values.dateTime,
                     "error": err.sqlState
                 })
+                if(err.sqlState == '45000') {
+                    const [row, field] = await db.promise().execute(`SELECT * FROM master.job WHERE job_ride = ${ride_name}`)
+                    if (row.length === 0 )  {
+                        await db.promise().execute('INSERT INTO master.job(`job_code`, `job_name`, `job_ride`, `job_concession`, `job_giftshop`, `job_date`, `job_completed`, `worker`, `job_date_completed`)')
+                    }
+                }
             }
         }
         if (brokenTickets.length !== 0) {
