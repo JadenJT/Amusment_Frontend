@@ -11,7 +11,7 @@ function validateName(emplyeeFirstName) {
 }
 
 function validateEmail(employeeEmail) {
-  if(employeeEmail === 0 || employeeEmail > 30) return false;
+  if (employeeEmail === 0 || employeeEmail > 30) return false;
 
   const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   if (!regex.test(employeeEmail)) return false;
@@ -50,7 +50,7 @@ const NewReports = () => {
   const [errorFirstName, setErrorFirstName] = useState('');
   const [errorLastName, setErrorLastName] = useState('');
   const [errorEmail, setErrorEmail] = useState('');
-  
+
   //Margin Errors
   const [marginBottomFirstName, setMarginBottomFirstName] = useState('1em');
   const [marginBottomLastName, setMarginBottomLastName] = useState('1em');
@@ -70,7 +70,7 @@ const NewReports = () => {
     setRideLoading(false);
   };
   useEffect(() => {
-      fetchRidesData();
+    fetchRidesData();
   }, []);
 
   const fetchConcessionsData = async () => {
@@ -80,7 +80,7 @@ const NewReports = () => {
     setConcessionLoading(false);
   };
   useEffect(() => {
-      fetchConcessionsData();
+    fetchConcessionsData();
   }, []);
 
   const fetchGiftShopsData = async () => {
@@ -90,7 +90,7 @@ const NewReports = () => {
     setGiftshopLoading(false);
   };
   useEffect(() => {
-      fetchGiftShopsData();
+    fetchGiftShopsData();
   }, []);
 
   const fetchZoneData = async () => {
@@ -100,7 +100,7 @@ const NewReports = () => {
     setZoneLoading(false);
   };
   useEffect(() => {
-      fetchZoneData();
+    fetchZoneData();
   }, []);
 
   //Reset Forms & Variables
@@ -128,8 +128,8 @@ const NewReports = () => {
 
   const handleAttractionNameChange = (e) => { setArractionName(e.target.value); }
   const handleAttractionTypeChange = (e) => { setAttractionType(e.target.value); }
-  const handleAttractionZoneChange = (e) => { 
-    setAttractionZone(e.target.value); 
+  const handleAttractionZoneChange = (e) => {
+    setAttractionZone(e.target.value);
     setArractionName('')
   }
   const handleStartDateChange = (e) => { setStartDate(e.target.value); }
@@ -176,19 +176,19 @@ const NewReports = () => {
     const items = rideList.item;
     const filteredItems = items.filter(ride => ride.name !== null);
     return filteredItems.map((ride, index) => (
-        <option key={index} value={ride.name}>
-            {ride.name}
-        </option>
+      <option key={index} value={ride.name}>
+        {ride.name}
+      </option>
     ));
   };
   const renderZoneIdOptions = () => {
-      const items = zoneList.item;
-      const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
-      return uniqueZoneIds.map((zoneId, index) => (
-          <option key={index} value={zoneId}>
-              {zoneId}
-          </option>
-      ));
+    const items = zoneList.item;
+    const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
+    return uniqueZoneIds.map((zoneId, index) => (
+      <option key={index} value={zoneId}>
+        {zoneId}
+      </option>
+    ));
   };
   const renderAllLocationOptions = () => {
     const mergedArray = [...rideList.item, ...concessionList.item, ...giftshopList.item];
@@ -219,88 +219,88 @@ const NewReports = () => {
 
     if (selectedOption === 'ticket') {
 
-    if (attractionName === "") attractionName = null;
-    if (attractionZone === "") attractionZone = null;
-    if (attractionType === "") attractionType = null;
-    if (startDate === "") startDate = null;
-    if (endDate === "") endDate = null;
-    if ((startDate === null && endDate !== null) || (startDate !== null && endDate === null)) {
-      return setErrorBox(true);
-    }
+      if (attractionName === "") attractionName = null;
+      if (attractionZone === "") attractionZone = null;
+      if (attractionType === "") attractionType = null;
+      if (startDate === "") startDate = null;
+      if (endDate === "") endDate = null;
+      if ((startDate === null && endDate !== null) || (startDate !== null && endDate === null)) {
+        return setErrorBox(true);
+      }
 
-    const ticketData = {
-      "ride_name": attractionName,
-      "zone": attractionZone,
-      "ride_type": attractionType,
-      "start_date": startDate,
-      "end_date": endDate
-    };
+      const ticketData = {
+        "ride_name": attractionName,
+        "zone": attractionZone,
+        "ride_type": attractionType,
+        "start_date": startDate,
+        "end_date": endDate
+      };
 
-    const response = await fetch('http://localhost:8080/ticket/report', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(ticketData)
-    });
-    const responseData = await response.json();
-    setFetchData(responseData.item)
-    setShowTable(true);
+      const response = await fetch('http://localhost:8080/ticket/report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(ticketData)
+      });
+      const responseData = await response.json();
+      setFetchData(responseData.item)
+      setShowTable(true);
 
     } else if (selectedOption === 'maintenance') {
 
-    if (attractionName === "") attractionName = null;
-    if (attractionZone === "") attractionZone = null;
-    if (startDate === "") startDate = null;
-    if (endDate === "") endDate = null;
-    if ((startDate === null && endDate !== null) || (startDate !== null && endDate === null)) {
-      return setErrorBox(true);
-    }
+      if (attractionName === "") attractionName = null;
+      if (attractionZone === "") attractionZone = null;
+      if (startDate === "") startDate = null;
+      if (endDate === "") endDate = null;
+      if ((startDate === null && endDate !== null) || (startDate !== null && endDate === null)) {
+        return setErrorBox(true);
+      }
 
-    const maintenanceData = {
-      "ride_name": attractionName,
-      "zone": attractionZone,
-      "start_date": startDate,
-      "end_date": endDate
-    };
+      const maintenanceData = {
+        "ride_name": attractionName,
+        "zone": attractionZone,
+        "start_date": startDate,
+        "end_date": endDate
+      };
 
-    const response = await fetch('http://localhost:8080/maintenance/report', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(maintenanceData)
-    });
-    const responseData = await response.json();
-    setFetchData(responseData.item)
-    setShowTable(true);
+      const response = await fetch('http://localhost:8080/maintenance/report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(maintenanceData)
+      });
+      const responseData = await response.json();
+      setFetchData(responseData.item)
+      setShowTable(true);
 
     } else if (selectedOption === 'employee') {
 
-    if (firstName === "") firstName = null;
-    if (lastName === "") lastName = null;
-    if (attractionName === "") attractionName = null;
-    if (jobRole === "") jobRole = null;
-    if (email === "") email = null;
+      if (firstName === "") firstName = null;
+      if (lastName === "") lastName = null;
+      if (attractionName === "") attractionName = null;
+      if (jobRole === "") jobRole = null;
+      if (email === "") email = null;
 
-    const employeeData = {
-      "f_name": firstName,
-      "l_name": lastName,
-      "job_location": attractionName,
-      "job_role": jobRole,
-      "email": email
-    };
+      const employeeData = {
+        "f_name": firstName,
+        "l_name": lastName,
+        "job_location": attractionName,
+        "job_role": jobRole,
+        "email": email
+      };
 
-    const response = await fetch('http://localhost:8080/employee/report', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(employeeData)
-    });
-    const responseData = await response.json();
-    setFetchData(responseData.item)
-    setShowTable(true);
+      const response = await fetch('http://localhost:8080/employee/report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(employeeData)
+      });
+      const responseData = await response.json();
+      setFetchData(responseData.item)
+      setShowTable(true);
 
     } else if (selectedOption === 'incident') {
 
@@ -318,18 +318,18 @@ const NewReports = () => {
   }
 
   if (isConcessionLoading) {
-      return <div className="App">Loading...</div>;
+    return <div className="App">Loading...</div>;
   }
 
   if (isGiftshopLoading) {
-      return <div className="App">Loading...</div>;
+    return <div className="App">Loading...</div>;
   }
 
   if (isZoneLoading) {
-      return <div className="App">Loading...</div>;
+    return <div className="App">Loading...</div>;
   }
 
-  
+
 
   return (
     <div>
@@ -369,9 +369,9 @@ const NewReports = () => {
 
                 <h3 className='option-title'>Type</h3>
                 <select className='select-modify-option' name='zone' value={attractionType} onChange={handleAttractionTypeChange}>
-                    <option value='' disabled>Select a type</option>
-                    <option value='Adult'>Adult</option>
-                    <option value='Child'>Child</option>
+                  <option value='' disabled>Select a type</option>
+                  <option value='Adult'>Adult</option>
+                  <option value='Child'>Child</option>
                 </select>
 
                 <h3 className='option-title'>Start Date</h3>
@@ -384,71 +384,71 @@ const NewReports = () => {
 
             {selectedOption === 'maintenance' && (
               <div className='admin-option-box'>
-              <h3 className='option-title'>Ride</h3>
-              <select className='select-modify-option' name='ride' value={attractionName} onChange={handleAttractionNameChange}>
-                <option value='' disabled>Select a ride</option>
-                {renderRideNameOptions()}
-              </select>
+                <h3 className='option-title'>Ride</h3>
+                <select className='select-modify-option' name='ride' value={attractionName} onChange={handleAttractionNameChange}>
+                  <option value='' disabled>Select a ride</option>
+                  {renderRideNameOptions()}
+                </select>
 
-              <h3 className='option-title'>Zone</h3>
-              <select className='select-modify-option' name='zone' value={attractionZone} onChange={handleAttractionZoneChange}>
-                <option value='' disabled>Select a zone</option>
-                {renderZoneIdOptions()}
-              </select>
+                <h3 className='option-title'>Zone</h3>
+                <select className='select-modify-option' name='zone' value={attractionZone} onChange={handleAttractionZoneChange}>
+                  <option value='' disabled>Select a zone</option>
+                  {renderZoneIdOptions()}
+                </select>
 
-              <h3 className='option-title'>Start Date</h3>
-              <input className='option-input' type='date' value={startDate} onChange={handleStartDateChange}></input>
+                <h3 className='option-title'>Start Date</h3>
+                <input className='option-input' type='date' value={startDate} onChange={handleStartDateChange}></input>
 
-              <h3 className='option-title'>End Date</h3>
-              <input className='option-input' type='date' value={endDate} onChange={handleEndDateChange}></input>
-            </div>
+                <h3 className='option-title'>End Date</h3>
+                <input className='option-input' type='date' value={endDate} onChange={handleEndDateChange}></input>
+              </div>
             )}
 
             {selectedOption === 'employee' && (
               <div className='admin-option-box'>
-              <h3 className='option-title'>First Name</h3>
-              <input type='text' placeholder='Enter first name' className='option-input' value={firstName} onChange={handleFirstNameChange} style={{marginBottom: marginBottomFirstName}}></input>
-              <div className='admin-error'>{errorFirstName}</div>
+                <h3 className='option-title'>First Name</h3>
+                <input type='text' placeholder='Enter first name' className='option-input' value={firstName} onChange={handleFirstNameChange} style={{ marginBottom: marginBottomFirstName }}></input>
+                <div className='admin-error'>{errorFirstName}</div>
 
-              <h3 className='option-title'>Last Name</h3>
-              <input type='text' placeholder='Enter last name' className='option-input' value={lastName} onChange={handleLastNameChange} style={{marginBottom: marginBottomLastName}}></input>
-              <div className='admin-error'>{errorLastName}</div>
+                <h3 className='option-title'>Last Name</h3>
+                <input type='text' placeholder='Enter last name' className='option-input' value={lastName} onChange={handleLastNameChange} style={{ marginBottom: marginBottomLastName }}></input>
+                <div className='admin-error'>{errorLastName}</div>
 
-              <h3 className='option-title'>Location</h3>
-              <select className='select-modify-option' name='location' value={attractionName} onChange={handleAttractionNameChange}>
-                <option value='' disabled>Select a location</option>
-                {renderAllLocationOptions()}
-              </select>
+                <h3 className='option-title'>Location</h3>
+                <select className='select-modify-option' name='location' value={attractionName} onChange={handleAttractionNameChange}>
+                  <option value='' disabled>Select a location</option>
+                  {renderAllLocationOptions()}
+                </select>
 
-              <h3 className='option-title'>Job Role</h3>
-              <select className='select-modify-option' name='role' value={jobRole} onChange={hanldeJobRoleChange}>
-                <option value='' disabled>Select a zone</option>
-                <option value='admin'>Admin</option>
-                <option value='manager'>Manager</option>
-                <option value='maintenance'>Maintenance</option>
-                <option value='janitor'>Janitor</option>
-                <option value='cashier'>Cashier</option>
-                <option value='operator'>Operator</option>
-              </select>
+                <h3 className='option-title'>Job Role</h3>
+                <select className='select-modify-option' name='role' value={jobRole} onChange={hanldeJobRoleChange}>
+                  <option value='' disabled>Select a zone</option>
+                  <option value='admin'>Admin</option>
+                  <option value='manager'>Manager</option>
+                  <option value='maintenance'>Maintenance</option>
+                  <option value='janitor'>Janitor</option>
+                  <option value='cashier'>Cashier</option>
+                  <option value='operator'>Operator</option>
+                </select>
 
-              <h3 className='option-title'>Email</h3>
-              <input type='text' placeholder='Enter email' className='option-input' value={email} onChange={handleEmailChange} style={{marginBottom: marginBottomEmail}}></input>
-              <div className='admin-error'>{errorEmail}</div>
-            </div>
+                <h3 className='option-title'>Email</h3>
+                <input type='text' placeholder='Enter email' className='option-input' value={email} onChange={handleEmailChange} style={{ marginBottom: marginBottomEmail }}></input>
+                <div className='admin-error'>{errorEmail}</div>
+              </div>
             )}
             <button className='admin-modify-button' style={{ display: isOptionSelected ? 'block' : 'none' }}>submit</button>
             {errorBox && (
               <div>
-                  <div className='error-box-overlay'></div>
-                  <div className='error-box'>
-                      <h3 className='error-box-text'>Error</h3>
-                      <p className='error-box-text'>Please correct the errors and try again.</p>
-                      <ul className='error-box-ul'>
-                          {((startDate !== null && endDate === "") && <li>You entered a start date, you must have an end date!</li>)}
-                          {((startDate === "" && endDate !== null) && <li>You entered an end date, you must have a start date!</li>)}
-                          <button className='return-button' onClick={() => setErrorBox(false)}>return</button>
-                      </ul>
-                  </div>
+                <div className='error-box-overlay'></div>
+                <div className='error-box'>
+                  <h3 className='error-box-text'>Error</h3>
+                  <p className='error-box-text'>Please correct the errors and try again.</p>
+                  <ul className='error-box-ul'>
+                    {((startDate !== null && endDate === "") && <li>You entered a start date, you must have an end date!</li>)}
+                    {((startDate === "" && endDate !== null) && <li>You entered an end date, you must have a start date!</li>)}
+                    <button className='return-button' onClick={() => setErrorBox(false)}>return</button>
+                  </ul>
+                </div>
               </div>
             )}
           </form>
@@ -466,115 +466,115 @@ const NewReports = () => {
               </tr>
             </thead>
             <tbody>
-            {
-            fetchData.map((item, index) => {
-              return (
-                <tr>
-                  <td>{item.Ride_Name}</td>
-                  <td>{item.Ride_Zone}</td>
-                  <td>${item.Ticket_Amount}</td>
-                  <td>{item.Date_Recorded}</td>
-                </tr>
-                );
-              })
-            }
+              {
+                fetchData.map((item, index) => {
+                  return (
+                    <tr>
+                      <td>{item.Ride_Name}</td>
+                      <td>{item.Ride_Zone}</td>
+                      <td>${item.Ticket_Amount}</td>
+                      <td>{item.Date_Recorded}</td>
+                    </tr>
+                  );
+                })
+              }
             </tbody>
-              {renderTicketTotal()}
+            {renderTicketTotal()}
           </table>
         </div>
       )}
 
       {selectedOption === 'maintenance' && showTable && (
         <div className='admin-edit-body'>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th className='option-title'>Job Code</th>
-              <th className='option-title'>Zone</th>
-              <th className='option-title'>Ride</th>
-              <th className='option-title'>Employee Name</th>
-              <th className='option-title'>Scheduled Date</th>
-              <th className='option-title'>Email Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-          fetchData.map((item, index) => {
-            return (
+          <table className='table'>
+            <thead>
               <tr>
-                <td>{item.job_code}</td>
-                <td>{item.Zone}</td>
-                <td>{item.Ride}</td>
-                <td>{item.full_name}</td>
-                <td>{item.Scheduled_Date}</td>
-                <td>{item.Email_Contact}</td>
+                <th className='option-title'>Job Code</th>
+                <th className='option-title'>Zone</th>
+                <th className='option-title'>Ride</th>
+                <th className='option-title'>Employee Name</th>
+                <th className='option-title'>Scheduled Date</th>
+                <th className='option-title'>Email Contact</th>
               </tr>
-              );
-            })
-          }
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {
+                fetchData.map((item, index) => {
+                  return (
+                    <tr>
+                      <td>{item.job_code}</td>
+                      <td>{item.Zone}</td>
+                      <td>{item.Ride}</td>
+                      <td>{item.full_name}</td>
+                      <td>{item.Scheduled_Date}</td>
+                      <td>{item.Email_Contact}</td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        </div>
       )}
 
       {selectedOption === 'employee' && showTable && (
         <div className='admin-edit-body'>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th className='option-title'>Name</th>
-              <th className='option-title'>Job Name</th>
-              <th className='option-title'>Location</th>
-              <th className='option-title'>Email Contact</th>
-              <th className='option-title'>Phone Number</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-          fetchData.map((item, index) => {
-            return (
+          <table className='table'>
+            <thead>
               <tr>
-                <td>{item.Name}</td>
-                <td>{item.Job_Role}</td>
-                <td>{item.Location}</td>
-                <td>{item.contact_email}</td>
-                <td>{item.Phone_number}</td>
+                <th className='option-title'>Name</th>
+                <th className='option-title'>Job Name</th>
+                <th className='option-title'>Location</th>
+                <th className='option-title'>Email Contact</th>
+                <th className='option-title'>Phone Number</th>
               </tr>
-              );
-            })
-          }
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {
+                fetchData.map((item, index) => {
+                  return (
+                    <tr>
+                      <td>{item.Name}</td>
+                      <td>{item.Job_Role}</td>
+                      <td>{item.Location}</td>
+                      <td>{item.contact_email}</td>
+                      <td>{item.Phone_number}</td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        </div>
       )}
 
       {selectedOption === 'incident' && showTable && (
         <div className='admin-edit-body'>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th className='option-title'>Incident ID</th>
-              <th className='option-title'>Email Contact</th>
-              <th className='option-title'>Description</th>
-              <th className='option-title'>Date of Incident</th>
-            </tr>
-          </thead>
-          <tbody>
-          {
-          fetchData.map((item, index) => {
-            return (
+          <table className='table'>
+            <thead>
               <tr>
-                <td>{item.id}</td>
-                <td>{item.email}</td>
-                <td>{item.description}</td>
-                <td>{item.date}</td>
+                <th className='option-title'>Incident ID</th>
+                <th className='option-title'>Email Contact</th>
+                <th className='option-title'>Description</th>
+                <th className='option-title'>Date of Incident</th>
               </tr>
-              );
-            })
-          }
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {
+                fetchData.map((item, index) => {
+                  return (
+                    <tr>
+                      <td>{item.id}</td>
+                      <td>{item.email}</td>
+                      <td>{item.description}</td>
+                      <td>{item.date}</td>
+                    </tr>
+                  );
+                })
+              }
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   )

@@ -4,21 +4,21 @@ export const ShopContext = createContext(null);
 
 export const ShopContextProvider = (props) => {
 
-    const [cartItems, setCartItems] = useState({});
+    const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
 
 
-    const addToCart = (ride_id, type, date, image) => {
+    const addToCart = (name, ride_id, type, date) => {
         let updatedCartItems = cartItems;
         if (ride_id in updatedCartItems) {
             updatedCartItems[ride_id].amount++;
         } else {
             var item = {
+                name: name,
                 ride_id: ride_id,
                 type: type,
                 date: date,
                 amount: 1,
-                image: image,
             }
             updatedCartItems[ride_id] = item;
         }
