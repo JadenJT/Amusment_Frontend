@@ -34,6 +34,9 @@ function AdminHub({ user }) {
                     <Link to='/InsertEmployee' className='navbar-logo'>
                         InsertEmployee
                     </Link>
+                    <Link to='/RemoveEmployee' className='navbar-logo'>
+                        RemoveEmployee
+                    </Link>
                 </div>
             }
         </div>

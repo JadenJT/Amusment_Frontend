@@ -10,6 +10,9 @@ function Employee({ user }) {
     return (
         <div>
             <h1>This is Employee</h1>
+            <Link to="/EditEmployee" className='navbar-logo'>
+                EditEmployee
+            </Link>
         </div>
     )
 }

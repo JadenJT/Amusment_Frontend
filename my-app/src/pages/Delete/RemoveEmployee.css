@@ -1,0 +1,86 @@
+/* cover style */
+.employee-remove-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+.employee-remove-cover{
+    background-color: white;
+    width: 80em;
+    height: min-content;
+    position: relative;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/*table style */
+.remove-table-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.remove-emp-table {
+    margin: 0, auto;
+    width: 80%;
+    background-color: white;
+    border-collapse: collapse;
+    overflow: hidden;
+}
+
+.remove-line:nth-child(even) {
+    border-bottom: 1px solid #000;
+    background-color:  #f9f9f9;
+}
+.remove-header-col {
+    padding: 8px;
+    text-align: left;
+}
+.employee-data {
+    padding: 8px;
+    text-align: left;
+    color: black;
+
+}
+.employee-line-highlighted {
+    background-color: #E9B4E9;
+    animation-name: glow;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+  
+@keyframes glow {
+    0% {
+      box-shadow: 0 0 5px #E9B4E9, 0 0 20px #E9B4E9, 0 0 30px #E9B4E9;
+    }
+    50% {
+      box-shadow: 0 0 20px #E9B4E9, 0 0 30px #E9B4E9, 0 0 40px #E9B4E9;
+    }
+    100% {
+      box-shadow: 0 0 5px #E9B4E9, 0 0 20px #E9B4E9, 0 0 30px #E9B4E9;
+    }
+}
+/*style for remove button */
+.employee-remove-button{
+    width: 20%;
+    height: 3em;
+    background-color: #c3a3ff;
+    color: white;
+    border: none;
+    font-size: 1em;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+.employee-remove-button:hover{
+    transform: scale(1.05);
+    background-color: black;
+}

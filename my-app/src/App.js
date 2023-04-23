@@ -26,6 +26,9 @@ import DbConcession from './pages/test2/DbConcession';
 import DbZones from './pages/test3/dbZones';
 import IncidentReportMaker from './pages/IncidentReportMaker/IncidentReportMaker';
 import NewReports from './pages/NewReports/Reports';
+import EditEmployee from './pages/Modify/EditEmployee';
+import RemoveEmployee from './pages/Delete/RemoveEmployee';
+import InsertEmployee from './pages/Insert/InsertEmployee';
 
 export const UserContext = createContext(null);
 export const baseUrl = "http://localhost:8080";
@@ -64,8 +67,16 @@ function App() {
                 <Route path="Employee" element={<Employee user={user} />} />
               }
 
+              {user.token != null && user.role_type != 'customer' &&
+                <Route path="EditEmployee" element={<EditEmployee user={user} />} />
+              }
+
               {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
                 <Route path="Manager" element={<Manager user={user} />} />
+              }
+
+              {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
+                <Route path="RemoveEmployee" element={<RemoveEmployee user={user} />} />
               }
 
               {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager' || user.role_type == 'maintenance') &&
@@ -87,6 +98,10 @@ function App() {
               {user.role_type == 'admin' &&
                 <Route path='RemoveAttraction' element={<RemoveAttraction />} />
               }
+              {user.role_type == 'admin' &&
+                <Route path='InsertEmployee' element={<InsertEmployee />} />
+              }
+              
 
             </Route>
           </Routes>
