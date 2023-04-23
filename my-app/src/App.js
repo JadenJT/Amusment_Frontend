@@ -86,8 +86,10 @@ function App() {
               <Route path="*" element={<Error404 />} />
               <Route path="concessions" element={<DbConcession />} />
               <Route path="zone" element={<DbZones />} />
-              <Route path="Job" element={<Job />} />
 
+              {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
+                <Route path="Job" element={<Job />} />
+              }
 
               {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
                 <Route path='Report' element={<NewReports />} />

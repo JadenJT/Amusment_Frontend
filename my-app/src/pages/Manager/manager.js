@@ -22,6 +22,9 @@ function Manager({ user }) {
             <Link to='/RemoveEmployee' className='button-link-side'>
                 RemoveEmployee
             </Link>
+            <Link to='/Job' className='button-link-side'>
+                Assign Job
+            </Link>
 
             <h3 className="subheader">Other Portals</h3>
 
