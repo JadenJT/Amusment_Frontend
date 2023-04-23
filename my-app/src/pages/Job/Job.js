@@ -29,11 +29,12 @@ const Job = () => {
 
 
   //reset form
-  const resetForm = () => {
+  const resetForm = async () => {
     setJobRole('');
-    setJobLocation();
+    setJobLocation('');
     setJobAttraction('');
     setJobPerson('');
+    setMessageError('');
   };
 
 
@@ -157,6 +158,15 @@ const Job = () => {
     body: JSON.stringify(postData)
     });
     const responseData = await response.json();
+    if (responseData.statusCode === 201) {
+      await resetForm();
+      setMessageError("Job Added!")
+      setTimeout(() => {
+        setMessageError("");
+      }, 4000);
+    } else  {
+      setMessageError("Job already exist for person.")
+    }
   }
 
   if (isRideLoading) {
@@ -183,7 +193,8 @@ const Job = () => {
       <div className='admin-edit-body'>
         <div className='admin-edit-cover'>
           <h1 className='admin-edit-title'>Add Job to Ride, Concession, Gift shop</h1>
-          <form className='admin-edit-form'>
+          <form className='admin-edit-form' onSubmit={handleFormSubmit}>
+            <div className='select-option-title'>{messageError}</div>
             <h3 className='select-option-title'>Select an option to add to</h3>
               <select className='select-option' name='option' value={jobLocation} onChange={handleJobLoactionChange}>
                 <option value='' disabled>select an option</option>

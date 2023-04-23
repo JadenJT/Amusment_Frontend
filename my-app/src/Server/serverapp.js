@@ -40,7 +40,6 @@ const getHandlers = {
   '/ride/maintenance/all': (req, res) => jobRoutes.getAllMaintenanceJob(req, res),
 
   '/employee/get': (req, res) => employeeRoutes.getAllEmployees(req, res),
-
 }
 
 // All POST request
