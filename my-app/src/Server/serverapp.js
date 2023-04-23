@@ -49,7 +49,7 @@ const postHandlers = {
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/ride/add': (req, res) => rideRoutes.addRide(req, res),
   '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
-  '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
+  '/incident/add': (req, res) => incidentRoutes.addIncidentReport(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
 
   '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
