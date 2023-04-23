@@ -1,3 +1,38 @@
+table {
+    width: 75%;
+}
+td{
+    background-color: white;
+    border: 0.15 solid black;
+    text-align: center;
+    color: black;
+}
+tr th {
+    background-color: #c3a3ff;
+    text-align: center;
+    padding:3px 5px;
+}
+tr:hover {
+    background-color: #c3a3ff;
+    cursor: pointer;
+}
+
+.table-cover {
+    background-color: white;
+    width: 75%;
+    height: min-content;
+    border-radius: 1em;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
 /* cover style */
 .admin-edit-body{
     display: flex;

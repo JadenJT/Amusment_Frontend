@@ -16,10 +16,7 @@ const rideRoutes = require('./routes/ride');
 // All GET request
 const getHandlers = {
   '/ticket/owned': (req, res) => ticketRoutes.ticketsOwn(req, res),
-  '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
-  '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
-  '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
-  '/incident/get': (req, res) => incidentRoutes.getIncident(req, res),
+  '/incident/get': (req, res) => incidentRoutes.getIncidentReport(req, res),
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
@@ -52,7 +49,7 @@ const postHandlers = {
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/ride/add': (req, res) => rideRoutes.addRide(req, res),
   '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
-  '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
+  '/incident/add': (req, res) => incidentRoutes.addIncidentReport(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
 
   '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
@@ -61,14 +58,16 @@ const postHandlers = {
   '/ride/delete': (req, res) => rideRoutes.deleteRide(req, res),
   '/concession/delete': (req, res) => concessionRoutes.deleteConcession(req, res),
   '/giftshop/delete': (req, res) => giftshopRoutes.deleteGiftshop(req, res),
-
+  
   '/employee/edit': (req, res) => employeeRoutes.updateEmployee(req, res),
   '/ride/edit': (req, res) => rideRoutes.editRide(req, res),
   '/concession/edit': (req, res) => concessionRoutes.editConcession(req, res),
   '/giftshop/edit': (req, res) => giftshopRoutes.editGiftshop(req, res),
-
   
-
+  '/employee/report': (req, res) => employeeRoutes.employeeReport(req, res),
+  '/maintenance/report': (req, res) => maintenanceRoutes.maintenanceReport(req, res),
+  '/ticket/report': (req, res) => ticketRoutes.ticketReport(req, res),
+  
 }
 
 const server = http.createServer(async (req, res) => {

@@ -66,9 +66,23 @@ const Maintenance = () => {
         }
     };
     
-    const handleJobSubmit = () => {
-        /*finish code*/
-    };
+    const handleJobSubmit = async () => {
+        const data = {
+          work_code: jobCode,
+        };
+      
+        await fetch("http://localhost:8080/job/complete", {
+          method: 'POST',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data)
+        });
+      
+        // Remove the job with the submitted job code from tableData state
+        
+        setJobCode('');
+      };
 
     if (user.role_type == 'customer') {
         return <Error404></Error404>;

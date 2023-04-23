@@ -4,6 +4,7 @@ import { UserContext, baseUrl } from '../../App';
 import { ShopContext } from '../../components/cartContext/CartContext';
 import Logo from '../../icons/Umazing.svg';
 
+
 function convertImage(array) {
     let buf = new Uint8Array(array)
     let dt = new TextDecoder("utf-8");
@@ -11,26 +12,34 @@ function convertImage(array) {
     return <img className="img-ride" src={`data:image/jpeg;base64,${b64}`} />
 }
 
+
 function DbRides() {
 
     const [isLoading, setLoading] = useState(true);
     const [isKidLoading, setKidLoading] = useState(true);
 
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+
     const [ridedata, setRideData] = useState([]);
     const [kidRideData, setkidRideData] = useState([]);
-    const { addToCart, cartItems } = useContext(ShopContext);
+    const { addToCart, cartItems, removeFromCart } = useContext(ShopContext);
     const { user } = useContext(UserContext);
 
     const handleRideClick = (index, event) => {
         const updatedRides = [...ridedata];
         updatedRides[index].showInfo = !updatedRides[index].showInfo;
         setRideData(updatedRides);
+        setDate('')
+        setTime('')
     };
 
     const handleKidsRideClick = (index, event) => {
         const updatedKidRides = [...kidRideData];
         updatedKidRides[index].showInfo = !updatedKidRides[index].showInfo;
         setkidRideData(updatedKidRides);
+        setDate('')
+        setTime('')
     };
 
     const handleInfoClose = (index) => {
@@ -88,6 +97,13 @@ function DbRides() {
         getAllKidsRides();
     }, []);
 
+    const handleDateChange = (event) => {
+        setDate(event.target.value);
+    }
+
+    const handleTimeChange = (event) => {
+        setTime(event.target.value);
+    }
 
     if (isLoading) {
         return <div className="App">Loading...</div>;
@@ -97,6 +113,8 @@ function DbRides() {
         return <div className="App">Loading...</div>;
     }
 
+    const currentDate = new Date();
+    const earliestDate = currentDate.toISOString().substring(0, 10);
 
     return (
         <div>
@@ -118,7 +136,7 @@ function DbRides() {
                 <div className="all-rides" key={ride.name} onClick={() => handleRideClick(index)}>
                     {convertImage(ride.image.data)}
                     <div className="ride-details">
-                        <h2 className="ride-name">{ride.name}</h2>
+                        <h2 className="ride-name ">{ride.name} {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</h2>
                         <p>
                             {ride.description}
                             <br />
@@ -132,23 +150,52 @@ function DbRides() {
                             <div className="ride-info-box">
                                 <h2 className="ride-name-onClick">{ride.name}</h2>
                                 {convertImage(ride.image.data)}
-                                <p className='ride-info-p'>This will show if the ride is available or not. <br />
-                                    {ride.description}
-                                    <br />
-                                    Location: {ride.zone_id}
-                                    <br />
-                                    Must be {ride.height_requirement} to ride
-                                </p>
-
+                                {ride.description}
+                                <br />
+                                Location: {ride.zone_id}
+                                <br />
+                                Must be {ride.height_requirement} to ride
                                 {user.token != null &&
+                                    <div>
+                                        <input type='date' min={earliestDate} onClick={(event) => event.stopPropagation()} onChange={handleDateChange} />
+                                        <div>
+                                            <select name="time" id="time" onClick={(event) => event.stopPropagation()} onChange={handleTimeChange}>
+                                                <option value="" disabled selected>Time</option>
+                                                <option value="08:00:00">8:00 AM</option>
+                                                <option value="09:00:00">9:00 AM</option>
+                                                <option value="10:00:00">10:00 AM</option>
+                                                <option value="11:00:00">11:00 AM</option>
+                                                <option value="12:00:00">12:00 PM</option>
+                                                <option value="13:00:00">1:00 PM</option>
+                                                <option value="14:00:00">2:00 PM</option>
+                                                <option value="15:00:00">3:00 PM</option>
+                                                <option value="16:00:00">4:00 PM</option>
+                                                <option value="17:00:00">5:00 PM</option>
+                                                <option value="18:00:00">6:00 PM</option>
+                                                <option value="19:00:00">7:00 PM</option>
+                                                <option value="20:00:00">8:00 PM</option>
+                                                <option value="21:00:00">9:00 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                }
+                                {user.token != null && (date != '' && time != '') &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.id);
-                                    }}>Buy {cartItems[ride.id] > 0 && <>({cartItems[ride.id]})</>}</button>
+                                        addToCart(ride.ride_id, ride.type, `${date} ${time}`, ride.image.data);
+                                    }}>Buy {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</button>
+                                }
+                                {user.token != null && (ride.ride_id in cartItems) &&
+                                    <button className="rides-buy-button " onClick={(event) => {
+                                        event.stopPropagation(); // stop the click event from bubbling up to the parent div
+                                        removeFromCart(ride.ride_id);
+                                    }}>Remove</button>
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
                                     handleInfoClose(index)
+                                    setDate("")
+                                    setTime("")
                                 }}>Close</button>
                             </div>
                         </div>
@@ -159,11 +206,10 @@ function DbRides() {
             {/* These are the kids rides */}
             <h1 id="kids-rides-title"><u>Kids Rides</u></h1>
             {kidRideData.map((ride, index) => (
-
-                <div className="all-rides" key={ride.name} onClick={() => handleRideClick(index)}>
+                <div className="all-rides" key={ride.name} onClick={() => handleKidsRideClick(index)}>
                     {convertImage(ride.image.data)}
                     <div className="ride-details">
-                        <h2 className="ride-name">{ride.name}</h2>
+                        <h2 className="ride-name ">{ride.name} {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</h2>
                         <p>
                             {ride.description}
                             <br />
@@ -173,27 +219,55 @@ function DbRides() {
                         </p>
                     </div>
                     {ride.showInfo && (
-                        <div className="ride-info-overlay" onClick={(event) => handleOverlayClick(event, index)}>
+                        <div className="ride-info-overlay" onClick={(event) => handleKidsOverlayClick(event, index)}>
                             <div className="ride-info-box">
                                 <h2 className="ride-name-onClick">{ride.name}</h2>
                                 {convertImage(ride.image.data)}
-                                <p className='ride-info-p'>This will show if the ride is available or not. <br />
-                                    {ride.description}
-                                    <br />
-                                    Location: {ride.zone_id}
-                                    <br />
-                                    Must be {ride.height_requirement} to ride
-                                </p>
 
+                                {ride.description}
+                                <br />
+                                Location: {ride.zone_id}
+                                <br />
+                                Must be {ride.height_requirement} to ride
                                 {user.token != null &&
+                                    <div>
+                                        <input type='date' min={earliestDate} onClick={(event) => event.stopPropagation()} onChange={handleDateChange} />
+                                        <div>
+                                            <select name="time" id="time" onClick={(event) => event.stopPropagation()} onChange={handleTimeChange}>
+                                                <option value="" disabled selected>Time</option>
+                                                <option value="08:00:00">8:00 AM</option>
+                                                <option value="09:00:00">9:00 AM</option>
+                                                <option value="10:00:00">10:00 AM</option>
+                                                <option value="11:00:00">11:00 AM</option>
+                                                <option value="12:00:00">12:00 PM</option>
+                                                <option value="13:00:00">1:00 PM</option>
+                                                <option value="14:00:00">2:00 PM</option>
+                                                <option value="15:00:00">3:00 PM</option>
+                                                <option value="16:00:00">4:00 PM</option>
+                                                <option value="17:00:00">5:00 PM</option>
+                                                <option value="18:00:00">6:00 PM</option>
+                                                <option value="19:00:00">7:00 PM</option>
+                                                <option value="20:00:00">8:00 PM</option>
+                                                <option value="21:00:00">9:00 PM</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                }
+                                {user.token != null && (date != '' && time != '') &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.id);
-                                    }}>Buy {<>({cartItems[ride.id]})</>}</button>
+                                        addToCart(ride.ride_id, ride.type, `${date} ${time}`);
+                                    }}>Buy {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</button>
+                                }
+                                {user.token != null && (ride.ride_id in cartItems) &&
+                                    <button className="rides-buy-button " onClick={(event) => {
+                                        event.stopPropagation(); // stop the click event from bubbling up to the parent div
+                                        removeFromCart(ride.ride_id);
+                                    }}>Remove</button>
                                 }
                                 <button className="rides-close-button" onClick={(event) => {
                                     event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                    handleInfoClose(index)
+                                    handleKidsInfoClose(index)
                                 }}>Close</button>
                             </div>
                         </div>

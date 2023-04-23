@@ -1,36 +1,51 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const ShopContext = createContext(null);
 
-
-
-const getDeaultCart = () => {
-    let cart = {};
-    for (let i = 1; i < 16; i++) {
-        cart[i] = 0;
-    }
-    return cart;
-};
-
-
-
 export const ShopContextProvider = (props) => {
-    const [cartItems, setCartItems] = useState(getDeaultCart());
+
+    const [cartItems, setCartItems] = useState({});
     const [cartTotal, setCartTotal] = useState(0);
 
 
-    const addToCart = (rideId) => {
-        setCartItems((prev) => ({ ...prev, [rideId]: prev[rideId] + 1 }));
+    const addToCart = (ride_id, type, date, image) => {
+        let updatedCartItems = cartItems;
+        if (ride_id in updatedCartItems) {
+            updatedCartItems[ride_id].amount++;
+        } else {
+            var item = {
+                ride_id: ride_id,
+                type: type,
+                date: date,
+                amount: 1,
+                image: image,
+            }
+            updatedCartItems[ride_id] = item;
+        }
+        setCartItems(updatedCartItems);
         setCartTotal(cartTotal + 1);
     };
 
     const removeFromCart = (rideId) => {
-        setCartItems((prev) => ({ ...prev, [rideId]: prev[rideId] - 1 }));
-        setCartTotal(cartTotal - 1);
+        let updatedCartItems = cartItems;
+
+        if (updatedCartItems[rideId].amount > 0) {
+            setCartTotal(cartTotal - 1);
+        }
+
+        if (rideId in updatedCartItems && updatedCartItems[rideId].amount > 1) {
+            updatedCartItems[rideId].amount--;
+
+        } else {
+            delete updatedCartItems[rideId];
+        }
+
+
+        setCartItems(updatedCartItems);
+
     };
 
     const contextValue = { cartItems, addToCart, removeFromCart, cartTotal };
-    console.log(cartItems);
     return <ShopContext.Provider value={contextValue}>
         {props.children}
     </ShopContext.Provider>;
