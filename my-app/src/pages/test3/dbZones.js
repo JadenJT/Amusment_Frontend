@@ -67,6 +67,7 @@ function DbZones() {
         return <div className="App">Loading...</div>;
     }
 
+    console.log(Date)
     return (
         <div>
             <div className="zwp">

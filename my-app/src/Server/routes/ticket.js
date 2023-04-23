@@ -6,7 +6,7 @@ module.exports = {
     async buyTicket(req, res) {
         const bodyData = await getReqData(req);
         const ticketJSON = JSON.parse(bodyData);
-        const ticketList = ticketJSON[0];
+        const ticketList = ticketJSON.ticket;
 
         const brokenTickets = [];
         const inputtedTicket = [];
@@ -17,8 +17,8 @@ module.exports = {
             let query = `INSERT INTO ticket(\`ticket_id\`, \`date\`, \`price\`, \`ride_id\`, \`customer_email\`) VALUES (NULL, '${values.dateTime}', ${price}, ${values.ride_id}, '${values.email}');`
             const [row, field] = await db.promise().execute(`SELECT name FROM master.ride WHERE ride_id = ${values.ride_id}`);
             const ride_name = row[0].name;
-            
-            try{
+
+            try {
                 const [rows2, fields2] = await db.promise().execute(query)
                 inputtedTicket.push(rows2.insertId)
             } catch (err) {
@@ -27,23 +27,23 @@ module.exports = {
                     "dateTime": values.dateTime,
                     "error": err.sqlState
                 })
-                if(err.sqlState == '45000') {
-                    const [row, field] = await db.promise().execute(`SELECT * FROM master.job WHERE job_ride = ${ride_name}`)
-                    if (row.length === 0 )  {
-                        insertJob = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL, ${ride_name}, null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`;
+                if (err.sqlState == '45000') {
+                    const [row, field] = await db.promise().execute(`SELECT * FROM master.job WHERE job_ride = '${ride_name}';`)
+                    if (row.length === 0) {
+                        insertJob = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'maintenance', '${ride_name}', null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`;
                         await db.promise().execute(insertJob);
                     }
                 }
             }
         }
         if (brokenTickets.length !== 0) {
-            for (const ticket_id of inputtedTicket) {   
+            for (const ticket_id of inputtedTicket) {
                 await db.promise().execute(`DELETE FROM master.ticket WHERE ticket_id = ${ticket_id}`)
             }
         } else {
             return sendResponse(req, res, 201, "Tickets Added")
         }
-        return sendResponse(req, res, 500, "Tickets revoked", brokenTickets)
+        return sendResponse(req, res, 409, "Tickets revoked", brokenTickets)
     },
 
     async ticketsOwn(req, res) {

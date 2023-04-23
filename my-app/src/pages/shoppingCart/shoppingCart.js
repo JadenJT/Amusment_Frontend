@@ -35,7 +35,40 @@ function ShoppingCart() {
     }, []);
 
 
+    const handleCheckOut = async (event) => {
+        let checkout = []
+        for (let i = 0; i < cartItems.length; i++) {
+            if (cartItems[i] != null) {
+                let info = {
+                    ride_id: cartItems[i].ride_id,
+                    type: cartItems[i].type,
+                    email: user.email,
+                    dateTime: cartItems[i].date
+                }
+                for (let j = 0; j < cartItems[i].amount; j++) {
+                    checkout.push(info)
+                }
+            }
+        }
 
+        const ticketdata = {
+            ticket: checkout,
+        };
+
+        const response = await fetch('http://localhost:8080/ticket/buy', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ticketdata)
+        }).catch((error) => { console.log(error) });
+
+
+        const responseData = await response.json();
+        console.log(responseData)
+        console.log(checkout)
+
+    }
 
     return (
         <div className='cart-cover'>
@@ -77,9 +110,10 @@ function ShoppingCart() {
                         <div class="summary-label">Total</div>
                         <div class="summary-value">{total}</div>
                     </div>
-                    <button class="checkout-btn">Checkout</button>
+                    <button class="checkout-btn" onClick={handleCheckOut}>Checkout</button>
                 </div>
             </div>
+
         </div>
 
     )
