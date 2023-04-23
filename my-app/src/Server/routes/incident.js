@@ -21,7 +21,7 @@ module.exports = {
     },
 
     async getIncidentReport(req, res){
-        const query = 'SELECT * FROM master.incident ORDER BY id DESC LIMIT 10;'
+        const query = 'SELECT * FROM master.incident ORDER BY id DESC LIMIT 30;'
         const [rows, fields] = await db.promise().execute(query)
         return sendResponse(req, res, 200, "Fetched incidents", rows)
     }

@@ -16,7 +16,7 @@ const rideRoutes = require('./routes/ride');
 // All GET request
 const getHandlers = {
   '/ticket/owned': (req, res) => ticketRoutes.ticketsOwn(req, res),
-  '/incident/get': (req, res) => incidentRoutes.getIncident(req, res),
+  '/incident/get': (req, res) => incidentRoutes.getIncidentReport(req, res),
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
@@ -49,7 +49,7 @@ const postHandlers = {
   '/concession/add': (req, res) => concessionRoutes.addConcession(req, res),
   '/ride/add': (req, res) => rideRoutes.addRide(req, res),
   '/giftshop/add': (req, res) => giftshopRoutes.addGiftshop(req, res),
-  '/incident/add': (req, res) => incidentRoutes.addIncident(req, res),
+  '/incident/add': (req, res) => incidentRoutes.addIncidentReport(req, res),
   '/job/add': (req, res) => jobRoutes.addJob(req, res),
 
   '/job/complete': (req, res) => jobRoutes.markJobdone(req, res),
