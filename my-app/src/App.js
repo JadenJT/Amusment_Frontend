@@ -74,9 +74,14 @@ function App() {
               <Route path="concessions" element={<DbConcession />} />
               <Route path="zone" element={<DbZones />} />
 
-              <Route path='Report' element={<NewReports />} />
-              
-              <Route path='IncidentReportMaker' element={<IncidentReportMaker />} />
+
+              {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
+                <Route path='Report' element={<NewReports />} />
+              }
+
+              {user.token != null && (user.role_type != 'customer') &&
+                <Route path='IncidentReportMaker' element={<IncidentReportMaker />} />
+              }
 
               {user.role_type == 'admin' &&
                 <Route path='EditAttraction' element={<EditAttraciton />} />

@@ -28,7 +28,7 @@ module.exports = {
                     "error": err.sqlState
                 })
                 if (err.sqlState == '45000') {
-                    const [row, field] = await db.promise().execute(`SELECT * FROM master.job WHERE job_ride = '${ride_name}';`)
+                    const [row, field] = await db.promise().execute(`SELECT * FROM master.job WHERE job_ride = '${ride_name}' AND job_date_completed IS NULL;`)
                     if (row.length === 0) {
                         insertJob = `INSERT INTO master.job(\`job_code\`, \`job_name\`, \`job_ride\`, \`job_concession\`, \`job_giftshop\`, \`job_date\`, \`job_completed\`, \`worker\`, \`job_date_completed\`) VALUES (NULL,'maintenance', '${ride_name}', null, null, (DATE_ADD(CURDATE(), INTERVAL 3 DAY)), FALSE, NULL, NULL);`;
                         await db.promise().execute(insertJob);

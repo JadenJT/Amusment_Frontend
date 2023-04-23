@@ -117,7 +117,7 @@ function DbRides() {
     const currentDate = new Date();
     const earliestDate = currentDate.toISOString().substring(0, 10);
 
-    console.log(date, time)
+
     return (
         <div>
             <div className="rwp">

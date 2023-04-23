@@ -116,4 +116,29 @@
     font-weight: bold;
     cursor: pointer;
     float: right;
+    justify-content: space-between;
+}
+
+.logout-btnn {
+    display: block;
+    margin-top: 20px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e65667;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    float: left;
+    justify-content: space-between;
+}
+
+
+.success-box-text {
+    color: #00FF00;
+}
+
+.unsuccess-box-text {
+    color: #e65667;
 }
