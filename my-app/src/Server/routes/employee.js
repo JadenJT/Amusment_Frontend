@@ -111,16 +111,15 @@ module.exports = {
 
         let query = `UPDATE master.employee SET `
 
-        if (address != null) query += `address = '${address}', `
+        if (address != null) {
+            query += `UPDATE master.employee SET address = '${address}' WHERE email = '${email}';`
+            await db.promise().execute(query); 
+        }
         if (phone_number != null) {
             await db.promise().execute(
                 `UPDATE master.person SET phone_number = ${phone_number} WHERE email = '${email}';`
             )
         }
-        query = query.slice(0, -2);
-        query += ` WHERE email = '${email}';`
-
-        await db.promise().execute(query); 
         return sendResponse(req, res, 200, `Employee Updated`);
     },
 
