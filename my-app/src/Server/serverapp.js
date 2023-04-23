@@ -37,6 +37,8 @@ const getHandlers = {
   '/giftshop/all': (req, res) => giftshopRoutes.getGiftshop(req, res),
   '/zone/all': (req, res) => rideRoutes.getZones(req, res),
 
+  '/employee/get': (req, res) => employeeRoutes.getAllEmployees(req, res)
+
 }
 
 // All POST request

@@ -32,6 +32,12 @@ function AdminHub({ user }) {
                     <Link to='/Employee' className='button-link-stack'>
                         Employee
                     </Link>
+                    <Link to='/InsertEmployee' className='navbar-logo'>
+                        InsertEmployee
+                    </Link>
+                    <Link to='/RemoveEmployee' className='navbar-logo'>
+                        RemoveEmployee
+                    </Link>
                 </div>
             }
         </div>

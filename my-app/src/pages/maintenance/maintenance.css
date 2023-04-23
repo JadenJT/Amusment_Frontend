@@ -1,3 +1,102 @@
+
+/*cover style */
+.maintenance-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+}
+.maintenance-cover{
+    background-color: white;
+    width: 80em;
+    height: min-content;
+    position: relative;
+    padding: 1em;
+    border-radius: 1em;
+    box-shadow: 0 0.1em .5em #9c9c9c;
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* style for title */
+.job-title-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    margin-top: 1em;
+    color: black;
+}
+/* style for table*/
+.job-table-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+.job-table{
+    margin: 0, auto;
+    width: 50%;
+    background-color: white;
+    border: none;
+    border-collapse: collapse;
+    border-radius: .8em;
+    overflow: hidden;
+}
+
+.job-header-col{
+    border:1px solid #000000;
+    padding: 8px;
+    text-align: left;
+    color: white;
+    background-color: #B062EA;
+}
+.job-data{
+    border:1px solid #000000;
+    padding: 8px;
+    text-align: left;
+    color: black;
+}
+.job-line:nth-child(even){
+    background-color: #f9f9f9;
+}
+.job-line-highlighted{
+    background-color: #E9B4E9;
+    animation-name: glow;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px #E9B4E9, 0 0 20px #E9B4E9, 0 0 30px #E9B4E9;
+    }
+    50% {
+        box-shadow: 0 0 20px #E9B4E9, 0 0 30px #E9B4E9, 0 0 40px #E9B4E9;
+    }
+    100% {
+        box-shadow: 0 0 5px #E9B4E9, 0 0 20px #E9B4E9, 0 0 30px #E9B4E9;
+    }
+}
+.job-button{
+    width: 20%;
+    height: 3em;
+    background-color: #c3a3ff;
+    color: white;
+    border: none;
+    font-size: 1em;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    cursor: pointer;
+}
+.job-button:hover {
+    transform: scale(1.05);
+    background-color: black;
+}
+
 .button-link-side {
     display: inline-block;
     width: 15%;
@@ -36,3 +135,4 @@
   .subheader{
     color:white;
   }
+

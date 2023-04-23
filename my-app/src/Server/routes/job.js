@@ -1,6 +1,8 @@
 const db = require('../database');
 const { sendResponse } = require("../helpers/response");
 const { getReqData } = require("../helpers/utils");
+const url = require('url');
+const querystring = require('querystring');
 
 module.exports = {
     async addJob(req, res){

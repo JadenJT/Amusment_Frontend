@@ -118,7 +118,7 @@ module.exports = {
             )
         }
         query = query.slice(0, -2);
-        query += ` WHERE employee_id = ${employee_id};`
+        query += ` WHERE email = '${email}';`
 
         await db.promise().execute(query); 
         return sendResponse(req, res, 200, `Employee Updated`);
@@ -137,15 +137,21 @@ module.exports = {
         const email = employeeJSON.email;
 
 
-        if (employee_id == null || email == null) return sendResponse(req, res, 409, "Missing information")
-        if (!await checkEmployeeExist(email) || !await checkEmployeeExistID(employee_id)) return sendResponse(req, res, 409, "Employee does not exist with both credentials")
+        if (email == null) return sendResponse(req, res, 409, "Missing information")
+        if (!await checkEmployeeExist(email)) return sendResponse(req, res, 409, "Employee does not exist with both credentials")
 
-        const personQuery = `UPDATE master.person AS PER JOIN master.employee AS EMP ON PER.email = EMP.email SET PER.role_type = 'customer' WHERE EMP.employee_id = ${employee_id};`
+        const personQuery = `UPDATE master.person AS PER JOIN master.employee AS EMP ON PER.email = EMP.email SET PER.role_type = 'customer' WHERE EMP.email = '${email}';`
         await db.promise().execute(personQuery);
 
-        query = `UPDATE FROM master.employee SET active = FALSE WHERE email = '${email}`
+        query = `UPDATE master.employee SET active = FALSE WHERE email = '${email}';`
         await db.promise().execute(query);
 
         return sendResponse(req, res, 200, "Employee removed");
+
+    }, 
+    async getAllEmployees(req, res) {
+        const [rows, fields] = await db.promise().execute(`SELECT CONCAT(PER.f_name, ' ', PER.l_name) AS Name, EMP.* FROM master.employee AS EMP, master.person AS PER WHERE EMP.email = PER.email;`)
+        return sendResponse(req, res, 200, "Employees Fetched", rows)
+
     }
 }
