@@ -2,7 +2,7 @@ import "./loginForm.css"
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useToken from '../../tokenhelpers/helpers';
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 
 
 function validateEmail(userEmail) {
@@ -75,7 +75,7 @@ const Loginform = () => {
       password: passwordValue,
     };
 
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch(`${baseUrl}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

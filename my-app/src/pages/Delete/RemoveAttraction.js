@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './RemoveAttraction.css'
+import { baseUrl } from '../../App';
 
 const RemoveAttraction = () => {
 
@@ -37,7 +38,7 @@ const RemoveAttraction = () => {
 
     //fetch get data
     const fetchridedata = async () => {
-        const response = await fetch('http://localhost:8080/ride/all');
+        const response = await fetch(`${baseUrl}/ride/all`);
 
         const data = await response.json();
         setRideData(data);
@@ -47,7 +48,7 @@ const RemoveAttraction = () => {
         fetchridedata();
     }, []);
     const fetchconcessiondata = async () => {
-        const response = await fetch('http://localhost:8080/concession/all');
+        const response = await fetch(`${baseUrl}/concession/all`);
         const data = await response.json();
         setConcessionData(data);
         setConcessionLoading(false);
@@ -56,7 +57,7 @@ const RemoveAttraction = () => {
         fetchconcessiondata();
     }, []);
     const fetchgiftshopdata = async () => {
-        const response = await fetch('http://localhost:8080/giftshop/all');
+        const response = await fetch(`${baseUrl}/giftshop/all`);
         const data = await response.json();
         setGiftshopData(data);
         setGiftshopLoading(false);
@@ -110,7 +111,7 @@ const RemoveAttraction = () => {
             const rideData = new FormData();
             rideData.append('name', rideoption)
 
-            await fetch('http://localhost:8080/ride/delete', {
+            await fetch(`${baseUrl}/ride/delete`, {
                 method: 'POST',
                 body: rideData
             });
@@ -122,7 +123,7 @@ const RemoveAttraction = () => {
             const concessionData = new FormData();
             concessionData.append('name', concessionoption)
 
-            await fetch('http://localhost:8080/concession/delete', {
+            await fetch(`${baseUrl}/concession/delete`, {
                 method: 'POST',
                 body: concessionData
             });
@@ -130,11 +131,11 @@ const RemoveAttraction = () => {
 
         } else if (selectedOption === 'giftshop') {
             if (giftshopoption == "") return setAttractionMessage("No giftshop selected");
-            
+
             const giftshopData = new FormData();
             giftshopData.append('name', giftshopoption)
 
-            await fetch('http://localhost:8080/giftshop/delete', {
+            await fetch(`${baseUrl}/giftshop/delete`, {
                 method: 'POST',
                 body: giftshopData
             });
@@ -216,8 +217,8 @@ const RemoveAttraction = () => {
                                     </option>
                                     {renderGiftShopOptions()}
                                 </select>
-                                    <div className='admin-error'>{attractionMessage}</div>
-                                    <div className='admin-success'>{attractionMessage}</div>
+                                <div className='admin-error'>{attractionMessage}</div>
+                                <div className='admin-success'>{attractionMessage}</div>
                             </div>
                         )}
 

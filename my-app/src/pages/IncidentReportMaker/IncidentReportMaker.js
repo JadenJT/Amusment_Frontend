@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
 import "./IncidentReportMaker.css";
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 
 
-function validateDescription(userDesc){
+function validateDescription(userDesc) {
     if (userDesc.length === 0 || userDesc.length > 750) return false;
-    
+
     const regex = /^[.,a-zA-Z0-9!\s]+$/;
     if (!regex.test(userDesc)) return false;
 
@@ -21,7 +21,7 @@ const IncidentReportMaker = () => {
     const [marginBottomDescription, setMarginBottomDescription] = useState('1em');
     const { user } = useContext(UserContext);
 
-    const handleDescriptionChange = (e) => { 
+    const handleDescriptionChange = (e) => {
         setDescription(e.target.value);
         if (!validateDescription(e.target.value)) {
             setErrorDescription("Invalid Description - Illegal character");
@@ -37,7 +37,7 @@ const IncidentReportMaker = () => {
         setDate('');
         setDescription('');
     }
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -50,7 +50,7 @@ const IncidentReportMaker = () => {
             date: date
 
         }
-        const response = await fetch('http://localhost:8080/incident/add', {
+        const response = await fetch(`${baseUrl}/incident/add`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,15 +59,15 @@ const IncidentReportMaker = () => {
         });
         resetForm();
     }
-    
-    return(
+
+    return (
         <div>
             <div className='admin-edit-body'>
                 <div className='admin-edit-cover'>
                     <form className='admin-edit-form' onSubmit={handleSubmit}>
                         <div className='admin-option-box'>
                             <h3 className='option-title'>Incident Description</h3>
-                            <textarea placeholder='Enter description' className='option-input' value={description} onChange={handleDescriptionChange} style={{marginBottom: marginBottomDescription, resize: 'vertical' }}></textarea>
+                            <textarea placeholder='Enter description' className='option-input' value={description} onChange={handleDescriptionChange} style={{ marginBottom: marginBottomDescription, resize: 'vertical' }}></textarea>
                             <div className='admin-error'>{errorDescription}</div>
                             <h3 className='option-title'>Date of Incident</h3>
                             <input className='option-input' type='date' value={date} onChange={handleDateChange}></input>

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { ShopContext } from '../../components/cartContext/CartContext';
 import './shoppingCart.css';
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -71,7 +71,7 @@ function ShoppingCart() {
             ticket: checkout,
         };
 
-        const response = await fetch('http://localhost:8080/ticket/buy', {
+        const response = await fetch(`${baseUrl}/ticket/buy`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

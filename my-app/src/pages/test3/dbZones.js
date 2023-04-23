@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Logo from '../../icons/Umazing.svg'
 import { Link } from "react-scroll";
 import '../Zone/zone.css'
+import { baseUrl } from '../../App';
+
 function convertImage(array) {
     let buf = new Uint8Array(array)
     let dt = new TextDecoder("utf-8");
@@ -21,7 +23,7 @@ function DbZones() {
 
     // get all active concessions
     const fetchConcessiondata = async () => {
-        const response = await fetch('http://localhost:8080/concession/Active');
+        const response = await fetch(`${baseUrl}/concession/Active`);
         const data = await response.json();
         setconcessiondata(data.item);
         setConcessionLoading(false);
@@ -33,7 +35,7 @@ function DbZones() {
 
     // get all active rides
     const fetchRidedata = async () => {
-        const response = await fetch('http://localhost:8080/ride/allActiveRide');
+        const response = await fetch(`${baseUrl}/ride/allActiveRide`);
         const data = await response.json();
         setRideData(data.item);
         setRideLoading(false);
@@ -45,7 +47,7 @@ function DbZones() {
 
     // get all active giftshops
     const fetchGiftshopdata = async () => {
-        const response = await fetch('http://localhost:8080/giftshop/Active');
+        const response = await fetch(`${baseUrl}/giftshop/Active`);
         const data = await response.json();
         setgiftshopdata(data.item);
         setGiftshopLoading(false);

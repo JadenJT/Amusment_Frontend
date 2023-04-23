@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Logo from '../../icons/Umazing.svg'
 import { Link } from "react-scroll";
 import '../Concessions/concessions.css'
+import { baseUrl } from '../../App';
+
 function convertImage(array) {
     let buf = new Uint8Array(array)
     let dt = new TextDecoder("utf-8");
@@ -15,7 +17,7 @@ function DbConcession() {
 
 
     const fetchConcessiondata = async () => {
-        const response = await fetch('http://localhost:8080/concession/Active');
+        const response = await fetch(`${baseUrl}/concession/Active`);
         const data = await response.json();
         for (let i = 0; i < data.item.length; i++) {
             data.item[i].showInfo = false;

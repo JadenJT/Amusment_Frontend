@@ -2,7 +2,7 @@ import './register.css';
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useToken from '../../tokenhelpers/helpers';
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 
 
 function validateFirstName(firstname) {
@@ -203,7 +203,7 @@ const Register = () => {
       password: passwordValue,
     };
 
-    const response = await fetch('http://localhost:8080/register', {
+    const response = await fetch(`${baseUrl}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
