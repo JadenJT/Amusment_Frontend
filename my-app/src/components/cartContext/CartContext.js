@@ -8,7 +8,7 @@ export const ShopContextProvider = (props) => {
     const [cartTotal, setCartTotal] = useState(0);
 
 
-    const addToCart = (ride_id, type, date) => {
+    const addToCart = (ride_id, type, date, image) => {
         let updatedCartItems = cartItems;
         if (ride_id in updatedCartItems) {
             updatedCartItems[ride_id].amount++;
@@ -18,10 +18,11 @@ export const ShopContextProvider = (props) => {
                 type: type,
                 date: date,
                 amount: 1,
+                image: image,
             }
             updatedCartItems[ride_id] = item;
         }
-
+        console.log(updatedCartItems)
         setCartItems(updatedCartItems);
         setCartTotal(cartTotal + 1);
     };

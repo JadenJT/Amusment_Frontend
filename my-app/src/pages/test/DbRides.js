@@ -12,6 +12,7 @@ function convertImage(array) {
     return <img className="img-ride" src={`data:image/jpeg;base64,${b64}`} />
 }
 
+
 function DbRides() {
 
     const [isLoading, setLoading] = useState(true);
@@ -181,7 +182,7 @@ function DbRides() {
                                 {user.token != null && (date != '' && time != '') &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.ride_id, ride.type, `${date} ${time}`);
+                                        addToCart(ride.ride_id, ride.type, `${date} ${time}`, ride.image.data);
                                     }}>Buy {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</button>
                                 }
                                 {user.token != null && (ride.ride_id in cartItems) &&
