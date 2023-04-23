@@ -9,7 +9,9 @@ function Employee({ user }) {
 
     return (
         <div>
-            <h1>This is Employee</h1>
+            <h1>Employee Portal</h1>
+            <Link className='button-link-side'>Edit Information</Link>
+            <Link to='/IncidentReportMaker' className='button-link-side'>Create Incident Report</Link>
         </div>
     )
 }
