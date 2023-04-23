@@ -42,14 +42,15 @@ module.exports = {
         const location = employeeJSON.job_location;
         const job_type = employeeJSON.job_role; 
         const email = employeeJSON.email;
+        console.log(employeeJSON)
 
-        let query = `SELECT CONCAT(PER.f_name, ' ', PER.l_name) AS Name, JOB.job_name AS Job_Role, CONCAT(COALESCE(JOB.job_ride, ''), COALESCE(JOB.job_concession, ''), COALESCE(JOB.job_giftshop, '')) AS Location, PER.email AS contact_email FROM master.person AS PER, master.job AS JOB, master.employee AS EMP WHERE EMP.email = PER.email AND EMP.work_code = JOB.job_code `
+        let query = `SELECT CONCAT(PER.f_name, ' ', PER.l_name) AS Name, JOB.job_name AS Job_Role, CONCAT(COALESCE(JOB.job_ride, ''), COALESCE(JOB.job_concession, ''), COALESCE(JOB.job_giftshop, '')) AS Location, PER.email AS contact_email, PER.phone_number AS Phone_number FROM master.person AS PER, master.job AS JOB WHERE CONCAT(PER.f_name, ' ', PER.l_name) = JOB.worker `
 
         if (f_name != null) query += `AND PER.f_name = '${f_name}' `
         if (l_name != null) query += `AND PER.l_name = '${l_name}' `
         if (location != null) query += `AND (JOB.job_ride = '${location}' OR JOB.job_concession = '${location}' OR JOB.job_giftshop = '${location}') `
         if (job_type != null) query += `AND JOB.job_name = '${job_type}' `
-        if (email != null) query += `AND EMP.email = '${email}' `
+        if (email != null) query += `AND PER.email = '${email}' `
 
         query += ';'
 
@@ -76,12 +77,12 @@ module.exports = {
         const ssn = employeeJSON.ssn;
         const b_date = employeeJSON.b_date;
 
-        let query = 'INSERT INTO master.employee(`employee_id`, `work_code`, `address`, `email`, `ssn`, `b_date`) VALUES (?, ?, ?, ?, ?, ?);'
+        let query = 'INSERT INTO master.employee(`employee_id`, `work_code`, `address`, `email`, `ssn`, `b_date`, active) VALUES (?, ?, ?, ?, ?, ?, ?);'
 
         if (await checkEmailExist(email)) return sendResponse(req, res, 409, `Email does not exist.`)
         if (await checkEmployeeExist(email)) return sendResponse(req, res, 409, `Person already exist.`)
 
-        const [row, fields] = await db.promise().execute(query, [null, work_code, address, email, ssn, b_date]);
+        const [row, fields] = await db.promise().execute(query, [null, work_code, address, email, ssn, b_date, true]);
         const [job_row, job_field] = await db.promise().execute('SELECT JOB.job_name FROM master.job AS JOB WHERE job_code = ?;', [work_code])
 
         const job_name = job_row[0].job_name;
@@ -103,39 +104,24 @@ module.exports = {
     async updateEmployee(req, res){
         const bodyData = await getReqData(req);
         const employeeJSON = JSON.parse(bodyData);
-        const employee_id = employeeJSON.employee_id;  
-        const email = employeeJSON.email;
-        const work_code = employeeJSON.work_code;
+        const email = employeeJSON.email;  
+        const phone_number = employeeJSON.phone_number;
         const address = employeeJSON.address;
+        if (address === null && phone_number === null) return sendResponse(req, res, 500, "No info inputted")
 
         let query = `UPDATE master.employee SET `
 
-        if (email != null) query += `email = '${email}', `
-        if (work_code != null) query += `work_code = ${work_code}, `
         if (address != null) query += `address = '${address}', `
-
+        if (phone_number != null) {
+            await db.promise().execute(
+                `UPDATE master.person SET phone_number = ${phone_number} WHERE email = ${email}`
+            )
+        }
         query = query.slice(0, -2);
         query += ` WHERE employee_id = ${employee_id};`
 
         await db.promise().execute(query); 
-
-        if (work_code != null) {
-            const [job_row, job_field] = await db.promise().execute('SELECT JOB.job_name FROM master.job AS JOB WHERE job_code = ?;', [work_code])
-
-            const job_name = job_row[0].job_name;
-            const personQuery = `UPDATE master.person AS PER JOIN master.employee AS EMP ON PER.email = EMP.email SET PER.role_type = '${job_name}' WHERE EMP.employee_id = ${employee_id};`
-
-            await db.promise().execute(personQuery)
-        }
-
-        const rowsUpdated = {
-            employee_id: employee_id,
-            email: email,
-            work_code: work_code,
-            address: address
-        }
-
-        return sendResponse(req, res, 200, `Employee Updated`, rowsUpdated);
+        return sendResponse(req, res, 200, `Employee Updated`);
     },
 
     /*
@@ -148,7 +134,6 @@ module.exports = {
     async removeEmployee(req, res) {
         const bodyData = await getReqData(req);
         const employeeJSON = JSON.parse(bodyData);
-        const employee_id = employeeJSON.employee_id; 
         const email = employeeJSON.email;
 
 
@@ -158,7 +143,7 @@ module.exports = {
         const personQuery = `UPDATE master.person AS PER JOIN master.employee AS EMP ON PER.email = EMP.email SET PER.role_type = 'customer' WHERE EMP.employee_id = ${employee_id};`
         await db.promise().execute(personQuery);
 
-        query = `DELETE FROM master.employee WHERE email = '${email}' AND employee_id = ${employee_id}`
+        query = `UPDATE FROM master.employee SET active = FALSE WHERE email = '${email}`
         await db.promise().execute(query);
 
         return sendResponse(req, res, 200, "Employee removed");

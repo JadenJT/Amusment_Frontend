@@ -30,6 +30,7 @@ function IncidentReportMaker(){
     function Submit(desc, email, date){
         if(!validateDescription(desc) || !validateEmail(email) || !validateDate(date))
             document.getElementById("buttonText").syle.color = 'red';
+            console.log(desc, email, date)
     }
     return(
         <div className="body">
