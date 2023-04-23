@@ -44,8 +44,6 @@ const Maintenance = () => {
             <tr key={index} className={highlightedRowIndex === index ? 'job-line-highlighted' : 'job-line'}>
                 <td className='job-data'>{job.job_code}</td>
                 <td className='job-data'>{job.job_ride}</td>
-                <td className='job-data'>{job.job_concession}</td>
-                <td className='job-data'>{job.job_giftshop}</td>
                 <td className='job-data'>{formatDate(job.job_date)}</td>
             </tr>
         ));
@@ -79,8 +77,6 @@ const Maintenance = () => {
             body: JSON.stringify(data)
         });
 
-        // Remove the job with the submitted job code from tableData state
-
         setJobCode('');
     };
 
@@ -108,8 +104,6 @@ const Maintenance = () => {
                             <tr className='job-line'>
                                 <th className='job-header-col'>Job code</th>
                                 <th className='job-header-col'>Ride name</th>
-                                <th className='job-header-col'>Concession name</th>
-                                <th className='job-header-col'>Gift Shop name</th>
                                 <th className='job-header-col'>Job Date</th>
                             </tr>
                             {renderJobData()}

@@ -22,9 +22,9 @@ module.exports = {
         const jobJSON = JSON.parse(bodyData); 
         const work_code = jobJSON.work_code;
 
-        const query = `UPDATE master.job SET job_completed = TRUE, job_date_completed = (current_timestamp()) WHERE job_code = ?`
+        const query = `UPDATE master.job SET job_completed = TRUE, job_date_completed = (current_timestamp()) WHERE job_code = ${work_code}`
 
-        const [rows, fields] = await db.promise().execute(query, [work_code])
+        const [rows, fields] = await db.promise().execute(query)
 
         return sendResponse(req, res, 200, "Job completed!", rows)
 
