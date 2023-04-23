@@ -70,4 +70,9 @@ module.exports = {
         }
         return sendResponse(req, res, 200, "Logged in", personInfo)
     },
+
+    async getAllPerson(req, res) {
+        const [rows, fields] = await db.promise().execute(`SELECT CONCAT(f_name, ' ', l_name) AS Name, role_type FROM master.person WHERE role_type != 'customer';`);
+        return sendResponse(req, res, 200, "Got Persons", rows);
+    }
 }
