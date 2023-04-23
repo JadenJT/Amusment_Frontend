@@ -315,7 +315,11 @@ const NewReports = () => {
     setShowTable(true);
 
     } else if (selectedOption === 'incident') {
-      
+
+      const response = await fetch('http://localhost:8080/incident/get')
+      const responseData = await response.json()
+      setFetchData(responseData.item)
+      setShowTable(true);
     }
   }
 
@@ -383,10 +387,10 @@ const NewReports = () => {
                 </select>
 
                 <h3 className='option-title'>Start Date</h3>
-                <input type='date' value={startDate} onChange={handleStartDateChange}></input>
+                <input type='date' className='option-input' value={startDate} onChange={handleStartDateChange}></input>
 
                 <h3 className='option-title'>End Date</h3>
-                <input type='date' value={endDate} onChange={handleEndDateChange}></input>
+                <input type='date' className='option-input' value={endDate} onChange={handleEndDateChange}></input>
               </div>
             )}
 
@@ -405,10 +409,10 @@ const NewReports = () => {
               </select>
 
               <h3 className='option-title'>Start Date</h3>
-              <input type='date' value={startDate} onChange={handleStartDateChange}></input>
+              <input className='option-input' type='date' value={startDate} onChange={handleStartDateChange}></input>
 
               <h3 className='option-title'>End Date</h3>
-              <input type='date' value={endDate} onChange={handleEndDateChange}></input>
+              <input className='option-input' type='date' value={endDate} onChange={handleEndDateChange}></input>
             </div>
             )}
 
@@ -547,6 +551,35 @@ const NewReports = () => {
                 <td>{item.Location}</td>
                 <td>{item.contact_email}</td>
                 <td>{item.Phone_number}</td>
+              </tr>
+              );
+            })
+          }
+          </tbody>
+        </table>
+      </div>
+      )}
+
+      {selectedOption === 'incident' && showTable && (
+        <div className='admin-edit-body'>
+        <table className='table'>
+          <thead>
+            <tr>
+              <th className='option-title'>Incident ID</th>
+              <th className='option-title'>Email Contact</th>
+              <th className='option-title'>Description</th>
+              <th className='option-title'>Date of Incident</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+          fetchData.map((item, index) => {
+            return (
+              <tr>
+                <td>{item.id}</td>
+                <td>{item.email}</td>
+                <td>{item.description}</td>
+                <td>{item.date}</td>
               </tr>
               );
             })
