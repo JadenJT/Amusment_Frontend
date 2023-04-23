@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import Error404 from '../Error404/error404';
 import { Link } from 'react-router-dom';
+import './adminHub.css'
 
 function AdminHub({ user }) {
     if (user.role_type != 'admin') {
@@ -9,26 +10,26 @@ function AdminHub({ user }) {
     return (
         <div>
             {user != null && user.role_type == 'admin' &&
-                <div className='Attraction'>
-                    <h1>This is admin</h1>
+                <div>
+                    <h1>Admin Portal</h1>
 
-                    <Link to='/InsertAttraction' className='navbar-logo'>
-                        InsertAttraction
+                    <Link to='/InsertAttraction' className='button-link-side'>
+                        Insert Attraction
                     </Link>
-                    <Link to='/EditAttraction' className='navbar-logo'>
-                        EditAttraciton
+                    <Link to='/EditAttraction' className='button-link-side'>
+                        Edit Attraciton
                     </Link>
-                    <Link to='/RemoveAttraction' className='navbar-logo'>
-                        RemoveAttraction
+                    <Link to='/RemoveAttraction' className='button-link-side'>
+                        Remove Attraction
                     </Link>
-
-                    <Link to='/manager' className='navbar-logo'>
+                    <h3 className="subheader">Other Portals</h3>
+                    <Link to='/manager' className='button-link-stack'>
                         Manager
                     </Link>
-                    <Link to='/maintenance' className='navbar-logo'>
+                    <Link to='/maintenance' className='button-link-stack'>
                         Maintenance
                     </Link>
-                    <Link to='/Employee' className='navbar-logo'>
+                    <Link to='/Employee' className='button-link-stack'>
                         Employee
                     </Link>
                     <Link to='/InsertEmployee' className='navbar-logo'>

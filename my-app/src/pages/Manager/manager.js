@@ -9,12 +9,15 @@ function Manager({ user }) {
     return (
 
         <div>
-            <h1>This is manager</h1>
-            <Link to='/employee' className='navbar-logo'>
-                Employee
+            <h1>Manager Portal</h1>
+            <Link to='/Report' className='button-link-side'>
+                Theme Park Reports
             </Link>
-            <Link to='/maintenance' className='navbar-logo'>
+            <Link to='/Maintenance' className='button-link-stack'>
                 Maintenance
+            </Link>
+            <Link to='/Employee' className='button-link-stack'>
+                Employee
             </Link>
         </div>
     )

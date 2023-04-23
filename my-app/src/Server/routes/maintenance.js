@@ -21,7 +21,7 @@ module.exports = {
         const start_date = ticketJSON.start_date;
         const end_date = ticketJSON.end_date;
 
-        let query = `SELECT JOB.job_code AS job_code, RIDE.zone_id AS Zone, JOB.job_ride AS Ride, CONCAT(PER.f_name, ' ', PER.l_name) AS full_name, JOB.job_date AS Scheduled_Date, EMP.email AS Email_Contact FROM master.job AS JOB JOIN master.ride AS RIDE ON RIDE.name = JOB.job_ride LEFT JOIN master.person AS PER ON CONCAT(PER.f_name, ' ', PER.l_name) = JOB.worker LEFT JOIN master.employee AS EMP ON EMP.email = PER.email WHERE JOB.job_name = 'maintenance' AND JOB.job_date_completed IS NULL AND (CONCAT(PER.f_name, ' ', PER.l_name) = JOB.worker OR JOB.worker IS NULL) `;
+        let query = `SELECT JOB.job_code AS job_code, RIDE.zone_id AS Zone, JOB.job_ride AS Ride, CONCAT(PER.f_name, ' ', PER.l_name) AS full_name, JOB.job_date AS Scheduled_Date, EMP.email AS Email_Contact, JOb.job_date_completed FROM master.job AS JOB JOIN master.ride AS RIDE ON RIDE.name = JOB.job_ride LEFT JOIN master.person AS PER ON CONCAT(PER.f_name, ' ', PER.l_name) = JOB.worker LEFT JOIN master.employee AS EMP ON EMP.email = PER.email WHERE JOB.job_name = 'maintenance' AND (CONCAT(PER.f_name, ' ', PER.l_name) = JOB.worker OR JOB.worker IS NULL) `;
 
         if (ride_name != null) query += `AND Job.job_ride = '${ride_name}' `
         if (zone != null) query += `AND RIDE.zone_id = '${zone}' `

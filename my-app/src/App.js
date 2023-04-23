@@ -8,10 +8,7 @@ import { useState, createContext, useContext } from "react";
 import Layout from "./components/layout";
 import Home from "./pages/Home/home";
 import Error404 from './pages/Error404/error404';
-import Concessions from "./pages/Concessions/concessions";
 import Login from './pages/Login/login';
-import Rides from "./pages/Rides/rides";
-import Zones from './pages/Zone/zone';
 import AdminHub from './pages/admin/adminHub';
 import InsertAttraction from './pages/Attraction/InsertAttraction';
 import EditAttraciton from './pages/Modify/EditAttraction';
@@ -88,9 +85,14 @@ function App() {
               <Route path="concessions" element={<DbConcession />} />
               <Route path="zone" element={<DbZones />} />
 
-              <Route path='report' element={<NewReports />} />
 
-              <Route path='IncidentReportMaker' element={<IncidentReportMaker />} />
+              {user.token != null && (user.role_type == 'admin' || user.role_type == 'manager') &&
+                <Route path='Report' element={<NewReports />} />
+              }
+
+              {user.token != null && (user.role_type != 'customer') &&
+                <Route path='IncidentReportMaker' element={<IncidentReportMaker />} />
+              }
 
               {user.role_type == 'admin' &&
                 <Route path='EditAttraction' element={<EditAttraciton />} />

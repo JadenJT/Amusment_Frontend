@@ -89,8 +89,8 @@ const Maintenance = () => {
     }
     return (
         <div>
-            <h1>This is maintenance</h1>
-            <Link to='/employee' className='navbar-logo'>
+            <h1>Maintenance Portal</h1>
+            <Link to='/employee' className='button-link-stack'>
                 Employee
             </Link>
             <div className='maintenance-body'>

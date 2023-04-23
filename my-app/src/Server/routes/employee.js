@@ -147,9 +147,11 @@ module.exports = {
         await db.promise().execute(query);
 
         return sendResponse(req, res, 200, "Employee removed");
+
     }, 
     async getAllEmployees(req, res) {
         const [rows, fields] = await db.promise().execute(`SELECT CONCAT(PER.f_name, ' ', PER.l_name) AS Name, EMP.* FROM master.employee AS EMP, master.person AS PER WHERE EMP.email = PER.email;`)
         return sendResponse(req, res, 200, "Employees Fetched", rows)
+
     }
 }
