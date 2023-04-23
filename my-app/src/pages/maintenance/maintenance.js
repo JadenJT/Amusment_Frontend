@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Error404 from '../Error404/error404';
 import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
@@ -13,12 +13,12 @@ const Maintenance = () => {
     const [highlightedRowIndex, setHighlightedRowIndex] = useState(null);
 
     //fetching job data
-    const fetchjobdata = async () =>{
-        const personJobRes = await fetch('http://localhost:8080/job/get?' +  new URLSearchParams({
+    const fetchjobdata = async () => {
+        const personJobRes = await fetch('http://localhost:8080/job/get?' + new URLSearchParams({
             email: user.email
         }))
         const personJobData = await personJobRes.json();
-        setTableData(personJobData);    
+        setTableData(personJobData);
     };
     useEffect(() => {
         fetchjobdata();
@@ -41,7 +41,7 @@ const Maintenance = () => {
     const renderJobData = () => {
         const items = tableData?.item || [];
         return items.map((job, index) => (
-            <tr key= {index} className={highlightedRowIndex === index ? 'job-line-highlighted' : 'job-line'}>
+            <tr key={index} className={highlightedRowIndex === index ? 'job-line-highlighted' : 'job-line'}>
                 <td className='job-data'>{job.job_code}</td>
                 <td className='job-data'>{job.job_ride}</td>
                 <td className='job-data'>{job.job_concession}</td>
@@ -54,35 +54,35 @@ const Maintenance = () => {
     //handle functions
     const handleJobCodeChange = (e) => {
         const enteredJobCode = e.target.value;
-        setJobCode(enteredJobCode); 
+        setJobCode(enteredJobCode);
         const items = tableData.item;
         const exist = items.findIndex(job => job.job_code === parseInt(enteredJobCode));
-        if(exist !== -1){
+        if (exist !== -1) {
             setIsJobCodeValid(true);
             setHighlightedRowIndex(exist);
-        }else{
+        } else {
             setIsJobCodeValid(false);
             setHighlightedRowIndex(null);
         }
     };
-    
+
     const handleJobSubmit = async () => {
         const data = {
-          work_code: jobCode,
+            work_code: jobCode,
         };
-      
+
         await fetch("http://localhost:8080/job/complete", {
-          method: 'POST',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data)
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
         });
-      
+
         // Remove the job with the submitted job code from tableData state
-        
+
         setJobCode('');
-      };
+    };
 
     if (user.role_type == 'customer') {
         return <Error404></Error404>;
@@ -90,9 +90,7 @@ const Maintenance = () => {
     return (
         <div>
             <h1>Maintenance Portal</h1>
-            <Link to='/employee' className='button-link-stack'>
-                Employee
-            </Link>
+
             <div className='maintenance-body'>
                 <div className='maintenance-cover'>
                     <div className='job-title-box'>
@@ -119,6 +117,10 @@ const Maintenance = () => {
                     </div>
                 </div>
             </div>
+            <h3 className="subheader">Other Portals</h3>
+            <Link to='/employee' className='button-link-stack'>
+                Employee
+            </Link>
         </div>
     )
 }

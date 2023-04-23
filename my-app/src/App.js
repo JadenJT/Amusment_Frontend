@@ -23,13 +23,13 @@ import DbConcession from './pages/test2/DbConcession';
 import DbZones from './pages/test3/dbZones';
 import IncidentReportMaker from './pages/IncidentReportMaker/IncidentReportMaker';
 import NewReports from './pages/NewReports/Reports';
-<<<<<<< Updated upstream
+
 import EditEmployee from './pages/Modify/EditEmployee';
 import RemoveEmployee from './pages/Delete/RemoveEmployee';
 import InsertEmployee from './pages/Insert/InsertEmployee';
-=======
+
 import Job from './pages/Job/Job';
->>>>>>> Stashed changes
+
 
 export const UserContext = createContext(null);
 export const baseUrl = "http://localhost:8080";
@@ -108,7 +108,7 @@ function App() {
               {user.role_type == 'admin' &&
                 <Route path='InsertEmployee' element={<InsertEmployee />} />
               }
-              
+
 
             </Route>
           </Routes>
