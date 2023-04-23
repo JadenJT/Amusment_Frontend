@@ -176,7 +176,7 @@ const NewReports = () => {
     const items = rideList.item;
     const filteredItems = items.filter(ride => ride.name !== null);
     return filteredItems.map((ride, index) => (
-        <option key={ride.name} value={ride.name}>
+        <option key={index} value={ride.name}>
             {ride.name}
         </option>
     ));
@@ -185,7 +185,7 @@ const NewReports = () => {
       const items = zoneList.item;
       const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
       return uniqueZoneIds.map((zoneId, index) => (
-          <option key={zoneId} value={zoneId}>
+          <option key={index} value={zoneId}>
               {zoneId}
           </option>
       ));
@@ -193,23 +193,11 @@ const NewReports = () => {
   const renderAllLocationOptions = () => {
     const mergedArray = [...rideList.item, ...concessionList.item, ...giftshopList.item];
     return mergedArray.map((att, index) => (
-      <option key={att.name} value={att.name}>
+      <option key={index} value={att.name}>
         {att.name}
       </option>
     ));
   };
-  const renderTicketRows = () => {
-    fetchData.map((item, index) => {
-      return (
-      <tr>
-        <td>{item.Ride_Name}</td>
-        <td>{item.Ride_Zone}</td>
-        <td>{item.Ticket_Amount}</td>
-        <td>{item.Date_Recorded}</td>
-      </tr>
-      );
-    });
-  }
   const renderTicketTotal = () => {
     let total = 0;
     fetchData.map((item, index) => {
