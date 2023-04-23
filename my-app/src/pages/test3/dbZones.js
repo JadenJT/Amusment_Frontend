@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Logo from '../../icons/Umazing.svg'
 import { Link } from "react-scroll";
-
+import '../Zone/zone.css'
 function convertImage(array) {
     let buf = new Uint8Array(array)
     let dt = new TextDecoder("utf-8");
@@ -67,6 +67,7 @@ function DbZones() {
         return <div className="App">Loading...</div>;
     }
 
+    console.log(Date)
     return (
         <div>
             <div className="zwp">

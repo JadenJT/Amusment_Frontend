@@ -3,6 +3,7 @@ import { Link } from "react-scroll";
 import { UserContext, baseUrl } from '../../App';
 import { ShopContext } from '../../components/cartContext/CartContext';
 import Logo from '../../icons/Umazing.svg';
+import "../Rides/rides.css";
 
 
 function convertImage(array) {
@@ -116,6 +117,7 @@ function DbRides() {
     const currentDate = new Date();
     const earliestDate = currentDate.toISOString().substring(0, 10);
 
+    console.log(date, time)
     return (
         <div>
             <div className="rwp">
@@ -182,7 +184,7 @@ function DbRides() {
                                 {user.token != null && (date != '' && time != '') &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.ride_id, ride.type, `${date} ${time}`, ride.image.data);
+                                        addToCart(ride.name, ride.ride_id, ride.type, `${date} ${time}`);
                                     }}>Buy {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</button>
                                 }
                                 {user.token != null && (ride.ride_id in cartItems) &&
@@ -256,7 +258,7 @@ function DbRides() {
                                 {user.token != null && (date != '' && time != '') &&
                                     <button className="rides-buy-button " onClick={(event) => {
                                         event.stopPropagation(); // stop the click event from bubbling up to the parent div
-                                        addToCart(ride.ride_id, ride.type, `${date} ${time}`);
+                                        addToCart(ride.name, ride.ride_id, ride.type, `${date} ${time}`);
                                     }}>Buy {ride.ride_id in cartItems && <>({cartItems[ride.ride_id].amount})</>}</button>
                                 }
                                 {user.token != null && (ride.ride_id in cartItems) &&
