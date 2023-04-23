@@ -109,7 +109,7 @@ const EditAttraction = () => {
     useEffect(() => {
         fetchRidesData();
     }, []);
-    //console.log(rideData);
+
     const fetchConcessionsData = async () => {
         const response = await fetch(`${baseUrl}/concession/all`);
         const data = await response.json();
@@ -119,7 +119,7 @@ const EditAttraction = () => {
     useEffect(() => {
         fetchConcessionsData();
     }, []);
-    //console.log(concessionData);
+
     const fetchGiftShopsData = async () => {
         const response = await fetch(`${baseUrl}/giftshop/all`);
         const data = await response.json();
@@ -129,7 +129,7 @@ const EditAttraction = () => {
     useEffect(() => {
         fetchGiftShopsData();
     }, []);
-    //console.log(giftshopData);
+
     const fetchZoneData = async () => {
         const response = await fetch(`${baseUrl}/zone/all`);
         const data = await response.json();

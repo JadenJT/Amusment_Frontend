@@ -56,8 +56,7 @@ module.exports = {
             const selected_giftshop = req.body.selected_giftshop;
             const name = req.body.name;
             const zone_id = req.body.zone_id;
-            console.log(zone_id)
-            console.log(selected_giftshop)
+
             if (req.files[0]) {
                 var image = req.files[0].buffer.toString('binary');
             }

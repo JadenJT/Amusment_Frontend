@@ -21,7 +21,7 @@ function ShoppingCart() {
 
     const getTotal = () => {
         let updatedTotal = 0;
-        console.log(cartItems)
+
         for (let i = 0; i < cartItems.length; i++) {
             if (cartItems[i] != null) {
                 if (cartItems[i].type == 'Adult') {
@@ -82,7 +82,7 @@ function ShoppingCart() {
 
         const responseData = await response.json();
         setshowInfo(true);
-        console.log(responseData);
+
 
         if (responseData.message == "Tickets Added") {
             setsuccessfulCheckout(true)
@@ -119,7 +119,7 @@ function ShoppingCart() {
         }
 
     }
-    console.log(invalid);
+
     return (
         <div className='cart-cover'>
             <h1 className='cart-title'>Your Cart <>({cartTotal} Item(s))</> </h1>

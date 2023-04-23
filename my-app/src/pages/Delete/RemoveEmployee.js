@@ -31,7 +31,7 @@ const RemoveEmployee = () => {
         fetchEmployeedata();
     }, []);
 
-    console.log(employeeData);
+
 
     //render employee data
     const renderEmployeeData = () => {
