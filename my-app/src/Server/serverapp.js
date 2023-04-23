@@ -16,7 +16,7 @@ const rideRoutes = require('./routes/ride');
 // All GET request
 const getHandlers = {
   '/ticket/owned': (req, res) => ticketRoutes.ticketsOwn(req, res),
-  '/incident/get': (req, res) => incidentRoutes.getIncident(req, res),
+  '/incident/get': (req, res) => incidentRoutes.getIncidentReport(req, res),
   '/job/get': (req, res) => jobRoutes.getJob(req, res),
   '/giftshop/exist': (req, res) => giftshopRoutes.giftshopExist(req, res),
   '/concession/exist': (req, res) => concessionRoutes.concessionExist(req, res),
