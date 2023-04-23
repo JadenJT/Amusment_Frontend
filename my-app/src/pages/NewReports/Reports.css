@@ -1,3 +1,21 @@
+table {
+    width: 75%;
+}
+td{
+    background-color: white;
+    border: 0.15 solid black;
+    text-align: center;
+    color: black;
+}
+tr th {
+    background-color: #c3a3ff;
+    text-align: center;
+    padding:3px 5px;
+}
+tr:hover {
+    background-color: #c3a3ff;
+    cursor: pointer;
+}
 
 .table-cover {
     background-color: white;
