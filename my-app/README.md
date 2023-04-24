@@ -1,3 +1,5 @@
+![App Logo](my-app/src/icons/Umazing.svg)
+
 # Team 14 Theme Park Database Management
 # Links
 Hosted Site: <http://ec2-18-119-116-174.us-east-2.compute.amazonaws.com/>  
