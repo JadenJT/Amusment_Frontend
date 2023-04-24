@@ -1,4 +1,5 @@
 ![App Logo](./my-app/src/icons/Umazing.svg)
+
 # Amuesment Park Database 🎡🎠🎪
 
 An Amuesment Park Database Webapplication made using react.
