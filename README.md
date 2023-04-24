@@ -1,5 +1,9 @@
 # Amuesment Park Database 🎡🎠🎪
 
+# Links
+Hosted Site: <http://ec2-18-119-116-174.us-east-2.compute.amazonaws.com/>  
+Link to files and readme: <https://google.com/>  
+
 ## Installation/Startup guide 🔨
 
 cd into the my-app to access everything
