@@ -69,12 +69,7 @@ module.exports = {
     */
     async addEmployee(req, res) {
         const bodyData = await getReqData(req);
-<<<<<<< HEAD
         const employeeJSON = JSON.parse(bodyData);  
-=======
-        const employeeJSON = JSON.parse(bodyData);
-        const work_code = employeeJSON.work_code;
->>>>>>> e59286d794671747c76dd5b102ab8d8f60f26d26
         const address = employeeJSON.address;
         const email = employeeJSON.email;
         const ssn = employeeJSON.ssn;
