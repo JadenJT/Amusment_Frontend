@@ -67,6 +67,8 @@ SECRETKEY ="<SECRET KEY>" (Default = "secretKey")
                 -  Zone Id, Name, Image
         - Incident Report (Data)  
                 - Description, Date of Incident
+        - Jobs
+                - Create job for a specific ride, concession, or giftshop
     - Edits/Modified:   
         - Ride (Data)  
             - Name, Type, Zone Id, Ride Capacity, Hour Capacity, Image, Last Maintenance  
@@ -85,6 +87,8 @@ SECRETKEY ="<SECRET KEY>" (Default = "secretKey")
             - Change perm_closed column to True; (Does not delete from Database)
         - Giftshop
             - Change perm_closed column to True; (Does not delete from Database)
+        - Employee
+            - Marks as active to false (Does not delete from Database)
             
 2. Types of Roles  
     <table>
