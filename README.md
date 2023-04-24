@@ -16,7 +16,7 @@ version >= 16.16
 ### Scripts 📜
 `npm start`
 
-Installs all required modules. (If the app is throwing missing errors, check this first)
+Installs all required modules/dependencies. (If the app is throwing missing errors, check this first)
 
 `npm run dev`
 
