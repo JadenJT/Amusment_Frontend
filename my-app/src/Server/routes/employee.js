@@ -72,7 +72,7 @@ module.exports = {
 
         if (await checkEmailExist(email) === false) return sendResponse(req, res, 200, `Email does not exist.`)
         if (await checkEmployeeExist(email)) {
-            db.promise().execute(`UPDATE master.employee SET active = true WHERE email = '${email}';`)
+            await db.promise().execute(`UPDATE master.employee SET active = true WHERE email = '${email}';`)
         }
 
         const [row, fields] = await db.promise().execute(query, [null, address, email, ssn, b_date, true]);
