@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
 import Error404 from '../Error404/error404';
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 import { Link } from 'react-router-dom';
 import './maintenance.css';
+
 
 const Maintenance = () => {
     const [tableData, setTableData] = useState([]);
@@ -14,7 +15,7 @@ const Maintenance = () => {
 
     //fetching job data
     const fetchjobdata = async () => {
-        const personJobRes = await fetch('http://localhost:8080/job/get?' + new URLSearchParams({
+        const personJobRes = await fetch(`${baseUrl}/job/get?` + new URLSearchParams({
             email: user.email
         }))
         const personJobData = await personJobRes.json();
@@ -69,7 +70,7 @@ const Maintenance = () => {
             work_code: jobCode,
         };
 
-        await fetch("http://localhost:8080/job/complete", {
+        await fetch(`${baseUrl}/job/complete`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

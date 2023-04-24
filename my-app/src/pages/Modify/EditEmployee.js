@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 
-function validateAddress(address){
+function validateAddress(address) {
     const addressRegex = /^\d+\s+[a-zA-Z\s]+\s+[a-zA-Z]+\s+[a-zA-Z]{2}\s+\d{5}$/;
-    if(address.length > 50 || !addressRegex.test(address)){
+    if (address.length > 50 || !addressRegex.test(address)) {
         return false;
-    }else {
+    } else {
         return true;
     }
 };
-function validatePhoneNum(number){
+function validatePhoneNum(number) {
     const regex = /^[0-9\b]+$/;
-    if(!regex.test(number)){
+    if (!regex.test(number)) {
         return false;
     } else {
         return true;
@@ -19,7 +19,7 @@ function validatePhoneNum(number){
 };
 
 const EditEmployee = () => {
-    const { user } = useContext(UserContext); 
+    const { user } = useContext(UserContext);
     let [address, setaddress] = useState('');
     let [phonenumber, setphonenumber] = useState('');
 
@@ -32,13 +32,13 @@ const EditEmployee = () => {
     const [addressErorrMarginBottom, setAddressErorrMarginBottom] = useState('1em');
     const [phonenumberErrorMarginBottom, setphoneNumberErrorMarignBottom] = useState('1em');
 
-    const handleaddressChange = (e) =>{
+    const handleaddressChange = (e) => {
         let address = e.target.value;
         setaddress(address);
-        if(!validateAddress(address)){
+        if (!validateAddress(address)) {
             setAddressError("Please enter a valid address.");
             setAddressErorrMarginBottom('1em');
-        }else{
+        } else {
             setAddressError("");
             setAddressErorrMarginBottom('');
         }
@@ -46,15 +46,15 @@ const EditEmployee = () => {
 
     const handlephonenumChange = (e) => {
         let phonenumberin = e.target.value;
-        
-        if(!validatePhoneNum(phonenumber)){
+
+        if (!validatePhoneNum(phonenumber)) {
             setPhoneNumberError("Please enter a valid phone number.");
             setphoneNumberErrorMarignBottom('1em');
-        }else{
+        } else {
             setPhoneNumberError("");
             setphoneNumberErrorMarignBottom('');
         }
-        if(phonenumberin.length > 10){
+        if (phonenumberin.length > 10) {
             phonenumberin = phonenumberin.slice(0, 9);
         }
         setphonenumber(phonenumberin);
@@ -72,20 +72,20 @@ const EditEmployee = () => {
 
     const handleEditOnSubmit = async (e) => {
         e.preventDefault();
-        if(addressError || phonenumberError || (!address && !phonenumber)){
+        if (addressError || phonenumberError || (!address && !phonenumber)) {
             setShowErrorBox(true);
             return;
         } else {
-            if(address == "") address = null;
-            if(phonenumber == "") phonenumber = null;
-            
+            if (address == "") address = null;
+            if (phonenumber == "") phonenumber = null;
+
             const employeeData = {
                 email: user.email,
                 phone_number: phonenumber,
                 address: address,
             };
 
-            await fetch("http://localhost:8080/employee/edit", {
+            await fetch(`${baseUrl}/employee/edit`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -98,7 +98,7 @@ const EditEmployee = () => {
 
     };
 
-    return(
+    return (
         <div>
             <div className='admin-edit-body'>
                 <div className='admin-edit-cover'>
@@ -108,11 +108,11 @@ const EditEmployee = () => {
                     <form className='admin-edit-form' onSubmit={handleEditOnSubmit}>
                         <h3 className='option-title'>Address:</h3>
                         <p style={{ color: 'black', fontSize: '14px' }}> format: 1234 Umazing St Houston Tx 12345</p>
-                        <input type='text' placeholder='Enter new address' className='option-input' value={address} onChange={handleaddressChange} style={{marginBottom: addressErorrMarginBottom}}></input>
+                        <input type='text' placeholder='Enter new address' className='option-input' value={address} onChange={handleaddressChange} style={{ marginBottom: addressErorrMarginBottom }}></input>
                         <div className='admin-error'>{addressError}</div>
 
                         <h3 className='option-title'>Phone number:</h3>
-                        <input type='text' placeholder='Enter phone number' className='option-input' value={phonenumber} onChange={handlephonenumChange} style={{marginBottom: phonenumberErrorMarginBottom}}></input>
+                        <input type='text' placeholder='Enter phone number' className='option-input' value={phonenumber} onChange={handlephonenumChange} style={{ marginBottom: phonenumberErrorMarginBottom }}></input>
                         <div className='admin-error'>{phonenumberError}</div>
 
                         <button className='admin-modify-button'>

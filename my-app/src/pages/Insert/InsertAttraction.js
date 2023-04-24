@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../App';
 
 function validateAttractionDescription(attractionDescription) {
   if (attractionDescription.length === 0 || attractionDescription.length > 200) {
@@ -319,7 +320,7 @@ const InsertAttraction = () => {
       }
 
       // Check if Ride exist within the db
-      const rideExistRes = await fetch('http://localhost:8080/ride/exist?' + new URLSearchParams({
+      const rideExistRes = await fetch(`${baseUrl}/ride/exist?` + new URLSearchParams({
         name: attractionName
       }))
       const rideExistData = await rideExistRes.json();
@@ -339,7 +340,7 @@ const InsertAttraction = () => {
         ridesData.append('image', imageFileValue)
         ridesData.append('description', attractionDescription)
 
-        await fetch('http://localhost:8080/ride/add', {
+        await fetch(`${baseUrl}/ride/add`, {
           method: 'POST',
           body: ridesData
         });
@@ -363,7 +364,7 @@ const InsertAttraction = () => {
       }
 
       //Check if concession Exist
-      const concessionExistRes = await fetch('http://localhost:8080/concession/exist?' + new URLSearchParams({
+      const concessionExistRes = await fetch(`${baseUrl}/concession/exist?` + new URLSearchParams({
         name: attractionName
       }))
       const concessionExistData = await concessionExistRes.json();
@@ -378,7 +379,7 @@ const InsertAttraction = () => {
         concessForm.append('image', imageFileValue)
         concessForm.append('description', attractionDescription)
 
-        const res2 = await fetch('http://localhost:8080/concession/add', {
+        const res2 = await fetch(`${baseUrl}/concession/add`, {
           method: 'POST',
           body: concessForm
         });
@@ -401,7 +402,7 @@ const InsertAttraction = () => {
       }
 
       //Check if giftshop
-      const giftshopExistRes = await fetch('http://localhost:8080/giftshop/exist?' + new URLSearchParams({
+      const giftshopExistRes = await fetch(`${baseUrl}/giftshop/exist?` + new URLSearchParams({
         name: attractionName
       }))
       const giftshopExistData = await giftshopExistRes.json();
@@ -413,7 +414,7 @@ const InsertAttraction = () => {
         giftShopData.append('image', imageFileValue)
         giftShopData.append('description', attractionDescription)
 
-        const res3 = await fetch('http://localhost:8080/giftshop/add', {
+        const res3 = await fetch(`${baseUrl}/giftshop/add`, {
           method: 'POST',
           body: giftShopData
         });

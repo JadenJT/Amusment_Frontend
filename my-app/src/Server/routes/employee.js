@@ -10,13 +10,13 @@ async function checkEmployeeExist(person_email) {
 }
 
 async function checkEmailExist(person_email) {
-        const [rows, fields] = await db.promise().execute(
-            'SELECT * FROM master.person WHERE email = ?', [person_email])
-        if (rows.length < 1) return false;
-        return true;
-} 
+    const [rows, fields] = await db.promise().execute(
+        'SELECT * FROM master.person WHERE email = ?', [person_email])
+    if (rows.length < 1) return false;
+    return true;
+}
 
-async function checkEmployeeExistID(employee_id){
+async function checkEmployeeExistID(employee_id) {
     const [rows, fields] = await db.promise().execute(
         'SELECT * FROM master.employee WHERE employee_id = ?', [employee_id])
     if (rows.length < 1) return false;
@@ -34,15 +34,14 @@ module.exports = {
             "email": "john.cox1@gmail.com"
         }
     */
-    async employeeReport(req, res){
+    async employeeReport(req, res) {
         const bodyData = await getReqData(req);
-        const employeeJSON = JSON.parse(bodyData);  
+        const employeeJSON = JSON.parse(bodyData);
         const f_name = employeeJSON.f_name;
         const l_name = employeeJSON.l_name;
         const location = employeeJSON.job_location;
-        const job_type = employeeJSON.job_role; 
+        const job_type = employeeJSON.job_role;
         const email = employeeJSON.email;
-        console.log(employeeJSON)
 
         let query = `SELECT CONCAT(PER.f_name, ' ', PER.l_name) AS Name, JOB.job_name AS Job_Role, CONCAT(COALESCE(JOB.job_ride, ''), COALESCE(JOB.job_concession, ''), COALESCE(JOB.job_giftshop, '')) AS Location, PER.email AS contact_email, PER.phone_number AS Phone_number FROM master.person AS PER, master.job AS JOB WHERE CONCAT(PER.f_name, ' ', PER.l_name) = JOB.worker `
 
@@ -70,7 +69,12 @@ module.exports = {
     */
     async addEmployee(req, res) {
         const bodyData = await getReqData(req);
+<<<<<<< HEAD
         const employeeJSON = JSON.parse(bodyData);  
+=======
+        const employeeJSON = JSON.parse(bodyData);
+        const work_code = employeeJSON.work_code;
+>>>>>>> e59286d794671747c76dd5b102ab8d8f60f26d26
         const address = employeeJSON.address;
         const email = employeeJSON.email;
         const ssn = employeeJSON.ssn;
@@ -100,10 +104,10 @@ module.exports = {
             "address": "7777 Smith St Houston Tx 77002"
         }
     */
-    async updateEmployee(req, res){
+    async updateEmployee(req, res) {
         const bodyData = await getReqData(req);
         const employeeJSON = JSON.parse(bodyData);
-        const email = employeeJSON.email;  
+        const email = employeeJSON.email;
         const phone_number = employeeJSON.phone_number;
         const address = employeeJSON.address;
         if (address === null && phone_number === null) return sendResponse(req, res, 500, "No info inputted")
@@ -112,7 +116,7 @@ module.exports = {
 
         if (address != null) {
             query += `UPDATE master.employee SET address = '${address}' WHERE email = '${email}';`
-            await db.promise().execute(query); 
+            await db.promise().execute(query);
         }
         if (phone_number != null) {
             await db.promise().execute(
@@ -146,7 +150,7 @@ module.exports = {
 
         return sendResponse(req, res, 200, "Employee removed");
 
-    }, 
+    },
     async getAllEmployees(req, res) {
         const [rows, fields] = await db.promise().execute(`SELECT CONCAT(PER.f_name, ' ', PER.l_name) AS Name, EMP.* FROM master.employee AS EMP, master.person AS PER WHERE EMP.email = PER.email;`)
         return sendResponse(req, res, 200, "Employees Fetched", rows)

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './InsertAttraction.css';
 import { useNavigate } from 'react-router-dom';
+import { baseUrl } from '../../App';
 
 function validateAttractionDescription(attractionDescription) {
   if (attractionDescription.length === 0 || attractionDescription.length > 500) {
-    return false;   
+    return false;
   }
   const regex = /^^[a-zA-Z,-.\s]+$$/;
   if (!regex.test(attractionDescription)) {
@@ -132,7 +133,7 @@ const InsertAttraction = () => {
   const [attractionDescriptionError, setAttractionDescriptionError] = useState('');
 
   /* confirmation messages */
-  const [attractionAdded, setAttractionAdded] = useState(''); 
+  const [attractionAdded, setAttractionAdded] = useState('');
 
   /* set errror margins */
   const [zoneIdMarginBottom, setzoneIdMarginBottom] = useState('1em');
@@ -302,22 +303,22 @@ const InsertAttraction = () => {
     }
   }
   const fetchZoneData = async () => {
-    const response = await fetch('http://localhost:8080/zone/all');
+    const response = await fetch(`${baseUrl}/zone/all`);
     const data = await response.json();
     setZoneData(data);
     setZoneLoading(false);
   };
   useEffect(() => {
-      fetchZoneData();
+    fetchZoneData();
   }, []);
 
   const renderZoneIdOptions = () => {
     const items = zoneData.item;
     const uniqueZoneIds = [...new Set(items.map(zoneid => zoneid.char_name))];
     return uniqueZoneIds.map((zoneId, index) => (
-        <option key={zoneId} value={zoneId}>
-            {zoneId}
-        </option>
+      <option key={zoneId} value={zoneId}>
+        {zoneId}
+      </option>
     ));
   };
 
@@ -340,7 +341,7 @@ const InsertAttraction = () => {
       }
 
       // Check if Ride exist within the db
-      const rideExistRes = await fetch('http://localhost:8080/ride/exist?' +  new URLSearchParams({
+      const rideExistRes = await fetch(`${baseUrl}/ride/exist?` + new URLSearchParams({
         name: attractionName
       }))
       const rideExistData = await rideExistRes.json();
@@ -360,13 +361,13 @@ const InsertAttraction = () => {
         ridesData.append('image', imageFileValue)
         ridesData.append('description', attractionDescription)
 
-        await fetch('http://localhost:8080/ride/add', {
+        await fetch(`${baseUrl}/ride/add`, {
           method: 'POST',
           body: ridesData
         });
         resetForm();
         setAttractionAdded("Ride has been added!");
-        setTimeout( () => {
+        setTimeout(() => {
           setAttractionAdded("");
         }, 4000);
       } else {
@@ -384,13 +385,13 @@ const InsertAttraction = () => {
       }
 
       //Check if concession Exist
-      const concessionExistRes = await fetch('http://localhost:8080/concession/exist?' +  new URLSearchParams({
+      const concessionExistRes = await fetch(`${baseUrl}/concession/exist?` + new URLSearchParams({
         name: attractionName
       }))
       const concessionExistData = await concessionExistRes.json();
 
-      if(!concessionExistData.item){
-        
+      if (!concessionExistData.item) {
+
         //Add Concession to db.
         const concessForm = new FormData();
         concessForm.append('name', attractionName)
@@ -399,13 +400,13 @@ const InsertAttraction = () => {
         concessForm.append('image', imageFileValue)
         concessForm.append('description', attractionDescription)
 
-        const res2 = await fetch('http://localhost:8080/concession/add', {
+        const res2 = await fetch(`${baseUrl}/concession/add`, {
           method: 'POST',
           body: concessForm
         });
         resetForm();
         setAttractionAdded("Concession has been added!");
-        setTimeout( () => {
+        setTimeout(() => {
           setAttractionAdded("");
         }, 4000);
       } else {
@@ -422,25 +423,25 @@ const InsertAttraction = () => {
       }
 
       //Check if giftshop
-      const giftshopExistRes = await fetch('http://localhost:8080/giftshop/exist?' +  new URLSearchParams({
+      const giftshopExistRes = await fetch(`${baseUrl}/giftshop/exist?` + new URLSearchParams({
         name: attractionName
       }))
       const giftshopExistData = await giftshopExistRes.json();
 
-      if(!giftshopExistData.item){
+      if (!giftshopExistData.item) {
         const giftShopData = new FormData();
         giftShopData.append('name', attractionName)
         giftShopData.append('zone', ZoneId)
         giftShopData.append('image', imageFileValue)
         giftShopData.append('description', attractionDescription)
 
-        const res3 = await fetch('http://localhost:8080/giftshop/add', {
+        const res3 = await fetch(`${baseUrl}/giftshop/add`, {
           method: 'POST',
           body: giftShopData
         });
         resetForm();
         setAttractionAdded("Giftshop has been added!");
-        setTimeout( () => {
+        setTimeout(() => {
           setAttractionAdded("");
         }, 4000);
       } else {
@@ -482,10 +483,10 @@ const InsertAttraction = () => {
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
                 <select className='select-modify-option' name='zone' value={ZoneId} onChange={handleZoneIdChange}>
-                    <option value='' disabled>
-                        Select a zone id
-                    </option>
-                    {renderZoneIdOptions()}
+                  <option value='' disabled>
+                    Select a zone id
+                  </option>
+                  {renderZoneIdOptions()}
                 </select>
                 <div className='admin-error'>{zoneIdError}</div>
 
@@ -504,7 +505,7 @@ const InsertAttraction = () => {
 
                 <h3 className='option-title'>Ride Category:</h3>
                 <select className='ride-select-option' value={attractionCategory} onChange={handleCategoryChange} style={{ marginBottom: rideCategoryMarginBottom }}>
-                <option value="" disabled>Select an option</option>
+                  <option value="" disabled>Select an option</option>
                   <option>RollerCoaster</option>
                   <option>WaterCoaster</option>
                   <option>Spinner</option>
@@ -541,10 +542,10 @@ const InsertAttraction = () => {
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
                 <select className='select-modify-option' name='zone' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }}>
-                    <option value='' disabled>
-                        Select a zone id
-                    </option>
-                    {renderZoneIdOptions()}
+                  <option value='' disabled>
+                    Select a zone id
+                  </option>
+                  {renderZoneIdOptions()}
                 </select>
                 <div className='admin-error'>{zoneIdError}</div>
 
@@ -573,16 +574,16 @@ const InsertAttraction = () => {
               <div className='admin-option-box'>
                 <h3 className='option-title'>Zone id:</h3>
                 <select className='select-modify-option' name='zone' value={ZoneId} onChange={handleZoneIdChange} style={{ marginBottom: zoneIdMarginBottom }}>
-                    <option value='' disabled>
-                        Select a zone id
-                    </option>
-                    {renderZoneIdOptions()}
+                  <option value='' disabled>
+                    Select a zone id
+                  </option>
+                  {renderZoneIdOptions()}
                 </select>
                 <div className='admin-error'>{zoneIdError}</div>
 
                 <h3 className='option-title'>Giftshop name:</h3>
                 <input type='text' placeholder='Enter ride name' className='option-input' value={attractionName} onChange={handleAttractionNameChange} style={{ marginBottom: attractionNameMarginBottom }} />
-    
+
                 <div className='option-insert-img'>
                   <h3 className='option-title'>Giftshop image: (.jpg only)</h3>
                   <input type='file' id="imageUpload" onChange={handleFileSelect} accept="image/jpg" className='option-input-img'></input>

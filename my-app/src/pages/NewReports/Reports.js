@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Reports.css';
+import { baseUrl } from '../../App';
 
 function validateName(emplyeeFirstName) {
   if (emplyeeFirstName.length === 0 || emplyeeFirstName.length > 15) return false;
@@ -64,7 +65,7 @@ const NewReports = () => {
 
   /*fetch rides/concession/giftshops data*/
   const fetchRidesData = async () => {
-    const response = await fetch('http://localhost:8080/ride/all');
+    const response = await fetch(`${baseUrl}/ride/all`);
     const data = await response.json();
     setRideList(data);
     setRideLoading(false);
@@ -74,7 +75,7 @@ const NewReports = () => {
   }, []);
 
   const fetchConcessionsData = async () => {
-    const response = await fetch('http://localhost:8080/concession/all');
+    const response = await fetch(`${baseUrl}/concession/all`);
     const data = await response.json();
     setConcessionList(data);
     setConcessionLoading(false);
@@ -84,7 +85,7 @@ const NewReports = () => {
   }, []);
 
   const fetchGiftShopsData = async () => {
-    const response = await fetch('http://localhost:8080/giftshop/all');
+    const response = await fetch(`${baseUrl}/giftshop/all`);
     const data = await response.json();
     setGiftshopList(data);
     setGiftshopLoading(false);
@@ -94,7 +95,7 @@ const NewReports = () => {
   }, []);
 
   const fetchZoneData = async () => {
-    const response = await fetch('http://localhost:8080/zone/all');
+    const response = await fetch(`${baseUrl}/zone/all`);
     const data = await response.json();
     setZoneList(data);
     setZoneLoading(false);
@@ -236,7 +237,7 @@ const NewReports = () => {
         "end_date": endDate
       };
 
-      const response = await fetch('http://localhost:8080/ticket/report', {
+      const response = await fetch(`${baseUrl}/ticket/report`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -264,7 +265,7 @@ const NewReports = () => {
         "end_date": endDate
       };
 
-      const response = await fetch('http://localhost:8080/maintenance/report', {
+      const response = await fetch(`${baseUrl}/maintenance/report`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -291,7 +292,7 @@ const NewReports = () => {
         "email": email
       };
 
-      const response = await fetch('http://localhost:8080/employee/report', {
+      const response = await fetch(`${baseUrl}/employee/report`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -304,7 +305,7 @@ const NewReports = () => {
 
     } else if (selectedOption === 'incident') {
 
-      const response = await fetch('http://localhost:8080/incident/get')
+      const response = await fetch(`${baseUrl}/incident/get`)
       const responseData = await response.json()
       setFetchData(responseData.item)
       setShowTable(true);

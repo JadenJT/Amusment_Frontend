@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { ShopContext } from '../../components/cartContext/CartContext';
 import './shoppingCart.css';
-import { UserContext } from '../../App';
+import { UserContext, baseUrl } from '../../App';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -21,7 +21,7 @@ function ShoppingCart() {
 
     const getTotal = () => {
         let updatedTotal = 0;
-        console.log(cartItems)
+
         for (let i = 0; i < cartItems.length; i++) {
             if (cartItems[i] != null) {
                 if (cartItems[i].type == 'Adult') {
@@ -71,7 +71,7 @@ function ShoppingCart() {
             ticket: checkout,
         };
 
-        const response = await fetch('http://localhost:8080/ticket/buy', {
+        const response = await fetch(`${baseUrl}/ticket/buy`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ function ShoppingCart() {
 
         const responseData = await response.json();
         setshowInfo(true);
-        console.log(responseData);
+
 
         if (responseData.message == "Tickets Added") {
             setsuccessfulCheckout(true)
@@ -119,7 +119,7 @@ function ShoppingCart() {
         }
 
     }
-    console.log(invalid);
+
     return (
         <div className='cart-cover'>
             <h1 className='cart-title'>Your Cart <>({cartTotal} Item(s))</> </h1>
