@@ -10,7 +10,7 @@ version >= 16.16
 1. Install packages
 ```
 `npm install`
-
+```
 ### Scripts 📜
 `npm start`
 
