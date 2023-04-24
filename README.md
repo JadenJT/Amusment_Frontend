@@ -22,6 +22,12 @@ Installs all required modules. (If the app is throwing missing errors, check thi
 
 If you are trying run the app on your machine you have to swtich the base url found in the app.js folder to http://localhost:8080 this allows you to run the project on your local machine
 
+# Starting the Server locally 
+Once you have the .env set up, you can continue to this step.  
+
+Firstly you're going to have to do `npm i` which will install the dependencies for the project.  
+
+We have our backend and front end working in one repo, so once you have entered the `/my-app` folder inside your Command Prompt or VSCode terminal, you will do the command `npm start`. This will start the frontend of the server. To start the backend you will need to open another Command Prompt or VSCode within the same `/my-app` folder and now run `npm run dev` which will start up the backend server.
 
 ## Installing the files
 The project team14project.zip folder is in the link above and contains the database sql dump (team14dump.sql). If you are using mysql workbench you can either import the sql file or copy the code into the editor in the workbench and execute.
