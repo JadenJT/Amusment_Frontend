@@ -132,7 +132,7 @@ SECRETKEY ="<SECRET KEY>" (Default = "secretKey")
 
     - Maintenance Report - Displays Job Code, Zone, Ride, Employee Name, Scheduled Date, Email Contact, Date completed. This report is used by the Admin & Manager. This report is dynamic based on the user's choice of wanting to look for the maintance. It will also show maintenance jobs that have yet to be assigned. The tables it gets data from is Job, Ride, Person, & Employee.
 
-    - Employee Report -  Displays Name, Job Name, Location, Email Contact, Phone Number
+    - Employee Report -  Displays Name, Job Name, Location, Email Contact, Phone Number. This report is used by the Admins & Managers. This report is dynamic based on the user's choice of wanting to look for the Employees. The tables it gets data from is Person & Employee tables.
 
 ## Technologies 📡
 
