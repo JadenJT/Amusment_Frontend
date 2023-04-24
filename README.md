@@ -1,5 +1,7 @@
 # Amuesment Park Database 🎡🎠🎪
 
+An Amuesment Park Database Webapplication made using react.
+
 # Links
 Hosted Site: <http://ec2-18-119-116-174.us-east-2.compute.amazonaws.com/>  
 Link to files and readme: <https://google.com/>  
