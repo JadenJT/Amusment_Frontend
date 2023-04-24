@@ -13,10 +13,13 @@ version >= 16.16
 ```
 `npm install`
 ```
+Installs all required modules/dependencies. (If the app is throwing missing errors, check this first)
+
 ### Scripts 📜
 `npm start`
 
-Installs all required modules/dependencies. (If the app is throwing missing errors, check this first)
+This will let you run the site locally in development mode.
+Ideal for testing and non-production runs.
 
 `npm run dev`
 
