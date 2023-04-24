@@ -2,7 +2,7 @@
 
 ## Installation/Startup guide 🔨
 
-cd into the my
+cd into the my-app to access everything
 
 Node version requirement 
 ```
@@ -25,3 +25,9 @@ If you are trying run the app on your machine you have to swtich the base url fo
 
 ## Installing the files
 The project team14project.zip folder is in the link above and contains the database sql dump (team14dump.sql). If you are using mysql workbench you can either import the sql file or copy the code into the editor in the workbench and execute.
+
+
+## Technologies 📡
+
+#### Front-end
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
