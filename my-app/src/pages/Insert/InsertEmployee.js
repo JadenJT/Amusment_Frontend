@@ -30,25 +30,36 @@ function validateAddress(address) {
 
 const InsertEmployee = () => {
     //insert new employee
-    const [address, setAddress] = useState('');
-    const [emailAddress, setemailAddress] = useState('');
-    const [ssn, setSsn] = useState('');
-    const [dateofbirth, setDateOfBirth] = useState('');
+    let [address, setAddress] = useState('');
+    let [emailAddress, setemailAddress] = useState('');
+    let [ssn, setSsn] = useState('');
+    let [dateofbirth, setDateOfBirth] = useState('');
 
     //error messages
-    const [addressError, setAddressError] = useState('');
-    const [emailAddressError, setEmailAddressError] = useState('');
-    const [ssnError, setSSNError] = useState('');
-    const [showErroBox, setShowErrorBox] = useState(false);
+    let [addressError, setAddressError] = useState('');
+    let [emailAddressError, setEmailAddressError] = useState('');
+    let [ssnError, setSSNError] = useState('');
+    let [showErroBox, setShowErrorBox] = useState(false);
+    let [message, setMessage] = useState('');
 
     //error margins
-    const [addressErrorMarginBottom, setaddressErrorMarginBottom] = useState('1em');
-    const [emailAddressErrorMarginBottom, setemailAddressErrorMarginBottom] = useState('1em');
-    const [ssnErrorMarginBottom, setssnErrorMarginBottom] = useState('1em');
+    let [addressErrorMarginBottom, setaddressErrorMarginBottom] = useState('1em');
+    let [emailAddressErrorMarginBottom, setemailAddressErrorMarginBottom] = useState('1em');
+    let [ssnErrorMarginBottom, setssnErrorMarginBottom] = useState('1em');
 
+    const resetForm = () => {
+        setAddress('');
+        setemailAddress('');
+        setSsn('');
+        setDateOfBirth('');
+        setAddress('');
+        setEmailAddressError('');
+        setSSNError('');
+        setShowErrorBox('');
+    }
     //handle functions
     const handleAddress = (e) => {
-        const address = e.target.value;
+        let address = e.target.value;
         setAddress(address);
         if (address.length > 50 || !validateAddress(address)) {
             setAddressError("Please enter a valid address no more than 50 characters");
@@ -59,7 +70,7 @@ const InsertEmployee = () => {
         }
     };
     const handleEmail = (e) => {
-        const emailAddress = e.target.value;
+        let emailAddress = e.target.value;
         setemailAddress(emailAddress);
         if (!validateEmail(emailAddress)) {
             setEmailAddressError("Please enter a valid email address.");
@@ -70,7 +81,7 @@ const InsertEmployee = () => {
         }
     };
     const handleSSN = (e) => {
-        const ssn = e.target.value;
+        let ssn = e.target.value;
 
         if (!validateDigit(ssn)) {
             setSSNError("Please enter a valid SSN.");
@@ -102,15 +113,21 @@ const InsertEmployee = () => {
                 b_date: dateofbirth,
             };
 
-            await fetch(`${baseUrl}/employee/add`, {
+            const res = await fetch(`${baseUrl}/employee/add`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(employeeData)
             });
-            //haven't tested fetch. but need to rest the form after submission
-            //call restform();
+            const resData = await res.json()
+            console.log(resData)
+            if (resData.message == 'Email does not exist.' || resData.message == 'Person already exist.') {
+                return setMessage("Invalid Email or Employee Exist")
+            } else {
+                setMessage("")
+                resetForm()
+            }
         }
     };
 
@@ -120,6 +137,7 @@ const InsertEmployee = () => {
                 <div className='admin-insert-cover'>
                     <h1 className='admin-insert-title'>Add new Employee</h1>
                     <form className='admin-insert-form' onSubmit={handleFormOnSubmit}>
+                        <div className='option-title'>{message}</div>
 
                         <h3 className='option-title'>Enter Address:</h3>
                         <p style={{ color: 'black', fontSize: '14px' }}> format: 1234 Umazing St Houston Tx 12345</p>

@@ -30,7 +30,7 @@ import InsertEmployee from './pages/Insert/InsertEmployee';
 import Job from './pages/Job/Job';
 
 export const UserContext = createContext(null);
-export const baseUrl = "http://ec2-18-119-116-174.us-east-2.compute.amazonaws.com:8080";
+export const baseUrl = "http://localhost:8080";
 
 function App() {
   const [user, setUser] = useState(UserContext);

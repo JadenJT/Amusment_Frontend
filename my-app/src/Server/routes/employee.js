@@ -5,21 +5,14 @@ const { getReqData } = require("../helpers/utils")
 async function checkEmployeeExist(person_email) {
     const [rows, fields] = await db.promise().execute(
         'SELECT * FROM master.employee WHERE email = ?', [person_email])
-    if (rows.length < 1) return false;
+    if (rows.length === 0) return false;
     return true;
 }
 
 async function checkEmailExist(person_email) {
     const [rows, fields] = await db.promise().execute(
         'SELECT * FROM master.person WHERE email = ?', [person_email])
-    if (rows.length < 1) return false;
-    return true;
-}
-
-async function checkEmployeeExistID(employee_id) {
-    const [rows, fields] = await db.promise().execute(
-        'SELECT * FROM master.employee WHERE employee_id = ?', [employee_id])
-    if (rows.length < 1) return false;
+    if (rows.length === 0) return false;
     return true;
 }
 
@@ -77,8 +70,8 @@ module.exports = {
 
         let query = 'INSERT INTO master.employee(`employee_id`, `address`, `email`, `ssn`, `b_date`, active) VALUES (?, ?, ?, ?, ?, ?);'
 
-        if (await checkEmailExist(email)) return sendResponse(req, res, 409, `Email does not exist.`)
-        if (await checkEmployeeExist(email)) return sendResponse(req, res, 409, `Person already exist.`)
+        if (await checkEmailExist(email) === false) return sendResponse(req, res, 200, `Email does not exist.`)
+        if (await checkEmployeeExist(email)) return sendResponse(req, res, 200, `Person already exist.`)
 
         const [row, fields] = await db.promise().execute(query, [null, address, email, ssn, b_date, true]);
         const [job_row, job_field] = await db.promise().execute('SELECT JOB.job_name FROM master.job AS JOB WHERE job_code = ?;', [work_code])
