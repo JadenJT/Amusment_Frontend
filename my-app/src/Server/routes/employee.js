@@ -71,7 +71,9 @@ module.exports = {
         let query = 'INSERT INTO master.employee(`employee_id`, `address`, `email`, `ssn`, `b_date`, active) VALUES (?, ?, ?, ?, ?, ?);'
 
         if (await checkEmailExist(email) === false) return sendResponse(req, res, 200, `Email does not exist.`)
-        if (await checkEmployeeExist(email)) return sendResponse(req, res, 200, `Person already exist.`)
+        if (await checkEmployeeExist(email)) {
+            db.promise().execute(`UPDATE master.employee SET active = true WHERE email = '${email}';`)
+        }
 
         const [row, fields] = await db.promise().execute(query, [null, address, email, ssn, b_date, true]);
         const [job_row, job_field] = await db.promise().execute('SELECT JOB.job_name FROM master.job AS JOB WHERE job_code = ?;', [work_code])
