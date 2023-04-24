@@ -2,6 +2,8 @@
 
 ## Installation/Startup guide 🔨
 
+cd into the my
+
 Node version requirement 
 ```
 version >= 16.16
@@ -17,7 +19,8 @@ version >= 16.16
 Installs all required modules. (If the app is throwing missing errors, check this first)
 
 `npm run dev`
-If swtiching the base url found in the app.js folder to http://localhost:8080 this allows you to run the project on your local machine
+
+If you are trying run the app on your machine you have to swtich the base url found in the app.js folder to http://localhost:8080 this allows you to run the project on your local machine
 
 
 ## Installing the files
