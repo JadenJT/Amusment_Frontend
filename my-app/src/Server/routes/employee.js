@@ -71,18 +71,17 @@ module.exports = {
     async addEmployee(req, res) {
         const bodyData = await getReqData(req);
         const employeeJSON = JSON.parse(bodyData);  
-        const work_code = employeeJSON.work_code;
         const address = employeeJSON.address;
         const email = employeeJSON.email;
         const ssn = employeeJSON.ssn;
         const b_date = employeeJSON.b_date;
 
-        let query = 'INSERT INTO master.employee(`employee_id`, `work_code`, `address`, `email`, `ssn`, `b_date`, active) VALUES (?, ?, ?, ?, ?, ?, ?);'
+        let query = 'INSERT INTO master.employee(`employee_id`, `address`, `email`, `ssn`, `b_date`, active) VALUES (?, ?, ?, ?, ?, ?);'
 
         if (await checkEmailExist(email)) return sendResponse(req, res, 409, `Email does not exist.`)
         if (await checkEmployeeExist(email)) return sendResponse(req, res, 409, `Person already exist.`)
 
-        const [row, fields] = await db.promise().execute(query, [null, work_code, address, email, ssn, b_date, true]);
+        const [row, fields] = await db.promise().execute(query, [null, address, email, ssn, b_date, true]);
         const [job_row, job_field] = await db.promise().execute('SELECT JOB.job_name FROM master.job AS JOB WHERE job_code = ?;', [work_code])
 
         const job_name = job_row[0].job_name;

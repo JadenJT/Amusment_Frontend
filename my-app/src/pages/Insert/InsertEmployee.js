@@ -30,37 +30,23 @@ function validateAddress(address){
 
 const InsertEmployee = () => {
     //insert new employee
-    const [workcode, setworkcode] = useState(null);
     const [address, setAddress] = useState('');
     const [emailAddress, setemailAddress] = useState('');
     const [ssn, setSsn] = useState('');
     const [dateofbirth, setDateOfBirth] = useState('');
 
     //error messages
-    const [workCodeError, setworkCodeError] = useState('');
     const [addressError, setAddressError] = useState('');
     const [emailAddressError, setEmailAddressError] = useState('');
     const [ssnError, setSSNError] = useState('');
     const [showErroBox, setShowErrorBox] = useState(false);
 
     //error margins
-    const [workcodeErrorMarginBottom, setworkCodeErrorMarginBottom] = useState('1em');
     const [addressErrorMarginBottom, setaddressErrorMarginBottom] = useState('1em');
     const [emailAddressErrorMarginBottom, setemailAddressErrorMarginBottom] = useState('1em');
     const [ssnErrorMarginBottom, setssnErrorMarginBottom] = useState('1em'); 
 
     //handle functions
-    const handleWorkCode = (e) =>{
-        const workcode = e.target.value;
-        setworkcode(workcode);
-        if(!validateDigit(workcode)){
-            setworkCodeError("Please enter a valid work code digit.");
-            setworkCodeErrorMarginBottom('1em');
-        } else{
-            setworkCodeError('');
-            setworkCodeError('');
-        }
-    };
     const handleAddress = (e) => {
         const address = e.target.value;
         setAddress(address);
@@ -105,12 +91,11 @@ const InsertEmployee = () => {
     const handleFormOnSubmit = async (e) => {
         e.preventDefault();
        
-        if(workCodeError || !workcode || addressError || !address || emailAddressError || !emailAddress || ssnError || !ssn || !dateofbirth){
+        if( addressError || !address || emailAddressError || !emailAddress || ssnError || !ssn || !dateofbirth){
             setShowErrorBox(true);
             return;
         } else{
             const employeeData = {
-                work_code: workcode,
                 address: address,
                 email: emailAddress,
                 ssn: ssn,
@@ -135,10 +120,6 @@ const InsertEmployee = () => {
                 <div className='admin-insert-cover'>
                     <h1 className='admin-insert-title'>Add new Employee</h1>
                     <form className='admin-insert-form' onSubmit={handleFormOnSubmit}>
-                        
-                        <h3 className='option-title'>Enter Work code:</h3>
-                        <input type='number' placeholder='Enter work code' className='option-input' value={workcode} onChange={handleWorkCode} style={{marginBottom : workcodeErrorMarginBottom}}></input>
-                        <div className='admin-error'>{workCodeError}</div>
 
                         <h3 className='option-title'>Enter Address:</h3>
                         <p style={{ color: 'black', fontSize: '14px' }}> format: 1234 Umazing St Houston Tx 12345</p>
@@ -166,8 +147,7 @@ const InsertEmployee = () => {
                                     <h3 className='error-box-text'>Error</h3>
                                     <p className='error-box-text'>Please correct the errors and try again.</p>
                                     <ul className='error-box-ul'>
-                                        {((!workcode || !address || !emailAddress || !ssn || !dateofbirth) && <li>Please enter valid inputs.</li>)}
-                                        {(!validateDigit(workcode) && <li>Please enter a valid workcode.</li>)}
+                                        {((!address || !emailAddress || !ssn || !dateofbirth) && <li>Please enter valid inputs.</li>)}
                                         {(!validateDigit(ssn) && <li>Please select a valid ssn.</li>)}
                                         {(!validateEmail(emailAddress) && <li>Please enter a valid email address.</li>)}
                                         {(!validateAddress(address) && <li>Please enter a valid address.</li>)}
