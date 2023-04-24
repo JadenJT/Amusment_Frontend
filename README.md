@@ -39,6 +39,6 @@ The project team14project.zip folder is in the link above and contains the datab
 
 ![Azure](https://img.shields.io/badge/azure-%230072C6.svg?style=for-the-badge&logo=microsoftazure&logoColor=white) Host the backend
 
-Deployed the website through AWS
+![AWS]Deployed the website through AWS
 
 
